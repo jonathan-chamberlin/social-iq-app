@@ -28,7 +28,7 @@ No third-party dependencies or package manager configured yet.
 - **Entry point:** `Social IQ/Social_IQApp.swift` — `@main` SwiftUI App
 - **UI:** `Social IQ/ContentView.swift` — root view
 - **Assets:** `Social IQ/Assets.xcassets/` — app icon, accent color
-- **Target:** iOS 26.2+, Swift 5.0, Xcode 26.3+
+- **Target:** iOS 17.0+, Swift 5.0, Xcode 26.3+
 
 ## Swift/SwiftUI Conventions
 
@@ -38,11 +38,16 @@ No third-party dependencies or package manager configured yet.
 - Localization support enabled (string catalogs)
 
 ## Product Strategy Reference
-This app is being built using principles from the App Mafia course. The full playbook is available as a global skill: `app-mafia-mobile`.
+Always read `~/.claude/skills/app-mafia-mobile/SKILL.md` for the App Mafia playbook. Dive into its `references/` modules for deep context on ideation, design, development, and distribution.
 
-- When making product, design, distribution, or prioritization decisions, invoke the `app-mafia-mobile` skill
-- Default to the App Mafia's approach: launch fast, iterate based on data, optimize for organic social media distribution, use AI to enable new product categories
-- Project-specific design docs (ideation, design reference, competitive analysis) are in `.claude/downloads/`
+Project-specific docs live in `references/` at the repo root:
+- `ideation-reference.md` — problem definition, target audience, app concept
+- `ideation-raw-research.md` — raw field notes from Instagram, TikTok, Reddit research
+- `design-reference.md` — UX/UI decisions, onboarding flow, screen designs
+- `competitive-analysis.md` — competitor landscape for social skills apps
+- `tech-stack-reference.md` — decided tech stack and rationale
+- `monetization-reference.md` — pricing, revenue levers, paywall strategy
+- `analytics-event-taxonomy.md` — Mixpanel events, user properties, key funnels
 
 ## Notes
 

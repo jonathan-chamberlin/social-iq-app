@@ -64,12 +64,13 @@ Young, nerdy, awkward, isolated, potentially neurodivergent, introverted. Almost
 
 ## The Social IQ Loop
 
-There are levels to communication / emotional intelligence:
-1. Identifying your own state and how to communicate it
-2. Observing people's tone, face, body language, and words
-3. Identifying the emotional state someone else is in
-4. Knowing how they will react to what you plan on saying
-5. Based off of that, knowing what to say and how to say it
+Three steps you can remember mid-conversation: **READ → THINK → SPEAK.**
+
+1. **READ** — Check yourself, then read them (face, body, tone → identify their state)
+2. **THINK** — What do they need right now? Will what I'm about to say land?
+3. **SPEAK** — Say it with the right words + tone + timing. Watch their reaction. Loop back to READ.
+
+Emotion-specific protocols (anxious → lower stakes, defensive → validate first, etc.) are applied inside the THINK step and taught progressively through the app.
 
 See [social-iq-loop.md](social-iq-loop.md) for the full framework.
 

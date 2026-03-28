@@ -13,7 +13,7 @@ Date: March 22, 2026
 The explanation breaks down:
 - Why the chosen answer would land poorly (what effect it has on the other person)
 - Why the correct answer works (what effect it has on the other person's emotional state)
-- The underlying Social IQ Loop principle behind it
+- The underlying Social IQ Loop principle (READ → THINK → SPEAK) behind it
 
 See [decisions/001-primary-action.md](../decisions/001-primary-action.md) for full reasoning on why this was chosen over an AI advisor or voice roleplay model.
 
@@ -78,18 +78,16 @@ Font rule: no more than 3 fonts total. Having a separate font for the logo vs. i
 
 ## The Social IQ Loop (EQ Skill Tree)
 
-- Your tone
-- Observing people — tone, face, body language, words
+The core loop is **READ → THINK → SPEAK.** Each step maps to a screen type in scenario practice (one primary action per screen):
+
+- **READ** — Check yourself, then read them (face → body → tone → words → identify state)
     - Listening
     - Observing
-- Identifying someone's current emotional state
-- Predicting how they'll react to what you plan to say
-    - Warmth
-    - Confidence
-    - Humor
-    - Praise
-    - Calibration (reading when to be blunt vs. soft)
-- Knowing what to say and how to say it based on all of the above
+- **THINK** — What do they need right now? Will this land?
+    - State Protocols (anxious, defensive, angry, excited, stubborn — unlocked progressively)
+    - Warmth, Confidence, Humor, Praise, Calibration (reading when to be blunt vs. soft)
+- **SPEAK** — Say it. Watch their reaction. Loop back to READ.
+    - Words + tone + timing + framing
 
 ---
 
@@ -133,7 +131,7 @@ Social IQ maps closest to **Impulse** — a short game that produces a score. Th
 **Outputs:**
 - Personalized roadmap to accomplish their goal
 - Most relevant scenarios/lessons to start with
-- XP bars across the Social IQ Loop dimensions
+- XP bars across the Social IQ Loop steps (READ, THINK, SPEAK)
 
 ### Onboarding Length
 

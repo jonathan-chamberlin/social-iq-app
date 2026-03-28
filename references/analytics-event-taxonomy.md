@@ -85,7 +85,7 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 | current_streak | number | Daily |
 | total_scenarios_completed | number | On scenario complete |
 | average_score | number | On scenario complete |
-| social_iq_loop_level | string (L1-L5) | On progression |
+| social_iq_loop_step | string (READ, THINK, SPEAK) | On progression |
 | referral_code_used | string | Onboarding |
 
 ---

@@ -24,7 +24,7 @@ The founder's initial lean was toward Option 1, then considered pivoting to Opti
 The explanation is the core differentiator — it breaks down:
 - Why the chosen answer would land poorly (what effect it would have on the other person)
 - Why the correct answer works (what effect it has on the other person's emotional state)
-- The underlying principle from the Social IQ Loop that makes it work
+- The underlying principle from the Social IQ Loop (READ → THINK → SPEAK) that makes it work
 
 ---
 
@@ -55,7 +55,7 @@ The explanation is the core differentiator — it breaks down:
 
 ### The founder's unique advantage is embedded in the scenario format
 
-- The Social IQ Loop (observe state, identify emotion, predict reaction, calibrate response) is encoded into every scenario and explanation.
+- The Social IQ Loop (READ → THINK → SPEAK) is encoded into every scenario and explanation — each step maps to a screen type where users practice one skill at a time.
 - Current social skills teaching gives vague advice like "just be yourself." These scenarios give concrete situations with concrete right answers and explain exactly WHY each response works based on the other person's emotional state.
 - Ren (the mascot) delivers the explanation — warm, specific, mechanism-first. Never "wrong," always "here's what the pause was telling you."
 

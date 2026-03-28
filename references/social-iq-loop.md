@@ -2,87 +2,34 @@
 
 The core framework behind Social IQ. This is the mental process that socially intelligent people run automatically. The app trains users to internalize this loop through scenario practice.
 
+See [decisions/002-simplified-loop.md](../decisions/002-simplified-loop.md) for why this was simplified from the original 5-level version (archived at [archives/social-iq-loop-v1.md](../archives/social-iq-loop-v1.md)).
+
 ---
 
 ## The Loop
 
 ```
-                        [ START ]
-                            │
-                            ▼
-L1 ── [ SELF-AWARENESS ]──────────────── Not regulated?
-       Check your own state             → Pause. Don't respond yet.
-                            │
-                    Regulated ↓
-                            │
-                            ▼
-L2 ── [ OBSERVATION ]────────────────── Signals unclear?
-       Face → body → tone → words       → Give more time. Observe more.
-                            │
-                    Signals clear ↓
-                            │
-                            ▼
-L3 ── [ STATE ID + RESPONSE PROTOCOL ]──────────────────────────────────
-       │
-       What state are they in?
-                            │
-       ┌──────┬─────────────┼─────────────┬──────────────┬─────────────┐
-       │      │             │             │              │             │
-       ▼      ▼             ▼             ▼              ▼             ▼
-    CALM   ANXIOUS      DEFENSIVE      ANGRY         EXCITED      STUBBORN
-       │      │             │             │              │             │
-       │   Reduce        Validate      Receive         Match        Don't
-       │   stakes        before        don't fix      energy,      argue.
-       │   first.        content.      it. Just       redirect     Ask SPIN
-       │   Lower         Don't         absorb.        toward       questions.
-       │   pressure.     correct       Let them       useful
-       │   Normalize     them yet.     feel           action.
-       │   the topic.    Agree on      heard
-       │                 something
-       │                 small first.
-       │
-  Proceed
-  normally ──────────────────────────────────────────────────────────────┐
-                                                                         │
-                            All paths ↓                                  │
-                            │                                            │
-                            ▼                                            │
-L4 ── [ REACTION PREDICTION ] ◄──────────────────────────────────────── │
-       Simulate how your response lands          ▲                       │
-                            │                    │                       │
-       Would it make them smile, feel important, │                       │
-       heard, recognized, or empowered?          │                       │
-                            │                    │                       │
-              ┌─────────────┴─────────────┐      │                       │
-              │                           │      │                       │
-            Yes ↓                        No ────┘                       │
-              │                    Rethink your angle.                   │
-              │                    What do they actually                 │
-              │                    need right now?                       │
-              ▼                                                          │
-L5 ── [ CALIBRATED RESPONSE ]────────── After responding:               │
-       Words + tone + timing +          → Note impact → intent vs effect │
-       framing                                                           │
-                            │                                            │
-                            ▼                                            │
-                       [ RESPOND ]                                       │
-                            │                                            │
-                            └────────────────────────────────────────────┘
-                                  Observe impact. Loop back to L2.
+READ → THINK → SPEAK → (watch reaction) → READ again
 ```
+
+### READ — Check yourself, then read them.
+- Am I calm enough to do this? (If no, pause.)
+- What's their face, body, tone saying?
+- What state are they in?
+
+### THINK — What do they need right now?
+- Based on their state, what would make them feel heard / important / seen?
+- If I say this, will it land?
+
+### SPEAK — Say it. Then watch.
+- Words + tone + timing.
+- Watch their reaction. Loop back to READ.
 
 ---
 
-## Level Breakdown
+## State Protocols
 
-### L1 — Self-Awareness
-Check your own emotional state before engaging. If you're not regulated (angry, anxious, reactive), pause. Don't respond yet. You can't accurately read someone else when your own signal is noisy.
-
-### L2 — Observation
-Read the other person's signals in priority order: face → body language → tone → words. Words are the least reliable signal. If signals are unclear, give more time and observe more before acting.
-
-### L3 — State Identification + Response Protocol
-Identify the other person's current emotional state and apply the correct protocol:
+These are the emotion-specific playbooks you apply inside the THINK step. The app teaches these progressively — beginners learn the 3-step loop first, then unlock protocols as they level up.
 
 | State | Protocol |
 | --- | --- |
@@ -93,14 +40,24 @@ Identify the other person's current emotional state and apply the correct protoc
 | **Excited** | Match energy, then redirect toward useful action. |
 | **Stubborn** | Don't argue. Ask SPIN questions. |
 
-### L4 — Reaction Prediction
-Before speaking, simulate how your response will land. Would it make them smile, feel important, heard, recognized, or empowered? If no — rethink your angle. What do they actually need right now? Loop back and try a different approach.
+New states (sad, lonely, jealous, etc.) will be added as app content over time. The loop stays the same — the protocol library grows.
 
-### L5 — Calibrated Response
-Deliver your response with calibrated words + tone + timing + framing. After responding, observe the impact. Compare intent vs. actual effect. Then loop back to L2 — keep observing.
+---
+
+## How It Maps to the App
+
+Each step maps to one screen type in scenario practice:
+
+| Loop Step | Screen Type | User Action |
+| --- | --- | --- |
+| **READ** | Observation screen | Watch a face/clip, pick the emotional state |
+| **THINK** | Analysis screen | Given the state, pick what they need to hear |
+| **SPEAK** | Response screen | Pick the best response from options |
+
+One primary action per screen. Score + explanation after each scenario.
 
 ---
 
 ## Why This Works
 
-Most social skills advice is vague ("just be yourself", "be normal", "have a conversation"). This loop is a concrete decision tree. Each level has a specific input, a check, and a clear action. It can be practiced through scenarios where users identify states, predict reactions, and pick calibrated responses — which is exactly what the app does.
+Most social skills advice is vague ("just be yourself", "be normal"). This loop is three words you can remember mid-conversation. Each step has one clear thing to do. The emotion protocols give you specific playbooks for specific states — but you learn them progressively through the app, not all at once.

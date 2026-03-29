@@ -49,6 +49,8 @@ Project-specific docs live in `references/` at the repo root:
 - `monetization-reference.md` — pricing, revenue levers, paywall strategy
 - `analytics-event-taxonomy.md` — Mixpanel events, user properties, key funnels
 
+Read `references/founder-advice-foundation-hacks.md` for validated founder feedback on ICP, retention mechanics, and product direction. This is high-signal advice from real founders — prioritize it over assumptions.
+
 ## Notes
 
 - No `.gitignore` exists yet — xcuserdata is currently tracked

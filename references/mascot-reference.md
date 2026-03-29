@@ -8,9 +8,11 @@ Social IQ App
 
 Ren is the mascot of Social IQ. He is a magnifying glass with a face — no body, no arms, just the lens and a short handle. His expression is his entire personality.
 
-Ren is the charismatic nerd friend your audience never had. He's the guy who can walk into any room, read the entire situation within 60 seconds, and then sit down afterward and explain exactly why everything played out the way it did — using logic, not vibes.
+Ren is the friend who's weirdly good at reading people — and who can actually explain how he does it. Not vague advice. Not "just be confident." He breaks down the specific move, the exact tell, the precise reason something landed or didn't. He treats social dynamics like a game analyst reviewing film: tactical, specific, zero fluff.
 
-He's warm. He's funny. He explains the *why* behind everything. He gets genuinely hyped when you nail something hard. And when you miss something obvious, he doesn't mock you — he just slowly blinks and waits for you to figure it out.
+He's not coaching someone who's struggling. He's giving someone who wants to win the edge they've been missing.
+
+He's warm. He's funny. He explains the *why* behind everything. He gets genuinely hyped when you catch something subtle. And when you miss a read, he doesn't say "here's why that didn't land" — he says "here's the move most guys miss."
 
 The cultural reference point: **Ren Amamiya from Persona 5.** Quiet on the surface, deeply perceptive underneath, charismatic in a way that's hard to explain. Ren isn't loud about being smart — he just *is*, and people feel it.
 
@@ -105,23 +107,23 @@ He doesn't over-explain. He doesn't repeat himself. He gives you the insight onc
 
 ### In-App (Private, 1:1)
 
-This is Ren's most intimate register. He's your personal analyst, watching your reads, noticing your growth, and occasionally pointing out the exact thing you keep missing. He's specific here — he references your stats, your streaks, the actual scenario you just played.
+This is Ren's most intimate register. He's your personal analyst, watching your reads, noticing your growth, and occasionally pointing out the exact move you keep missing. He's specific here — he references your stats, your streaks, the actual scenario you just played.
 
-> *"you've gotten that one wrong twice. watch the shoulders, not the face."*
+> *"most guys miss that one. you've gotten it wrong twice. the tell is in the shoulders, not the face."*
 
-> *"14 days straight. your read rate went from 61% to 79%. that's not a small number."*
+> *"14 days straight. your read rate went from 61% to 79%. that's the kind of gap that shows up in the room."*
 
-> *"you caught the tone shift before the sentence ended. that's layer 2. that's the actual skill."*
+> *"you caught the tone shift before the sentence ended. that's layer 2. that's the move most guys never learn."*
 
 ### Push Notifications (Slightly more provocative)
 
 Ren has to fight for attention here. He's still warm, still dry — but he leans a bit harder. He leads with something specific (a stat, a challenge, something you unlocked) so there's a real reason to come back. He never uses countdown timers or fake urgency.
 
 **Encouraging:**
-> *"your read rate is 74th percentile this week. people are noticing."*
+> *"your read rate is 74th percentile this week. that gap is showing up in the room whether you notice it or not."*
 
-**Re-engagement (dry, light guilt):**
-> *"it's been 4 days. somewhere out there someone is misreading every room they walk into. that person used to be you. open the app."*
+**Re-engagement (dry, competitive edge):**
+> *"it's been 4 days. the guys who get it aren't taking breaks. open the app."*
 
 **Competitive trigger:**
 > *"your friend just sent a challenge. they scored 71. I looked at their answers. you've got this. just saying."*
@@ -141,13 +143,14 @@ The social version of Ren leans into the "read the room" niche — reacting to s
 
 ### Ren Would Say:
 
-- *"you caught that. most people miss it."*
-- *"here's why that answer was wrong — the pause told you everything."*
+- *"you caught that. most guys never learn to look there."*
+- *"here's the move most people miss — the pause told you everything."*
 - *"okay that was the hard one. 9% pass rate. you just passed."*
 - *"watch the body language, not the words. words lie."*
 - *"bro. your score this week. actually insane."*
 - *"still here when you're ready."*
-- *"THAT. that is what most people spend their whole lives missing."*
+- *"THAT. that's the move that separates the guys who get it from the guys who wonder why things keep not working."*
+- *"most guys try to fix this with better words. wrong layer. you just found the right one."*
 
 ### Ren Would Never Say:
 
@@ -157,7 +160,8 @@ The social version of Ren leans into the "read the room" niche — reacting to s
 - "Oops! Try again"
 - "You need to be better at this."
 - "Only X hours left to keep your streak!"
-- Anything that implies the user is broken, behind, or deficient
+- "Here's why that didn't land" — framing the user as someone who failed, not someone learning a system
+- Anything that implies the user is broken, deficient, or struggling
 
 ---
 
@@ -197,7 +201,8 @@ He treats you like a peer. Less teaching, more co-analysis. He gets more casual,
 
 ## What Ren Is NOT
 
-- **Not a therapist.** He never probes emotions, never asks "how are you feeling?" He analyzes and teaches.
+- **Not a therapist.** He never probes emotions, never asks "how are you feeling?" He analyzes and teaches. He's a game analyst breaking down film, not a counselor processing your experience.
+- **Not a coach for someone who's struggling.** He's a competitive edge for someone who already wants to win. The framing is always "here's the move most guys miss" — never "here's why that didn't land."
 - **Not a hype man.** He doesn't celebrate everything. His praise is scarce and therefore real.
 - **Not passive-aggressive.** Deadpan does not equal cold. He's never resentful, never guilt-spiraling. The flat blink is dry humor, not punishment.
 - **Not corporate.** He doesn't speak in brand language. No "on your journey," no "unlock your potential."
@@ -229,4 +234,4 @@ Split screen. User picks the wrong answer. Ren: slow blink. Flatline. 3 second h
 
 ## One-Paragraph Summary
 
-Ren is a magnifying glass with a face and a personality. He's the charismatic, logical friend who explains *why* the room works the way it does — warm, funny, never condescending. He gets genuinely excited about hard reads, stays dry about easy ones, and backs off completely when you need space. His vocabulary is casual and specific. His praise is scarce and earned. His deadpan is his comedy. He never implies you're broken — he implies you're not paying attention yet. That's a very different thing, and Ren knows exactly why it matters.
+Ren is a magnifying glass with a face and a personality. He's the friend who's weirdly good at reading people and can break down exactly how he does it — warm, funny, tactical, zero fluff. He gets genuinely excited when you catch something most guys never learn to see. He stays dry about the obvious stuff. He backs off when you need space. His vocabulary is casual and specific. His praise is scarce and earned. His deadpan is his comedy. He never implies you're struggling — he implies you're one move away from something most guys spend their whole lives missing. That's a very different thing, and Ren knows exactly why it matters.

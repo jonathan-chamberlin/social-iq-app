@@ -62,15 +62,16 @@ The name needs to signal **intelligence + strategy**, not deficiency. Think how 
 
 ### Brand Aesthetic
 
-Target audience: young, male-skewed, nerdy/introverted/neurodivergent, game and anime enjoyers.
+Target audience: male, 18-28, self-improvement oriented. Reads about charisma, influence, and human nature. Adjacent to the looksmaxxing / self-improvement trend but wants the social edge, not just the physical one.
 
 Visual language for this demographic:
-- Emojis
-- Colors (vibrant, gamified look)
-- Lowercase text
-- Slang
-- Fun, cool, laid-back — feels like a game, not a program
-- Include pictures of young people (since you're targeting young people specifically)
+- Clean, dark, masculine — confident without being aggressive
+- Deep backgrounds (near-black), sharp contrast, minimal clutter
+- Typography: strong, modern, no rounded playful fonts — this is a tool, not a toy
+- No gamified or cute visual elements; closer to a high-end fitness app than a language learning app
+- Lowercase copy still works — it reads as sharp and low-effort-cool, not goofy
+- Imagery: real young men in social situations — confident, not staged-happy
+- Gold or electric blue as accent colors signal intelligence and precision, not fun
 
 Font rule: no more than 3 fonts total. Having a separate font for the logo vs. in-app text is fine.
 
@@ -119,18 +120,16 @@ Social IQ maps closest to **Impulse** — a short game that produces a score. Th
 - Sign in (Apple, Google, email)
 - Name
 - Age (generational framing)
-- Current social life
-- Current social skills
-- Goal social life
-- Goal social skills
-- Barrier to improvement
-- Payoff / what success looks like
+- What area do you want to level up first? (career networking / dating / commanding a room / reading people)
+- Current situation (e.g., "I'm forgettable in group settings" / "I freeze in high-stakes conversations" / "I can't tell if I'm landing")
+- What's the next unlock you want? (e.g., "Get the promotion" / "Be the guy she can't stop thinking about" / "Own every room I walk into")
+- What's held you back? (e.g., "I know the theory but freeze in the moment" / "Advice I find is too vague" / "I read wrong and say the wrong thing")
 - Minutes per day available
 - Permissions: notifications, microphone
 
 **Outputs:**
-- Personalized roadmap to accomplish their goal
-- Most relevant scenarios/lessons to start with
+- Personalized training path built around their stated goal
+- Most relevant scenarios to start with (career, dating, social dynamics)
 - XP bars across the Social IQ Loop steps (READ, THINK, SPEAK)
 
 ### Onboarding Length
@@ -143,21 +142,22 @@ Single-player experience with consistent rewards (like CalAI and Duolingo):
 
 Modeled on Quittr and CalAI: **Personal questionnaire → Calculate result → Scare screens → Uplift screens → Paywall**
 
-**Phase 1 — Personal Questionnaire (Pain-focused)**
-Ask questions that surface the user's problem and pain points. The longer they spend here, the stronger the sunk cost effect. The calculating screen doesn't actually do anything — it just extends time on onboarding intentionally.
+**Phase 1 — Personal Questionnaire (Goal-focused)**
+Ask questions that surface what the user is trying to unlock — career, dating, social status. Frame everything around competitive advantage, not deficiency. Language: "level up," "master," "unlock," "read," "command." The longer they spend here, the stronger the sunk cost effect. The calculating screen doesn't actually do anything — it just extends time on onboarding intentionally.
 
-**Phase 2 — Analysis Result**
-Show a score or assessment that makes the problem feel real and serious. This is the "scare" phase — dramatic visuals work here (e.g., Quittr's big red screen). Then follow with additional symptom-check questions to deepen problem awareness.
+**Phase 2 — Analysis Result (Scare screen)**
+Show a score or assessment that makes the cost of weak social skills feel real. This is not "you have a problem" — it's "here's what this has already cost you." Surface the specific losses: the promotion that went to someone less qualified, the girl who went cold after a great first impression, the group that stopped inviting you, the meeting where you said something smart and no one reacted. Dramatic visuals work here (e.g., Quittr's big red screen). Then follow with specific-situation questions that deepen the cost awareness.
 
 **Phase 3 — Uplift Screens**
-Switch from negative to positive:
-- What the app will help them do (goal end state)
-- Testimonials framed around life outcomes, not app features (e.g., "I finally stopped being the quiet one in the room")
-- Chart: doing it alone vs. using the app (faster progress with the app)
-- Goal selection — frame as aspirational, uplifting choices
+Reframe entirely: social skills are not a personality trait — they are a learnable system. Language: confident, direct, slightly edgy. Self-improvement YouTube, not therapy office.
+- Lead with: *"Social skills aren't a personality trait. They're a system. And systems can be practiced."*
+- Transformation framing: "guys who trained this got promoted, locked in the girl, became the guy people remember" — not "reduced anxiety"
+- Testimonials framed around charisma gains and social outcomes, not emotional relief (e.g., "I started getting invited to things I didn't even know existed" / "My manager pulled me aside and said I'd changed — I hadn't changed, I'd just started paying attention")
+- Chart: doing it alone vs. using a system (faster, more measurable progress)
+- Goal selection framed as aspirational: the version of you who reads every room, every time
 
 **Phase 4 — Pre-paywall priming**
-Tell the user it's time to invest in themselves.
+Tell the user they now have a system — and it's time to start using it.
 
 **Phase 5 — Referral code screen**
 Ask if they have a referral code. Tracks which influencers drove traffic.
@@ -175,12 +175,12 @@ Ask for a rating. Low conversion individually, significant at scale.
 
 ## Emotional Hooks & Core Human Drivers
 
-The deepest driver for this audience isn't "learn social skills" — it's **"I want to stop being invisible."**
+The deepest driver for this audience isn't "learn social skills" — it's **"I want a competitive edge most guys don't have."**
 
 **Hook hierarchy:**
-- **Fear:** "People can tell something's off about me"
-- **Desire:** "I want people to actually want me around"
-- **Identity:** "I understand people better than most"
+- **Fear:** "I'm losing ground to guys who just get it — in rooms, in dating, at work"
+- **Desire:** "I want to be the guy people remember, follow, and want around"
+- **Identity:** "I read situations other people miss entirely"
 
 **In-app trigger:** After a correct answer, don't say "Correct." Say something like *"You caught that. Most people miss it entirely."* — feeds the identity desire and makes them feel rare and perceptive.
 

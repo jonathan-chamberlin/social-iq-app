@@ -20,45 +20,41 @@ Games that improve your ability to:
 
 ## Target Audience
 
-Young, nerdy, awkward, isolated, potentially neurodivergent, introverted. Almost all like games and movies (some like anime, manga, outdoors).
+**ICP: The Self-Improvement Guy**
+
+Male, 18-28. Reads or watches content about charisma, influence, social dynamics, and human nature. Adjacent to the looksmaxxing / self-improvement trend but wants the social side, not just the physical. Aspirational references: 48 Laws of Power, How to Win Friends and Influence People, Chris Voss (Never Split the Difference), body language content, networking and career content. Platforms: TikTok, YouTube (self-improvement creators), Reddit (r/socialskills, r/selfimprovement, r/confidence).
+
+Core pain: knows social skills matter for career, dating, and life — but the advice out there is vague ("just be confident"). Wants a system he can actually practice.
+
+**NOT the anime nerd / gamer introvert archetype. NOT corporate L&D. NOT therapy-adjacent.**
+
+> **Why this shifted:** Two independent founders at a hackathon — Ritwik (CBO at Fragile) and Kelly Palmer (product design lead at Eight Sleep) — both said the same thing unprompted: lean into charisma and reading people, target the self-improvement niche, not the introverted gamer niche.
 
 ### How They See Themselves
-- "I see other people socializing"
-- Like there is something different about them because it seems like others can make friends easily, and they think others can tell they're different
-- People saying they are on the spectrum or have autism
-- Nerd
+- Ambitious. Wants to be the kind of person who commands a room
+- Aware that social skills are a competitive advantage — for promotions, for dating, for being someone people remember
+- Already doing the work (gym, reading, self-improvement content) — this is the next unlock
+- Not broken. Wants an edge.
 
 ### Their Problems
-- "No friends"
-- No one reaches out to them or asks them to hangout
-- Feel excluded
-- Can't relate to most people
-- Self-isolated but feels like it's been too long
-- Social at work but can't translate that charisma outside work
-- People keep putting them down, friends treating them badly by making jokes at their expense
-- "Social anxiety"
-- Lost social skills or ability to connect / reconnect with old friends
-- "People say/think I'm boring"
-- Feel like they have nothing to say
-- People they meet ghost them
-- Conversations feeling like an interview / interrogation
+- Knows what to do in theory but freezes or fumbles in the moment
+- Gets passed over — for the promotion, for the invite, for the second date — without understanding why
+- Comes across as stiff, forgettable, or low-status in group settings without knowing it
+- Has friends but isn't the guy people remember or go to
+- Can't read whether a conversation is going well or falling flat until it's too late
 
 ### What They're Asking For
-- What to talk about
-- How to be more assertive / setting boundaries / say no without coming across weird or mean
-- "How to not be weird"
-- "How to be normal"
-- "How can I make friends"
-- How to break into a friend group
-- Want to get invited to stuff
-- Long-term friend, best friend
-- Deep convos, emotional depth
-- Someone they share hobbies with
-- How to set boundaries in specific situations
+- How to command a room without forcing it
+- How to read people accurately — what they're actually feeling vs. what they're saying
+- How to be memorable in networking, interviews, first impressions
+- How to lead conversations instead of just reacting
+- How to build genuine influence with people over time
 
 ### Their Desires
-- Make long-term friends with people who have the same hobbies
-- Be in happy relationships with people who communicate and do the little things
+- Be the guy people want in the room
+- Build real influence at work and in social circles
+- Win in dating by being genuinely compelling, not just trying harder
+- Master the social layer that most guys ignore
 
 ---
 

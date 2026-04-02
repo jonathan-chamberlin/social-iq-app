@@ -17,16 +17,25 @@ struct LessonView: View {
             if viewModel.isComplete {
                 completionView
             } else if let step = viewModel.currentStep {
-                ScrollView {
-                    VStack(spacing: 20) {
-                        stepIndicator(currentLabel: step.label)
-                        scenarioCard(step: step)
-                        questionText(step: step)
-                        optionCards(step: step)
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        VStack(spacing: 20) {
+                            stepIndicator(currentLabel: step.label)
+                            scenarioCard(step: step)
+                            questionText(step: step)
+                            optionCards(step: step)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 16)
+                        .padding(.bottom, 40)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
-                    .padding(.bottom, 40)
+                    .onChange(of: viewModel.showFeedback) { _, showing in
+                        if showing, let selected = viewModel.selectedOptionIndex {
+                            withAnimation {
+                                proxy.scrollTo("option-\(selected)", anchor: .center)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -110,32 +119,31 @@ struct LessonView: View {
             return option.feedback.isCorrect ? .green : .orange
         }()
 
-        return Button {
-            viewModel.selectOption(index)
-        } label: {
-            VStack(alignment: .leading, spacing: 8) {
-                Text(option.label)
-                    .font(.subheadline)
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.leading)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        return VStack(alignment: .leading, spacing: 8) {
+            Text(option.label)
+                .font(.subheadline)
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-                if isSelected, showingFeedback {
-                    feedbackPanel(option: option)
-                }
+            if isSelected, showingFeedback {
+                feedbackPanel(option: option)
             }
-            .padding(14)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.white.opacity(0.06))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                    .stroke(borderColor, lineWidth: isSelected && showingFeedback ? 2 : 1)
-            )
         }
-        .disabled(showingFeedback && viewModel.isCorrectSelection)
-        .buttonStyle(.plain)
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.06))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(borderColor, lineWidth: isSelected && showingFeedback ? 2 : 1)
+        )
+        .id("option-\(index)")
+        .contentShape(Rectangle())
+        .onTapGesture {
+            viewModel.selectOption(index)
+        }
     }
 
     // MARK: - Feedback Panel

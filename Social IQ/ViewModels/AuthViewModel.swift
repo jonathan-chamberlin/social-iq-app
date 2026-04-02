@@ -51,6 +51,20 @@ final class AuthViewModel {
         }
     }
 
+    #if DEBUG
+    func devSkipAuth() {
+        let devUser = User(
+            id: UUID(),
+            appMetadata: [:],
+            userMetadata: ["full_name": .string("Dev User")],
+            aud: "dev",
+            createdAt: Date(),
+            updatedAt: Date()
+        )
+        authState = .signedIn(devUser)
+    }
+    #endif
+
     func signOut() async {
         do {
             try await AuthService.shared.signOut()

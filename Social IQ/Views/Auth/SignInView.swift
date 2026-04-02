@@ -44,6 +44,14 @@ struct SignInView: View {
                     .frame(maxWidth: 280)
                 }
 
+                #if DEBUG
+                Button("Skip Sign In (Dev)") {
+                    authViewModel.devSkipAuth()
+                }
+                .font(.footnote)
+                .foregroundStyle(.gray)
+                #endif
+
                 if let error = authViewModel.errorMessage {
                     Text(error)
                         .font(.footnote)

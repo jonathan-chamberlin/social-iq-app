@@ -82,5 +82,12 @@
     "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 3, "would_use_again": "implied_yes"},
     "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": true, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
     "verbatim_quotes": ["If you own that silence you're a dog", "It makes me feel like I kind of know something, but also that other people are in the same boat", "Even your instinct might be to say this, but if you're in a professional setting, this is what you should be doing"]
+  },
+  {
+    "demographics": {"name": "Avi", "session_number": "13", "session_type": "remote", "age": 23, "background": "VC guy in SF, already very socially skilled with strong social circle"},
+    "icp_classification": {"icp_fit": "Not ICP", "icp_score": 1, "icp_reasoning": "Already socially skilled, no improvement goal, strong existing social circle"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 1, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Seems interesting, who is this for? Lonely guys?", "The discrete nature of the multiple choice questions is perhaps a bit reductive", "None of the onboarding questions resonated with me"]
   }
 ]

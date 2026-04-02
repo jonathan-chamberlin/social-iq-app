@@ -19,9 +19,19 @@ final class SuperwallService {
     }
 
     /// Present a paywall for a specific placement.
-    /// Placements: "onboarding_complete", "lesson_locked"
-    static func presentPaywall(event: String = "lesson_locked") {
-        Superwall.shared.register(placement: event)
+    static func presentPaywall(placement: SuperwallPlacement = .lessonLocked) {
+        Superwall.shared.register(placement: placement.rawValue)
+    }
+
+    /// Present a paywall and execute `onDismiss` after the user finishes interacting.
+    /// The feature block fires when:
+    /// - The user purchases and the paywall closes
+    /// - The user dismisses without purchasing
+    /// - No paywall is configured for this placement
+    static func presentPaywall(placement: SuperwallPlacement, onDismiss: @escaping @Sendable () -> Void) {
+        Superwall.shared.register(placement: placement.rawValue) {
+            onDismiss()
+        }
     }
 
     static var isSubscribed: Bool {

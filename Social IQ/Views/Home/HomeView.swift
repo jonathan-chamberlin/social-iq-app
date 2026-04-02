@@ -15,7 +15,7 @@ struct HomeView: View {
 
     private var userName: String {
         if case .signedIn(let user) = authViewModel.authState,
-           let metadata = user.userMetadata["full_name"],
+           let metadata = user.userMetadata[DatabaseSchema.UserMetadata.fullName],
            case .string(let name) = metadata {
             return name
         }
@@ -79,6 +79,12 @@ struct HomeView: View {
             .navigationTitle("Social IQ")
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
+            .onAppear {
+                if UserDefaults.standard.bool(forKey: "shouldAutoOpenLesson1") {
+                    UserDefaults.standard.removeObject(forKey: "shouldAutoOpenLesson1")
+                    selectedLesson = LessonData.allLessons.first
+                }
+            }
         }
     }
 
@@ -88,7 +94,7 @@ struct HomeView: View {
 
     private func handleLessonTap(_ lesson: Lesson) {
         if isLocked(lesson) {
-            SuperwallService.presentPaywall(event: "lesson_locked")
+            SuperwallService.presentPaywall(placement: .lessonLocked)
         } else {
             selectedLesson = lesson
         }
@@ -115,8 +121,8 @@ struct HomeView: View {
                     .multilineTextAlignment(.leading)
 
                 HStack(spacing: 8) {
-                    tag(lesson.category, color: .purple)
-                    tag(lesson.difficulty, color: .blue)
+                    tag(lesson.category.rawValue, color: .purple)
+                    tag(lesson.difficulty.rawValue, color: .blue)
                 }
             }
 

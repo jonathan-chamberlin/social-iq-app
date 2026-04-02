@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E23C692C2F7DFDFB0031EDA1 /* SuperwallKit in Frameworks */ = {isa = PBXBuildFile; productRef = E23C692B2F7DFDFB0031EDA1 /* SuperwallKit */; };
 		E23C69302F7E008A0031EDA1 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E23C692F2F7E008A0031EDA1 /* Supabase */; };
+		E23C697C2F7EFF8B0031EDA1 /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = E23C697B2F7EFF8B0031EDA1 /* Mixpanel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E23C697C2F7EFF8B0031EDA1 /* Mixpanel in Frameworks */,
 				E23C69302F7E008A0031EDA1 /* Supabase in Frameworks */,
 				E23C692C2F7DFDFB0031EDA1 /* SuperwallKit in Frameworks */,
 			);
@@ -82,6 +84,7 @@
 			packageProductDependencies = (
 				E23C692B2F7DFDFB0031EDA1 /* SuperwallKit */,
 				E23C692F2F7E008A0031EDA1 /* Supabase */,
+				E23C697B2F7EFF8B0031EDA1 /* Mixpanel */,
 			);
 			productName = "Social IQ";
 			productReference = E24636162F758225001A5EE8 /* Social IQ.app */;
@@ -114,6 +117,7 @@
 			packageReferences = (
 				E23C69292F7DFDA30031EDA1 /* XCRemoteSwiftPackageReference "supabase-swift" */,
 				E23C692A2F7DFDFB0031EDA1 /* XCRemoteSwiftPackageReference "Superwall-iOS" */,
+				E23C697A2F7EFF8B0031EDA1 /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E24636172F758225001A5EE8 /* Products */;
@@ -384,6 +388,14 @@
 				minimumVersion = 4.14.1;
 			};
 		};
+		E23C697A2F7EFF8B0031EDA1 /* XCRemoteSwiftPackageReference "mixpanel-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mixpanel/mixpanel-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -396,6 +408,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E23C69292F7DFDA30031EDA1 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		E23C697B2F7EFF8B0031EDA1 /* Mixpanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23C697A2F7EFF8B0031EDA1 /* XCRemoteSwiftPackageReference "mixpanel-swift" */;
+			productName = Mixpanel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

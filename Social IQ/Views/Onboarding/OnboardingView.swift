@@ -312,7 +312,7 @@ struct OnboardingView: View {
                 .padding(.top, 20)
 
             VStack(alignment: .leading, spacing: 16) {
-                scareBullet("Awkward silences kill your confidence — and people notice")
+                scareBullet("Awkward silences kill your confidence. And people notice.")
                 scareBullet("Opportunities pass because you can't connect")
                 scareBullet("You overthink every interaction, then replay it for hours")
                 scareBullet("The gap between your potential and your presence keeps growing")
@@ -375,7 +375,7 @@ struct OnboardingView: View {
                 .padding(.top, 20)
 
             Text(
-                "Most guys never realize social skills are trainable. You did. Social IQ uses the same deliberate practice frameworks that athletes and top performers use — adapted for real social situations."
+                "Most guys never realize social skills are trainable. You did. Social IQ uses the same deliberate practice frameworks that athletes and top performers use. Adapted for real social situations."
             )
             .font(.body)
             .foregroundStyle(.white.opacity(0.9))
@@ -416,12 +416,12 @@ struct OnboardingView: View {
             testimonialCard(
                 name: "Andre",
                 duration: "1 month in",
-                text: "The lesson format clicked for me immediately. It's like Duolingo but for something that actually matters."
+                text: "It's like Duolingo but I actually see results every day."
             )
             testimonialCard(
                 name: "Aryaman",
                 duration: "3 weeks in",
-                text: "I went from being the quiet guy in the group to the one people gravitate toward. No cap, this works."
+                text: "I wish I started using this sooner."
             )
         }
     }
@@ -506,7 +506,7 @@ struct OnboardingView: View {
                     path.move(to: CGPoint(x: 0, y: chartH * 0.75))
                     path.addLine(to: CGPoint(x: w, y: chartH * 0.7))
                 }
-                .stroke(Color.gray.opacity(0.5), style: StrokeStyle(lineWidth: 2, dash: [6, 4]))
+                .stroke(Color.gray.opacity(0.5), lineWidth: 2)
 
                 // "With Social IQ" line — curves upward
                 Path { path in
@@ -517,7 +517,7 @@ struct OnboardingView: View {
                         control2: CGPoint(x: w * 0.65, y: chartH * 0.2)
                     )
                 }
-                .stroke(Color.green, lineWidth: 3)
+                .stroke(Color.green, lineWidth: 6)
 
                 // X-axis labels
                 HStack {
@@ -527,6 +527,7 @@ struct OnboardingView: View {
                     Spacer()
                     Text("Week 8")
                 }
+                .padding(.horizontal, 16)
                 .font(.caption2)
                 .foregroundStyle(.white.opacity(0.5))
                 .offset(y: labelHeight / 2)
@@ -686,8 +687,9 @@ struct OnboardingView: View {
                 .padding(.horizontal, 8)
 
             Button {
-                SuperwallService.presentPaywall(event: "onboarding_complete")
-                completeOnboardingAndDismiss()
+                SuperwallService.presentPaywall(placement: .onboardingComplete) {
+                    completeOnboardingAndDismiss()
+                }
             } label: {
                 Text("Start My Training")
                     .font(.headline)
@@ -701,6 +703,7 @@ struct OnboardingView: View {
             }
 
             Button {
+                UserDefaults.standard.set(true, forKey: "shouldAutoOpenLesson1")
                 completeOnboardingAndDismiss()
             } label: {
                 Text("Start with free lesson")
@@ -709,119 +712,6 @@ struct OnboardingView: View {
             }
         }
         .frame(maxWidth: .infinity)
-    }
-}
-
-// MARK: - Wrapping Flow Layout
-
-private struct WrappingHStack<Item: Hashable, Content: View>: View {
-    let items: [Item]
-    let spacing: CGFloat
-    let lineSpacing: CGFloat
-    @ViewBuilder let content: (Item) -> Content
-
-    @State private var totalHeight: CGFloat = .zero
-
-    var body: some View {
-        GeometryReader { geo in
-            generateContent(in: geo)
-        }
-        .frame(height: totalHeight)
-    }
-
-    private func generateContent(in geo: GeometryProxy) -> some View {
-        var width: CGFloat = 0
-        var height: CGFloat = 0
-
-        return ZStack(alignment: .topLeading) {
-            ForEach(items, id: \.self) { item in
-                content(item)
-                    .padding(.trailing, spacing)
-                    .padding(.bottom, lineSpacing)
-                    .alignmentGuide(.leading) { d in
-                        if abs(width - d.width) > geo.size.width {
-                            width = 0
-                            height -= d.height + lineSpacing
-                        }
-                        let result = width
-                        if item == items.last {
-                            width = 0
-                        } else {
-                            width -= d.width + spacing
-                        }
-                        return result
-                    }
-                    .alignmentGuide(.top) { _ in
-                        let result = height
-                        if item == items.last {
-                            height = 0
-                        }
-                        return result
-                    }
-            }
-        }
-        .background(
-            GeometryReader { geo in
-                Color.clear.preference(key: HeightPreferenceKey.self, value: geo.size.height)
-            }
-        )
-        .onPreferenceChange(HeightPreferenceKey.self) { totalHeight = $0 }
-    }
-}
-
-private struct HeightPreferenceKey: PreferenceKey {
-    static let defaultValue: CGFloat = 0
-    static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-        value = max(value, nextValue())
-    }
-}
-
-private struct CalculatingView: View {
-    let onFinish: () -> Void
-
-    @State private var phase = 0
-
-    private let messages = [
-        "Analyzing your social patterns...",
-        "Mapping skill gaps...",
-        "Customizing your lessons...",
-    ]
-
-    var body: some View {
-        VStack(spacing: 32) {
-            Spacer()
-                .frame(height: 60)
-
-            ProgressView()
-                .controlSize(.large)
-                .tint(.white)
-
-            VStack(alignment: .leading, spacing: 12) {
-                ForEach(0...phase, id: \.self) { i in
-                    if i < messages.count {
-                        HStack(spacing: 8) {
-                            Image(systemName: i < phase ? "checkmark.circle.fill" : "circle.dotted")
-                                .foregroundStyle(i < phase ? .green : .white.opacity(0.5))
-                            Text(messages[i])
-                                .font(.subheadline)
-                                .foregroundStyle(.white.opacity(0.7))
-                        }
-                        .transition(.opacity.combined(with: .move(edge: .bottom)))
-                    }
-                }
-            }
-
-            Spacer()
-        }
-        .animation(.easeInOut(duration: 0.4), value: phase)
-        .task {
-            try? await Task.sleep(for: .milliseconds(800))
-            phase = 1
-            try? await Task.sleep(for: .milliseconds(800))
-            phase = 2
-            try? await Task.sleep(for: .milliseconds(1400))
-            onFinish()
-        }
     }
 }
 

@@ -6,6 +6,20 @@
 import Foundation
 import Supabase
 
+enum OnboardingError: LocalizedError {
+    case profileNotFound(String)
+    case saveFailed(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .profileNotFound(let userId):
+            "No profile found for user \(userId)"
+        case .saveFailed(let reason):
+            "Failed to save onboarding data: \(reason)"
+        }
+    }
+}
+
 struct OnboardingService {
     private var client: SupabaseClient {
         SupabaseService.shared.client
@@ -21,9 +35,9 @@ struct OnboardingService {
         }
 
         let rows: [ProfileRow] = try await client
-            .from("user_profiles")
-            .select("onboarding_completed")
-            .eq("id", value: userId)
+            .from(DatabaseSchema.UserProfiles.table)
+            .select(DatabaseSchema.UserProfiles.onboardingCompleted)
+            .eq(DatabaseSchema.UserProfiles.id, value: userId)
             .execute()
             .value
 
@@ -74,9 +88,9 @@ struct OnboardingService {
         )
 
         try await client
-            .from("user_profiles")
+            .from(DatabaseSchema.UserProfiles.table)
             .update(update)
-            .eq("id", value: userId)
+            .eq(DatabaseSchema.UserProfiles.id, value: userId)
             .execute()
     }
 }

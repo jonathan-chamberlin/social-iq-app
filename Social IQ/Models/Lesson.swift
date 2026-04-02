@@ -5,11 +5,24 @@
 
 import Foundation
 
+enum LessonCategory: String, Codable, Hashable {
+    case workplace
+    case dating
+    case friendships
+    case family
+}
+
+enum LessonDifficulty: String, Codable, Hashable {
+    case beginner
+    case intermediate
+    case advanced
+}
+
 struct Lesson: Identifiable, Codable, Hashable {
     let id: String
     let title: String
-    let category: String
-    let difficulty: String
+    let category: LessonCategory
+    let difficulty: LessonDifficulty
     let scenarioText: String
     let steps: [LessonStep]
 }

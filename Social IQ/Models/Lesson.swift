@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Lesson: Identifiable, Codable {
+struct Lesson: Identifiable, Codable, Hashable {
     let id: String
     let title: String
     let category: String
@@ -14,7 +14,7 @@ struct Lesson: Identifiable, Codable {
     let steps: [LessonStep]
 }
 
-struct LessonStep: Identifiable, Codable {
+struct LessonStep: Identifiable, Codable, Hashable {
     let id: String
     let label: String
     let question: String
@@ -22,14 +22,14 @@ struct LessonStep: Identifiable, Codable {
     let correctIndex: Int
 }
 
-struct LessonOption: Identifiable, Codable {
+struct LessonOption: Identifiable, Codable, Hashable {
     let id: String
     let prefix: String
     let label: String
     let feedback: OptionFeedback
 }
 
-struct OptionFeedback: Codable {
+struct OptionFeedback: Codable, Hashable {
     let isCorrect: Bool
     let text: String
 }

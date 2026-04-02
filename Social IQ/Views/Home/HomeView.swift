@@ -8,6 +8,10 @@ import SwiftUI
 
 struct HomeView: View {
     var authViewModel: AuthViewModel
+    @State private var completedLessonIds: Set<String> = []
+    @State private var selectedLesson: Lesson?
+
+    private let progressService = LessonProgressService()
 
     private var userName: String {
         if case .signedIn(let user) = authViewModel.authState,
@@ -16,6 +20,13 @@ struct HomeView: View {
             return name
         }
         return ""
+    }
+
+    private var userId: String? {
+        if case .signedIn(let user) = authViewModel.authState {
+            return user.id.uuidString
+        }
+        return nil
     }
 
     private var greeting: String {
@@ -37,7 +48,9 @@ struct HomeView: View {
                             .padding(.top, 8)
 
                         ForEach(LessonData.allLessons) { lesson in
-                            NavigationLink(destination: LessonView(lesson: lesson)) {
+                            Button {
+                                handleLessonTap(lesson)
+                            } label: {
                                 lessonCard(lesson)
                             }
                             .buttonStyle(.plain)
@@ -56,23 +69,79 @@ struct HomeView: View {
                     .padding(.horizontal, 20)
                 }
             }
+            .navigationDestination(item: $selectedLesson) { lesson in
+                LessonView(
+                    lesson: lesson,
+                    userId: userId,
+                    onComplete: { Task { await loadCompletedLessons() } }
+                )
+            }
             .navigationTitle("Social IQ")
             .toolbarColorScheme(.dark, for: .navigationBar)
+            .task { await loadCompletedLessons() }
+        }
+    }
+
+    private func isLocked(_ lesson: Lesson) -> Bool {
+        lesson.id != LessonData.allLessons.first?.id && !SuperwallService.isSubscribed
+    }
+
+    private func handleLessonTap(_ lesson: Lesson) {
+        if isLocked(lesson) {
+            SuperwallService.presentPaywall()
+        } else {
+            selectedLesson = lesson
+        }
+    }
+
+    private func loadCompletedLessons() async {
+        guard let userId else { return }
+        do {
+            let completed = try await progressService.fetchCompletedLessons(userId: userId)
+            completedLessonIds = Set(completed.map(\.lessonId))
+        } catch {
+            // Silently fail — lessons still usable without progress data
         }
     }
 
     // MARK: - Lesson Card
 
     private func lessonCard(_ lesson: Lesson) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(lesson.title)
-                .font(.headline)
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.leading)
+        HStack {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(lesson.title)
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.leading)
 
-            HStack(spacing: 8) {
-                tag(lesson.category, color: .purple)
-                tag(lesson.difficulty, color: .blue)
+                HStack(spacing: 8) {
+                    tag(lesson.category, color: .purple)
+                    tag(lesson.difficulty, color: .blue)
+                }
+            }
+
+            Spacer()
+
+            if isLocked(lesson) {
+                Text("PRO")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(
+                        Capsule().fill(
+                            LinearGradient(
+                                colors: [.blue, .purple],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                    )
+            } else if completedLessonIds.contains(lesson.id) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundStyle(.green)
+                    .font(.title2)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

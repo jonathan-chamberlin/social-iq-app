@@ -7,6 +7,8 @@ import SwiftUI
 
 struct LessonView: View {
     var lesson: Lesson
+    var userId: String?
+    var onComplete: (() -> Void)?
     @State private var viewModel = LessonViewModel()
     @Environment(\.dismiss) private var dismiss
 
@@ -43,6 +45,14 @@ struct LessonView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear {
             viewModel.startLesson(lesson)
+        }
+        .onChange(of: viewModel.isComplete) { _, complete in
+            if complete, let userId {
+                Task {
+                    await viewModel.saveProgress(userId: userId)
+                    onComplete?()
+                }
+            }
         }
     }
 

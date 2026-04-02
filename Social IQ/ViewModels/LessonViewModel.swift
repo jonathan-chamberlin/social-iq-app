@@ -13,6 +13,9 @@ final class LessonViewModel {
     var showFeedback: Bool = false
     var answers: [Int] = []
     var isComplete: Bool = false
+    var saveError: String?
+
+    private let progressService = LessonProgressService()
 
     var currentStep: LessonStep? {
         guard let lesson = currentLesson,
@@ -57,6 +60,19 @@ final class LessonViewModel {
             showFeedback = false
         } else {
             isComplete = true
+        }
+    }
+
+    func saveProgress(userId: String) async {
+        guard let lesson = currentLesson else { return }
+        do {
+            try await progressService.saveLessonProgress(
+                userId: userId,
+                lessonId: lesson.id,
+                score: score
+            )
+        } catch {
+            saveError = error.localizedDescription
         }
     }
 }

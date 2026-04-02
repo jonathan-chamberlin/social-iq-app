@@ -9,7 +9,12 @@ import Mixpanel
 enum AnalyticsService {
 
     static func initialize(token: String) {
-        Mixpanel.initialize(token: token, trackAutomaticEvents: true)
+        Mixpanel.initialize(token: token, trackAutomaticEvents: false)
+        #if DEBUG
+        Mixpanel.mainInstance().loggingEnabled = true
+        #endif
+        track(event: .appOpened)
+        Mixpanel.mainInstance().flush()
     }
 
     static func track(event: AnalyticsEvent, properties: [String: MixpanelType]? = nil) {

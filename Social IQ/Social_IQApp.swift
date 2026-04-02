@@ -20,6 +20,7 @@ struct Social_IQApp: App {
         // Eagerly initialize the Supabase client
         _ = SupabaseService.shared
         SuperwallService.configure()
+        AnalyticsService.initialize(token: AppConfig.mixpanelToken)
     }
 
     var body: some Scene {

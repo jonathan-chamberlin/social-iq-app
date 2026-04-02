@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E23C692C2F7DFDFB0031EDA1 /* SuperwallKit in Frameworks */ = {isa = PBXBuildFile; productRef = E23C692B2F7DFDFB0031EDA1 /* SuperwallKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		E24636162F758225001A5EE8 /* Social IQ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Social IQ.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E23C692C2F7DFDFB0031EDA1 /* SuperwallKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = "Social IQ";
 			packageProductDependencies = (
+				E23C692B2F7DFDFB0031EDA1 /* SuperwallKit */,
 			);
 			productName = "Social IQ";
 			productReference = E24636162F758225001A5EE8 /* Social IQ.app */;
@@ -94,6 +100,10 @@
 			);
 			mainGroup = E246360D2F758225001A5EE8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E23C69292F7DFDA30031EDA1 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				E23C692A2F7DFDFB0031EDA1 /* XCRemoteSwiftPackageReference "Superwall-iOS" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E24636172F758225001A5EE8 /* Products */;
 			projectDirPath = "";
@@ -288,6 +298,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Social IQ/Social IQRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 35373542G8;
@@ -342,6 +353,33 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E23C69292F7DFDA30031EDA1 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+		E23C692A2F7DFDFB0031EDA1 /* XCRemoteSwiftPackageReference "Superwall-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/superwall/Superwall-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.14.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E23C692B2F7DFDFB0031EDA1 /* SuperwallKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23C692A2F7DFDFB0031EDA1 /* XCRemoteSwiftPackageReference "Superwall-iOS" */;
+			productName = SuperwallKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E246360E2F758225001A5EE8 /* Project object */;
 }

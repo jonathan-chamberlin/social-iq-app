@@ -1,0 +1,86 @@
+[
+  {
+    "demographics": {"name": "Hudson", "session_number": "01", "session_type": "in-person", "age": 20, "background": "ZBT brother, self-improvement, looksmaxxing, business ideas"},
+    "icp_classification": {"icp_fit": "Strong", "icp_score": 5, "icp_reasoning": "Every onboarding answer applied to him"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 2, "would_use_again": "yes"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": true, "wanted_more_visuals": true, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Yo, this is kind of sick", "This is cool because it hyperanalyzes those situations. These are things you think about but never see on paper", "It's not just correct, incorrect… you just need more education"]
+  },
+  {
+    "demographics": {"name": "Aryaman", "session_number": "02", "session_type": "in-person", "age": null, "background": "Comp sci student, wants AI research at Tesla"},
+    "icp_classification": {"icp_fit": "ICP", "icp_score": 5, "icp_reasoning": "Wants to improve social skills, into self-improvement, onboarding fit issues are UX not ICP mismatch"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 2, "would_use_again": "implied_yes"},
+    "pattern_signals": {"felt_like_test": true, "too_much_text": false, "wanted_more_visuals": true, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": true, "wanted_lesson_tracking": true, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["I like the details of the body language and everything… I've faced this situation a lot personally", "The MCQ type exam stuff — gamify it, add animations, maybe a video", "After onboarding, jump straight to the lecture"]
+  },
+  {
+    "demographics": {"name": "Nishanth", "session_number": "03", "session_type": "in-person", "age": null, "background": "Not into self-improvement, claims excellent social life"},
+    "icp_classification": {"icp_fit": "Poor", "icp_score": 1, "icp_reasoning": "Not self-selected, not into self-improvement, personally disengaged"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 2, "would_use_again": "no"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": true, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": true, "wanted_deferred_feedback": true, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": true, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Don't have a right answer, just have it prompt to the final answer", "If you say this, I would inevitably believe this… then it becomes personal", "It erodes trust on the authority of this app"]
+  },
+  {
+    "demographics": {"name": "Brandon", "session_number": "04", "session_type": "in-person", "age": 28, "background": "Veteran, CS student, charismatic, emotionally intelligent"},
+    "icp_classification": {"icp_fit": "Edge", "icp_score": 3, "icp_reasoning": "28, already socially skilled, but resonated with turning-strangers-into-connections and did 3 lessons; not actively seeking improvement"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 3, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Turning strangers into connections. Exactly. That's pretty efficient", "I read it differently… I could tell this person's frustrated", "You can't teach nuance without showing the right answer"]
+  },
+  {
+    "demographics": {"name": "Charlie", "session_number": "05", "session_type": "in-person", "age": null, "background": "College student, engineering, fraternity, wants deeper friendships"},
+    "icp_classification": {"icp_fit": "Edge", "icp_score": 3, "icp_reasoning": "Real pain (wants friends who reach out), 3 lessons unprompted, but not self-improvement-oriented by identity"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 3, "would_use_again": "implied_yes"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": true, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": true, "wanted_progress_bar": false, "wanted_lesson_tracking": true, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["What do I do now?", "Realized options he'd initially pick could have unintended effects", "More than one right answer could exist; different choices leading to different follow-up questions"]
+  },
+  {
+    "demographics": {"name": "Andre", "session_number": "06", "session_type": "remote", "age": 20, "background": "Ambitious, into self-improvement and Elon Musk, data engineering"},
+    "icp_classification": {"icp_fit": "Perfect", "icp_score": 5, "icp_reasoning": "Literally described as perfect ICP — super interested in social/networking"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 1, "would_use_again": "implied_yes"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": true, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": true, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["I actually personally really liked it… it's so actionable for anybody to do in 15 minutes", "Take a mixture of precision and simplicity and combine it into something unforgettable", "When I'm talking to ChatGPT I can pretty much ask it anything with no judgment"]
+  },
+  {
+    "demographics": {"name": "Dylan", "session_number": "07", "session_type": "remote", "age": 20, "background": "Built Chrome extensions, technical background"},
+    "icp_classification": {"icp_fit": "Non-ICP", "icp_score": 2, "icp_reasoning": "Has product sense but no personal need for social skill improvement"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 2, "would_use_again": "no"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": true, "no_clear_direction": true, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["It's lacking direction and a soul", "When you look at Duolingo and other big learning apps they have a clear direction and path", "A typical lovable or base44 website"]
+  },
+  {
+    "demographics": {"name": "Kyle", "session_number": "08", "session_type": "remote", "age": null, "background": "Former self-improvement enthusiast, now focused on business"},
+    "icp_classification": {"icp_fit": "Former ICP", "icp_score": 2, "icp_reasoning": "Was the inspiration for the app but graduated out of the need; no longer in self-improvement phase"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 1, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": true, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Reminded me of a test", "I honestly felt I didn't have enough context to accurately answer the questions", "Even revised tone still felt like a test"]
+  },
+  {
+    "demographics": {"name": "Jack", "session_number": "09", "session_type": "remote", "age": null, "background": "Spiritual, six-figure day trader, traveling Asia"},
+    "icp_classification": {"icp_fit": "Low", "icp_score": 2, "icp_reasoning": "Already emotionally intelligent, spent only a few minutes"},
+    "core_metrics": {"completed_L1": false, "started_L2_unprompted": false, "total_lessons_done": 0, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": true, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Tried it out for a few minutes. Seems like an interesting concept", "Write an answer rather than multiple choice and have a trained AI rate the response"]
+  },
+  {
+    "demographics": {"name": "Kofi", "session_number": "10", "session_type": "remote", "age": null, "background": "Nigerian immigrant, marketing agency owner, content with social life"},
+    "icp_classification": {"icp_fit": "Not ICP", "icp_score": 1, "icp_reasoning": "Content with social life, none of onboarding options fit"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 1, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["The initial answers on the description of my social life right now, none of them fit me", "Some data points backing this as to why those are the right answers would be great", "This is something valuable to the right person for sure"]
+  },
+  {
+    "demographics": {"name": "Sasha", "session_number": "11", "session_type": "in-person", "age": null, "background": "College student, fraternity, socially confident"},
+    "icp_classification": {"icp_fit": "Poor", "icp_score": 1, "icp_reasoning": "Feels socially good already, no self-improvement goal"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": 1, "would_use_again": "no"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["What if I don't think any of them apply to me?", "Figure out what people are really worried about", "Reading what people actually mean — that's one of my strongest things"]
+  },
+  {
+    "demographics": {"name": "Wyatt", "session_number": "12", "session_type": "in-person", "age": null, "background": "Grad student, environmental policy, dates rarely"},
+    "icp_classification": {"icp_fit": "Strong", "icp_score": 5, "icp_reasoning": "Real skill gaps, engaged deeply with 3 lessons — strongest retention signal"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 3, "would_use_again": "implied_yes"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": true, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": true, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["If you own that silence you're a dog", "It makes me feel like I kind of know something, but also that other people are in the same boat", "Even your instinct might be to say this, but if you're in a professional setting, this is what you should be doing"]
+  }
+]

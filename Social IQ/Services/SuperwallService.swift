@@ -16,6 +16,9 @@ final class SuperwallService {
     }
 
     static var isSubscribed: Bool {
-        Superwall.shared.subscriptionStatus == .active
+        if case .active = Superwall.shared.subscriptionStatus {
+            return true
+        }
+        return false
     }
 }

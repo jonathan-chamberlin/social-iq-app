@@ -1,0 +1,16 @@
+//
+//  AppConfig.swift.example
+//  Social IQ
+//
+//  Copy this file to AppConfig.swift and fill in your actual keys.
+//  AppConfig.swift is gitignored and will not be committed.
+//
+
+import Foundation
+
+enum AppConfig {
+    static let supabaseURL = URL(string: "https://YOUR_PROJECT.supabase.co")!
+    static let supabaseAnonKey = "YOUR_SUPABASE_ANON_KEY"
+    static let superwallAPIKey = "YOUR_SUPERWALL_API_KEY"
+    static let mixpanelToken = "YOUR_MIXPANEL_TOKEN"
+}

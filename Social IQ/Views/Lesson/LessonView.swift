@@ -45,9 +45,11 @@ struct LessonView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         .onAppear {
             viewModel.startLesson(lesson)
+            AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
         }
         .onChange(of: viewModel.isComplete) { _, complete in
             if complete, let userId {
+                AnalyticsService.track(event: .lessonCompleted, properties: ["lesson_id": lesson.id])
                 Task {
                     await viewModel.saveProgress(userId: userId)
                     onComplete?()

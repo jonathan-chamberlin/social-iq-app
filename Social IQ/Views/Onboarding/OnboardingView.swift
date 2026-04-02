@@ -3,6 +3,7 @@
 //  Social IQ
 //
 
+import Mixpanel
 import StoreKit
 import SwiftUI
 
@@ -60,6 +61,9 @@ struct OnboardingView: View {
         .animation(.easeInOut(duration: 0.3), value: currentStep)
         .animation(.easeInOut(duration: 0.3), value: quizSubStep)
         .preferredColorScheme(.dark)
+        .onAppear {
+            AnalyticsService.track(event: .onboardingStarted)
+        }
     }
 
     // MARK: - Progress Dots
@@ -152,6 +156,7 @@ struct OnboardingView: View {
 
     private func advance() {
         guard currentStep < totalSteps else { return }
+        AnalyticsService.track(event: .onboardingStepCompleted, properties: ["step": currentStep])
         currentStep += 1
     }
 
@@ -360,6 +365,7 @@ struct OnboardingView: View {
             } catch {
                 // Best-effort save — don't block the user
             }
+            AnalyticsService.track(event: .onboardingCompleted)
             onComplete()
         }
     }
@@ -687,7 +693,7 @@ struct OnboardingView: View {
                 .padding(.horizontal, 8)
 
             Button {
-                SuperwallService.presentPaywall(placement: .onboardingComplete) {
+                SuperwallService.presentPaywallWithHandler(placement: .onboardingComplete) {
                     completeOnboardingAndDismiss()
                 }
             } label: {

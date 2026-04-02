@@ -34,6 +34,14 @@ final class SuperwallService {
         }
     }
 
+    /// Present a paywall and execute `onComplete` when the user should proceed.
+    /// The feature block fires when the user has access (purchased, already subscribed, or no paywall configured).
+    static func presentPaywallWithHandler(placement: SuperwallPlacement, onComplete: @escaping () -> Void) {
+        Superwall.shared.register(placement: placement.rawValue) {
+            onComplete()
+        }
+    }
+
     static var isSubscribed: Bool {
         if case .active(_) = Superwall.shared.subscriptionStatus {
             return true

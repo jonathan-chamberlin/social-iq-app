@@ -51,6 +51,7 @@ struct Social_IQApp: App {
     }
 
     private func checkOnboarding(userId: String) async {
+        AnalyticsService.identify(userId: userId)
         do {
             let completed = try await onboardingService.fetchOnboardingCompleted(userId: userId)
             showOnboarding = !completed

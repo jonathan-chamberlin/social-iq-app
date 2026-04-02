@@ -88,7 +88,7 @@ struct HomeView: View {
 
     private func handleLessonTap(_ lesson: Lesson) {
         if isLocked(lesson) {
-            SuperwallService.presentPaywall()
+            SuperwallService.presentPaywall(event: "lesson_locked")
         } else {
             selectedLesson = lesson
         }

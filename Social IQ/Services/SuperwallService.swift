@@ -1,3 +1,10 @@
+// SUPERWALL DASHBOARD SETUP:
+// 1. Create campaign "Onboarding Paywall" → placement: "onboarding_complete"
+// 2. Create campaign "Lesson Locked" → placement: "lesson_locked"
+// 3. Create campaign "Transaction Abandoned" → placement: "transaction_abandon" (built-in Superwall event)
+// 4. For transaction_abandoned: set 50-80% discount offer (23.1% conversion, +40% revenue)
+// 5. Use Superwall template paywalls until $1M+ ARR
+
 //
 //  SuperwallService.swift
 //  Social IQ
@@ -11,7 +18,9 @@ final class SuperwallService {
         Superwall.configure(apiKey: AppConfig.superwallAPIKey)
     }
 
-    static func presentPaywall(event: String = "campaign_trigger") {
+    /// Present a paywall for a specific placement.
+    /// Placements: "onboarding_complete", "lesson_locked"
+    static func presentPaywall(event: String = "lesson_locked") {
         Superwall.shared.register(placement: event)
     }
 
@@ -21,4 +30,9 @@ final class SuperwallService {
         }
         return false
     }
+
+    // NOTE: transaction_abandon is a built-in Superwall event.
+    // No code-side registration needed — configure it entirely in the Superwall dashboard
+    // by creating a campaign triggered by the "transaction_abandon" event.
+    // Set the offer to 50-80% discount for maximum win-back conversion.
 }

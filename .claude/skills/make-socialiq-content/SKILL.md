@@ -261,3 +261,23 @@ Before marking a lesson complete, verify:
 - [ ] "(even if you don't)" parenthetical used where user might resist the advice
 - [ ] All 4 wrong answers are things a real person would actually say
 - [ ] Correct answer position varies across the lesson set
+
+
+## Post-task reflection (run after every completed task)
+
+Before marking the Notion task Done, answer these four questions:
+1. Did I do anything differently from what this skill instructed?
+2. Did I encounter an error this skill didn't anticipate?
+3. Did I find a faster or better method?
+4. Did the human override my approach at any decision point?
+
+If YES to any: format a skill update proposal:
+  SKILL UPDATE PROPOSED — [skill name]
+  Change: [what to add/modify/remove]
+  Reason: [why this would have helped]
+  Diff: [exact before/after lines]
+
+Send via ccgram as a decision card (same format as Layer 1).
+Wait for approval before modifying the skill file.
+If approved: apply the diff. Commit: "skill: [skill-name] update — [one-line reason] [agent]"
+If rejected: log the reasoning in DECISIONS.md and do not retry.

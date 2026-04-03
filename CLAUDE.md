@@ -1,58 +1,66 @@
-# CLAUDE.md
+# Social IQ — iOS App
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Stack
+- SwiftUI (iOS 17+), Swift 5.0+
+- @Observable ONLY (never ObservableObject, never @Published)
+- Supabase (auth + DB) — see .claude/skills/supabase-schema-rls/
+- Superwall (paywalls) — see .claude/skills/superwall-campaigns/
+- Mixpanel (analytics) — see .claude/skills/mixpanel-taxonomy/
+- NavigationStack (never NavigationView)
+- async/await (never Combine, never GCD)
+- Apple Sign In via AuthenticationServices
 
-## Project
+## Concurrency
+- SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor — all code is main-actor-isolated by default
+- SWIFT_APPROACHABLE_CONCURRENCY = YES — modern concurrency syntax enabled
+- Use @concurrent for explicit background offloading
 
-Social IQ is a native iOS app built with SwiftUI. Currently at initial scaffold stage — no business logic, networking, or persistence yet.
+## Build command
+xcodebuild -project "Social IQ.xcodeproj" -scheme "Social IQ" \
+  -destination "platform=iphonesimulator,id=F9A3AAE0-306C-412C-AA3F-491BD795870A" \
+  -derivedDataPath DerivedData build 2>&1 | xcsift -w
 
-## Build & Run
+## Simulator
+iPhone 17 Pro — UDID: F9A3AAE0-306C-412C-AA3F-491BD795870A
+Launch: xcrun simctl launch F9A3AAE0-306C-412C-AA3F-491BD795870A com.jonathanchamberlin.Social-IQ
+Screenshot: xcrun simctl io booted screenshot /tmp/social-iq-screen.png
 
-This is an Xcode project (no SPM command-line build). All build/run/test operations go through Xcode or `xcodebuild`:
+## Project structure
+Social IQ/
+  Config/           — AppConfig (Supabase URL, API keys)
+  Constants/        — DatabaseSchema, AnalyticsEvent
+  Models/           — Codable structs (Lesson, UserProfile, LessonProgress)
+  Data/             — Lesson content data (Lesson1-5)
+  ViewModels/       — AuthViewModel, LessonViewModel, OnboardingViewModel
+  Views/
+    Home/           — HomeView
+    Auth/           — SignInView
+    Lesson/         — LessonView
+    Paywall/        — PaywallView
+    Onboarding/     — Onboarding flow
+  Services/         — AnalyticsService, AuthService
+  Utilities/
+  Assets.xcassets/
 
-```bash
-# Build
-xcodebuild -project "Social IQ.xcodeproj" -scheme "Social IQ" -sdk iphonesimulator build
-
-# Run tests (once test targets exist)
-xcodebuild -project "Social IQ.xcodeproj" -scheme "Social IQ" -sdk iphonesimulator test
-
-# Clean
-xcodebuild -project "Social IQ.xcodeproj" -scheme "Social IQ" clean
-```
-
-No third-party dependencies or package manager configured yet.
-
-## Architecture
-
-- **Entry point:** `Social IQ/Social_IQApp.swift` — `@main` SwiftUI App
-- **UI:** `Social IQ/ContentView.swift` — root view
-- **Assets:** `Social IQ/Assets.xcassets/` — app icon, accent color
-- **Target:** iOS 17.0+, Swift 5.0, Xcode 26.3+
-
-## Swift/SwiftUI Conventions
-
-- `SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor` — all code is main-actor-isolated by default
-- `SWIFT_APPROACHABLE_CONCURRENCY = YES` — modern concurrency syntax enabled
-- Uses `#Preview` macro for SwiftUI previews
-- Localization support enabled (string catalogs)
+## Rules
+- One type per file, named after the type
+- // MARK: - for section headers in every file
+- After changes: build → verify compilation → run tests → screenshot
+- NEVER modify .pbxproj directly
+- All Supabase tables snake_case, all Swift types PascalCase
+- Team signing ID: 35373542G8
 
 ## Product Strategy Reference
-Always read `~/.claude/skills/app-mafia-mobile/SKILL.md` for the App Mafia playbook. Dive into its `references/` modules for deep context on ideation, design, development, and distribution.
+Always read `~/.claude/skills/app-mafia-mobile/SKILL.md` for the App Mafia playbook.
 
 Project-specific docs live in `references/` at the repo root:
 - `ideation-reference.md` — problem definition, target audience, app concept
-- `ideation-raw-research.md` — raw field notes from Instagram, TikTok, Reddit research
 - `design-reference.md` — UX/UI decisions, onboarding flow, screen designs
-- `competitive-analysis.md` — competitor landscape for social skills apps
-- `tech-stack-reference.md` — decided tech stack and rationale
+- `competitive-analysis.md` — competitor landscape
+- `tech-stack-reference.md` — tech stack and rationale
 - `monetization-reference.md` — pricing, revenue levers, paywall strategy
 - `analytics-event-taxonomy.md` — Mixpanel events, user properties, key funnels
+- `founder-advice-foundation-hacks.md` — validated founder feedback on ICP, retention, product direction
 
-Read `references/founder-advice-foundation-hacks.md` for validated founder feedback on ICP, retention mechanics, and product direction. This is high-signal advice from real founders — prioritize it over assumptions.
-
-## Notes
-
-- No `.gitignore` exists yet — xcuserdata is currently tracked
-- No test targets defined yet
-- Automatic code signing with team ID 35373542G8
+## Gotchas (append new mistakes here)
+- Xcode project has a space in it: "Social IQ.xcodeproj" — always quote paths

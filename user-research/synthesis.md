@@ -1,14 +1,14 @@
-# User Research Synthesis — 13 Sessions
+# User Research Synthesis — 15 Sessions
 
-**Generated:** 2026-04-02
-**Source:** 13 user research transcripts (Sessions 01–13)
+**Generated:** 2026-04-03
+**Source:** 15 user research transcripts (Sessions 01–15)
 **Method:** Full transcript analysis with ICP classification, pattern extraction, and frequency counting. Loose counting: includes plausible inferences, not just explicit mentions.
 
 ---
 
 ## Participant Classification
 
-### ICP Users (n=5)
+### ICP Users (n=6)
 Users who fit the target profile: self-improvement-oriented males 18-28 who actively want to level up social skills.
 
 | # | Name | Format | Lessons Done | Would Return? |
@@ -18,8 +18,11 @@ Users who fit the target profile: self-improvement-oriented males 18-28 who acti
 | 06 | Andre | Remote | 1+ | Yes |
 | 07 | Dylan | Remote | 2 | Not stated |
 | 12 | Wyatt | In-person | 3 | Strong yes |
+| 15 | Theo | Remote | 0 (unclear) | Not stated |
 
 Note on Dylan: his "No" in the transcript was answering "Was there a moment that surprised you or made you think?" — NOT "Would you use this again?" His return intent is unknown.
+
+Note on Theo: Most self-improvement-oriented tester yet. Feedback was about onboarding — unclear if he got past it to complete a lesson. Possible onboarding bounce from a high-value ICP user.
 
 ### Non-ICP Users (n=5)
 Users who are already socially confident, not seeking improvement, or outside the demographic.
@@ -27,54 +30,59 @@ Users who are already socially confident, not seeking improvement, or outside th
 | # | Name | Format | Lessons Done | Would Return? | Why Not ICP |
 |---|------|--------|-------------|---------------|-------------|
 | 03 | Nishanth | In-person | 1+ | Unlikely | Self-rates high, disengaged, didn't read explanations |
-| 10 | Kofi | Remote | 1+ | No signal | Content with social life, different demographic |
+| 10 | Kofi | Remote | 1 (started L2) | No signal | Content with social life, different demographic |
 | 11 | Sasha | In-person | 1 | No | Socially confident, no improvement goal |
 | 09 | Jack | Remote | Partial | Not stated | Already emotionally intelligent, minimal engagement |
 | 13 | Avi | Remote | 1 | Not stated | Already very socially skilled, strong social circle, VC in SF |
 
-### Edge Cases (n=3)
+Note on Kofi update: Follow-up revealed he DID start L2 (dating lesson) unprompted but bounced — lesson menu felt overwhelming + day was starting. Also described app as "quiz module."
+
+### Edge Cases (n=4)
 
 | # | Name | Classification | Rationale |
 |---|------|---------------|-----------|
 | 04 | Brandon | Debatable | Already socially skilled veteran — but did 3 lessons, resonated with "turning strangers into connections." ICP is about *wanting to level up*, not current skill. Could be ICP or aspirational non-ICP. |
 | 05 | Charlie | Near-ICP | Not hardcore self-improvement but has real pain (wants friends who reach out); did 3 lessons unprompted |
 | 08 | Kyle | Former ICP | Was first person to teach Jonathan about reading people. No longer consuming self-improvement content. Tested revised tone — still felt like a test. Graduated out of ICP. |
+| 14 | Elijah | Edge | Looksmaxxing influencer, deep self-improvement identity but physical not social. Did 2 lessons, said "really cool," projected into scenarios. Questioned whether you can truly know someone's internal motives. |
 
 ---
 
 ## Retention Signal Summary
 
-| Metric | Count | % of Total (n=13) | ICP % (n=5) | Non-ICP % (n=5) |
+| Metric | Count | % of Total (n=15) | ICP % (n=6) | Non-ICP % (n=5) |
 |--------|-------|--------------------|-------------|-----------------|
-| Completed L1 | 12 | 92% | 5/5 (100%) | 4/5 (80%) |
-| Started L2 unprompted | 8 | 62% | 4/5 (80%) | 2/5 (40%) |
-| Did 3+ lessons | 4 | 31% | 1/5 (Wyatt) | 0/5 |
-| Said "would return" | 4 | 31% | 3/5 (60%) | 0/5 (0%) |
-| Said "would NOT return" | 2 | 15% | 0/5 (0%) | 2/5 (40%) |
+| Completed L1 | 12 | 80% | 5/6 (83%) | 4/5 (80%) |
+| Started L2 unprompted | 10 | 67% | 4/6 (67%) | 3/5 (60%) |
+| Did 3+ lessons | 4 | 27% | 1/6 (Wyatt) | 0/5 |
+| Said "would return" | 4 | 27% | 3/6 (50%) | 0/5 (0%) |
+| Said "would NOT return" | 2 | 13% | 0/6 (0%) | 2/5 (40%) |
 
-Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP). Not counted in either column.
+Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP), Elijah (2 lessons). Not counted in either column.
 
-**Key finding:** ICP users have 60% stated return intent vs. 0% for non-ICP. Two ICP users (Dylan, Wyatt) have unknown return intent — the real number could be higher.
+**Key finding:** ICP users have 50% stated return intent vs. 0% for non-ICP. Three ICP users (Dylan, Wyatt, Theo) have unknown return intent — the real number could be higher. Theo is concerning: the most self-improvement-oriented tester may have bounced at onboarding.
+
+**New finding (Kofi update):** Kofi DID start L2 unprompted — bumps Non-ICP L2 rate from 40% to 60%. This narrows the gap between ICP and Non-ICP L2 starts (67% vs 60%), weakening L2-start as a discriminator. However, Kofi bounced quickly due to "menu overwhelm" — the lesson list may be a retention leak for ALL users, not just non-ICP.
 
 ---
 
 ## The Critical Confound: In-Person vs. Remote
 
-| Metric | In-Person (n=7) | Remote (n=6) |
+| Metric | In-Person (n=7) | Remote (n=8) |
 |--------|----------------|-------------|
-| Started L2 unprompted | 6/7 (86%) | 2/6 (33%) |
-| Did 3+ lessons | 3/7 (43%) | 0/6 (0%) |
-| Said "would return" | 3/7 (43%) | 1/6 (17%) |
-| Said "would NOT return" | 1/7 (14%) | 1/6 (17%) |
+| Started L2 unprompted | 6/7 (86%) | 4/8 (50%) |
+| Did 3+ lessons | 3/7 (43%) | 0/8 (0%) |
+| Said "would return" | 3/7 (43%) | 1/8 (13%) |
+| Said "would NOT return" | 1/7 (14%) | 1/8 (13%) |
 
 **Crossed with ICP:**
 
 | Segment | L2 Start Rate | Would Return |
 |---------|--------------|-------------|
 | ICP + In-person (Hudson, Aryaman, Wyatt) | 3/3 (100%) | 3/3 (100%) |
-| ICP + Remote (Andre, Dylan) | 1/2 (50%) | 1/2 (Andre yes, Dylan unknown) |
+| ICP + Remote (Andre, Dylan, Theo) | 1/3 (33%) | 1/3 (Andre yes, Dylan+Theo unknown) |
 | Non-ICP + In-person (Nishanth, Sasha) | 2/2 (100%) | 0/2 (0%) |
-| Non-ICP + Remote (Kofi, Jack, Avi) | 0/3 (0%) | 0/3 (0%) |
+| Non-ICP + Remote (Kofi, Jack, Avi) | 1/3 (33%) | 0/3 (0%) |
 
 **This is the most important finding in the dataset.** Every in-person user started L2 regardless of ICP fit. Remote users mostly didn't. Two explanations:
 
@@ -87,19 +95,21 @@ Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP
 
 ## Pattern Analysis — Ranked by Frequency
 
-### 1. "Feels like a test, not a conversation" — 54% (7/13)
+### 1. "Feels like a test, not a conversation" — 60% (9/15)
 
 | Who Said It | ICP? | Signal Type | Specific Quote/Note |
 |-------------|------|------------|-------------------|
 | Hudson | Yes | Explicit | Explanation tone sounds like a "school assignment" — needs to sound like "a really social friend" |
 | Aryaman | Yes | Explicit | "MCQ type exam stuff" |
 | Andre | Yes | Explicit | Should feel like ChatGPT — "no judgment" |
+| Theo | Yes | Explicit | "Less quiz and more like a personalized experience" — independently echoed Andre |
 | Kyle | Former | Explicit | "Reminded me of a test" (even on REVISED tone) |
 | Nishanth | No | Explicit | "Erodes trust on the authority of this app" |
 | Dylan | Yes | Inferred | "Lacking soul" — sterile test-like experience vs. engaging learning |
+| Kofi | No | Explicit | "Reminded me of a quiz module" (updated from inferred) |
 | Kofi | No | Inferred | Wanted data citations to validate answers — downstream symptom of test framing |
 
-**ICP signal:** 3/5 ICP users (60%) explicit, 4/5 (80%) including inferred. Kyle (former ICP) tested the revised tone and it STILL felt like a test — the problem is structural, not just copy.
+**ICP signal:** 4/6 ICP users (67%) explicit, 5/6 (83%) including inferred. Theo independently arrived at the same feedback as Andre ("less quiz, more personalized") without seeing Andre's response — two ICP users converging on the same structural critique is strong signal. Kyle (former ICP) tested the revised tone and it STILL felt like a test — the problem is structural, not just copy.
 
 ### 2. "Too much text, needs more visuals" — 54% (7/13)
 
@@ -115,7 +125,7 @@ Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP
 
 **ICP signal:** 4/5 ICP users (80%) explicitly said this. Universal across all groups.
 
-### 3. "Scenarios need richer context / clearer setting" — 38% (5/13)
+### 3. "Scenarios need richer context / clearer setting" — 40% (6/15)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -124,21 +134,24 @@ Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP
 | Kyle | Former | "I didn't have enough context to accurately answer the questions" |
 | Brandon | Edge | "Is this in the group setting or in a one-on-one?" — ambiguous |
 | Wyatt | Near | Forgot the pool context entirely mid-lesson |
+| Elijah | Edge | "How do we know what the person's true internal feelings/motives are" — questions the epistemological basis of reading social cues |
 
-**ICP signal:** 2/5 ICP (40%). Real problem — ICP users need more scene-setting to project themselves into scenarios accurately.
+**ICP signal:** 2/6 ICP (33%). Elijah's variant is distinct — not about setting details but about whether you can truly infer internal states from behavior. This is a credibility challenge that touches the core premise of the app.
 
-### 4. "Onboarding options don't fit me" — 46% (6/13)
+### 4. "Onboarding options don't fit me" — 53% (8/15)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
 | Aryaman | Yes | "There should be a text box instead of a list" — options too specific |
+| Theo | Yes | "Instead of allowing me to describe my situation specifically, it's kind of assuming I fit into one of those categories" |
 | Nishanth | No | None of the "biggest problem" options applied |
 | Kofi | No | "None of them fit me. I'm content." |
 | Sasha | No | "What if I don't think any of them apply to me?" |
 | Avi | No | "None of the onboarding questions resonated with me" |
 | Wyatt | Near | Wanted to pick more than one option |
+| Kofi | No | Updated: lesson menu also felt like "a menu of things" — overwhelm extends beyond onboarding |
 
-**ICP signal:** Only 1/5 ICP (20%) — Aryaman. Most complaints came from non-ICP users who shouldn't be fitting the options. This is the onboarding correctly filtering. Wyatt's "pick more than one" is the only actionable ICP feedback here.
+**ICP signal:** 2/6 ICP (33%) — Aryaman and Theo. Theo's complaint is different from non-ICP "none fit me" — he wants to describe his specific situation, not just pick from categories. This is a personalization request, not a filtering failure. Two ICP users (Aryaman + Theo) independently want free-text self-description. Combined with Andre's "less quiz" feedback, the onboarding may be losing ICP users who have nuanced self-awareness.
 
 ### 5. "Defer wrong-answer feedback to end of lesson" — 31% (4/13)
 
@@ -161,15 +174,16 @@ Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP
 
 **ICP signal:** 3/5 ICP (60%). Dylan's quote is the sharpest: "Lacking direction and a soul… Duolingo has a mascot, sound effects, personalities." Important but implement after core feel is fixed — mascot on top of a quiz that feels like an exam is lipstick on a pig.
 
-### 7. "Home page / lesson list is confusing" — 23% (3/13)
+### 7. "Home page / lesson list is confusing" — 27% (4/15)
 
-| Who Said It | ICP? |
-|-------------|------|
-| Aryaman | Yes |
-| Charlie | Near |
-| Wyatt | Near |
+| Who Said It | ICP? | Specific Quote/Note |
+|-------------|------|-------------------|
+| Aryaman | Yes | After onboarding, should jump straight to lecture |
+| Charlie | Near | "What do I do now?" |
+| Wyatt | Near | Unclear direction after onboarding |
+| Kofi | No | "Felt like a menu of things so a little of overwhelming the brain" — bounced from L2 partly due to this |
 
-**ICP signal:** 1/5 ICP (20%), but both near-ICP users also flagged it. The post-onboarding transition is broken — users should go straight to their first lesson.
+**ICP signal:** 1/6 ICP (17%), but Kofi's comment confirms the lesson list is a retention leak even for users who made it past L1. Combined with prior signals, the post-onboarding transition needs to guide users into the next lesson, not present a menu.
 
 ### 8. "Wants free-text / AI-rated open responses" — 15% (2/13)
 
@@ -237,14 +251,14 @@ These are things ICP users explicitly praised or demonstrated through behavior. 
 
 ## ICP vs Non-ICP Behavior Comparison
 
-| Dimension | ICP (n=5) | Non-ICP (n=5) | Edge (n=3) |
+| Dimension | ICP (n=6) | Non-ICP (n=5) | Edge (n=4) |
 |-----------|-----------|---------------|------------|
-| Avg lessons completed | ~2.0 | ~0.8 | ~2.3 |
-| Projected into scenarios | 4/5 (80%) | 0/5 (0%) | 3/3 (100%) |
-| Read explanations carefully | 4/5 (80%) | 0/5 (0%) | 3/3 (100%) |
-| Gave constructive feature ideas | 5/5 (100%) | 3/5 (60%) | 3/3 (100%) |
-| Would return | 3/5 (60%) | 0/5 (0%) | 1/3 (33%) |
-| Questioned answer authority | 1/5 (20%) | 3/5 (60%) | 1/3 (33%) |
+| Avg lessons completed | ~1.7 | ~0.8 | ~2.5 |
+| Projected into scenarios | 4/6 (67%) | 0/5 (0%) | 4/4 (100%) |
+| Read explanations carefully | 4/6 (67%) | 0/5 (0%) | 4/4 (100%) |
+| Gave constructive feature ideas | 6/6 (100%) | 3/5 (60%) | 4/4 (100%) |
+| Would return | 3/6 (50%) | 0/5 (0%) | 1/4 (25%) |
+| Questioned answer authority | 1/6 (17%) | 3/5 (60%) | 2/4 (50%) |
 
 **Key difference:** ICP users project themselves into scenarios and read explanations. Non-ICP users debate the format and question whether answers are "really" right. This is the clearest behavioral signal for screening future testers — if someone argues about answer authority instead of engaging with the scenario, they're probably not ICP.
 
@@ -311,6 +325,8 @@ Corrections applied from founder review:
 - Brandon classified as Edge/Debatable, not Non-ICP
 
 Session 13 (Avi) added 2026-04-02: Non-ICP, remote. Introduced two new patterns: "MCQ format is reductive" and "positioning reads as for lonely guys." Both are low-frequency (1/13) but worth monitoring.
+
+Sessions 14-15 added 2026-04-03: Kofi follow-up revealed he started L2 unprompted (dating lesson) but bounced due to lesson menu overwhelm and described app as "quiz module." Elijah (Edge, remote) did 2 lessons, said "really cool," questioned scenario credibility ("how do we know the person's true internal feelings"). Theo (ICP, remote) — most self-improvement-oriented tester yet — may have bounced at onboarding; independently echoed Andre's "less quiz, more personalized" feedback.
 
 To keep this document useful over time:
 - **Don't append** — if new sessions are added, re-synthesize from all transcripts

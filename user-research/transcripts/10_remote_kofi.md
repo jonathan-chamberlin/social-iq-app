@@ -16,8 +16,8 @@
 
 ## Key Moments
 - **Lesson 1 completion:** Yes (gave specific content feedback)
-- **Started Lesson 2 unprompted:** UNCLEAR
-- **If no L2:** Not stated
+- **Started Lesson 2 unprompted:** Yes — "I just got into the one with the dating concept" but didn't finish (day was starting)
+- **If no L2 completion:** Time constraint + lesson menu felt overwhelming
 
 ## Feedback (text)
 
@@ -29,10 +29,19 @@
 
 4. "This is something valuable to the right person for sure."
 
+### Follow-up Feedback (April 2026)
+
+5. "I just got into the one with the dating concept and then saw the other modules but didn't have time for it because my day was starting."
+
+6. "Also felt like a menu of things so a little of overwhelming the brain could have ensued which made me put it away quicker to start my day."
+
+7. "Reminded me of a quiz module or something of the sort. Nothing really coming to mind tbh."
+
 ## Raw Notes
-Kofi isn't ICP (content with his social life, runs a business, different demographic) but his feedback still has one useful signal: the credibility/authority concern. He wants data backing the "right" answers — studies, stats, research. A skeptic mind would question why one answer is objectively better without evidence. This echoes Nishanth's trust-erosion concern from a different angle. The onboarding gap (no "I'm content" option) is expected since the app isn't for people who are already content. His "valuable to the right person" comment is polite validation but not a signal since he self-identified as not that person.
+Kofi isn't ICP (content with his social life, runs a business, different demographic) but his feedback still has useful signals: the credibility/authority concern (wants data backing "right" answers) and now three new ones. He DID start L2 unprompted (dating lesson), which is a positive retention signal even from a non-ICP user. But the lesson menu overwhelmed him — "a menu of things" made him bounce faster when combined with time pressure. The "quiz module" comparison reinforces the structural test-feel problem. The onboarding gap (no "I'm content" option) is expected since the app isn't for people who are already content. His "valuable to the right person" comment is polite validation but not a signal since he self-identified as not that person.
 
 ## Top 3 Takeaways
 1. **Credibility backing for "right" answers** — skeptics want research/data cited (useful for authority positioning even if Kofi isn't ICP)
-2. **Onboarding correctly filters him out** — no option for "I'm content" is by design, but could add a graceful exit
-3. **Not ICP — weight feedback accordingly**
+2. **Lesson menu overwhelm** — seeing all modules at once created cognitive overload; reinforces "just start the next lesson" design direction
+3. **Quiz feel confirmed** — "reminded me of a quiz module" adds to the structural test-feel pattern (now 8/15)
+4. **Not ICP — weight feedback accordingly**

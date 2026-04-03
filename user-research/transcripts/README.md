@@ -7,9 +7,10 @@
 - **type**: `inperson` or `remote`
 - **date**: ISO date of session
 
-## Target: 10 Sessions
+## Target: 10+ Sessions
 - Sessions 001–005: In-person (ZBT watch sessions)
-- Sessions 006–010: Remote
+- Sessions 006–010: Remote (initial batch)
+- Sessions 011–015: Additional sessions (mix of in-person and remote)
 
 ## Success Metric
 User completes a lesson AND voluntarily starts a second one unprompted.

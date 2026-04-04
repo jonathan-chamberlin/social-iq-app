@@ -2,35 +2,34 @@
 
 **Last updated:** 2026-04-04
 
-Delivery style: one phase at a time, click-by-click, grouped under headings. Don't show next phase until current is confirmed.
+## Just Completed
+- Expanded onboarding for ICP segmentation: gender, social context, discovery source questions
+- Expanded quiz options (Quiz 1: 6 options, Quiz 2: 5 options, Quiz 3: 5 options, Goals: 9 options)
+- Personalized scare screen based on Quiz 1 answer (6 variants)
+- Age range expanded to 13-99, gender-neutral copy throughout
+- Supabase migration applied (gender, social_context, discovery_source columns)
+- Build 5 archived and uploaded to App Store Connect / TestFlight
+- Onboarding flag reset in Supabase for testing
+- User research synthesis updated to n=18 with two ICP segments (A: self-improvement, B: sorority/overthinkers)
+- Created "Social IQ Pro" paywall (ID 203822) from Sharpen template with annual ($29.99) + weekly ($4.99)
+- Swapped both "Onboarding Paywall" and "Lesson Locked" campaigns to Social IQ Pro (100% treatment)
+- Enabled Apple auth provider in Supabase (Client ID: com.jonathanchamberlin.Social-IQ)
+- TestFlight internal testing group "Dev Testing" created, build added, tester invited
 
-## Completed Today
-- TestFlight: Build 3 (v1.0) uploaded and available
-- Superwall: Created "Social IQ Pro" paywall (ID 203822) from Sharpen template with annual ($29.99) + weekly ($4.99)
-- Superwall: Swapped both "Onboarding Paywall" and "Lesson Locked" campaigns to Social IQ Pro (100% treatment)
-
-## Currently Active: Phase 2 — Verify Apple Sign In + Supabase Persistence (ship-blocker)
-
-- Test A: Fresh sign-in → complete onboarding → verify row in `user_profiles` with all fields populated
-- Test B: Delete app → reinstall from TestFlight → sign in again → should skip onboarding, land on HomeView
-- Verify only one row exists in Supabase with same UUID, all data intact
-
-## Phase 3: Verify Mixpanel Events
-
-- Open Mixpanel dashboard → Events/Live View
-- Trigger each event on phone: app_opened, onboarding_started, onboarding_step_completed (per step), onboarding_completed, lesson_locked_tap, lesson_started, lesson_completed
-- Confirm user identity (Supabase UUID as distinct ID) appears in Mixpanel Users
-
-## Phase 4: Confirm Payment Pipeline
-
-- App Store Connect → Agreements, Tax, and Banking → Paid Apps agreement must be active (bank + tax + contact all green)
-- Enroll in Small Business Program (15% cut) at developer.apple.com/programs/small-business-program
-
-## Other Unfinished
+## Unfinished
+- Apple Sign In not yet verified end-to-end on TestFlight (provider was just enabled — needs test)
 - `transaction_abandon` campaign has no placement and only a holdout variant — needs paywall + placement configured
-- Rotate Superwall secret key (`sk_4238...`) — previously committed to git
-- Superwall MCP `create_paywall` products param and `get_paywall`/`list_paywalls` have bugs (product type mismatch)
-- Old Blinkist paywall (ID 195192) and Example Paywall (ID 195191) can be archived
+- Phase 2: Verify Apple Sign In + Supabase persistence (ship-blocker) — test sign-in, check Supabase row, delete/reinstall/re-sign-in
+- Phase 3: Verify Mixpanel events fire correctly
+- Phase 4: Confirm payment pipeline (Paid Apps agreement, Small Business Program enrollment)
+- Paywall copy still says "Get Sharpen+" — needs Social IQ branding in Superwall editor
+
+## Next Up
+- Test Apple Sign In on TestFlight build (should work now that Supabase provider is enabled)
+- Walk through full onboarding on device, verify data in Supabase
+- Delete/reinstall persistence test
+- Mixpanel event verification
+- Payment pipeline setup
 
 ## Blockers
-- None
+- Rotate Superwall secret key (`sk_4238...`) — previously committed to git

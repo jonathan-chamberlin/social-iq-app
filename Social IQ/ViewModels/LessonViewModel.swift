@@ -14,6 +14,7 @@ final class LessonViewModel {
     var answers: [Int] = []
     var isComplete: Bool = false
     var saveError: String?
+    var questionStartedAt: Date = .now
 
     private let progressService = LessonProgressService()
 
@@ -43,6 +44,7 @@ final class LessonViewModel {
         showFeedback = false
         answers = []
         isComplete = false
+        questionStartedAt = .now
     }
 
     func selectOption(_ index: Int) {
@@ -58,6 +60,7 @@ final class LessonViewModel {
             currentStepIndex += 1
             selectedOptionIndex = nil
             showFeedback = false
+            questionStartedAt = .now
         } else {
             isComplete = true
         }

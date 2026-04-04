@@ -12,25 +12,27 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 
 ## Onboarding Events
 
-| Event | Properties | Purpose |
-|-------|-----------|---------|
-| onboarding_started | source (organic, challenge_link, ad) | Track entry point |
-| onboarding_step_completed | step_number, step_name | Identify drop-off points in the funnel |
-| onboarding_step_skipped | step_number, step_name | Track which steps users skip |
-| onboarding_completed | duration_seconds, source | Conversion to app |
-| onboarding_abandoned | last_step_number, last_step_name, duration_seconds | Where people leave |
+| Event | Properties | Status | Purpose |
+|-------|-----------|--------|---------|
+| onboarding_started | (none yet) | **LIVE** | Track entry point |
+| onboarding_step_completed | step, step_name, duration_seconds, answer (quiz only) | **LIVE** | Drop-off by screen name + time spent |
+| onboarding_completed | (none yet) | **LIVE** | Conversion to app |
+| onboarding_abandoned | last_step, last_step_name, duration_seconds | **LIVE** | Where people leave (fires on background) |
+| onboarding_step_skipped | step_number, step_name | NOT YET | Track which steps users skip |
+
+### Onboarding Step Names (enum-driven, safe to reorder)
+`quiz_challenge`, `quiz_meet_new`, `quiz_underperform`, `name_age_gender`, `social_context`, `calculating`, `scare`, `uplift`, `social_proof`, `chart`, `goal_selection`, `referral_code`, `discovery_source`, `rating_prompt`, `bridge_to_paywall`
 
 ---
 
-## Scenario Events
+## Lesson Events
 
-| Event | Properties | Purpose |
-|-------|-----------|---------|
-| scenario_started | scenario_id, difficulty, loop_level (L1-L5), category | What content is being consumed |
-| scenario_answered | scenario_id, answer_chosen, is_correct, time_to_answer_seconds | Core engagement metric |
-| scenario_explanation_viewed | scenario_id, duration_seconds | Are people reading the explanations |
-| scenario_completed | scenario_id, score, percentile | Completion tracking |
-| scenario_skipped | scenario_id | Content quality signal — high skip rate = bad scenario |
+| Event | Properties | Status | Purpose |
+|-------|-----------|--------|---------|
+| lesson_started | lesson_id | **LIVE** | What content is being consumed |
+| question_answered | lesson_id, question_number, question_type (READ/THINK/SPEAK), answer_index, is_correct, time_to_answer_seconds | **LIVE** | Per-question difficulty + engagement |
+| lesson_completed | lesson_id | **LIVE** | Completion tracking |
+| lesson_locked_tap | (defined, not wired) | NOT YET | Paywall trigger signal |
 
 ---
 
@@ -76,17 +78,22 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 
 ## User Properties (Set Once or Updated)
 
-| Property | Type | Set When |
-|----------|------|----------|
-| age | number | Onboarding |
-| age_group | string (under_18, 18_22, 23_28, 29_35, 36_plus) | Onboarding — used for age-segmented paywalls |
-| signup_source | string | First app open |
-| subscription_status | string (free, trial, subscribed, churned) | On change |
-| current_streak | number | Daily |
-| total_scenarios_completed | number | On scenario complete |
-| average_score | number | On scenario complete |
-| social_iq_loop_step | string (READ, THINK, SPEAK) | On progression |
-| referral_code_used | string | Onboarding |
+| Property | Type | Set When | Status |
+|----------|------|----------|--------|
+| first_name | string | Onboarding completion | **LIVE** |
+| age | number | Onboarding completion | **LIVE** |
+| gender | string | Onboarding completion | **LIVE** |
+| social_context | string | Onboarding completion | **LIVE** |
+| goals | string (comma-separated) | Onboarding completion | **LIVE** |
+| discovery_source | string | Onboarding completion | **LIVE** |
+| quiz_challenge | string (answer text) | Onboarding completion | **LIVE** |
+| quiz_meet_new | string (answer text) | Onboarding completion | **LIVE** |
+| quiz_underperform | string (answer text) | Onboarding completion | **LIVE** |
+| age_group | string (under_18, 18_22, 23_28, 29_35, 36_plus) | Onboarding — used for age-segmented paywalls | NOT YET |
+| signup_source | string | First app open | NOT YET |
+| subscription_status | string (free, trial, subscribed, churned) | On change | NOT YET |
+| current_streak | number | Daily | NOT YET |
+| referral_code_used | string | Onboarding | NOT YET |
 
 ---
 

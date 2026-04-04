@@ -36,6 +36,18 @@ struct LessonView: View {
                             withAnimation {
                                 proxy.scrollTo("option-\(selected)", anchor: .center)
                             }
+                            // Track per-question answer
+                            if let step = viewModel.currentStep {
+                                let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
+                                AnalyticsService.track(event: .questionAnswered, properties: [
+                                    "lesson_id": lesson.id,
+                                    "question_number": viewModel.currentStepIndex + 1,
+                                    "question_type": step.label,
+                                    "answer_index": selected,
+                                    "is_correct": step.options[selected].feedback.isCorrect,
+                                    "time_to_answer_seconds": timeToAnswer,
+                                ])
+                            }
                         }
                     }
                 }

@@ -7,41 +7,193 @@ import Mixpanel
 import StoreKit
 import SwiftUI
 
+// MARK: - Onboarding Step Enum
+
+enum OnboardingStep: Int, CaseIterable {
+    case quiz
+    case nameAgeGender
+    case socialContext
+    case calculating
+    case scare
+    case uplift
+    case socialProof
+    case chart
+    case goalSelection
+    case referralCode
+    case discoverySource
+    case ratingPrompt
+    case bridgeToPaywall
+
+    var analyticsName: String {
+        switch self {
+        case .quiz: "quiz"
+        case .nameAgeGender: "name_age_gender"
+        case .socialContext: "social_context"
+        case .calculating: "calculating"
+        case .scare: "scare"
+        case .uplift: "uplift"
+        case .socialProof: "social_proof"
+        case .chart: "chart"
+        case .goalSelection: "goal_selection"
+        case .referralCode: "referral_code"
+        case .discoverySource: "discovery_source"
+        case .ratingPrompt: "rating_prompt"
+        case .bridgeToPaywall: "bridge_to_paywall"
+        }
+    }
+
+    var autoAdvances: Bool {
+        switch self {
+        case .quiz, .socialContext, .calculating, .discoverySource, .bridgeToPaywall:
+            true
+        default:
+            false
+        }
+    }
+
+    var showsBackButton: Bool {
+        switch self {
+        case .quiz, .calculating:
+            false
+        default:
+            true
+        }
+    }
+
+    var next: OnboardingStep? {
+        let all = Self.allCases
+        guard let idx = all.firstIndex(of: self), idx + 1 < all.count else { return nil }
+        return all[all.index(after: idx)]
+    }
+
+    var previous: OnboardingStep? {
+        let all = Self.allCases
+        guard let idx = all.firstIndex(of: self), idx > all.startIndex else { return nil }
+        let prev = all[all.index(before: idx)]
+        // Skip calculating when going back
+        if prev == .calculating { return prev.previous }
+        return prev
+    }
+
+    var stepNumber: Int {
+        Self.allCases.firstIndex(of: self)! + 1
+    }
+
+    static var totalCount: Int { allCases.count }
+}
+
+// MARK: - Quiz Sub-Step
+
+enum QuizSubStep: Int, CaseIterable {
+    case challenge = 1
+    case meetNew = 2
+    case underperform = 3
+
+    var analyticsName: String {
+        switch self {
+        case .challenge: "quiz_challenge"
+        case .meetNew: "quiz_meet_new"
+        case .underperform: "quiz_underperform"
+        }
+    }
+
+    var question: String {
+        switch self {
+        case .challenge: "What's your biggest social challenge?"
+        case .meetNew: "When you meet someone new, you usually..."
+        case .underperform: "How often do you feel like you underperformed socially?"
+        }
+    }
+
+    var options: [String] {
+        switch self {
+        case .challenge:
+            [
+                "Keeping conversations going",
+                "Making strong first impressions",
+                "Reading the room",
+                "Speaking up in groups",
+                "Overthinking after social situations",
+                "Approaching new people confidently",
+            ]
+        case .meetNew:
+            [
+                "Wait for them to talk first",
+                "Say hi but run out of things to say",
+                "Talk too much from nerves",
+                "Avoid the situation entirely",
+                "Do fine, but replay it in my head for hours",
+            ]
+        case .underperform:
+            [
+                "Almost every day",
+                "A few times a week",
+                "Occasionally",
+                "Rarely but when it counts",
+                "Almost never",
+            ]
+        }
+    }
+
+    var next: QuizSubStep? {
+        QuizSubStep(rawValue: rawValue + 1)
+    }
+
+    var previous: QuizSubStep? {
+        QuizSubStep(rawValue: rawValue - 1)
+    }
+}
+
+// MARK: - OnboardingView
+
 struct OnboardingView: View {
     let userId: String
     let onComplete: () -> Void
+    @Environment(\.scenePhase) private var scenePhase
 
     private let service = OnboardingService()
 
     // MARK: - State
 
-    @State private var currentStep = 1
-    @State private var quizSubStep = 1 // 1, 2, or 3 within step 1
+    @State private var currentStep: OnboardingStep = .quiz
+    @State private var quizSubStep: QuizSubStep = .challenge
     @State private var quizAnswers: [Int] = []
 
     @State private var userName: String = ""
     @State private var userAge: Int = 22
     @State private var selectedGender: String = ""
-
-    // Social context (step 3)
     @State private var selectedSocialContext: String = ""
-
-    // Goal selection (step 9)
     @State private var selectedGoals: Set<String> = []
-
-    // Referral code (step 10)
     @State private var referralCode: String = ""
-
-    // Discovery source (step 12)
     @State private var selectedDiscoverySource: String = ""
 
-    // Completion
     @State private var isCompleting = false
-
-    // Calculating screen
+    @State private var stepEnteredAt: Date = .now
     @State private var calcPhase = 0
 
-    private let totalSteps = 13
+    // MARK: - Analytics Helpers
+
+    private var currentAnalyticsName: String {
+        if currentStep == .quiz {
+            return quizSubStep.analyticsName
+        }
+        return currentStep.analyticsName
+    }
+
+    private func trackStepCompleted(extraProperties: [String: MixpanelType] = [:]) {
+        let duration = Int(Date().timeIntervalSince(stepEnteredAt))
+        var properties: [String: MixpanelType] = [
+            "step": currentStep.stepNumber,
+            "step_name": currentAnalyticsName,
+            "duration_seconds": duration,
+        ]
+        for (key, value) in extraProperties {
+            properties[key] = value
+        }
+        AnalyticsService.track(event: .onboardingStepCompleted, properties: properties)
+    }
+
+    // MARK: - Body
 
     var body: some View {
         ZStack {
@@ -71,15 +223,25 @@ struct OnboardingView: View {
         .onAppear {
             AnalyticsService.track(event: .onboardingStarted)
         }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .background, currentStep != .bridgeToPaywall {
+                let duration = Int(Date().timeIntervalSince(stepEnteredAt))
+                AnalyticsService.track(event: .onboardingAbandoned, properties: [
+                    "last_step": currentStep.stepNumber,
+                    "last_step_name": currentAnalyticsName,
+                    "duration_seconds": duration,
+                ])
+            }
+        }
     }
 
     // MARK: - Progress Dots
 
     private var progressDots: some View {
         HStack(spacing: 6) {
-            ForEach(1...totalSteps, id: \.self) { index in
+            ForEach(OnboardingStep.allCases, id: \.self) { step in
                 Circle()
-                    .fill(index <= currentStep ? Color.white : Color.white.opacity(0.3))
+                    .fill(step.stepNumber <= currentStep.stepNumber ? Color.white : Color.white.opacity(0.3))
                     .frame(width: 8, height: 8)
             }
         }
@@ -92,20 +254,19 @@ struct OnboardingView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
                 switch currentStep {
-                case 1: quizStep
-                case 2: nameAgeGenderStep
-                case 3: socialContextStep
-                case 4: calculatingStep
-                case 5: scareStep
-                case 6: upliftStep
-                case 7: socialProofStep
-                case 8: chartStep
-                case 9: goalSelectionStep
-                case 10: referralCodeStep
-                case 11: discoverySourceStep
-                case 12: ratingPromptStep
-                case 13: bridgeToPaywallStep
-                default: EmptyView()
+                case .quiz: quizStepView
+                case .nameAgeGender: nameAgeGenderStep
+                case .socialContext: socialContextStep
+                case .calculating: calculatingStep
+                case .scare: scareStep
+                case .uplift: upliftStep
+                case .socialProof: socialProofStep
+                case .chart: chartStep
+                case .goalSelection: goalSelectionStep
+                case .referralCode: referralCodeStep
+                case .discoverySource: discoverySourceStep
+                case .ratingPrompt: ratingPromptStep
+                case .bridgeToPaywall: bridgeToPaywallStep
                 }
             }
         }
@@ -115,13 +276,11 @@ struct OnboardingView: View {
 
     @ViewBuilder
     private var bottomBar: some View {
-        if currentStep == 1 || currentStep == 3 || currentStep == 4 || currentStep == 11 || currentStep == 13 {
-            // Quiz & social context auto-advance on tap; calculating has no buttons;
-            // discovery source auto-advances; step 13 has its own CTAs
+        if currentStep.autoAdvances {
             EmptyView()
         } else {
             HStack {
-                if showBackButton {
+                if currentStep.showsBackButton {
                     Button {
                         goBack()
                     } label: {
@@ -152,78 +311,47 @@ struct OnboardingView: View {
 
     // MARK: - Navigation Logic
 
-    private var showBackButton: Bool {
-        currentStep >= 2 && currentStep != 4
-    }
-
     private var canContinue: Bool {
         switch currentStep {
-        case 2: return !userName.trimmingCharacters(in: .whitespaces).isEmpty && !selectedGender.isEmpty
-        case 9: return !selectedGoals.isEmpty
-        default: return true
+        case .nameAgeGender:
+            !userName.trimmingCharacters(in: .whitespaces).isEmpty && !selectedGender.isEmpty
+        case .goalSelection:
+            !selectedGoals.isEmpty
+        default:
+            true
         }
     }
 
     private func advance() {
-        guard currentStep < totalSteps else { return }
-        AnalyticsService.track(event: .onboardingStepCompleted, properties: ["step": currentStep])
-        currentStep += 1
+        guard let nextStep = currentStep.next else { return }
+        trackStepCompleted(extraProperties: quizAnswerProperty())
+        currentStep = nextStep
+        stepEnteredAt = .now
     }
 
     private func goBack() {
-        if currentStep == 1 && quizSubStep > 1 {
-            quizSubStep -= 1
+        if currentStep == .quiz, let prevSub = quizSubStep.previous {
+            quizSubStep = prevSub
             quizAnswers.removeLast()
-        } else if currentStep > 1 {
-            // Skip back over calculating screen
-            if currentStep - 1 == 4 {
-                currentStep -= 2
-            } else {
-                currentStep -= 1
-            }
+        } else if let prevStep = currentStep.previous {
+            currentStep = prevStep
         }
+        stepEnteredAt = .now
     }
 
-    // MARK: - Step 1: Quiz (3 sub-steps)
+    /// Returns quiz answer text as a property dict when completing a quiz sub-step via advance()
+    private func quizAnswerProperty() -> [String: MixpanelType] {
+        guard currentStep == .quiz, let lastAnswer = quizAnswers.last else { return [:] }
+        let options = quizSubStep.options
+        guard lastAnswer < options.count else { return [:] }
+        return ["answer": options[lastAnswer]]
+    }
+
+    // MARK: - Step: Quiz (3 sub-steps)
 
     @ViewBuilder
-    private var quizStep: some View {
-        switch quizSubStep {
-        case 1:
-            quizQuestion(
-                question: "What's your biggest social challenge?",
-                options: [
-                    "Keeping conversations going",
-                    "Making strong first impressions",
-                    "Reading the room",
-                    "Speaking up in groups",
-                    "Overthinking after social situations",
-                    "Approaching new people confidently",
-                ]
-            )
-        case 2:
-            quizQuestion(
-                question: "When you meet someone new, you usually...",
-                options: [
-                    "Wait for them to talk first",
-                    "Say hi but run out of things to say",
-                    "Talk too much from nerves",
-                    "Avoid the situation entirely",
-                    "Do fine, but replay it in my head for hours",
-                ]
-            )
-        default:
-            quizQuestion(
-                question: "How often do you feel like you underperformed socially?",
-                options: [
-                    "Almost every day",
-                    "A few times a week",
-                    "Occasionally",
-                    "Rarely but when it counts",
-                    "Almost never",
-                ]
-            )
-        }
+    private var quizStepView: some View {
+        quizQuestion(question: quizSubStep.question, options: quizSubStep.options)
     }
 
     private func quizQuestion(question: String, options: [String]) -> some View {
@@ -259,14 +387,23 @@ struct OnboardingView: View {
 
     private func selectQuizOption(_ index: Int) {
         quizAnswers.append(index)
-        if quizSubStep < 3 {
-            quizSubStep += 1
+        if let nextSub = quizSubStep.next {
+            // Track sub-step completion before advancing within quiz
+            let options = quizSubStep.options
+            var extra: [String: MixpanelType] = [:]
+            if index < options.count {
+                extra["answer"] = options[index]
+            }
+            trackStepCompleted(extraProperties: extra)
+            quizSubStep = nextSub
+            stepEnteredAt = .now
         } else {
+            // Last quiz sub-step — advance to next onboarding step
             advance()
         }
     }
 
-    // MARK: - Step 2: Name + Age + Gender
+    // MARK: - Step: Name + Age + Gender
 
     private let genderOptions = ["Male", "Female", "Other", "Prefer not to say"]
 
@@ -338,7 +475,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 3: Social Context (auto-advances on tap)
+    // MARK: - Step: Social Context (auto-advances on tap)
 
     private let socialContextOptions = [
         "College campus",
@@ -381,7 +518,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 4: Calculating (auto-advances)
+    // MARK: - Step: Calculating (auto-advances)
 
     private var calculatingStep: some View {
         CalculatingView {
@@ -389,7 +526,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 5: Scare
+    // MARK: - Step: Scare
 
     private var scareStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -410,42 +547,42 @@ struct OnboardingView: View {
 
     private func scareBullets(for quiz1Answer: Int) -> [String] {
         switch quiz1Answer {
-        case 0: // Keeping conversations going
+        case 0:
             return [
                 "Conversations die and you sit in painful silence",
                 "People stop reaching out because the energy always fades",
                 "You leave every interaction wishing you'd said more",
                 "The people you want to know drift away without understanding why",
             ]
-        case 1: // Making strong first impressions
+        case 1:
             return [
                 "People form their opinion of you in the first 7 seconds",
                 "You get one shot at a first meeting — and right now you're winging it",
                 "Forgettable introductions mean missed jobs, dates, and friendships",
                 "The version of you people remember isn't the real you",
             ]
-        case 2: // Reading the room
+        case 2:
             return [
                 "You miss the signals that tell you when to speak and when to listen",
                 "You say the wrong thing at the wrong time and only realize later",
                 "People think you don't care — but you just didn't notice",
                 "Social cues everyone else seems to get feel invisible to you",
             ]
-        case 3: // Speaking up in groups
+        case 3:
             return [
                 "Your ideas die in your head because the moment passes",
                 "The loud people get the credit while you stay invisible",
                 "You rehearse what to say, but by the time you're ready, the topic changed",
                 "People assume you have nothing to add — but you have everything to add",
             ]
-        case 4: // Overthinking after social situations
+        case 4:
             return [
                 "A good night gets ruined by 3am self-doubt",
                 "You replay every word you said, searching for what went wrong",
                 "One awkward moment loops in your head for days",
                 "You cancel plans to avoid the post-social spiral",
             ]
-        case 5: // Approaching new people confidently
+        case 5:
             return [
                 "You see someone you want to meet and walk right past them",
                 "The moment passes and you spend the rest of the night thinking \"what if\"",
@@ -505,12 +642,34 @@ struct OnboardingView: View {
             } catch {
                 // Best-effort save — don't block the user
             }
+            // Set user properties for Mixpanel segmentation
+            var userProps: [String: MixpanelType] = [
+                "first_name": userName,
+                "age": userAge,
+            ]
+            if !selectedGender.isEmpty { userProps["gender"] = selectedGender }
+            if !selectedSocialContext.isEmpty { userProps["social_context"] = selectedSocialContext }
+            if !selectedGoals.isEmpty { userProps["goals"] = Array(selectedGoals).joined(separator: ", ") }
+            if !selectedDiscoverySource.isEmpty { userProps["discovery_source"] = selectedDiscoverySource }
+            if quizAnswers.indices.contains(0) {
+                let q1 = QuizSubStep.challenge.options
+                if quizAnswers[0] < q1.count { userProps["quiz_challenge"] = q1[quizAnswers[0]] }
+            }
+            if quizAnswers.indices.contains(1) {
+                let q2 = QuizSubStep.meetNew.options
+                if quizAnswers[1] < q2.count { userProps["quiz_meet_new"] = q2[quizAnswers[1]] }
+            }
+            if quizAnswers.indices.contains(2) {
+                let q3 = QuizSubStep.underperform.options
+                if quizAnswers[2] < q3.count { userProps["quiz_underperform"] = q3[quizAnswers[2]] }
+            }
+            AnalyticsService.setUserProperties(userProps)
             AnalyticsService.track(event: .onboardingCompleted)
             onComplete()
         }
     }
 
-    // MARK: - Step 6: Uplift
+    // MARK: - Step: Uplift
 
     private var upliftStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -544,7 +703,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 7: Social Proof
+    // MARK: - Step: Social Proof
 
     private var socialProofStep: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -607,7 +766,7 @@ struct OnboardingView: View {
         )
     }
 
-    // MARK: - Step 8: Chart
+    // MARK: - Step: Chart
 
     private var chartStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -637,7 +796,6 @@ struct OnboardingView: View {
             let chartH = h - labelHeight
 
             ZStack(alignment: .bottomLeading) {
-                // Grid lines
                 ForEach(0..<4, id: \.self) { i in
                     let y = chartH * CGFloat(i) / 3
                     Path { path in
@@ -647,14 +805,12 @@ struct OnboardingView: View {
                     .stroke(Color.white.opacity(0.06), lineWidth: 1)
                 }
 
-                // "Without training" line — flat
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: chartH * 0.75))
                     path.addLine(to: CGPoint(x: w, y: chartH * 0.7))
                 }
                 .stroke(Color.gray.opacity(0.5), lineWidth: 2)
 
-                // "With Social IQ" line — curves upward
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: chartH * 0.75))
                     path.addCurve(
@@ -665,7 +821,6 @@ struct OnboardingView: View {
                 }
                 .stroke(Color.green, lineWidth: 6)
 
-                // X-axis labels
                 HStack {
                     Text("Week 1")
                     Spacer()
@@ -694,7 +849,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 9: Goal Selection
+    // MARK: - Step: Goal Selection
 
     private let goalOptions = [
         "Be more charismatic",
@@ -706,6 +861,8 @@ struct OnboardingView: View {
         "Stop overthinking social situations",
         "Approach people I'm interested in",
         "Be comfortable outside my friend group",
+        "Be someone people want to know",
+        "Be the center of attention",
     ]
 
     private var goalSelectionStep: some View {
@@ -745,7 +902,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 10: Referral Code
+    // MARK: - Step: Referral Code
 
     private var referralCodeStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -781,7 +938,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 11: Discovery Source (auto-advances on tap)
+    // MARK: - Step: Discovery Source (auto-advances on tap)
 
     private let discoverySourceOptions = [
         "Friend / word of mouth",
@@ -823,7 +980,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 12: Rating Prompt
+    // MARK: - Step: Rating Prompt
 
     private var ratingPromptStep: some View {
         VStack(spacing: 24) {
@@ -858,7 +1015,7 @@ struct OnboardingView: View {
         #endif
     }
 
-    // MARK: - Step 13: Bridge to Paywall
+    // MARK: - Step: Bridge to Paywall
 
     private var bridgeToPaywallStep: some View {
         VStack(spacing: 24) {

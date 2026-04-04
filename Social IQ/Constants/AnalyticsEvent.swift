@@ -13,6 +13,8 @@ enum AnalyticsEvent: String {
     case lessonStarted = "lesson_started"
     case lessonCompleted = "lesson_completed"
     case lessonLockedTap = "lesson_locked_tap"
+    case questionAnswered = "question_answered"
+    case onboardingAbandoned = "onboarding_abandoned"
     case paywallPresented = "paywall_presented"
     case subscriptionStarted = "subscription_started"
 }

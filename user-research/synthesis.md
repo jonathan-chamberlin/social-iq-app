@@ -18,11 +18,11 @@ Self-improvement-oriented males 18–28 who actively want to level up social ski
 | 06 | Andre | Remote | 1+ | Yes |
 | 07 | Dylan | Remote | 2 | Not stated |
 | 12 | Wyatt | In-person | 3 | Strong yes |
-| 15 | Theo | Remote | 0 (unclear) | Not stated |
+| 15 | Theo | Remote | In progress (doing 1-2) | Not stated |
 
 Note on Dylan: his "No" in the transcript was answering "Was there a moment that surprised you or made you think?" — NOT "Would you use this again?" His return intent is unknown.
 
-Note on Theo: Most self-improvement-oriented tester yet. Feedback was about onboarding — unclear if he got past it to complete a lesson. Possible onboarding bounce from a high-value ICP user.
+Note on Theo: Most self-improvement-oriented tester yet. Completed onboarding successfully (did NOT bounce). Onboarding answers: wants to "own social scenarios" and be the "star" of interactions; comfortable one-on-one but wants to own group settings. Strong ICP-A signal — self-describes wanting to make an imprint on people to advance his goals. Currently doing 1-2 lessons (2026-04-04) and will report back on aha moments. Earlier feedback about onboarding wanting "less quiz, more personalized" was a design critique, not a bounce.
 
 ### ICP Segment B: Social Anxiety / Overthinkers (n=3)
 Sorority sisters at Northeastern (DEEF). Overthink social interactions, replay them afterward, want to navigate social dynamics better. Different from Segment A in gender, social context, and use case — but equal ICP strength.
@@ -73,7 +73,7 @@ Note on Kofi update: Follow-up revealed he DID start L2 (dating lesson) unprompt
 
 Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP), Elijah (2 lessons). Not counted in either ICP or Non-ICP columns.
 
-**Key finding:** Combined ICP (Segments A+B) has 67% stated return intent vs. 0% for non-ICP. ICP-B (the new sorority segment) hit 100% on every retention metric in session 16 — the strongest cohort in the dataset. ICP-A still has three users with unknown return intent (Dylan, Wyatt, Theo); the real ICP-A number could be higher. Theo is the ongoing concern: the most self-improvement-oriented ICP-A tester may have bounced at onboarding.
+**Key finding:** Combined ICP (Segments A+B) has 67% stated return intent vs. 0% for non-ICP. ICP-B (the new sorority segment) hit 100% on every retention metric in session 16 — the strongest cohort in the dataset. ICP-A still has two users with unknown return intent (Dylan, Theo); the real ICP-A number could be higher. **Theo update (2026-04-04):** Theo did NOT bounce at onboarding — he completed it and is now actively doing lessons. The onboarding bounce concern is resolved. Awaiting his lesson feedback for aha moment and return intent data.
 
 **Kofi update:** Kofi DID start L2 unprompted — Non-ICP L2 rate is 60%, narrowing the gap vs. ICP-A (67%). However, Kofi bounced quickly due to menu overwhelm — the lesson list is a retention leak for all users, not just non-ICP.
 
@@ -95,7 +95,7 @@ Session 16 was in-person. Including it changes the in-person/remote split.
 | Segment | L2 Start Rate | Would Return |
 |---------|--------------|-------------|
 | ICP-A + In-person (Hudson, Aryaman, Wyatt) | 3/3 (100%) | 3/3 (100%) |
-| ICP-A + Remote (Andre, Dylan, Theo) | 1/3 (33%) | 1/3 (Andre yes; Dylan+Theo unknown) |
+| ICP-A + Remote (Andre, Dylan, Theo) | 1/3 (33%) | 1/3 (Andre yes; Dylan unknown; Theo in progress) |
 | ICP-B + In-person (Lauren, Sana, Phoebe) | 3/3 (100%) | 3/3 (100%) |
 | Non-ICP + In-person (Nishanth, Sasha) | 2/2 (100%) | 0/2 (0%) |
 | Non-ICP + Remote (Kofi, Jack, Avi) | 1/3 (33%) | 0/3 (0%) |
@@ -317,6 +317,7 @@ These are things ICP users explicitly praised or demonstrated through behavior. 
 | Pushed through paywall friction | Lauren, Sana, Phoebe (ICP-B) | All three were disappointed by locked lessons — demand signal |
 | Resonated with overthinking framing | Lauren, Phoebe (ICP-B) | Resonated with "overthink every interaction and replay it for hours" |
 | Content addresses real sorority dynamics | Sana (ICP-B) | Described cliquey sorority circles where it's hard to meet people outside the group |
+| Lesson layout and specificity praised | Theo (ICP-A) | "I really like how the lessons are laid out and specific" — remote user, no observer effect |
 
 ---
 
@@ -424,6 +425,8 @@ Corrections applied from founder review (sessions 01–15):
 Session 13 (Avi) added 2026-04-02: Non-ICP, remote. Introduced two new patterns: "MCQ format is reductive" and "positioning reads as for lonely guys." Both are low-frequency (1/18) but worth monitoring.
 
 Sessions 14–15 added 2026-04-03: Kofi follow-up revealed he started L2 unprompted (dating lesson) but bounced due to lesson menu overwhelm and described app as "quiz module." Elijah (Edge, remote) did 2 lessons, said "really cool," questioned scenario credibility. Theo (ICP-A, remote) — most self-improvement-oriented tester yet — may have bounced at onboarding; independently echoed Andre's "less quiz, more personalized" feedback.
+
+Theo follow-up added 2026-04-04: Theo confirmed he completed onboarding (did not bounce). Onboarding answers: wants to "own social scenarios," be the "star" of interactions; comfortable one-on-one, wants to own group settings. Currently doing 1-2 lessons and will report back on aha moments. Resolves the "possible onboarding bounce from high-value ICP user" concern.
 
 Session 16 added 2026-04-03: In-person group session with Lauren, Sana, and Phoebe (sorority sisters, DEEF at Northeastern). All three: Strong ICP (classified as ICP Segment B), completed 3+ lessons, auto-started next lessons, hit and wanted through the Pro paywall. Introduced new ICP segment ("Social Anxiety / Overthinkers"), two new patterns (paywall demand signal, auto-start behavior), and a concrete distribution channel (Lauren, VP FSL at Northeastern). Complicates the "skipped explanations = not ICP" and "questioned answer authority = not ICP" heuristics — see Pattern 13 and the ICP behavior comparison table.
 

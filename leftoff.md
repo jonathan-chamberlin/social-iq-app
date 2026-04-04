@@ -11,5 +11,9 @@
 - Build 3 with Superwall fix, then re-upload
 - Submit for App Store Review (Apple reviews in 24-72 hours)
 
+- Test that Apple login actually works
+- Test that Supabase actually adds new users when they sign up
+- Test that Mixpanel actually tracks events when going through the app (simulator + TestFlight)
+
 ## Blockers
 - Install Mixpanel MCP server (Smithery @dragonkhoi/mixpanel-mcp) — config added but package not installed

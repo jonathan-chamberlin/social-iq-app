@@ -11,7 +11,7 @@
 - Rotate Superwall secret key (`sk_4238...`) — previously committed to git
 
 ## Next Up
-- Verify new analytics events in Mixpanel after next TestFlight build or simulator run
+- Verify new analytics events in Mixpanel dashboard after next TestFlight build
 - Build onboarding funnel in Mixpanel by step_name
 - Wire up `lesson_locked_tap` in HomeView when locked lesson is tapped
 - After Paid Apps agreement activates: verify prices on paywall, test sandbox purchase, enroll in Small Business Program

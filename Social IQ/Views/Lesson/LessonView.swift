@@ -12,12 +12,16 @@ struct LessonView: View {
     @State private var viewModel = LessonViewModel()
     @Environment(\.dismiss) private var dismiss
 
+    private static let stepLabels = ["READ", "THINK", "SPEAK"]
+
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
 
             if viewModel.isComplete {
-                completionView
+                LessonCompletionView(score: viewModel.score, totalSteps: lesson.steps.count) {
+                    dismiss()
+                }
             } else if let step = viewModel.currentStep {
                 ScrollViewReader { proxy in
                     ScrollView {
@@ -74,7 +78,7 @@ struct LessonView: View {
 
     private func stepIndicator(currentLabel: String) -> some View {
         HStack(spacing: 8) {
-            ForEach(["READ", "THINK", "SPEAK"], id: \.self) { label in
+            ForEach(Self.stepLabels, id: \.self) { label in
                 Text(label)
                     .font(.caption)
                     .fontWeight(.semibold)
@@ -130,59 +134,34 @@ struct LessonView: View {
     private func optionCards(step: LessonStep) -> some View {
         VStack(spacing: 12) {
             ForEach(Array(step.options.enumerated()), id: \.element.id) { index, option in
-                optionCard(index: index, option: option)
+                LessonOptionCard(
+                    index: index,
+                    option: option,
+                    isSelected: viewModel.selectedOptionIndex == index,
+                    showingFeedback: viewModel.showFeedback,
+                    onTap: { viewModel.selectOption(index) },
+                    onNext: { viewModel.nextStep() }
+                )
             }
         }
     }
+}
 
-    private func optionCard(index: Int, option: LessonOption) -> some View {
-        let isSelected = viewModel.selectedOptionIndex == index
-        let showingFeedback = viewModel.showFeedback
-        let borderColor: Color = {
-            guard isSelected, showingFeedback else { return .white.opacity(0.15) }
-            return option.feedback.isCorrect ? .green : .red
-        }()
+// MARK: - LessonFeedbackPanel
 
-        return VStack(alignment: .leading, spacing: 8) {
-            Text(option.label)
-                .font(.subheadline)
-                .foregroundStyle(.white)
-                .multilineTextAlignment(.leading)
-                .frame(maxWidth: .infinity, alignment: .leading)
+private struct LessonFeedbackPanel: View {
+    let option: LessonOption
+    let onNext: () -> Void
 
-            if isSelected, showingFeedback {
-                feedbackPanel(option: option)
-            }
-        }
-        .padding(14)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white.opacity(0.06))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: isSelected && showingFeedback ? 2 : 1)
-        )
-        .id("option-\(index)")
-        .contentShape(Rectangle())
-        .onTapGesture {
-            viewModel.selectOption(index)
-        }
-    }
-
-    // MARK: - Feedback Panel
-
-    private func feedbackPanel(option: LessonOption) -> some View {
+    var body: some View {
         let isCorrect = option.feedback.isCorrect
-        return VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             Text(option.feedback.text)
                 .font(.caption)
                 .foregroundStyle(.white.opacity(0.9))
 
             if isCorrect {
-                Button {
-                    viewModel.nextStep()
-                } label: {
+                Button(action: onNext) {
                     Text("Next \u{2192}")
                         .font(.subheadline)
                         .fontWeight(.semibold)
@@ -204,10 +183,58 @@ struct LessonView: View {
                 .fill(isCorrect ? Color.green.opacity(0.15) : Color.red.opacity(0.15))
         )
     }
+}
 
-    // MARK: - Completion View
+// MARK: - LessonOptionCard
 
-    private var completionView: some View {
+private struct LessonOptionCard: View {
+    let index: Int
+    let option: LessonOption
+    let isSelected: Bool
+    let showingFeedback: Bool
+    let onTap: () -> Void
+    let onNext: () -> Void
+
+    var body: some View {
+        let borderColor: Color = {
+            guard isSelected, showingFeedback else { return .white.opacity(0.15) }
+            return option.feedback.isCorrect ? .green : .red
+        }()
+
+        VStack(alignment: .leading, spacing: 8) {
+            Text(option.label)
+                .font(.subheadline)
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            if isSelected, showingFeedback {
+                LessonFeedbackPanel(option: option, onNext: onNext)
+            }
+        }
+        .padding(14)
+        .background(
+            RoundedRectangle(cornerRadius: 10)
+                .fill(Color.white.opacity(0.06))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(borderColor, lineWidth: isSelected && showingFeedback ? 2 : 1)
+        )
+        .id("option-\(index)")
+        .contentShape(Rectangle())
+        .onTapGesture(perform: onTap)
+    }
+}
+
+// MARK: - LessonCompletionView
+
+private struct LessonCompletionView: View {
+    let score: Int
+    let totalSteps: Int
+    let onDismiss: () -> Void
+
+    var body: some View {
         VStack(spacing: 24) {
             Spacer()
 
@@ -216,7 +243,7 @@ struct LessonView: View {
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
 
-            Text("\(viewModel.score) / \(lesson.steps.count)")
+            Text("\(score) / \(totalSteps)")
                 .font(.system(size: 48, weight: .bold, design: .rounded))
                 .foregroundStyle(.purple)
 
@@ -226,9 +253,7 @@ struct LessonView: View {
 
             Spacer()
 
-            Button {
-                dismiss()
-            } label: {
+            Button(action: onDismiss) {
                 Text("Back to Home")
                     .font(.headline)
                     .frame(maxWidth: .infinity)

@@ -80,8 +80,8 @@ struct HomeView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
             .onAppear {
-                if UserDefaults.standard.bool(forKey: "shouldAutoOpenLesson1") {
-                    UserDefaults.standard.removeObject(forKey: "shouldAutoOpenLesson1")
+                if UserDefaults.standard.bool(forKey: AppConfig.shouldAutoOpenLesson1Key) {
+                    UserDefaults.standard.removeObject(forKey: AppConfig.shouldAutoOpenLesson1Key)
                     selectedLesson = LessonData.allLessons.first
                 }
             }

@@ -6,6 +6,19 @@
 import Foundation
 import Supabase
 
+struct OnboardingData {
+    let firstName: String
+    let age: Int
+    let gender: String?
+    let socialContext: String?
+    let quiz1Answer: String?
+    let quiz2Answer: String?
+    let quiz3Answer: String?
+    let selectedGoals: [String]
+    let referralCode: String?
+    let discoverySource: String?
+}
+
 enum OnboardingError: LocalizedError {
     case profileNotFound(String)
     case saveFailed(String)
@@ -44,19 +57,7 @@ struct OnboardingService {
         return rows.first?.onboardingCompleted ?? false
     }
 
-    func completeOnboarding(
-        userId: String,
-        firstName: String,
-        age: Int,
-        gender: String?,
-        socialContext: String?,
-        quiz1Answer: String?,
-        quiz2Answer: String?,
-        quiz3Answer: String?,
-        selectedGoals: [String],
-        referralCode: String?,
-        discoverySource: String?
-    ) async throws {
+    func completeOnboarding(userId: String, data: OnboardingData) async throws {
         struct ProfileUpdate: Encodable {
             let onboardingCompleted: Bool
             let firstName: String
@@ -87,16 +88,16 @@ struct OnboardingService {
 
         let update = ProfileUpdate(
             onboardingCompleted: true,
-            firstName: firstName,
-            age: age,
-            gender: gender,
-            socialContext: socialContext,
-            quiz1Answer: quiz1Answer,
-            quiz2Answer: quiz2Answer,
-            quiz3Answer: quiz3Answer,
-            selectedGoals: selectedGoals,
-            referralCode: referralCode?.isEmpty == true ? nil : referralCode,
-            discoverySource: discoverySource
+            firstName: data.firstName,
+            age: data.age,
+            gender: data.gender,
+            socialContext: data.socialContext,
+            quiz1Answer: data.quiz1Answer,
+            quiz2Answer: data.quiz2Answer,
+            quiz3Answer: data.quiz3Answer,
+            selectedGoals: data.selectedGoals,
+            referralCode: data.referralCode?.isEmpty == true ? nil : data.referralCode,
+            discoverySource: data.discoverySource
         )
 
         try await client

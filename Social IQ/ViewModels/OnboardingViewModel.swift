@@ -11,7 +11,8 @@ final class OnboardingViewModel {
         case quiz1 = 0
         case quiz2
         case quiz3
-        case nameAge
+        case nameAgeGender
+        case socialContext
         case calculating
         case scare
         case uplift
@@ -19,6 +20,7 @@ final class OnboardingViewModel {
         case chart
         case goalSelection
         case referralCode
+        case discoverySource
         case ratingPrompt
         case bridgeToPaywall
     }
@@ -30,15 +32,22 @@ final class OnboardingViewModel {
     var quiz2Answer: String?
     var quiz3Answer: String?
 
-    // Name + Age
+    // Name + Age + Gender
     var firstName: String = ""
     var age: Int = 25
+    var gender: String = ""
+
+    // Social context
+    var socialContext: String = ""
 
     // Goal selection
     var selectedGoals: Set<String> = []
 
     // Referral code
     var referralCode: String = ""
+
+    // Discovery source
+    var discoverySource: String = ""
 
     // State
     var isCompleting: Bool = false
@@ -49,9 +58,11 @@ final class OnboardingViewModel {
         case .quiz1: return quiz1Answer != nil
         case .quiz2: return quiz2Answer != nil
         case .quiz3: return quiz3Answer != nil
-        case .nameAge: return !firstName.trimmingCharacters(in: .whitespaces).isEmpty
+        case .nameAgeGender: return !firstName.trimmingCharacters(in: .whitespaces).isEmpty && !gender.isEmpty
+        case .socialContext: return false // auto-advances on tap
         case .calculating: return false
         case .goalSelection: return !selectedGoals.isEmpty
+        case .discoverySource: return false // auto-advances on tap
         case .referralCode: return true
         default: return true
         }

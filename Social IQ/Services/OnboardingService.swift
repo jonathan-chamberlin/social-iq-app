@@ -48,31 +48,40 @@ struct OnboardingService {
         userId: String,
         firstName: String,
         age: Int,
+        gender: String?,
+        socialContext: String?,
         quiz1Answer: String?,
         quiz2Answer: String?,
         quiz3Answer: String?,
         selectedGoals: [String],
-        referralCode: String?
+        referralCode: String?,
+        discoverySource: String?
     ) async throws {
         struct ProfileUpdate: Encodable {
             let onboardingCompleted: Bool
             let firstName: String
             let age: Int
+            let gender: String?
+            let socialContext: String?
             let quiz1Answer: String?
             let quiz2Answer: String?
             let quiz3Answer: String?
             let selectedGoals: [String]
             let referralCode: String?
+            let discoverySource: String?
 
             enum CodingKeys: String, CodingKey {
                 case onboardingCompleted = "onboarding_completed"
                 case firstName = "first_name"
                 case age
+                case gender
+                case socialContext = "social_context"
                 case quiz1Answer = "quiz1_answer"
                 case quiz2Answer = "quiz2_answer"
                 case quiz3Answer = "quiz3_answer"
                 case selectedGoals = "selected_goals"
                 case referralCode = "referral_code"
+                case discoverySource = "discovery_source"
             }
         }
 
@@ -80,11 +89,14 @@ struct OnboardingService {
             onboardingCompleted: true,
             firstName: firstName,
             age: age,
+            gender: gender,
+            socialContext: socialContext,
             quiz1Answer: quiz1Answer,
             quiz2Answer: quiz2Answer,
             quiz3Answer: quiz3Answer,
             selectedGoals: selectedGoals,
-            referralCode: referralCode?.isEmpty == true ? nil : referralCode
+            referralCode: referralCode?.isEmpty == true ? nil : referralCode,
+            discoverySource: discoverySource
         )
 
         try await client

@@ -89,7 +89,7 @@ struct HomeView: View {
     }
 
     private func isLocked(_ lesson: Lesson) -> Bool {
-        false
+        lesson.id != "lesson-1" && !SuperwallService.isSubscribed
     }
 
     private func handleLessonTap(_ lesson: Lesson) {

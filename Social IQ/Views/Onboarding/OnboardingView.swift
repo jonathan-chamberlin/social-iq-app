@@ -21,12 +21,19 @@ struct OnboardingView: View {
 
     @State private var userName: String = ""
     @State private var userAge: Int = 22
+    @State private var selectedGender: String = ""
 
-    // Goal selection (step 8)
+    // Social context (step 3)
+    @State private var selectedSocialContext: String = ""
+
+    // Goal selection (step 9)
     @State private var selectedGoals: Set<String> = []
 
-    // Referral code (step 9)
+    // Referral code (step 10)
     @State private var referralCode: String = ""
+
+    // Discovery source (step 12)
+    @State private var selectedDiscoverySource: String = ""
 
     // Completion
     @State private var isCompleting = false
@@ -34,7 +41,7 @@ struct OnboardingView: View {
     // Calculating screen
     @State private var calcPhase = 0
 
-    private let totalSteps = 11
+    private let totalSteps = 13
 
     var body: some View {
         ZStack {
@@ -86,16 +93,18 @@ struct OnboardingView: View {
             VStack(spacing: 0) {
                 switch currentStep {
                 case 1: quizStep
-                case 2: nameAgeStep
-                case 3: calculatingStep
-                case 4: scareStep
-                case 5: upliftStep
-                case 6: socialProofStep
-                case 7: chartStep
-                case 8: goalSelectionStep
-                case 9: referralCodeStep
-                case 10: ratingPromptStep
-                case 11: bridgeToPaywallStep
+                case 2: nameAgeGenderStep
+                case 3: socialContextStep
+                case 4: calculatingStep
+                case 5: scareStep
+                case 6: upliftStep
+                case 7: socialProofStep
+                case 8: chartStep
+                case 9: goalSelectionStep
+                case 10: referralCodeStep
+                case 11: discoverySourceStep
+                case 12: ratingPromptStep
+                case 13: bridgeToPaywallStep
                 default: EmptyView()
                 }
             }
@@ -106,8 +115,9 @@ struct OnboardingView: View {
 
     @ViewBuilder
     private var bottomBar: some View {
-        if currentStep == 1 || currentStep == 3 || currentStep == 11 {
-            // Quiz auto-advances on tap; calculating has no buttons; step 11 has its own CTAs
+        if currentStep == 1 || currentStep == 3 || currentStep == 4 || currentStep == 11 || currentStep == 13 {
+            // Quiz & social context auto-advance on tap; calculating has no buttons;
+            // discovery source auto-advances; step 13 has its own CTAs
             EmptyView()
         } else {
             HStack {
@@ -143,13 +153,13 @@ struct OnboardingView: View {
     // MARK: - Navigation Logic
 
     private var showBackButton: Bool {
-        currentStep >= 2 && currentStep != 3
+        currentStep >= 2 && currentStep != 4
     }
 
     private var canContinue: Bool {
         switch currentStep {
-        case 2: return !userName.trimmingCharacters(in: .whitespaces).isEmpty
-        case 8: return !selectedGoals.isEmpty
+        case 2: return !userName.trimmingCharacters(in: .whitespaces).isEmpty && !selectedGender.isEmpty
+        case 9: return !selectedGoals.isEmpty
         default: return true
         }
     }
@@ -166,7 +176,7 @@ struct OnboardingView: View {
             quizAnswers.removeLast()
         } else if currentStep > 1 {
             // Skip back over calculating screen
-            if currentStep - 1 == 3 {
+            if currentStep - 1 == 4 {
                 currentStep -= 2
             } else {
                 currentStep -= 1
@@ -187,6 +197,8 @@ struct OnboardingView: View {
                     "Making strong first impressions",
                     "Reading the room",
                     "Speaking up in groups",
+                    "Overthinking after social situations",
+                    "Approaching new people confidently",
                 ]
             )
         case 2:
@@ -197,6 +209,7 @@ struct OnboardingView: View {
                     "Say hi but run out of things to say",
                     "Talk too much from nerves",
                     "Avoid the situation entirely",
+                    "Do fine, but replay it in my head for hours",
                 ]
             )
         default:
@@ -207,6 +220,7 @@ struct OnboardingView: View {
                     "A few times a week",
                     "Occasionally",
                     "Rarely but when it counts",
+                    "Almost never",
                 ]
             )
         }
@@ -252,10 +266,12 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 2: Name + Age
+    // MARK: - Step 2: Name + Age + Gender
 
-    private var nameAgeStep: some View {
-        VStack(alignment: .leading, spacing: 32) {
+    private let genderOptions = ["Male", "Female", "Other", "Prefer not to say"]
+
+    private var nameAgeGenderStep: some View {
+        VStack(alignment: .leading, spacing: 24) {
             Text("Tell us about yourself")
                 .font(.title2)
                 .fontWeight(.bold)
@@ -283,11 +299,35 @@ struct OnboardingView: View {
             }
 
             VStack(alignment: .leading, spacing: 8) {
+                Text("Gender")
+                    .font(.subheadline)
+                    .foregroundStyle(.white.opacity(0.7))
+                HStack(spacing: 10) {
+                    ForEach(genderOptions, id: \.self) { option in
+                        let isSelected = selectedGender == option
+                        Button {
+                            selectedGender = option
+                        } label: {
+                            Text(option)
+                                .font(.subheadline)
+                                .foregroundStyle(isSelected ? .black : .white)
+                                .padding(.horizontal, 14)
+                                .padding(.vertical, 10)
+                                .background(
+                                    Capsule()
+                                        .fill(isSelected ? Color.white : Color.white.opacity(0.08))
+                                )
+                        }
+                    }
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
                 Text("Age: \(userAge)")
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.7))
                 Picker("Age", selection: $userAge) {
-                    ForEach(16...65, id: \.self) { age in
+                    ForEach(13...99, id: \.self) { age in
                         Text("\(age)").tag(age)
                     }
                 }
@@ -298,7 +338,50 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 3: Calculating (auto-advances)
+    // MARK: - Step 3: Social Context (auto-advances on tap)
+
+    private let socialContextOptions = [
+        "College campus",
+        "Greek life (sorority / fraternity)",
+        "Work / professional networking",
+        "Social events / parties / bars",
+        "Online / dating apps",
+        "Small friend groups",
+    ]
+
+    private var socialContextStep: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Where do you spend most of your social time?")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+                .padding(.top, 20)
+
+            VStack(spacing: 12) {
+                ForEach(socialContextOptions, id: \.self) { option in
+                    Button {
+                        selectedSocialContext = option
+                        advance()
+                    } label: {
+                        HStack {
+                            Text(option)
+                                .font(.body)
+                                .foregroundStyle(.white)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
+                        }
+                        .padding(16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.white.opacity(0.08))
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Step 4: Calculating (auto-advances)
 
     private var calculatingStep: some View {
         CalculatingView {
@@ -306,7 +389,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 4: Scare
+    // MARK: - Step 5: Scare
 
     private var scareStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -317,11 +400,65 @@ struct OnboardingView: View {
                 .padding(.top, 20)
 
             VStack(alignment: .leading, spacing: 16) {
-                scareBullet("Awkward silences kill your confidence. And people notice.")
-                scareBullet("Opportunities pass because you can't connect")
-                scareBullet("You overthink every interaction, then replay it for hours")
-                scareBullet("The gap between your potential and your presence keeps growing")
+                let bullets = scareBullets(for: quizAnswers.first ?? 0)
+                ForEach(bullets, id: \.self) { text in
+                    scareBullet(text)
+                }
             }
+        }
+    }
+
+    private func scareBullets(for quiz1Answer: Int) -> [String] {
+        switch quiz1Answer {
+        case 0: // Keeping conversations going
+            return [
+                "Conversations die and you sit in painful silence",
+                "People stop reaching out because the energy always fades",
+                "You leave every interaction wishing you'd said more",
+                "The people you want to know drift away without understanding why",
+            ]
+        case 1: // Making strong first impressions
+            return [
+                "People form their opinion of you in the first 7 seconds",
+                "You get one shot at a first meeting — and right now you're winging it",
+                "Forgettable introductions mean missed jobs, dates, and friendships",
+                "The version of you people remember isn't the real you",
+            ]
+        case 2: // Reading the room
+            return [
+                "You miss the signals that tell you when to speak and when to listen",
+                "You say the wrong thing at the wrong time and only realize later",
+                "People think you don't care — but you just didn't notice",
+                "Social cues everyone else seems to get feel invisible to you",
+            ]
+        case 3: // Speaking up in groups
+            return [
+                "Your ideas die in your head because the moment passes",
+                "The loud people get the credit while you stay invisible",
+                "You rehearse what to say, but by the time you're ready, the topic changed",
+                "People assume you have nothing to add — but you have everything to add",
+            ]
+        case 4: // Overthinking after social situations
+            return [
+                "A good night gets ruined by 3am self-doubt",
+                "You replay every word you said, searching for what went wrong",
+                "One awkward moment loops in your head for days",
+                "You cancel plans to avoid the post-social spiral",
+            ]
+        case 5: // Approaching new people confidently
+            return [
+                "You see someone you want to meet and walk right past them",
+                "The moment passes and you spend the rest of the night thinking \"what if\"",
+                "Your friend group stays the same size while opportunities walk by",
+                "The people you most want to know never find out you exist",
+            ]
+        default:
+            return [
+                "Awkward silences kill your confidence. And people notice.",
+                "Opportunities pass because you can't connect",
+                "You overthink every interaction, then replay it for hours",
+                "The gap between your potential and your presence keeps growing",
+            ]
         }
     }
 
@@ -356,11 +493,14 @@ struct OnboardingView: View {
                     userId: userId,
                     firstName: userName,
                     age: userAge,
+                    gender: selectedGender.isEmpty ? nil : selectedGender,
+                    socialContext: selectedSocialContext.isEmpty ? nil : selectedSocialContext,
                     quiz1Answer: quizAnswers.indices.contains(0) ? String(quizAnswers[0]) : nil,
                     quiz2Answer: quizAnswers.indices.contains(1) ? String(quizAnswers[1]) : nil,
                     quiz3Answer: quizAnswers.indices.contains(2) ? String(quizAnswers[2]) : nil,
                     selectedGoals: Array(selectedGoals),
-                    referralCode: referralCode.isEmpty ? nil : referralCode
+                    referralCode: referralCode.isEmpty ? nil : referralCode,
+                    discoverySource: selectedDiscoverySource.isEmpty ? nil : selectedDiscoverySource
                 )
             } catch {
                 // Best-effort save — don't block the user
@@ -370,7 +510,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 5: Uplift
+    // MARK: - Step 6: Uplift
 
     private var upliftStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -404,7 +544,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 6: Social Proof
+    // MARK: - Step 7: Social Proof
 
     private var socialProofStep: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -467,7 +607,7 @@ struct OnboardingView: View {
         )
     }
 
-    // MARK: - Step 7: Chart
+    // MARK: - Step 8: Chart
 
     private var chartStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -554,7 +694,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 8: Goal Selection
+    // MARK: - Step 9: Goal Selection
 
     private let goalOptions = [
         "Be more charismatic",
@@ -563,6 +703,9 @@ struct OnboardingView: View {
         "Make lasting impressions",
         "Lead any conversation",
         "Eliminate social anxiety",
+        "Stop overthinking social situations",
+        "Approach people I'm interested in",
+        "Be comfortable outside my friend group",
     ]
 
     private var goalSelectionStep: some View {
@@ -602,7 +745,7 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 9: Referral Code
+    // MARK: - Step 10: Referral Code
 
     private var referralCodeStep: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -638,7 +781,49 @@ struct OnboardingView: View {
         }
     }
 
-    // MARK: - Step 10: Rating Prompt
+    // MARK: - Step 11: Discovery Source (auto-advances on tap)
+
+    private let discoverySourceOptions = [
+        "Friend / word of mouth",
+        "Social media (TikTok, Instagram, etc.)",
+        "App Store search",
+        "Greek life / sorority / fraternity",
+        "Other",
+    ]
+
+    private var discoverySourceStep: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            Text("How did you hear about us?")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+                .padding(.top, 20)
+
+            VStack(spacing: 12) {
+                ForEach(discoverySourceOptions, id: \.self) { option in
+                    Button {
+                        selectedDiscoverySource = option
+                        advance()
+                    } label: {
+                        HStack {
+                            Text(option)
+                                .font(.body)
+                                .foregroundStyle(.white)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
+                        }
+                        .padding(16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .fill(Color.white.opacity(0.08))
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Step 12: Rating Prompt
 
     private var ratingPromptStep: some View {
         VStack(spacing: 24) {
@@ -653,7 +838,7 @@ struct OnboardingView: View {
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
 
-            Text("A quick rating helps other guys discover Social IQ")
+            Text("A quick rating helps other people discover Social IQ")
                 .font(.body)
                 .foregroundStyle(.white.opacity(0.7))
                 .multilineTextAlignment(.center)
@@ -665,13 +850,15 @@ struct OnboardingView: View {
     }
 
     private func requestAppReview() {
+        #if !DEBUG
         if let scene = UIApplication.shared.connectedScenes
             .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
             SKStoreReviewController.requestReview(in: scene)
         }
+        #endif
     }
 
-    // MARK: - Step 11: Bridge to Paywall
+    // MARK: - Step 13: Bridge to Paywall
 
     private var bridgeToPaywallStep: some View {
         VStack(spacing: 24) {

@@ -19,5 +19,5 @@ enum AnalyticsEvent: String {
 
 enum SuperwallPlacement: String {
     case onboardingComplete = "onboarding_complete"
-    case lessonLocked = "lesson_locked"
+    case lessonLocked = "lessons_locked"
 }

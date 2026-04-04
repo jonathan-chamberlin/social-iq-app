@@ -1,6 +1,6 @@
 // SUPERWALL DASHBOARD SETUP:
 // 1. Create campaign "Onboarding Paywall" → placement: "onboarding_complete"
-// 2. Create campaign "Lesson Locked" → placement: "lesson_locked"
+// 2. Create campaign "Lesson Locked" → placement: "lessons_locked"
 // 3. Create campaign "Transaction Abandoned" → placement: "transaction_abandon" (built-in Superwall event)
 // 4. For transaction_abandoned: set 50-80% discount offer (23.1% conversion, +40% revenue)
 // 5. Use Superwall template paywalls until $1M+ ARR

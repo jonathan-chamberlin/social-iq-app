@@ -33,7 +33,7 @@ Sorority sisters at Northeastern (DEEF). Overthink social interactions, replay t
 | 16b | Sana | In-person group | 3+ | Strong yes (unlocked paywall, kept going) |
 | 16c | Phoebe | In-person group | 3+ | Strong yes (unlocked paywall, kept going) |
 
-Note on Session 16: Group session, in-person, tested on Jonathan's MacBook iOS Simulator. All three completed 3+ lessons, auto-started the next lesson after finishing each one, and expressed visible disappointment when lessons were locked behind the Pro paywall. Jonathan unlocked them live — all three continued. Lauren is VP of FSL (Fraternity and Sorority Life) at Northeastern — a concrete distribution channel post-launch. Sana: "A lot of people need this" — described sorority circles as cliquey and hard to break into.
+Note on Session 16: Group session, in-person, tested on Jonathan's MacBook iOS Simulator with the enhanced onboarding (NOT the Base44 web prototype used in earlier sessions). All three completed 3+ lessons, auto-started the next lesson after finishing each one, and expressed visible disappointment when lessons were locked behind the Pro paywall. Jonathan unlocked them live — all three continued. Lauren is VP of FSL (Fraternity and Sorority Life) at Northeastern — a concrete distribution channel post-launch. Sana: "A lot of people need this" — described sorority circles as cliquey and hard to break into.
 
 **ICP targeting note:** Two distinct segments have now shown strong signals. Start with broad targeting; narrow based on which segment shows stronger retention once the app is live. Do not preemptively cut one segment before seeing organic data.
 

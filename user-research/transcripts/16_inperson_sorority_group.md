@@ -2,7 +2,7 @@
 **Date:** 2026-04-03
 **Participants:** Lauren, Sana, Phoebe
 **Context:** Three sorority sisters (DEEF). Group session — all went through the app together, reacting out loud. High energy, engaged, having fun. Transcript from Otter.ai with some speaker ambiguity.
-**Device:** Jonathan's MacBook (iOS Simulator) — one person navigated, another answered, then rotated. Sana did a scenario solo while others gave input.
+**Device:** Jonathan's MacBook (iOS Simulator with enhanced onboarding — NOT the Base44 web prototype). One person navigated, another answered, then rotated. Sana did a scenario solo while others gave input.
 **ICP Classification:** All three — Strong ICP (new female segment: sorority / social-anxiety-overthinkers). Different profile from self-improvement charisma guys. Genuinely excited, asked to do more lessons unprompted, identified real pain points in their own social lives without prompting.
 
 ---

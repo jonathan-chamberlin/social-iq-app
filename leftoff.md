@@ -11,7 +11,7 @@
 - Wait for build processing, then go to App Store Connect → 1.0 Prepare for Submission → Build → select the build
 - Fix Superwall placement name mismatch
 - Test Sign in with Apple on iPhone via TestFlight — smoke test before real users
-- Replace placeholder app icon with final design (1024x1024 PNG)
+- Generate a real app icon and replace the placeholder (1024x1024 PNG)
 - Hit Submit for Review (Apple reviews in 24-72 hours)
 
 ## Blockers

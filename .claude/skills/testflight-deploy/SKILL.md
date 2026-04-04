@@ -13,68 +13,93 @@ description: Archive, upload, and deploy a new build to TestFlight for Social IQ
 - **App Store Connect URL:** https://appstoreconnect.apple.com/teams/8833fdf3-8efa-47a0-8777-442f8cc35999/apps/6761561557/testflight/ios
 - **Internal testing group:** Dev Testing (auto-receives builds after compliance is resolved)
 
-## Full deploy process
+## App Store Connect API Key
+
+- **Key ID:** S6QR8N472U
+- **Issuer ID:** 8833fdf3-8efa-47a0-8777-442f8cc35999
+- **Key path:** `~/.appstoreconnect/private_keys/AuthKey_S6QR8N472U.p8`
+
+## Full CLI deploy process
+
+All steps run from the CLI — no Xcode GUI needed.
 
 ### Step 1 — Bump build number
 
-Before archiving, increment `CURRENT_PROJECT_VERSION` in the Xcode project. Do NOT modify .pbxproj directly — use:
-
 ```bash
 cd /Users/jonathanchamberlin/repos/social-iq
-agvtool new-version -all <next_build_number>
+CURRENT=$(agvtool what-version -terse)
+NEXT=$((CURRENT + 1))
+agvtool new-version -all $NEXT
+echo "Bumped build number from $CURRENT to $NEXT"
 ```
 
-### Step 2 — Archive in Xcode
+The "Cannot find" warning about `YES` is harmless — ignore it.
 
-1. Open `Social IQ.xcodeproj` in Xcode
-2. Top bar → select **"Social IQ" > "Any iOS Device (arm64)"** as destination (NOT a simulator)
-3. Menu: **Product → Archive**
-4. Wait for Organizer window to open
+### Step 2 — Archive
 
-### Step 3 — Upload to App Store Connect
+```bash
+xcodebuild archive \
+  -project "Social IQ.xcodeproj" \
+  -scheme "Social IQ" \
+  -destination "generic/platform=iOS" \
+  -archivePath /tmp/SocialIQ.xcarchive \
+  DEVELOPMENT_TEAM=35373542G8
+```
 
-1. In the Organizer, select the new archive → click **"Distribute App"**
-2. Choose **"App Store Connect"** → click **Next**
-3. Choose **"Upload"** (not Export) → click **Next**
-4. Leave all checkboxes default → click **Next**
-5. Select signing certificate (Team: 35373542G8) → click **Upload**
-6. Wait ~5-15 minutes for Apple to process (you'll get an email)
+### Step 3 — Export and upload to App Store Connect
 
-### Step 4 — Resolve compliance and add to testing group
+First, create `/tmp/ExportOptions.plist` if it doesn't exist:
 
-This is done in App Store Connect (browser). Generate a Claude Chrome prompt or do manually:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>method</key>
+    <string>app-store-connect</string>
+    <key>teamID</key>
+    <string>35373542G8</string>
+    <key>destination</key>
+    <string>upload</string>
+    <key>signingStyle</key>
+    <string>automatic</string>
+</dict>
+</plist>
+```
 
-1. Go to TestFlight tab → left sidebar → click **"iOS"** under Builds
-2. Scroll to the **"Version 1.0"** builds table, find the new build
-3. If it shows a "Missing Compliance" warning, click **"Manage"** next to it
-4. Select **"None of the algorithms mentioned above"** → click **"Save"**
-5. Status changes to "Ready to Submit"
-6. Resolving compliance auto-adds the build to "Dev Testing" group
+Then export + upload in one command:
 
-**If Dev Testing is NOT auto-added:** Click the **build number link** in the BUILD column to open the build detail page. Find the **"Group"** section, click **"+"**, select **"Dev Testing"**, click **"Add"**.
+```bash
+xcodebuild -exportArchive \
+  -archivePath /tmp/SocialIQ.xcarchive \
+  -exportOptionsPlist /tmp/ExportOptions.plist \
+  -exportPath /tmp/SocialIQ-export \
+  -allowProvisioningUpdates \
+  -authenticationKeyPath ~/.appstoreconnect/private_keys/AuthKey_S6QR8N472U.p8 \
+  -authenticationKeyID S6QR8N472U \
+  -authenticationKeyIssuerID 8833fdf3-8efa-47a0-8777-442f8cc35999
+```
+
+Look for `** EXPORT SUCCEEDED **` and `Upload succeeded` in the output.
+
+### Step 4 — Resolve compliance
+
+Apple takes 5-15 minutes to process the build. Then in App Store Connect:
+
+1. TestFlight → iOS builds → find the new build
+2. Missing Compliance → **"None of the algorithms mentioned above"** → Save
+3. Auto-adds to Dev Testing group
+
+This step can also be done via the App Store Connect API — see the `app-store-connect` skill.
 
 ### Step 5 — Install on device
 
-On the test iPhone, open the **TestFlight** app. The new build should appear as an update. Tap **"Update"**.
-
-## Claude Chrome prompt template
-
-When the user needs a prompt for Chrome automation to handle Step 4:
-
-```
-I'm on App Store Connect in the TestFlight tab for "Social IQ". I need to resolve compliance for Build N and add it to testing.
-
-1. In the left sidebar under "Builds", click "iOS"
-2. In the "Version 1.0" builds table, find Build N
-3. If it shows "Missing Compliance", click "Manage" next to it
-4. Select "None of the algorithms mentioned above" and click "Save"
-5. Click the build number link to open the build detail page
-6. Check if "Dev Testing" appears in the Group section — if not, click "+", select "Dev Testing", click "Add"
-```
+On the test iPhone, open the **TestFlight** app. The new build appears as an update. Tap **"Update"**.
 
 ## Notes
 
 - The app uses only HTTPS (exempt encryption) — always select "None of the algorithms mentioned above" for compliance
 - Build numbers must be strictly increasing — Apple rejects duplicates
-- No fastlane auth is configured — all App Store Connect actions are manual or via Claude Chrome
 - Superwall paywall config is server-side — paywall changes don't require a new build
+- Archive timeout: allow ~3-5 minutes for the archive step
+- Upload timeout: allow ~1-2 minutes for the export/upload step

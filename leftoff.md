@@ -9,9 +9,10 @@
 - `transaction_abandon` campaign has no placement, only holdout variant
 - Old Example Paywall (ID 195191) can be archived
 - Rotate Superwall secret key (`sk_4238...`) — previously committed to git
+- `AppConfig.swift` is gitignored — `shouldAutoOpenLesson1Key` constant added but won't be tracked; move UserDefaults keys to a non-ignored constants file
 
 ## Next Up
-- Verify new analytics events in Mixpanel dashboard after next TestFlight build
+- Verify new Mixpanel events in dashboard from Build 6 TestFlight usage
 - Build onboarding funnel in Mixpanel by step_name
 - Wire up `lesson_locked_tap` in HomeView when locked lesson is tapped
 - After Paid Apps agreement activates: verify prices on paywall, test sandbox purchase, enroll in Small Business Program

@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__XcodeBuildMCP__session_show_defaults",
+      "mcp__XcodeBuildMCP__session_set_defaults",
+      "mcp__XcodeBuildMCP__boot_sim",
+      "mcp__XcodeBuildMCP__build_sim",
+      "mcp__XcodeBuildMCP__get_sim_app_path",
+      "mcp__XcodeBuildMCP__install_app_sim"
+    ]
+  }
+}

@@ -128,7 +128,7 @@ struct LessonView: View {
         let showingFeedback = viewModel.showFeedback
         let borderColor: Color = {
             guard isSelected, showingFeedback else { return .white.opacity(0.15) }
-            return option.feedback.isCorrect ? .green : .orange
+            return option.feedback.isCorrect ? .green : .red
         }()
 
         return VStack(alignment: .leading, spacing: 8) {
@@ -182,14 +182,14 @@ struct LessonView: View {
             } else {
                 Text("Try again")
                     .font(.caption)
-                    .foregroundStyle(.orange.opacity(0.8))
+                    .foregroundStyle(.red.opacity(0.8))
             }
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 8)
-                .fill(isCorrect ? Color.green.opacity(0.15) : Color.orange.opacity(0.15))
+                .fill(isCorrect ? Color.green.opacity(0.15) : Color.red.opacity(0.15))
         )
     }
 

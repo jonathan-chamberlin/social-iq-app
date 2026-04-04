@@ -20,6 +20,9 @@ xcodebuild -project "Social IQ.xcodeproj" -scheme "Social IQ" \
   -destination "platform=iphonesimulator,id=F9A3AAE0-306C-412C-AA3F-491BD795870A" \
   -derivedDataPath DerivedData build 2>&1 | xcsift -w
 
+## Physical Device
+Jonathan iPhone 16 Pro — UDID: 00008140-000C11D00163001C (Platform: iOS)
+
 ## Simulator
 iPhone 17 Pro — UDID: F9A3AAE0-306C-412C-AA3F-491BD795870A
 Launch: xcrun simctl launch F9A3AAE0-306C-412C-AA3F-491BD795870A com.jonathanchamberlin.Social-IQ

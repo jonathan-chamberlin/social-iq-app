@@ -2,8 +2,8 @@
 **Date:** 2026-04-03
 **Participants:** Lauren, Sana, Phoebe
 **Context:** Three sorority sisters (DEEF). Group session — all went through the app together, reacting out loud. High energy, engaged, having fun. Transcript from Otter.ai with some speaker ambiguity.
-**Device:** Phone (app prototype)
-**ICP Classification:** All three — Strong ICP. Genuinely excited, asked to do more lessons unprompted, identified real pain points in their own social lives without prompting.
+**Device:** Jonathan's MacBook (iOS Simulator) — one person navigated, another answered, then rotated. Sana did a scenario solo while others gave input.
+**ICP Classification:** All three — Strong ICP (new female segment: sorority / social-anxiety-overthinkers). Different profile from self-improvement charisma guys. Genuinely excited, asked to do more lessons unprompted, identified real pain points in their own social lives without prompting.
 
 ---
 
@@ -142,11 +142,40 @@ One of the three (attribution unclear) pointed out girls don't know how to take 
 
 ---
 
+## Key Behavioral Signals
+
+- **Pro paywall friction → clear demand:** After finishing one lesson, all three were disappointed the rest were locked behind Pro. Jonathan unlocked them live. They immediately started another lesson — clear signal of wanting more content.
+- **Auto-started next lesson:** After completing a lesson, all three automatically started another without prompting. Did 3+ lessons total.
+- **Did not read explanations:** None of them read the answer explanations at all. Despite this, Phoebe and Lauren questioned how the "right" answer was determined — even though every answer had an explanation of why it was wrong/right.
+- **Answer credibility concern (Phoebe + Lauren):** Both questioned the basis for answers. Sana did not raise this. This is a credibility/trust issue, not a content issue.
+
+---
+
+## Scenario Ideas With Pull (user-requested)
+
+These came organically from the group, not prompted:
+1. **Public embarrassment** — dropping books, falling up stairs (Lauren's same-day experience)
+2. **Approaching a guy at a formal** — common sorority pain point. Girls go with "find a boyfriend" mindset which Phoebe says doesn't work.
+3. **Bad opener calibration** — referencing an obscure event from a year ago as an opener (group told a real story of this happening)
+4. **Taking compliments gracefully** — two failure modes: deflecting ("no omg it's nothing") and reflexive returning ("aw thanks I love yours too" — insincere)
+5. **Breaking out of cliques** — Sana: sorority circles are "solid," hard to make friends outside the group
+
+---
+
+## Distribution Opportunity
+
+**Lauren is VP of FSL (fraternity/sorority life) at Northeastern.** She mentioned FSL should sponsor the app — "there's so many people who don't know how to talk to people." FSL structure: Pan-Hellenic + IFC both under FSL umbrella, which also includes cultural frats/sororities.
+
+**Action:** After launch, pursue FSL distribution at Northeastern first. Requires: (1) a system to collect user feedback (profile data, suggestions — possibly in-app button linking to Google Form), (2) validated product before leveraging Lauren's network. If it works at Northeastern FSL, expand to other schools' Greek life orgs.
+
+---
+
 ## Top Takeaways
 
-1. **Female ICP is real** — all three were engaged, had fun, asked for more lessons, identified pain points without prompting. This isn't a guys-only product.
-2. **Answer credibility is the #1 concern** — Phoebe's question ("how do you decide?") will come from every skeptical user. Needs a credibility signal (psych research, data, expert backing).
-3. **Red/green for right/wrong** — universal, clear, immediate. Yellow confused Sana.
-4. **New scenario ideas with pull:** public embarrassment, approaching guys, receiving compliments gracefully, breaking out of cliques.
-5. **Copy needs to be gender-neutral** — "people" not "guys" throughout.
-6. **Sorority/FSL is a distribution channel** — group-level awareness of the pain point, not just individual.
+1. **New female ICP segment is real** — sorority / social-anxiety-overthinkers. Different from self-improvement charisma guys but equally engaged. Start with broad targeting, clarify based on who resonates.
+2. **Pro paywall validated demand** — being locked out of lessons created visible frustration. They wanted more badly enough that Jonathan unlocked it live.
+3. **Answer credibility is a concern (Phoebe + Lauren)** — needs a credibility signal (psych research, data, expert backing). But they didn't even read the explanations that already existed.
+4. **Explanations are being skipped entirely** — none of the three read them. This pattern (also seen with Nishanth) suggests explanations need a different format or delivery.
+5. **Red/green for right/wrong** — universal, clear, immediate. Yellow confused Sana.
+6. **Copy needs to be gender-neutral** — "people" not "guys" throughout.
+7. **FSL at Northeastern is a concrete distribution channel** — Lauren (VP) can connect. Pursue post-launch with feedback collection system in place.

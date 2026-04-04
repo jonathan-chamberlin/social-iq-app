@@ -381,7 +381,7 @@ struct OnboardingView: View {
                 .padding(.top, 20)
 
             Text(
-                "Most guys never realize social skills are trainable. You did. Social IQ uses the same deliberate practice frameworks that athletes and top performers use. Adapted for real social situations."
+                "Most people never realize social skills are trainable. You did. Social IQ uses the same deliberate practice frameworks that athletes and top performers use. Adapted for real social situations."
             )
             .font(.body)
             .foregroundStyle(.white.opacity(0.9))

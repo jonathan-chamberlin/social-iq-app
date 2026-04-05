@@ -94,11 +94,16 @@ AnalyticsService.setUserProperties([
 ])
 ```
 
+## Debugging analytics events
+1. **Check real-time first.** Use Mixpanel Live View (Events stream) or the Mixpanel MCP `Run-Query` with a short time range — NOT aggregate dashboard reports. Aggregate views have 30-60s ingestion delay that mimics "events not firing."
+2. **Check the network layer.** Enable `loggingEnabled = true` (already on in DEBUG) and look for `Successfully inserted row` + `Sending batch of data` + API response in console logs. If those appear, the event was sent — the issue is query-side delay, not tracking code.
+3. **Only then investigate code.** If the real-time stream and network logs confirm the event was never sent, trace the code path: caller → AnalyticsService.track() → Mixpanel.track() → flush().
+
 ## Rules
 - Every new feature MUST add its events to this taxonomy before shipping
 - Never track PII (email, phone) as event properties
 - Use Mixpanel's built-in $device, $os, $app_version — don't duplicate
-- Flush events on app background, not on every track call
+- Flush on every track call (AnalyticsService.track calls flush() immediately) — ensures events appear in real-time stream within seconds
 
 ## Post-task reflection (run after every completed task)
 

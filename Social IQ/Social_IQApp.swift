@@ -23,6 +23,13 @@ struct Social_IQApp: App {
         AnalyticsService.initialize(token: AppConfig.mixpanelToken)
     }
 
+    private var signedInUserId: String? {
+        if case .signedIn(let user) = authViewModel.authState {
+            return user.id.uuidString
+        }
+        return nil
+    }
+
     var body: some Scene {
         WindowGroup {
             Group {
@@ -42,6 +49,13 @@ struct Social_IQApp: App {
                     } else {
                         HomeView(authViewModel: authViewModel)
                     }
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                if signedInUserId != nil {
+                    FeedbackButton(userId: signedInUserId)
+                        .padding(.trailing, 20)
+                        .padding(.bottom, 24)
                 }
             }
             .task {

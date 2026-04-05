@@ -10,6 +10,9 @@ struct HomeView: View {
     var authViewModel: AuthViewModel
     @State private var completedLessonIds: Set<String> = []
     @State private var selectedLesson: Lesson?
+    #if DEBUG
+    @State private var debugForceSubscribed = false
+    #endif
 
     private let progressService = LessonProgressService()
 
@@ -46,6 +49,21 @@ struct HomeView: View {
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 8)
+                            #if DEBUG
+                            .onLongPressGesture(minimumDuration: 2) {
+                                debugForceSubscribed.toggle()
+                                SuperwallService.debugForceSubscribed = debugForceSubscribed
+                            }
+                            #endif
+
+                        #if DEBUG
+                        if debugForceSubscribed {
+                            Text("DEBUG: Pro mode forced ON")
+                                .font(.caption)
+                                .foregroundStyle(.green)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        #endif
 
                         ForEach(LessonData.allLessons) { lesson in
                             Button {
@@ -89,7 +107,10 @@ struct HomeView: View {
     }
 
     private func isLocked(_ lesson: Lesson) -> Bool {
-        lesson.id != "lesson-1" && !SuperwallService.isSubscribed
+        #if DEBUG
+        if debugForceSubscribed { return false }
+        #endif
+        return lesson.id != "lesson-1" && !SuperwallService.isSubscribed
     }
 
     private func handleLessonTap(_ lesson: Lesson) {

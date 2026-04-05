@@ -1,0 +1,89 @@
+{
+  "identifier" : "D3A5F8E2-1B4C-4E7A-9F6D-2C8B0A3E5D1F",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6744572091",
+    "_developerTeamID" : "35373542G8",
+    "_lastSynchronizedDate" : 1712300000
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "21606938",
+      "localizations" : [
+        {
+          "description" : "Unlock all Social IQ scenarios",
+          "displayName" : "Social IQ Pro",
+          "locale" : "en_US"
+        }
+      ],
+      "name" : "Social IQ Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "49.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "6745889741",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Best value — unlock everything for a year",
+              "displayName" : "Annual",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.jonathanchamberlin.socialiq.annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annual",
+          "subscriptionGroupID" : "21606938",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "4.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "6745889742",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Unlock everything week by week",
+              "displayName" : "Weekly",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "com.jonathanchamberlin.socialiq.weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly",
+          "subscriptionGroupID" : "21606938",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

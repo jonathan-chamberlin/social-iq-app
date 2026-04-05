@@ -48,7 +48,14 @@ final class SuperwallService {
         }
     }
 
+    #if DEBUG
+    static var debugForceSubscribed = false
+    #endif
+
     static var isSubscribed: Bool {
+        #if DEBUG
+        if debugForceSubscribed { return true }
+        #endif
         if case .active(_) = Superwall.shared.subscriptionStatus {
             return true
         }

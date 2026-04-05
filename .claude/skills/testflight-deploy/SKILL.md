@@ -96,6 +96,14 @@ This step can also be done via the App Store Connect API — see the `app-store-
 
 On the test iPhone, open the **TestFlight** app. The new build appears as an update. Tap **"Update"**.
 
+## Important: Local changes vs TestFlight
+
+Local code changes (editing Swift files, building for simulator) are NOT visible on TestFlight until the full deploy process above is completed. When making code changes intended for device testing, always explicitly tell the user: "These changes are local only — to test on your device, we need to archive and upload a new build." Don't assume the user knows this. After completing code changes, proactively offer to deploy.
+
+## Temporary debug changes
+
+When adding temporary debug code (e.g., skipping auth, forcing onboarding) to test locally, always revert before committing. Never commit `#if DEBUG` blocks that alter production flow unless intentional.
+
 ## Notes
 
 - The app uses only HTTPS (exempt encryption) — always select "None of the algorithms mentioned above" for compliance

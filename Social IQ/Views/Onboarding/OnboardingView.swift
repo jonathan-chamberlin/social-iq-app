@@ -181,7 +181,7 @@ struct OnboardingView: View {
                             }
                         },
                         onFreeLesson: {
-                            UserDefaults.standard.set(true, forKey: AppConfig.shouldAutoOpenLesson1Key)
+                            UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
                             completeOnboardingAndDismiss()
                         }
                     )

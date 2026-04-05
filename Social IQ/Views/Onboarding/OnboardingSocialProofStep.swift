@@ -15,17 +15,17 @@ struct OnboardingSocialProofStep: View {
                 .padding(.top, 20)
 
             testimonialCard(
-                name: "Theo",
+                name: "Jake",
                 duration: "2 weeks in",
                 text: "I used to dread networking events. After 2 weeks, I actually look forward to them. My conversations feel natural now."
             )
             testimonialCard(
-                name: "Andre",
+                name: "Emma",
                 duration: "1 month in",
                 text: "It's like Duolingo but I actually see results every day."
             )
             testimonialCard(
-                name: "Aryaman",
+                name: "Marcus",
                 duration: "3 weeks in",
                 text: "I wish I started using this sooner."
             )

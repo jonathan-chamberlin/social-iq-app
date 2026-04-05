@@ -19,6 +19,7 @@ enum AnalyticsService {
 
     static func track(event: AnalyticsEvent, properties: [String: MixpanelType]? = nil) {
         Mixpanel.mainInstance().track(event: event.rawValue, properties: properties)
+        Mixpanel.mainInstance().flush()
     }
 
     static func identify(userId: String) {

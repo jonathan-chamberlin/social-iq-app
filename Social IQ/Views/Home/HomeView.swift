@@ -80,8 +80,8 @@ struct HomeView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
             .onAppear {
-                if UserDefaults.standard.bool(forKey: AppConfig.shouldAutoOpenLesson1Key) {
-                    UserDefaults.standard.removeObject(forKey: AppConfig.shouldAutoOpenLesson1Key)
+                if UserDefaults.standard.bool(forKey: AppConstants.shouldAutoOpenLesson1Key) {
+                    UserDefaults.standard.removeObject(forKey: AppConstants.shouldAutoOpenLesson1Key)
                     selectedLesson = LessonData.allLessons.first
                 }
             }
@@ -94,6 +94,7 @@ struct HomeView: View {
 
     private func handleLessonTap(_ lesson: Lesson) {
         if isLocked(lesson) {
+            AnalyticsService.track(event: .lessonLockedTap, properties: ["lesson_id": lesson.id])
             SuperwallService.presentPaywall(placement: .lessonLocked)
         } else {
             selectedLesson = lesson

@@ -20,6 +20,7 @@ final class SuperwallService {
 
     /// Present a paywall for a specific placement.
     static func presentPaywall(placement: SuperwallPlacement = .lessonLocked) {
+        AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
         Superwall.shared.register(placement: placement.rawValue)
     }
 
@@ -29,6 +30,7 @@ final class SuperwallService {
     /// - The user dismisses without purchasing
     /// - No paywall is configured for this placement
     static func presentPaywall(placement: SuperwallPlacement, onDismiss: @escaping @Sendable () -> Void) {
+        AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
         Superwall.shared.register(placement: placement.rawValue) {
             onDismiss()
         }
@@ -37,7 +39,11 @@ final class SuperwallService {
     /// Present a paywall and execute `onComplete` when the user should proceed.
     /// The feature block fires when the user has access (purchased, already subscribed, or no paywall configured).
     static func presentPaywallWithHandler(placement: SuperwallPlacement, onComplete: @escaping () -> Void) {
+        AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
         Superwall.shared.register(placement: placement.rawValue) {
+            if isSubscribed {
+                AnalyticsService.track(event: .subscriptionStarted)
+            }
             onComplete()
         }
     }

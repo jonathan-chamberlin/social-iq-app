@@ -13,5 +13,9 @@
       "mcp__superwall__list_products",
       "mcp__superwall-docs__docs_search"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "mixpanel"
+  ],
+  "enableAllProjectMcpServers": true
 }

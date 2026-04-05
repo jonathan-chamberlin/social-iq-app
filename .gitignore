@@ -42,5 +42,6 @@ fastlane/test_output
 
 # App secrets / config
 Social IQ/Config/AppConfig.swift
+.env
 .env.mixpanel
 .mcp.json

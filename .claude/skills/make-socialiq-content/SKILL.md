@@ -185,7 +185,11 @@ After:
 **Before:** Priya
 **After:** Mia
 
-**Why:** The ICP is self-improvement guys 18-28. Names should feel like people they'd actually encounter. Don't use names that feel like diversity casting. Use whatever name feels natural for the scenario.
+**Why:** Two ICP segments — (A) self-improvement males 18-28 wanting to level up charisma, (B) social-anxiety overthinkers (e.g., sorority women who replay interactions). Names should feel like people either segment would encounter. Don't use names that feel like diversity casting. Use whatever name feels natural for the scenario.
+
+### Rule: Gender-neutral copy throughout
+
+All explanations, scenario framing, and UI copy must use "people" not "guys." Positioning that reads as "for lonely guys" will repel ICP-B. Scenarios should include contexts relevant to both segments — workplace, dating, social groups, campus settings, clique dynamics.
 
 ### Rule: Use active verbs for what the other person does
 
@@ -263,21 +267,9 @@ Before marking a lesson complete, verify:
 - [ ] Correct answer position varies across the lesson set
 
 
-## Post-task reflection (run after every completed task)
+## Post-task reflection
 
-Before marking the Notion task Done, answer these four questions:
-1. Did I do anything differently from what this skill instructed?
-2. Did I encounter an error this skill didn't anticipate?
-3. Did I find a faster or better method?
-4. Did the human override my approach at any decision point?
-
-If YES to any: format a skill update proposal:
-  SKILL UPDATE PROPOSED — [skill name]
-  Change: [what to add/modify/remove]
-  Reason: [why this would have helped]
-  Diff: [exact before/after lines]
-
-Send via ccgram as a decision card (same format as Layer 1).
-Wait for approval before modifying the skill file.
-If approved: apply the diff. Commit: "skill: [skill-name] update — [one-line reason] [agent]"
-If rejected: log the reasoning in DECISIONS.md and do not retry.
+After completing a lesson draft, check:
+1. Did Jonathan correct any answer options, tone, or framing? → Update the relevant Priority section above.
+2. Did a new scenario category emerge from user research? → Add to the category list.
+3. Did the ICP definition change? → Update the names/framing rules.

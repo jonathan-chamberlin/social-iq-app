@@ -8,7 +8,7 @@
 - Paywall copy still says "Get Sharpen+" — customize in Superwall editor
 - `transaction_abandon` campaign has no placement, only holdout variant
 - Old Example Paywall (ID 195191) can be archived
-- Rotate Superwall secret key (`sk_4238...`) — previously committed to git
+- Superwall secret key rotated (2026-04-04) — new key in `.env`, old `sk_4238...` is dead
 - `AppConfig.swift` is gitignored — `shouldAutoOpenLesson1Key` constant added but won't be tracked; move UserDefaults keys to a non-ignored constants file
 
 ## Next Up

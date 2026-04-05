@@ -5,38 +5,69 @@ description: Configure Superwall paywalls, placements, and A/B tests for Social 
 
 # Superwall Campaigns for Social IQ
 
+## Current Live Setup
+
+**Paywall:** Social IQ Pro (ID 203822) — used by both campaigns below
+- Annual: $29.99/year (42% savings)
+- 6 Months: $4.99/6mo (22% savings)
+- Product ID: `com.jonathanchamberlin.socialiq.annual`
+
+**Active Campaigns:**
+| Campaign | ID | Placement | Paywall |
+|----------|-----|-----------|---------|
+| Onboarding Paywall | 78286 | `onboarding_complete` | 203822 (100%) |
+| Lesson Locked | 78288 | `lessons_locked` | 203822 (100%) |
+| Transaction Abandoned | 78289 | (no placement yet) | (no paywall yet) |
+| Example Campaign | 75153 | `campaign_trigger` | 195191 (100%) |
+
+## MCP API Limitations
+
+The Superwall MCP can manage campaigns, placements, products, and entitlements — but **cannot edit paywall visual content** (text, layout, design). Paywall copy is edited in the Superwall dashboard visual editor only.
+
+**Known MCP bugs (as of 2026-04-04):**
+- `get_paywall` and `list_paywalls` fail with a schema error on the `products` field (expects string, gets object)
+- `create_paywall` has the same products type mismatch
+
+**Workaround for visual edits:** Generate a step-by-step prompt for Claude Chrome (browser) to click and replace text elements in the Superwall dashboard editor.
+
+## Paywall Copy Source
+
+Paywall copy decisions should be informed by user research. Read `user-research/synthesis.md` for:
+- What ICP users validated (positive signals to protect)
+- The #1 complaint ("feels like a test" — 50%) — avoid quiz/test language on paywalls
+- ICP-B paywall demand signal (Pattern 14) — Lauren, Sana, Phoebe were disappointed by locked lessons
+- Gender-neutral copy requirement (Pattern 12) — "people" not "guys"
+
 ## Key placements
 
-### transaction_abandoned (highest impact — 17-25% revenue lift)
-Fires when a user starts checkout but doesn't complete. Shows a discounted offer or urgency message.
+### lessons_locked (live — primary conversion point)
+Fires when a free user taps a locked lesson. This is where ICP-B showed visible demand.
+```swift
+Superwall.shared.register(placement: "lessons_locked")
+```
+
+### onboarding_complete (live — first paywall exposure)
+Fires at the end of onboarding. Keep it soft — user hasn't seen value yet.
+```swift
+Superwall.shared.register(placement: "onboarding_complete")
+```
+
+### transaction_abandoned (not yet configured)
+Fires when a user starts checkout but doesn't complete. Shows a discounted offer or urgency message. Highest impact placement (17-25% revenue lift) — configure once payment pipeline is live.
 ```swift
 Superwall.shared.register(placement: "transaction_abandoned")
 ```
 
-### paywall_close (second highest)
+### paywall_close (future)
 Fires when user dismisses a paywall without subscribing. Shows a "last chance" or alternative offer.
 ```swift
 Superwall.shared.register(placement: "paywall_close")
 ```
 
-### feature_gate
-Fires when a free user tries to access premium content. Main conversion point.
-```swift
-Superwall.shared.register(placement: "feature_gate", params: ["feature": featureName]) {
-  // User subscribed or has access — unlock the feature
-}
-```
-
-### session_milestone
+### session_milestone (future)
 Fires after a user completes N lessons (e.g., 3rd or 5th). They've seen value, now convert.
 ```swift
 Superwall.shared.register(placement: "session_milestone", params: ["lesson_count": count])
-```
-
-### onboarding_complete
-Fires at the end of onboarding. First paywall exposure — keep it soft.
-```swift
-Superwall.shared.register(placement: "onboarding_complete")
 ```
 
 ## Age-segmented routing (App Mafia insight)
@@ -62,21 +93,9 @@ Superwall.shared.setUserAttributes([
 - transaction_abandoned should fire ONCE per session, not repeatedly
 - Test one lever at a time — simultaneous tests contaminate results
 
-## Post-task reflection (run after every completed task)
+## Post-task reflection
 
-Before marking the Notion task Done, answer these four questions:
-1. Did I do anything differently from what this skill instructed?
-2. Did I encounter an error this skill didn't anticipate?
-3. Did I find a faster or better method?
-4. Did the human override my approach at any decision point?
-
-If YES to any: format a skill update proposal:
-  SKILL UPDATE PROPOSED — superwall-campaigns
-  Change: [what to add/modify/remove]
-  Reason: [why this would have helped]
-  Diff: [exact before/after lines]
-
-Send via ccgram as a decision card (same format as Layer 1).
-Wait for approval before modifying the skill file.
-If approved: apply the diff. Commit: "skill: superwall-campaigns update — [one-line reason] [agent]"
-If rejected: log the reasoning in DECISIONS.md and do not retry.
+After completing a Superwall task, check:
+1. Did I encounter an MCP error this skill didn't anticipate? → Update the "MCP API Limitations" section.
+2. Did the user override my approach? → Update the relevant section.
+3. Did campaign/paywall IDs change? → Update the "Current Live Setup" table.

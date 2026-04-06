@@ -3,15 +3,17 @@
 //  Social IQ
 //
 
-import AudioToolbox
+import AVFoundation
 import Foundation
 
 enum SoundPlayer {
+    private static var player: AVAudioPlayer?
+
     static func play(_ sound: Sound) {
         guard let url = Bundle.main.url(forResource: sound.filename, withExtension: "wav") else { return }
-        var soundID: SystemSoundID = 0
-        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
-        AudioServicesPlaySystemSound(soundID)
+        player = try? AVAudioPlayer(contentsOf: url)
+        player?.volume = sound.volume
+        player?.play()
     }
 
     enum Sound {
@@ -24,6 +26,13 @@ enum SoundPlayer {
             case .correctAnswer: "correct-answer"
             case .wrongAnswer: "wrong-answer"
             case .lessonComplete: "lesson-complete"
+            }
+        }
+
+        var volume: Float {
+            switch self {
+            case .wrongAnswer: 0.8
+            default: 1.0
             }
         }
     }

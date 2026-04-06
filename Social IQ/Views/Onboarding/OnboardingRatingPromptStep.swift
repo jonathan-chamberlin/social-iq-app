@@ -7,6 +7,8 @@ import StoreKit
 import SwiftUI
 
 struct OnboardingRatingPromptStep: View {
+    @Environment(\.requestReview) private var requestReview
+
     var body: some View {
         VStack(spacing: 24) {
             Spacer().frame(height: 40)
@@ -27,16 +29,7 @@ struct OnboardingRatingPromptStep: View {
         }
         .frame(maxWidth: .infinity)
         .onAppear {
-            requestAppReview()
+            requestReview()
         }
-    }
-
-    private func requestAppReview() {
-        #if !DEBUG
-        if let scene = UIApplication.shared.connectedScenes
-            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-            SKStoreReviewController.requestReview(in: scene)
-        }
-        #endif
     }
 }

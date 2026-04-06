@@ -45,8 +45,10 @@ struct OnboardingView: View {
     ]
 
     private static let discoverySourceOptions = [
+        "Reddit",
+        "Instagram",
+        "TikTok",
         "Friend / word of mouth",
-        "Social media (TikTok, Instagram, etc.)",
         "App Store search",
         "Greek life / sorority / fraternity",
         "Other",

@@ -19,6 +19,7 @@
 ## Next Up
 - Build onboarding funnel in Mixpanel by step_name
 - After Paid Apps agreement activates: verify actual product pricing on Superwall paywalls, test sandbox purchase on device via TestFlight, enroll in Small Business Program
+- Once App Store link is live: create Bitly attribution links per channel (one per channel, not per post)
 
 ## Blockers
 - **No Paid Apps agreement yet** — Apple Support case opened (ID: 102861544160). DPLA already accepted (March 30 → April 4). Apple's own docs say Paid Apps agreement should appear in App Store Connect but it's not showing. Likely a display glitch or stale cache on Apple's side. Waiting on Apple Support response.

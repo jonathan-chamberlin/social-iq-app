@@ -4,6 +4,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct LessonCompletionView: View {
     let lessonId: String
@@ -65,6 +66,9 @@ struct LessonCompletionView: View {
             }
             .padding(.horizontal, 32)
             .padding(.bottom, 40)
+        }
+        .onAppear {
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
     }
 }

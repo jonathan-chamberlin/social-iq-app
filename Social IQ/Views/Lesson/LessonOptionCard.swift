@@ -3,6 +3,7 @@
 //  Social IQ
 //
 
+import AudioToolbox
 import SwiftUI
 import UIKit
 
@@ -45,8 +46,18 @@ struct LessonOptionCard: View {
         .onTapGesture {
             if option.feedback.isCorrect {
                 UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                if !showingFeedback {
+                    Self.playCorrectSound()
+                }
             }
             onTap()
         }
+    }
+
+    private static func playCorrectSound() {
+        guard let url = Bundle.main.url(forResource: "correct-answer", withExtension: "wav") else { return }
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }

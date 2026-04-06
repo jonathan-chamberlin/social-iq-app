@@ -6,10 +6,18 @@
 import SwiftUI
 
 struct LessonCompletionView: View {
+    let lessonId: String
     let score: Int
     let totalSteps: Int
     let onDismiss: () -> Void
-    @State private var percentile: Int = 0
+
+    private var completionCount: Int {
+        AppConstants.lessonCompletionCounts[lessonId] ?? 0
+    }
+
+    private var percentile: Int {
+        AppConstants.lessonPercentiles[lessonId] ?? 85
+    }
 
     var body: some View {
         VStack(spacing: 24) {
@@ -28,12 +36,15 @@ struct LessonCompletionView: View {
                 .font(.subheadline)
                 .foregroundStyle(.gray)
 
-            if percentile > 0 {
-                Text("You read that better than \(percentile)% of people")
+            VStack(spacing: 6) {
+                Text("\(completionCount.formatted()) people completed this lesson")
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.5))
+                Text("You finished faster than \(percentile)% of them")
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(0.7))
-                    .padding(.top, 4)
             }
+            .padding(.top, 4)
 
             Spacer()
 
@@ -54,15 +65,6 @@ struct LessonCompletionView: View {
             }
             .padding(.horizontal, 32)
             .padding(.bottom, 40)
-        }
-        .onAppear {
-            let range: ClosedRange<Int> = switch score {
-            case 3: 78...92
-            case 2: 55...72
-            case 1: 30...48
-            default: 8...22
-            }
-            percentile = Int.random(in: range)
         }
     }
 }

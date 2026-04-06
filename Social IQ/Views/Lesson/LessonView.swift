@@ -19,7 +19,7 @@ struct LessonView: View {
             Color.black.ignoresSafeArea()
 
             if viewModel.isComplete {
-                LessonCompletionView(score: viewModel.score, totalSteps: lesson.steps.count) {
+                LessonCompletionView(lessonId: lesson.id, score: viewModel.score, totalSteps: lesson.steps.count) {
                     dismiss()
                 }
             } else if let step = viewModel.currentStep {

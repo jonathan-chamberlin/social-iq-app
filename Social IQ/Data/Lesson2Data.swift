@@ -36,7 +36,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: true,
                             renText: "you read the smile correctly. that's comfort, not boredom. most guys miss that.",
-                            text: "She smiled. That's not boredom, that's comfort. Most guys panic and rush to fill every silence, and she can feel that energy shift. The pause is fine. She's enjoying being with you."
+                            text: "Most guys panic and rush to fill every silence, and she can feel that energy shift. The pause is fine. She's enjoying being with you."
                         )
                     ),
                     LessonOption(
@@ -74,7 +74,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "instinct is right to do something, but you've been asking for 30 minutes. another question just digs you deeper into interview mode.",
-                            text: "You've been asking questions for 30 minutes. You're already in interview mode. Another question, even a great one, keeps that dynamic going. Nobody wants to feel like they're being interviewed."
+                            text: "Another question, even a great one, keeps the interview dynamic going. Nobody wants to feel like they're being interviewed."
                         )
                     ),
                     LessonOption(
@@ -84,7 +84,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "solid instinct to let the silence breathe. but going deep too early burns the mystery you actually want to keep.",
-                            text: "Going deep on a first date kills the mystery. That's what makes her want to see you again. Keep it light and fun. You can go deeper once she actually knows you."
+                            text: "That's what makes her want to see you again. Keep it light and fun. You can go deeper once she actually knows you."
                         )
                     ),
                     LessonOption(
@@ -104,7 +104,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "moving locations can work on dates, but not when things are already going well. you'd be fixing something that isn't broken.",
-                            text: "She just smiled at you. Things are going well. There's no energy to \"change.\" Moving locations right now is solving a problem that doesn't exist."
+                            text: "She just smiled at you. There's no energy to change."
                         )
                     )
                 ],
@@ -132,7 +132,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "that's a better question than most, but it's still a question. you're asking when you should be playing.",
-                            text: "Decent question, but you're still in interview mode. You're asking, not vibing."
+                            text: "She's waiting for the conversation to feel like fun, not a questionnaire."
                         )
                     ),
                     LessonOption(

@@ -26,7 +26,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "makes sense to go there - four times feels like scheming. but there's a difference between easy and malicious.",
-                            text: "\"Taking advantage\" makes it sound like he's scheming. He's not. He's just taking the easiest path. That's different from not caring. If you read this as him using you, you'll come in angry when what you actually need is boundaries."
+                            text: "If you read this as him using you, you'll come in angry when what you actually need is boundaries."
                         )
                     ),
                     LessonOption(
@@ -36,7 +36,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "that's the story he tells himself. four times says he has options - they're just harder than you.",
-                            text: "That's probably what Danny would tell you. But four times in eight months? He has other options. They're just harder than calling you. If you buy this framing, you become the permanent solution to a problem you can't fix."
+                            text: "That's probably what Danny would tell you. But if you buy this framing, you become the permanent solution to a problem you can't fix."
                         )
                     ),
                     LessonOption(
@@ -46,7 +46,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: true,
                             renText: "THAT. this isn't a crisis, it's a system. you saw it.",
-                            text: "This isn't a crisis. It's a system. He's found his path of least resistance and it runs through you. The three weeks of silence after you said no last time? That was him recalibrating, not punishing you. The relationship is real. The money pattern is also real. You have to handle them separately."
+                            text: "He's found his path of least resistance and it runs through you. The three weeks of silence after you said no last time? That was him recalibrating, not punishing you. The relationship is real. The money pattern is also real. You have to handle them separately."
                         )
                     ),
                     LessonOption(
@@ -56,7 +56,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "totally get it - family framing hits hard. but that guilt is exactly the lever keeping you in the cycle.",
-                            text: "This isn't a loyalty test. Danny needs rent money. But if you frame it that way, you'll feel guilty saying no, and that guilt is exactly what keeps the cycle going."
+                            text: "This isn't a loyalty test. Danny needs rent money. If you frame it that way, you'll feel guilty saying no."
                         )
                     )
                 ],
@@ -74,7 +74,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "solid instinct, but now you're the auditor. a good enough excuse and you're back on the hook.",
-                            text: "Now you're an auditor. He gives a reason, you evaluate it, he gets defensive, and suddenly you're arguing about the past. Plus you just signaled that the right excuse could unlock more cash."
+                            text: "He gives a reason, you evaluate it, he gets defensive, and suddenly you're arguing about the past."
                         )
                     ),
                     LessonOption(
@@ -104,7 +104,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "you've said some version of this before. Danny knows it. ultimatums you won't enforce just teach people to wait you out.",
-                            text: "Be honest. You've probably said some version of \"this is the last time\" before. Danny knows it too. Ultimatums you can't enforce just teach people to ignore your boundaries."
+                            text: "Empty ultimatums teach people your limits aren't real. Next time he calls, he already knows you'll fold."
                         )
                     )
                 ],
@@ -132,7 +132,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "you said yes, then softened it with rules he won't follow. that's not a boundary, that's a delay.",
-                            text: "\"Last time\" is a soft boundary he'll test again. \"Figure out a better system\" is homework he's never going to do."
+                            text: "You gave him money and a lecture. He heard the money part."
                         )
                     ),
                     LessonOption(
@@ -142,7 +142,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: true,
                             renText: "you caught that. no AND love in the same breath. that's exactly how you close the guilt door.",
-                            text: "Two clear things: the no is real and the love is real. They don't cancel each other out. He can't pull the \"you don't care about family\" card because you already named the relationship separately."
+                            text: "He can't pull the \"you don't care about family\" card because you already named the relationship separately."
                         )
                     ),
                     LessonOption(

@@ -56,7 +56,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "if she'd said \"you always do this\" you'd be right. she didn't. she's looking forward, not back.",
-                            text: "She's not bringing up past mistakes or saying \"you always do this.\" She's worried about the future. If you hear this as a trust issue, you'll get defensive about your track record instead of addressing what's actually going on."
+                            text: "If you hear this as a trust issue, you'll get defensive about your track record instead of addressing what's actually going on."
                         )
                     )
                 ],
@@ -104,7 +104,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "avoidance feels peaceful in the moment. it just moves the tension to next time.",
-                            text: "She's going to bring it up again. Guaranteed. Every time you dodge this conversation, she has more time to worry and the next one gets harder."
+                            text: "Every time you dodge this conversation, she has more time to worry and the next one gets harder."
                         )
                     )
                 ],
@@ -132,7 +132,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: true,
                             renText: "THAT. you named the fear out loud and gave her room to confirm it. that's the whole unlock.",
-                            text: "\"Scary\" validates what she's feeling. The paraphrase gives her a chance to say \"yes, exactly.\" Now she feels like you're actually listening, not just waiting to defend yourself."
+                            text: "Now she feels like you're actually listening, not just waiting to defend yourself."
                         )
                     ),
                     LessonOption(

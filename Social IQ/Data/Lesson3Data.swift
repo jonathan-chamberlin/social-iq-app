@@ -122,7 +122,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "introducing yourself first feels polite, but you just made them pause the fun to explain it to a stranger.",
-                            text: "Now they have to stop and recap the whole thing for you. You just killed the energy."
+                            text: "You just killed the energy. Now you're the guy who made everyone rewind."
                         )
                     ),
                     LessonOption(
@@ -142,7 +142,7 @@ extension LessonData {
                         feedback: OptionFeedback(
                             isCorrect: false,
                             renText: "sharing your own story feels natural, but you just pulled focus. their moment, not yours yet.",
-                            text: "You just redirected the conversation to yourself. The guy who was telling the story feels dismissed."
+                            text: "The guy who was telling the story feels dismissed. Wait until they've accepted your presence before sharing your own."
                         )
                     ),
                     LessonOption(

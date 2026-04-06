@@ -25,6 +25,7 @@ extension LessonData {
                         label: "They're closed off and not interested in meeting new people",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "makes sense - laughing loud can feel like a wall. but open groups leak energy outward. this one's doing exactly that.",
                             text: "They're laughing and being loud. That's not \"closed off.\" Closed-off groups face inward, give short answers, avoid eye contact. This group has open energy. You just need to time your approach right."
                         )
                     ),
@@ -34,6 +35,7 @@ extension LessonData {
                         label: "They're mid-story, and the group has a clear center of mass",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            renText: "yes. center of mass. you saw where the gravity was.",
                             text: "Cool shirt guy is clearly running the show right now. The group has a rhythm. Walk up mid-punchline and you kill the moment. Wait for the natural pause after the laugh."
                         )
                     ),
@@ -43,6 +45,7 @@ extension LessonData {
                         label: "They're bored and would welcome anyone who walks up with confidence",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "confidence is good, but boredom rescue is a story you're telling yourself. they're already having fun.",
                             text: "They're clearly entertained already. Walking up assuming they need you is the wrong frame. That's how you come across as the guy who interrupts instead of integrates."
                         )
                     ),
@@ -52,6 +55,7 @@ extension LessonData {
                         label: "They're testing whether strangers can break in without an introduction",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "they're not testing you. that's anxiety narrating. no one's keeping score.",
                             text: "Nobody at a house party is running entrance exams. If you approach like you're being evaluated, you'll come across as a try-hard. People pick up on that instantly."
                         )
                     )
@@ -69,6 +73,7 @@ extension LessonData {
                         label: "Walk up to the center of the group, make eye contact with the group's leader (cool shirt guy), and introduce yourself",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "sounds right on paper. but walking into the center mid-story is just... interrupting with extra steps.",
                             text: "Sounds like solid advice, but in practice you're interrupting someone's story to announce yourself. People will think \"this guy thinks he's the center of the world.\""
                         )
                     ),
@@ -78,6 +83,7 @@ extension LessonData {
                         label: "Walk up to the edge of the group, listen and make eye contact with whoever is talking for 10-15 seconds, then build on something someone just said",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            renText: "edge, listen, build. that's the whole move. most people skip straight to talking.",
                             text: "Listen for 10-15 seconds, then build on what they're already talking about. Now you look like someone who was paying attention, not someone barging in. People love feeling like others are interested in them. Most people miss this."
                         )
                     ),
@@ -87,6 +93,7 @@ extension LessonData {
                         label: "Ask Jordan to introduce you so you have social proof going in",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "totally get it - social proof feels safer. but you don't need backup here. it's a house party, not a gala.",
                             text: "At a high-status event, sure. But this is a house party. Everyone's on the same level. Asking Jordan for an intro is an unnecessary crutch, and it depends on him being free."
                         )
                     ),
@@ -96,6 +103,7 @@ extension LessonData {
                         label: "Walk up, make a comment about something in the room to create a natural opener",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "solid instinct for cold openers, but they already have a thread going. you'd be talking past them, not with them.",
                             text: "\"Nice playlist\" or \"cool couch\" has nothing to do with what they're talking about. You're starting a new thread nobody asked for instead of joining the one that's working."
                         )
                     )
@@ -113,6 +121,7 @@ extension LessonData {
                         label: "\"Hey, I'm [name], what's everyone laughing about?\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "introducing yourself first feels polite, but you just made them pause the fun to explain it to a stranger.",
                             text: "Now they have to stop and recap the whole thing for you. You just killed the energy."
                         )
                     ),
@@ -122,6 +131,7 @@ extension LessonData {
                         label: "\"Sorry to interrupt, do you guys know Jordan?\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "apologizing for showing up sets the whole tone wrong. you've already shrunk before saying anything real.",
                             text: "You've announced yourself as an outsider and apologized for showing up. Wrong energy."
                         )
                     ),
@@ -131,6 +141,7 @@ extension LessonData {
                         label: "\"Okay that story, I had the exact same thing happen in Denver, it was brutal\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            renText: "sharing your own story feels natural, but you just pulled focus. their moment, not yours yet.",
                             text: "You just redirected the conversation to yourself. The guy who was telling the story feels dismissed."
                         )
                     ),
@@ -140,6 +151,7 @@ extension LessonData {
                         label: "\"You must've been pissed, what airline was it?\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            renText: "that's it. you showed you heard them, then handed it back. clean entry.",
                             text: "\"You must've been pissed\" shows you were listening. People love that. One short question that extends their story, not yours. You're in the conversation naturally. Share your own story after they've accepted your presence."
                         )
                     )

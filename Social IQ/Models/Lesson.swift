@@ -44,5 +44,6 @@ struct LessonOption: Identifiable, Codable, Hashable {
 
 struct OptionFeedback: Codable, Hashable {
     let isCorrect: Bool
+    let renText: String
     let text: String
 }

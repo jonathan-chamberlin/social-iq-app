@@ -52,6 +52,8 @@ final class AuthViewModel {
     }
 
     #if DEBUG
+    var devSkipOnboarding = false
+
     func devSkipAuth() {
         let devUser = User(
             id: UUID(),
@@ -62,6 +64,11 @@ final class AuthViewModel {
             updatedAt: Date()
         )
         authState = .signedIn(devUser)
+    }
+
+    func devSkipAll() {
+        devSkipOnboarding = true
+        devSkipAuth()
     }
     #endif
 

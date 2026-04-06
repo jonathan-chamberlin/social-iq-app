@@ -50,6 +50,12 @@ struct SignInView: View {
                 }
                 .font(.footnote)
                 .foregroundStyle(.gray)
+
+                Button("Skip Onboarding (Dev)") {
+                    authViewModel.devSkipAll()
+                }
+                .font(.footnote)
+                .foregroundStyle(.gray)
                 #endif
 
                 if let error = authViewModel.errorMessage {

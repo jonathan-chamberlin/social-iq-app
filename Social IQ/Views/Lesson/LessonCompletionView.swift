@@ -3,6 +3,7 @@
 //  Social IQ
 //
 
+import AVFoundation
 import SwiftUI
 import UIKit
 
@@ -69,6 +70,14 @@ struct LessonCompletionView: View {
         }
         .onAppear {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
+            playCompletionSound()
         }
+    }
+
+    private func playCompletionSound() {
+        guard let url = Bundle.main.url(forResource: "lesson-complete", withExtension: "wav") else { return }
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(url as CFURL, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }

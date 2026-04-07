@@ -9,6 +9,7 @@ struct LessonFeedbackPanel: View {
     let option: LessonOption
     let onNext: () -> Void
     @State private var showFrameworks = false
+    @State private var showFullExplanation = false
 
     var body: some View {
         let isCorrect = option.feedback.isCorrect
@@ -18,9 +19,18 @@ struct LessonFeedbackPanel: View {
                     Text(option.feedback.renText)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
-                    Text(option.feedback.text)
-                        .font(.system(size: 14))
-                        .foregroundStyle(.white.opacity(0.85))
+
+                    if showFullExplanation {
+                        Text(option.feedback.text)
+                            .font(.system(size: 14))
+                            .foregroundStyle(.white.opacity(0.85))
+                    } else {
+                        Button { showFullExplanation = true } label: {
+                            Text("See more")
+                                .font(.system(size: 13))
+                                .foregroundStyle(.purple.opacity(0.8))
+                        }
+                    }
                 }
 
                 Spacer()

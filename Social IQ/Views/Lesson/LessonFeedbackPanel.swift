@@ -27,7 +27,7 @@ struct LessonFeedbackPanel: View {
                         Button { showFullExplanation = true } label: {
                             Text("See more")
                                 .font(.system(size: 13))
-                                .foregroundStyle(.purple.opacity(0.8))
+                                .foregroundStyle(Theme.gold.opacity(0.8))
                         }
                     }
                 }

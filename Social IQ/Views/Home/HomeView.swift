@@ -143,7 +143,7 @@ struct HomeView: View {
                     .multilineTextAlignment(.leading)
 
                 HStack(spacing: 8) {
-                    tag(lesson.category.rawValue, color: .purple)
+                    tag(lesson.category.rawValue, color: Theme.gold)
                     tag(lesson.difficulty.rawValue, color: .blue)
                 }
             }
@@ -160,7 +160,7 @@ struct HomeView: View {
                     .background(
                         Capsule().fill(
                             LinearGradient(
-                                colors: [.blue, .purple],
+                                colors: [Theme.gold, Theme.goldLight],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -206,7 +206,7 @@ struct HomeView: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: [.blue, .purple],
+                        colors: [Theme.gold, Theme.goldLight],
                         startPoint: .leading,
                         endPoint: .trailing
                     )

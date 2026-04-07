@@ -101,8 +101,8 @@ struct LessonView: View {
                             .foregroundStyle(.white)
                             .padding(.horizontal, 16)
                             .padding(.vertical, 8)
-                            .background(Capsule().fill(Color.purple))
-                            .shadow(color: nextButtonGlow ? .purple.opacity(0.6) : .clear, radius: 8)
+                            .background(Capsule().fill(Theme.gold))
+                            .shadow(color: nextButtonGlow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
                     }
                     .scaleEffect(nextButtonScale)
                     .onAppear {
@@ -143,7 +143,7 @@ struct LessonView: View {
 
                 VStack(spacing: 4) {
                     Circle()
-                        .fill(isCompleted || isCurrent ? Color.purple : Color.gray.opacity(0.4))
+                        .fill(isCompleted || isCurrent ? Theme.gold : Color.gray.opacity(0.4))
                         .frame(width: 10, height: 10)
                         .overlay {
                             if isCompleted {
@@ -161,7 +161,7 @@ struct LessonView: View {
 
                 if index < Self.stepLabels.count - 1 {
                     Rectangle()
-                        .fill(isCompleted ? Color.purple : Color.gray.opacity(0.3))
+                        .fill(isCompleted ? Theme.gold : Color.gray.opacity(0.3))
                         .frame(height: 2)
                         .offset(y: -8)
                 }
@@ -241,7 +241,7 @@ struct LessonView: View {
                         .padding()
                         .background(
                             LinearGradient(
-                                colors: [.purple, .blue],
+                                colors: [Theme.gold, Theme.goldLight],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )

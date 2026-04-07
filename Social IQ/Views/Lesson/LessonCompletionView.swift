@@ -32,7 +32,7 @@ struct LessonCompletionView: View {
 
             Text("\(score) / \(totalSteps)")
                 .font(.system(size: 48, weight: .bold, design: .rounded))
-                .foregroundStyle(.purple)
+                .foregroundStyle(Theme.gold)
 
             Text("correct on first try")
                 .font(.subheadline)
@@ -59,7 +59,7 @@ struct LessonCompletionView: View {
                             .padding()
                             .background(
                                 LinearGradient(
-                                    colors: [.purple, .blue],
+                                    colors: [Theme.gold, Theme.goldLight],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )

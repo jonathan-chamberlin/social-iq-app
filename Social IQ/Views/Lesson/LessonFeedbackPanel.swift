@@ -15,14 +15,16 @@ struct LessonFeedbackPanel: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(option.feedback.renText)
+                    Text(option.feedback.renText.replacingOccurrences(of: ". ", with: ".\n"))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
+                        .lineSpacing(4)
 
                     if showFullExplanation {
-                        Text(option.feedback.text)
+                        Text(option.feedback.text.replacingOccurrences(of: ". ", with: ".\n"))
                             .font(.system(size: 14))
                             .foregroundStyle(.white.opacity(0.85))
+                            .lineSpacing(4)
                     } else {
                         Button { showFullExplanation = true } label: {
                             Text("See more")

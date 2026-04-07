@@ -10,12 +10,6 @@ struct ResearchFrameworksSheet: View {
 
     private let frameworks: [(icon: String, name: String, description: String, citation: String)] = [
         (
-            "🤝",
-            "Gottman's Bids for Connection",
-            "Responding to people's emotional bids (turning toward vs. turning away) predicts relationship success.",
-            "Dr. John Gottman - University of Washington"
-        ),
-        (
             "🧠",
             "Ekman's Facial Action Coding",
             "Reading micro-expressions and emotional states from facial cues.",
@@ -28,16 +22,22 @@ struct ResearchFrameworksSheet: View {
             "Dr. Matthew Lieberman - UCLA"
         ),
         (
+            "👂",
+            "Active Listening",
+            "Reflecting, paraphrasing, and asking follow-up questions to demonstrate understanding.",
+            "Carl Rogers - founder of person-centered therapy"
+        ),
+        (
             "🪞",
             "Mirroring and Labeling",
             "Repeating back what someone said builds rapport and makes them feel heard.",
             "Chris Voss - former FBI lead hostage negotiator"
         ),
         (
-            "👂",
-            "Active Listening",
-            "Reflecting, paraphrasing, and asking follow-up questions to demonstrate understanding.",
-            "Carl Rogers - founder of person-centered therapy"
+            "🤝",
+            "Gottman's Bids for Connection",
+            "Responding to people's emotional bids (turning toward vs. turning away) predicts relationship success.",
+            "Dr. John Gottman - University of Washington"
         ),
     ]
 

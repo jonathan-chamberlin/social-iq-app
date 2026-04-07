@@ -10,6 +10,7 @@ struct LessonCompletionView: View {
     let lessonId: String
     let score: Int
     let totalSteps: Int
+    let onNextLesson: (() -> Void)?
     let onDismiss: () -> Void
 
     private var completionCount: Int {
@@ -49,20 +50,30 @@ struct LessonCompletionView: View {
 
             Spacer()
 
-            Button(action: onDismiss) {
-                Text("Back to Home")
-                    .font(.headline)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(
-                        LinearGradient(
-                            colors: [.purple, .blue],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-                    .foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            VStack(spacing: 12) {
+                if let onNextLesson {
+                    Button(action: onNextLesson) {
+                        Text("Next Lesson")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                LinearGradient(
+                                    colors: [.purple, .blue],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                }
+
+                Button(action: onDismiss) {
+                    Text("Back to Home")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                }
             }
             .padding(.horizontal, 32)
             .padding(.bottom, 40)

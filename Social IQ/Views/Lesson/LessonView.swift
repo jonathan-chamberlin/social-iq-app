@@ -10,18 +10,37 @@ struct LessonView: View {
     var userId: String?
     var onComplete: (() -> Void)?
     @State private var viewModel = LessonViewModel()
+    @State private var activeLesson: Lesson?
     @Environment(\.dismiss) private var dismiss
 
     private static let stepLabels = ["READ", "THINK", "SPEAK"]
+
+    private var displayedLesson: Lesson { activeLesson ?? lesson }
+
+    private var nextLesson: Lesson? {
+        guard let currentIndex = LessonData.allLessons.firstIndex(where: { $0.id == displayedLesson.id }),
+              currentIndex + 1 < LessonData.allLessons.count else { return nil }
+        return LessonData.allLessons[currentIndex + 1]
+    }
 
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
 
             if viewModel.isComplete {
-                LessonCompletionView(lessonId: lesson.id, score: viewModel.score, totalSteps: lesson.steps.count) {
-                    dismiss()
-                }
+                LessonCompletionView(
+                    lessonId: displayedLesson.id,
+                    score: viewModel.score,
+                    totalSteps: displayedLesson.steps.count,
+                    onNextLesson: nextLesson.map { next in
+                        {
+                            activeLesson = next
+                            viewModel.startLesson(next)
+                            AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": next.id])
+                        }
+                    },
+                    onDismiss: { dismiss() }
+                )
             } else if let step = viewModel.currentStep {
                 ScrollViewReader { proxy in
                     ScrollView {
@@ -43,7 +62,7 @@ struct LessonView: View {
                             if let step = viewModel.currentStep {
                                 let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
                                 AnalyticsService.track(event: .questionAnswered, properties: [
-                                    "lesson_id": lesson.id,
+                                    "lesson_id": displayedLesson.id,
                                     "question_number": viewModel.currentStepIndex + 1,
                                     "question_type": step.label,
                                     "answer_index": selected,
@@ -64,7 +83,7 @@ struct LessonView: View {
         }
         .onChange(of: viewModel.isComplete) { _, complete in
             if complete, let userId {
-                AnalyticsService.track(event: .lessonCompleted, properties: ["lesson_id": lesson.id])
+                AnalyticsService.track(event: .lessonCompleted, properties: ["lesson_id": displayedLesson.id])
                 Task {
                     await viewModel.saveProgress(userId: userId)
                     onComplete?()
@@ -124,7 +143,7 @@ struct LessonView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.gray)
             }
-            Text(lesson.scenarioText)
+            Text(displayedLesson.scenarioText)
                 .font(isReadStep ? .body : .caption)
                 .italic()
                 .foregroundStyle(.white.opacity(isReadStep ? 0.9 : 0.7))

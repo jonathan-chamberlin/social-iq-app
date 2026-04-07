@@ -32,17 +32,16 @@ Screenshot: xcrun simctl io booted screenshot /tmp/social-iq-screen.png
 Social IQ/
   Config/           — AppConfig (Supabase URL, API keys, UserDefaults keys)
   Constants/        — DatabaseSchema, AnalyticsEvent
-  Models/           — Codable structs (Lesson, UserProfile, LessonProgress)
+  Models/           — Codable structs (Lesson, LessonProgress)
   Data/             — Lesson content data (Lesson1-5)
   ViewModels/       — AuthViewModel, LessonViewModel
   Views/
     Home/           — HomeView
     Auth/           — SignInView
     Lesson/         — LessonView + extracted subcomponents (LessonOptionCard, etc.)
-    Paywall/        — PaywallView
     Onboarding/     — OnboardingView (coordinator) + 12 step files + enums
   Services/         — AnalyticsService, AuthService, OnboardingService, etc.
-  Utilities/
+  Utilities/        — HapticService, SoundPlayer, String+Formatting
   Assets.xcassets/
 
 ## Coding Conventions
@@ -69,14 +68,24 @@ Social IQ/
 - Services are structs (not classes) accessed via `SupabaseService.shared` or instantiated directly.
 - Service functions that take user input MUST use a data struct (e.g., `OnboardingData`) instead of 5+ parameters.
 - All analytics tracking goes through `AnalyticsService.track(event:properties:)`.
+- NEVER call `Mixpanel.mainInstance().flush()` per-event. Mixpanel batches automatically.
 
 ### Error handling
 - Custom error enums conforming to `LocalizedError` per service.
 - Best-effort saves (onboarding, lesson progress) — catch and continue, never block the user.
 
-### Constants
+### Constants and magic values
 - Magic strings shared across files MUST be extracted to `AppConfig` or a constants enum.
 - UserDefaults keys MUST be in `AppConfig` (e.g., `AppConfig.shouldAutoOpenLesson1Key`).
+- Animation timing values MUST be in a private `enum Timing` at the top of the struct, not inline.
+- URLs and entry field IDs MUST be `private static let` constants, not inline string literals.
+
+### Shared UI patterns
+- Card backgrounds: use `.cardBackground()` (defined in Theme.swift), never inline `RoundedRectangle.fill(Color.white.opacity(0.08))`.
+- Gold gradient: use `Theme.goldGradient`, never inline `LinearGradient(colors: [Theme.gold, Theme.goldLight], ...)`.
+- Screen background: use `.screenBackground()`, never inline `Color.black.ignoresSafeArea()`.
+- Haptics: use `HapticService.light()/.medium()/.heavy()/.success()`, never inline `UIImpactFeedbackGenerator`.
+- Sentence-splitting: use `.sentenceFormatted` (String extension), never inline `.replacingOccurrences(of: ". ", with: ".\n")`.
 
 ### Onboarding-specific
 - `OnboardingView.swift` is the coordinator only — state, navigation, analytics. No step UI.
@@ -103,3 +112,6 @@ Project-specific docs live in `references/` at the repo root:
 
 ## Gotchas (append new mistakes here)
 - Xcode project has a space in it: "Social IQ.xcodeproj" — always quote paths
+- Do NOT use Combine (Timer.publish, etc.) — the project uses async/await exclusively
+- Force unwraps on URL construction will be rejected — use optional binding or guard/let
+- `import UIKit` should only appear in Utilities (HapticService, SoundPlayer) — views use the service wrappers

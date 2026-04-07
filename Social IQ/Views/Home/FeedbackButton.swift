@@ -8,14 +8,17 @@ import SwiftUI
 struct FeedbackButton: View {
     let userId: String?
 
-    private var feedbackURL: URL {
-        let baseURL = "https://docs.google.com/forms/d/1JE2L8trw-RFpBGpzPmtHm5MjfxLxbC8lpLjAq6FkVWU/viewform?usp=pp_url"
-        let userParam = userId.map { "&entry.1584329496=\($0)" } ?? ""
-        return URL(string: baseURL + userParam)!
+    private static let feedbackFormBaseURL = "https://docs.google.com/forms/d/1JE2L8trw-RFpBGpzPmtHm5MjfxLxbC8lpLjAq6FkVWU/viewform?usp=pp_url"
+    private static let feedbackUserEntryField = "&entry.1584329496="
+
+    private var feedbackURL: URL? {
+        let userParam = userId.map { "\(Self.feedbackUserEntryField)\($0)" } ?? ""
+        return URL(string: Self.feedbackFormBaseURL + userParam)
     }
 
     var body: some View {
         Button {
+            guard let feedbackURL else { return }
             UIApplication.shared.open(feedbackURL)
         } label: {
             Image(systemName: "bubble.left.fill")

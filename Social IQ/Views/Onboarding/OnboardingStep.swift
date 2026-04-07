@@ -74,7 +74,7 @@ enum OnboardingStep: Int, CaseIterable {
     }
 
     var stepNumber: Int {
-        Self.allCases.firstIndex(of: self)! + 1
+        (Self.allCases.firstIndex(of: self) ?? 0) + 1
     }
 
     static var totalCount: Int { allCases.count }

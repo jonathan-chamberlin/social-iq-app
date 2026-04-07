@@ -3,9 +3,18 @@
 //  Social IQ
 
 import SwiftUI
-import UIKit
 
 struct LessonCompletionView: View {
+    private enum Timing {
+        static let scoreTickInterval: Double = 0.15
+        static let glowFadeDuration: Double = 0.4
+        static let percentileDelay: Double = 0.5
+        static let countdownStartDelay: Double = 1.2
+        static let autoAdvanceDuration: Double = 5
+        static let percentileSpringResponse: Double = 0.4
+        static let percentileSpringDamping: Double = 0.6
+    }
+
     let lessonId: String
     let score: Int
     let totalSteps: Int
@@ -96,7 +105,7 @@ struct LessonCompletionView: View {
                                     .frame(width: geo.size.width * countdownProgress)
                                     .animation(
                                         countdownActive
-                                            ? .linear(duration: 5)
+                                            ? .linear(duration: Timing.autoAdvanceDuration)
                                             : .none,
                                         value: countdownProgress
                                     )
@@ -124,14 +133,14 @@ struct LessonCompletionView: View {
             guard countdownActive, onNextLesson != nil else { return }
             // Kick off the fill animation on the next frame
             countdownProgress = 1.0
-            // Wait for the 5-second fill to complete
-            try? await Task.sleep(for: .seconds(5))
+            // Wait for the fill to complete
+            try? await Task.sleep(for: .seconds(Timing.autoAdvanceDuration))
             guard countdownActive else { return }
             countdownActive = false
             onNextLesson?()
         }
         .onAppear {
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            HapticService.success()
             SoundPlayer.play(.lessonComplete)
             startAnimations()
         }
@@ -142,34 +151,34 @@ struct LessonCompletionView: View {
     private func startAnimations() {
         // 1. Count up the score
         for i in 1...max(score, 1) {
-            let delay = Double(i) * 0.15
+            let delay = Double(i) * Timing.scoreTickInterval
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 displayedScore = min(i, score)
-                UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                HapticService.light()
             }
         }
 
         // 2. Gold glow after count-up finishes
-        let countUpDuration = Double(max(score, 1)) * 0.15 + 0.1
+        let countUpDuration = Double(max(score, 1)) * Timing.scoreTickInterval + 0.1
         DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration) {
-            withAnimation(.easeOut(duration: 0.4)) {
+            withAnimation(.easeOut(duration: Timing.glowFadeDuration)) {
                 showScoreGlow = true
             }
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            HapticService.medium()
         }
 
         // 3. Percentile flash - scale down + fade in
-        DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + 0.5) {
-            withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + Timing.percentileDelay) {
+            withAnimation(.spring(response: Timing.percentileSpringResponse, dampingFraction: Timing.percentileSpringDamping)) {
                 percentileScale = 1.0
                 percentileOpacity = 1.0
             }
-            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+            HapticService.heavy()
         }
 
         // 4. Start auto-advance countdown (only if next lesson exists)
         if onNextLesson != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + 1.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + Timing.countdownStartDelay) {
                 countdownActive = true
             }
         }

@@ -79,27 +79,24 @@ struct OnboardingView: View {
     // MARK: - Body
 
     var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
+        VStack(spacing: 0) {
+            progressDots
+                .padding(.top, 12)
+                .padding(.bottom, 24)
 
-            VStack(spacing: 0) {
-                progressDots
-                    .padding(.top, 12)
-                    .padding(.bottom, 24)
+            stepContent
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .id("\(currentStep)-\(quizSubStep)")
+                .transition(.asymmetric(
+                    insertion: .move(edge: .trailing),
+                    removal: .move(edge: .leading)
+                ))
 
-                stepContent
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .id("\(currentStep)-\(quizSubStep)")
-                    .transition(.asymmetric(
-                        insertion: .move(edge: .trailing),
-                        removal: .move(edge: .leading)
-                    ))
-
-                bottomBar
-                    .padding(.bottom, 16)
-            }
-            .padding(.horizontal, 24)
+            bottomBar
+                .padding(.bottom, 16)
         }
+        .padding(.horizontal, 24)
+        .screenBackground()
         .animation(.easeInOut(duration: 0.3), value: currentStep)
         .animation(.easeInOut(duration: 0.3), value: quizSubStep)
         .preferredColorScheme(.dark)
@@ -284,6 +281,30 @@ struct OnboardingView: View {
 
     // MARK: - Completion Flow
 
+    private func buildUserProperties() -> [String: MixpanelType] {
+        var userProps: [String: MixpanelType] = [
+            "first_name": userName,
+            "age": userAge,
+        ]
+        if !selectedGender.isEmpty { userProps["gender"] = selectedGender }
+        if !selectedSocialContext.isEmpty { userProps["social_context"] = selectedSocialContext }
+        if !selectedGoals.isEmpty { userProps["goals"] = Array(selectedGoals).joined(separator: ", ") }
+        if !selectedDiscoverySource.isEmpty { userProps["discovery_source"] = selectedDiscoverySource }
+        if quizAnswers.indices.contains(0) {
+            let q1 = QuizSubStep.challenge.options
+            if quizAnswers[0] < q1.count { userProps["quiz_challenge"] = q1[quizAnswers[0]] }
+        }
+        if quizAnswers.indices.contains(1) {
+            let q2 = QuizSubStep.meetNew.options
+            if quizAnswers[1] < q2.count { userProps["quiz_meet_new"] = q2[quizAnswers[1]] }
+        }
+        if quizAnswers.indices.contains(2) {
+            let q3 = QuizSubStep.underperform.options
+            if quizAnswers[2] < q3.count { userProps["quiz_underperform"] = q3[quizAnswers[2]] }
+        }
+        return userProps
+    }
+
     private func completeOnboardingAndDismiss() {
         guard !isCompleting else { return }
         isCompleting = true
@@ -305,27 +326,7 @@ struct OnboardingView: View {
             } catch {
                 // Best-effort save — don't block the user
             }
-            var userProps: [String: MixpanelType] = [
-                "first_name": userName,
-                "age": userAge,
-            ]
-            if !selectedGender.isEmpty { userProps["gender"] = selectedGender }
-            if !selectedSocialContext.isEmpty { userProps["social_context"] = selectedSocialContext }
-            if !selectedGoals.isEmpty { userProps["goals"] = Array(selectedGoals).joined(separator: ", ") }
-            if !selectedDiscoverySource.isEmpty { userProps["discovery_source"] = selectedDiscoverySource }
-            if quizAnswers.indices.contains(0) {
-                let q1 = QuizSubStep.challenge.options
-                if quizAnswers[0] < q1.count { userProps["quiz_challenge"] = q1[quizAnswers[0]] }
-            }
-            if quizAnswers.indices.contains(1) {
-                let q2 = QuizSubStep.meetNew.options
-                if quizAnswers[1] < q2.count { userProps["quiz_meet_new"] = q2[quizAnswers[1]] }
-            }
-            if quizAnswers.indices.contains(2) {
-                let q3 = QuizSubStep.underperform.options
-                if quizAnswers[2] < q3.count { userProps["quiz_underperform"] = q3[quizAnswers[2]] }
-            }
-            AnalyticsService.setUserProperties(userProps)
+            AnalyticsService.setUserProperties(buildUserProperties())
             AnalyticsService.track(event: .onboardingCompleted)
             onComplete()
         }

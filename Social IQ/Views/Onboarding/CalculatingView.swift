@@ -10,6 +10,11 @@ struct CalculatingView: View {
 
     @State private var phase = 0
 
+    private enum Timing {
+        static let phaseDelay: Duration = .milliseconds(800)
+        static let finalDelay: Duration = .milliseconds(1400)
+    }
+
     private let messages = [
         "Analyzing your social patterns...",
         "Mapping skill gaps...",
@@ -44,11 +49,11 @@ struct CalculatingView: View {
         }
         .animation(.easeInOut(duration: 0.4), value: phase)
         .task {
-            try? await Task.sleep(for: .milliseconds(800))
+            try? await Task.sleep(for: Timing.phaseDelay)
             phase = 1
-            try? await Task.sleep(for: .milliseconds(800))
+            try? await Task.sleep(for: Timing.phaseDelay)
             phase = 2
-            try? await Task.sleep(for: .milliseconds(1400))
+            try? await Task.sleep(for: Timing.finalDelay)
             onFinish()
         }
     }

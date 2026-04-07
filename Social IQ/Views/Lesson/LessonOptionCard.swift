@@ -4,7 +4,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct LessonOptionCard: View {
     let index: Int
@@ -45,7 +44,7 @@ struct LessonOptionCard: View {
         .contentShape(Rectangle())
         .onTapGesture {
             if option.feedback.isCorrect {
-                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                HapticService.medium()
             }
             if !hasPlayedSound {
                 SoundPlayer.play(option.feedback.isCorrect ? .correctAnswer : .wrongAnswer)

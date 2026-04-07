@@ -138,7 +138,7 @@ extension LessonData {
                     LessonOption(
                         id: "lesson-2-speak-C",
                         prefix: "C",
-                        label: "\"I hope you don'y cry yourself to sleep with how bad I'm beating you.\"",
+                        label: "\"I hope you don't cry yourself to sleep with how bad I'm beating you.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
                             renText: "Absurd, situational, zero pressure. That's exactly the register you want on a first date.",

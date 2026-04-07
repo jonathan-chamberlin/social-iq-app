@@ -15,6 +15,7 @@ struct Social_IQApp: App {
     @State private var onboardingChecked = false
     @State private var showSplash = true
 
+    private static let splashDuration: Duration = .milliseconds(1500)
     private let onboardingService = OnboardingService()
 
     init() {
@@ -36,7 +37,7 @@ struct Social_IQApp: App {
             if showSplash {
                 SplashView()
                     .task {
-                        try? await Task.sleep(for: .seconds(1.5))
+                        try? await Task.sleep(for: Self.splashDuration)
                         withAnimation { showSplash = false }
                     }
             } else {

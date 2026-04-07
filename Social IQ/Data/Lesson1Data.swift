@@ -12,7 +12,7 @@ extension LessonData {
         title: "Critical Feedback in Front of the Team",
         category: .workplace,
         difficulty: .intermediate,
-        scenarioText: "You're on a video meeting for the weekly standup. Fifteen people on the call. Your manager, Sandra, interupts you mid-update and says, \"I need to be honest, the format of this report isn't working for the client. We talked about this last week.\" Your face goes hot. You know the rest of the team is watching to see how you handle it.",
+        scenarioText: "You're on a video meeting for the weekly standup. Fifteen people on the call. Your manager, Sandra, interrupts you mid-update and says, \"I need to be honest, the format of this report isn't working for the client. We talked about this last week.\" Your face goes hot. You know the rest of the team is watching to see how you handle it.",
         steps: [
             LessonStep(
                 id: "lesson-1-read",

@@ -15,13 +15,13 @@ struct LessonFeedbackPanel: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(option.feedback.renText.replacingOccurrences(of: ". ", with: ".\n"))
+                    Text(option.feedback.renText.sentenceFormatted)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                         .lineSpacing(6)
 
                     if showFullExplanation {
-                        Text(option.feedback.text.replacingOccurrences(of: ". ", with: ".\n"))
+                        Text(option.feedback.text.sentenceFormatted)
                             .font(.system(size: 14))
                             .foregroundStyle(.white.opacity(0.85))
                             .lineSpacing(6)

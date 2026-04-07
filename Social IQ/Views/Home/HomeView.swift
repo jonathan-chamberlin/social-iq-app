@@ -39,8 +39,6 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.black.ignoresSafeArea()
-
                 ScrollView {
                     VStack(spacing: 20) {
                         Text(greeting)
@@ -87,6 +85,7 @@ struct HomeView: View {
                     .padding(.horizontal, 20)
                 }
             }
+            .screenBackground()
             .navigationDestination(item: $selectedLesson) { lesson in
                 LessonView(
                     lesson: lesson,
@@ -158,13 +157,7 @@ struct HomeView: View {
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
                     .background(
-                        Capsule().fill(
-                            LinearGradient(
-                                colors: [Theme.gold, Theme.goldLight],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
+                        Capsule().fill(Theme.goldGradient)
                     )
             } else if completedLessonIds.contains(lesson.id) {
                 Image(systemName: "checkmark.circle.fill")
@@ -174,10 +167,7 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.white.opacity(0.08))
-        )
+        .cardBackground()
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.white.opacity(0.1), lineWidth: 1)
@@ -204,13 +194,7 @@ struct HomeView: View {
                 .font(.headline)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(
-                    LinearGradient(
-                        colors: [Theme.gold, Theme.goldLight],
-                        startPoint: .leading,
-                        endPoint: .trailing
-                    )
-                )
+                .background(Theme.goldGradient)
                 .foregroundStyle(.white)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
         }

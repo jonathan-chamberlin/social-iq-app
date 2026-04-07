@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import UIKit
 
 @Observable
 final class LessonViewModel {
@@ -58,7 +57,7 @@ final class LessonViewModel {
               let selected = selectedOptionIndex else { return }
         answers.append(selected)
         if currentStepIndex + 1 < lesson.steps.count {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            HapticService.light()
             currentStepIndex += 1
             selectedOptionIndex = nil
             showFeedback = false

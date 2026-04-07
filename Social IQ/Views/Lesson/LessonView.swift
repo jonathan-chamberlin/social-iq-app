@@ -16,6 +16,13 @@ struct LessonView: View {
     @State private var nextButtonGlow = false
     @Environment(\.dismiss) private var dismiss
 
+    private enum Timing {
+        static let nextButtonSpringResponse: Double = 0.4
+        static let nextButtonSpringDamping: Double = 0.5
+        static let nextButtonGlowDuration: Double = 0.8
+        static let nextButtonGlowDelay: Double = 0.4
+    }
+
     private static let stepLabels = ["READ", "THINK", "SPEAK"]
 
     private var displayedLesson: Lesson { activeLesson ?? lesson }
@@ -28,8 +35,6 @@ struct LessonView: View {
 
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
-
             if viewModel.isComplete {
                 LessonCompletionView(
                     lessonId: displayedLesson.id,
@@ -45,75 +50,15 @@ struct LessonView: View {
                     onDismiss: { dismiss() }
                 )
             } else if let step = viewModel.currentStep {
-                ScrollViewReader { proxy in
-                    ScrollView {
-                        VStack(spacing: 20) {
-                            Text(displayedLesson.title)
-                                .font(.caption)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.white.opacity(0.5))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-
-                            stepIndicator(currentLabel: step.label)
-                            scenarioCard(step: step)
-                            questionText(step: step)
-                            optionCards(step: step)
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 16)
-                        .padding(.bottom, 40)
-                    }
-                    .onChange(of: viewModel.showFeedback) { _, showing in
-                        if showing, let selected = viewModel.selectedOptionIndex {
-                            withAnimation {
-                                proxy.scrollTo("option-\(selected)", anchor: .center)
-                            }
-                            if let step = viewModel.currentStep {
-                                let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
-                                AnalyticsService.track(event: .questionAnswered, properties: [
-                                    "lesson_id": displayedLesson.id,
-                                    "question_number": viewModel.currentStepIndex + 1,
-                                    "question_type": step.label,
-                                    "answer_index": selected,
-                                    "is_correct": step.options[selected].feedback.isCorrect,
-                                    "time_to_answer_seconds": timeToAnswer,
-                                ])
-                            }
-                        }
-                    }
-                }
+                lessonContent(step: step)
             }
         }
+        .screenBackground()
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                if showOtherAnswers {
-                    Button {
-                        showOtherAnswers = false
-                        nextButtonScale = 0
-                        nextButtonGlow = false
-                        viewModel.nextStep()
-                    } label: {
-                        Text("Next")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 8)
-                            .background(Capsule().fill(Theme.gold))
-                            .shadow(color: nextButtonGlow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
-                    }
-                    .scaleEffect(nextButtonScale)
-                    .onAppear {
-                        withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
-                            nextButtonScale = 1.0
-                        }
-                        withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true).delay(0.4)) {
-                            nextButtonGlow = true
-                        }
-                    }
-                }
+                nextStepButton
             }
         }
         .onAppear {
@@ -126,6 +71,79 @@ struct LessonView: View {
                 Task {
                     await viewModel.saveProgress(userId: userId)
                     onComplete?()
+                }
+            }
+        }
+    }
+
+    // MARK: - Lesson Content
+
+    private func lessonContent(step: LessonStep) -> some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(spacing: 20) {
+                    Text(displayedLesson.title)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white.opacity(0.5))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
+                    stepIndicator(currentLabel: step.label)
+                    scenarioCard(step: step)
+                    questionText(step: step)
+                    optionCards(step: step)
+                }
+                .padding(.horizontal, 20)
+                .padding(.top, 16)
+                .padding(.bottom, 40)
+            }
+            .onChange(of: viewModel.showFeedback) { _, showing in
+                if showing, let selected = viewModel.selectedOptionIndex {
+                    withAnimation {
+                        proxy.scrollTo("option-\(selected)", anchor: .center)
+                    }
+                    if let step = viewModel.currentStep {
+                        let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
+                        AnalyticsService.track(event: .questionAnswered, properties: [
+                            "lesson_id": displayedLesson.id,
+                            "question_number": viewModel.currentStepIndex + 1,
+                            "question_type": step.label,
+                            "answer_index": selected,
+                            "is_correct": step.options[selected].feedback.isCorrect,
+                            "time_to_answer_seconds": timeToAnswer,
+                        ])
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: - Next Step Button
+
+    @ViewBuilder private var nextStepButton: some View {
+        if showOtherAnswers {
+            Button {
+                showOtherAnswers = false
+                nextButtonScale = 0
+                nextButtonGlow = false
+                viewModel.nextStep()
+            } label: {
+                Text("Next")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(Capsule().fill(Theme.gold))
+                    .shadow(color: nextButtonGlow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
+            }
+            .scaleEffect(nextButtonScale)
+            .onAppear {
+                withAnimation(.spring(response: Timing.nextButtonSpringResponse, dampingFraction: Timing.nextButtonSpringDamping)) {
+                    nextButtonScale = 1.0
+                }
+                withAnimation(.easeInOut(duration: Timing.nextButtonGlowDuration).repeatForever(autoreverses: true).delay(Timing.nextButtonGlowDelay)) {
+                    nextButtonGlow = true
                 }
             }
         }
@@ -182,7 +200,7 @@ struct LessonView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.gray)
             }
-            Text(displayedLesson.scenarioText.replacingOccurrences(of: ". ", with: ".\n"))
+            Text(displayedLesson.scenarioText.sentenceFormatted)
                 .font(isReadStep ? .body : .caption)
                 .italic()
                 .foregroundStyle(.white.opacity(isReadStep ? 0.9 : 0.7))
@@ -191,10 +209,7 @@ struct LessonView: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.white.opacity(0.08))
-        )
+        .cardBackground()
     }
 
     // MARK: - Question
@@ -240,13 +255,7 @@ struct LessonView: View {
                         .font(.headline)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(
-                            LinearGradient(
-                                colors: [Theme.gold, Theme.goldLight],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
+                        .background(Theme.goldGradient)
                         .foregroundStyle(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 }

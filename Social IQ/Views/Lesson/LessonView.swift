@@ -186,6 +186,7 @@ struct LessonView: View {
                 .font(isReadStep ? .body : .caption)
                 .italic()
                 .foregroundStyle(.white.opacity(isReadStep ? 0.9 : 0.7))
+                .lineSpacing(6)
                 .lineLimit(isReadStep ? nil : 3)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

@@ -18,13 +18,13 @@ struct LessonFeedbackPanel: View {
                     Text(option.feedback.renText.replacingOccurrences(of: ". ", with: ".\n"))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
-                        .lineSpacing(4)
+                        .lineSpacing(6)
 
                     if showFullExplanation {
                         Text(option.feedback.text.replacingOccurrences(of: ". ", with: ".\n"))
                             .font(.system(size: 14))
                             .foregroundStyle(.white.opacity(0.85))
-                            .lineSpacing(4)
+                            .lineSpacing(6)
                     } else {
                         Button { showFullExplanation = true } label: {
                             Text("See more")

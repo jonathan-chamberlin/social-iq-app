@@ -25,7 +25,7 @@ extension LessonData {
                         label: "The date is going poorly and she's looking for an exit",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "Makes sense - silence can feel loaded. But she smiled at you. Exits don't come with smiles.",
+                            renText: "Makes sense, silence can feel loaded. But she smiled at you. Exits don't come with smiles.",
                             text: "30 minutes of good conversation and then one pause? That's not a red flag. If she wanted out she'd be checking her phone and giving one-word answers. She smiled at you. Relax."
                         )
                     ),
@@ -45,7 +45,7 @@ extension LessonData {
                         label: "She's bored and waiting for you to entertain her",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "Totally get it, the silence feels like pressure. But boredom and comfort look different - she smiled, not checked out.",
+                            renText: "Totally get it, the silence feels like pressure. But boredom and comfort look different, she smiled, not checked out.",
                             text: "\"She needs me to entertain her\" puts you in performer mode. That's not how good dates work. If you start scrambling to fill the silence, she'll sense the desperation. Not attractive."
                         )
                     ),
@@ -151,7 +151,7 @@ extension LessonData {
                         label: "\"I feel like we've covered the basics. What do you actually care about?\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "wanting more depth is a good sign. this just isn't the moment for it - arcade on date one is for fun, not philosophy.",
+                            renText: "Wanting more depth is a good sign. This just isn't the moment for it, arcade on date one is for fun, not philosophy.",
                             text: "Still an interview question, and way too deep for a first date at an arcade. Keep it playful."
                         )
                     )

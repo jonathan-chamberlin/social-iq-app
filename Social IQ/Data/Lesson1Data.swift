@@ -25,7 +25,7 @@ extension LessonData {
                         label: "She's genuinely frustrated and lost her composure",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "Fair read - but lost composure looks different. She was calm and specific, not heated.",
+                            renText: "Fair read, but lost composure looks different. She was calm and specific, not heated.",
                             text: "Totally see why you'd read it that way, but if she'd actually lost her cool you'd see it: raised voice, cutting you off harder. Read it as emotional and you'll respond emotionally. Bad move."
                         )
                     ),
@@ -55,7 +55,7 @@ extension LessonData {
                         label: "She's testing whether you can handle criticism professionally",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "Solid instinct, but a test implies she planned this. She didn't - she had a real problem and went public with it.",
+                            renText: "Solid instinct, but a test implies she planned this. She didn't, she had a real problem and went public with it.",
                             text: "\"Testing you\" means she planned this as a coaching moment. If you treat it like a test, you'll overperform and come across weird."
                         )
                     )
@@ -73,7 +73,7 @@ extension LessonData {
                         label: "Explain your reasoning so the team understands your perspective",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "Totally get why - your side of the story matters. But to 15 people watching, explaining right now just looks like you're arguing.",
+                            renText: "Totally get why, your side of the story matters. But to 15 people watching, explaining right now just looks like you're arguing.",
                             text: "The team hears \"he's arguing with Sandra.\" Now a 10-second correction becomes a full debate."
                         )
                     ),
@@ -103,7 +103,7 @@ extension LessonData {
                         label: "Push back gently to show you're not a pushover",
                         feedback: OptionFeedback(
                             isCorrect: false,
-                            renText: "The instinct to hold your ground is good - wrong room. Gentle pushback in front of 15 people still forces her to dig in.",
+                            renText: "The instinct to hold your ground is good, wrong room. Gentle pushback in front of 15 people still forces her to dig in.",
                             text: "Even \"gentle\" pushback in front of the whole team reads as you challenging her publicly. If she's wrong, handle it in private. Doing it here forces her to double down."
                         )
                     )

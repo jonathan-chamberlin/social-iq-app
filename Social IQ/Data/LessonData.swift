@@ -6,5 +6,5 @@
 import Foundation
 
 enum LessonData {
-    static var allLessons: [Lesson] { [lesson1, lesson2, lesson3, lesson4, lesson5] }
+    static var allLessons: [Lesson] { [lesson3, lesson2, lesson4, lesson1, lesson5] }
 }

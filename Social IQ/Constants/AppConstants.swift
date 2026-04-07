@@ -9,6 +9,9 @@ enum AppConstants {
     // MARK: - UserDefaults Keys
     static let shouldAutoOpenLesson1Key = "shouldAutoOpenLesson1"
 
+    // MARK: - Free Lessons
+    static let freeLessonIds: Set<String> = ["lesson-3", "lesson-2", "lesson-4"]
+
     // MARK: - Subscription Product IDs
     static let annualProductId = "com.jonathanchamberlin.socialiq.annual"
     static let weeklyProductId = "com.jonathanchamberlin.socialiq.weekly"

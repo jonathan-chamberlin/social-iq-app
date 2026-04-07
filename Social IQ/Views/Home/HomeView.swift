@@ -110,7 +110,7 @@ struct HomeView: View {
         #if DEBUG
         if debugForceSubscribed { return false }
         #endif
-        return lesson.id != "lesson-1" && !SuperwallService.isSubscribed
+        return !AppConstants.freeLessonIds.contains(lesson.id) && !SuperwallService.isSubscribed
     }
 
     private func handleLessonTap(_ lesson: Lesson) {

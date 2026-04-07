@@ -182,7 +182,7 @@ struct LessonView: View {
                     .fontWeight(.semibold)
                     .foregroundStyle(.gray)
             }
-            Text(displayedLesson.scenarioText)
+            Text(displayedLesson.scenarioText.replacingOccurrences(of: ". ", with: ".\n"))
                 .font(isReadStep ? .body : .caption)
                 .italic()
                 .foregroundStyle(.white.opacity(isReadStep ? 0.9 : 0.7))

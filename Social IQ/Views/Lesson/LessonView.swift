@@ -84,6 +84,20 @@ struct LessonView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbar {
+            if showOtherAnswers {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        showOtherAnswers = false
+                        viewModel.nextStep()
+                    } label: {
+                        Text("Next")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.purple)
+                    }
+                }
+            }
+        }
         .onAppear {
             viewModel.startLesson(lesson)
             AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
@@ -199,47 +213,25 @@ struct LessonView: View {
                 )
             }
 
-            if viewModel.isCorrectSelection && viewModel.showFeedback {
-                if !showOtherAnswers {
-                    Button {
-                        withAnimation { showOtherAnswers = true }
-                    } label: {
-                        Text("See why the other answers were wrong")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(
-                                LinearGradient(
-                                    colors: [.purple, .blue],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
+            if viewModel.isCorrectSelection && viewModel.showFeedback && !showOtherAnswers {
+                Button {
+                    withAnimation { showOtherAnswers = true }
+                } label: {
+                    Text("See why the other answers were wrong")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(
+                            LinearGradient(
+                                colors: [.purple, .blue],
+                                startPoint: .leading,
+                                endPoint: .trailing
                             )
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .padding(.top, 8)
-                } else {
-                    Button {
-                        showOtherAnswers = false
-                        viewModel.nextStep()
-                    } label: {
-                        Text("Next")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(
-                                LinearGradient(
-                                    colors: [.purple, .blue],
-                                    startPoint: .leading,
-                                    endPoint: .trailing
-                                )
-                            )
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                    .padding(.top, 8)
+                        )
+                        .foregroundStyle(.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+                .padding(.top, 8)
             }
         }
     }

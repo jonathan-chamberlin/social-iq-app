@@ -29,7 +29,7 @@ struct LessonOptionCard: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             if isSelected, showingFeedback {
-                LessonFeedbackPanel(option: option, onNext: onNext)
+                LessonFeedbackPanel(option: option)
             }
         }
         .padding(14)

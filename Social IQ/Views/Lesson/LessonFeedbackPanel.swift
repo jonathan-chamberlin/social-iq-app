@@ -7,7 +7,6 @@ import SwiftUI
 
 struct LessonFeedbackPanel: View {
     let option: LessonOption
-    let onNext: () -> Void
     @State private var showFrameworks = false
     @State private var showFullExplanation = false
 
@@ -42,17 +41,7 @@ struct LessonFeedbackPanel: View {
                 }
             }
 
-            if isCorrect {
-                Button(action: onNext) {
-                    Text("Next \u{2192}")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 8)
-                        .background(Capsule().fill(Color.purple))
-                }
-            } else {
+            if !isCorrect {
                 Text("Try again")
                     .font(.caption)
                     .foregroundStyle(.red.opacity(0.8))

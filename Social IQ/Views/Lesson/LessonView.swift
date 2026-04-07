@@ -195,21 +195,50 @@ struct LessonView: View {
                     isSelected: viewModel.selectedOptionIndex == index,
                     showingFeedback: shouldShowFeedback,
                     onTap: { viewModel.selectOption(index) },
-                    onNext: {
-                        showOtherAnswers = false
-                        viewModel.nextStep()
-                    }
+                    onNext: {}
                 )
             }
 
-            if viewModel.isCorrectSelection && viewModel.showFeedback && !showOtherAnswers {
-                Button {
-                    withAnimation { showOtherAnswers = true }
-                } label: {
-                    Text("See why the other answers were wrong")
-                        .font(.caption)
-                        .foregroundStyle(.purple.opacity(0.8))
-                        .padding(.top, 4)
+            if viewModel.isCorrectSelection && viewModel.showFeedback {
+                if !showOtherAnswers {
+                    Button {
+                        withAnimation { showOtherAnswers = true }
+                    } label: {
+                        Text("See why the other answers were wrong")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                LinearGradient(
+                                    colors: [.purple, .blue],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .padding(.top, 8)
+                } else {
+                    Button {
+                        showOtherAnswers = false
+                        viewModel.nextStep()
+                    } label: {
+                        Text("Next")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(
+                                LinearGradient(
+                                    colors: [.purple, .blue],
+                                    startPoint: .leading,
+                                    endPoint: .trailing
+                                )
+                            )
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                    }
+                    .padding(.top, 8)
                 }
             }
         }

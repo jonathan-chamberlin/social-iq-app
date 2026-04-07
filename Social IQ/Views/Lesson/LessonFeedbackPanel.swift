@@ -5,6 +5,19 @@
 
 import SwiftUI
 
+private func formatRenText(_ text: String) -> String {
+    text.replacingOccurrences(of: " -", with: ",")
+        .split(separator: ".", omittingEmptySubsequences: false)
+        .map { segment in
+            let trimmed = segment.drop(while: { $0.isWhitespace || $0.isNewline })
+            guard let first = trimmed.first else { return String(segment) }
+            let prefix = segment.prefix(while: { $0.isWhitespace || $0.isNewline })
+            return prefix + String(first).uppercased() + trimmed.dropFirst()
+        }
+        .joined(separator: ".")
+        .replacingOccurrences(of: ". ", with: ".\n")
+}
+
 struct LessonFeedbackPanel: View {
     let option: LessonOption
     @State private var showFrameworks = false
@@ -15,7 +28,7 @@ struct LessonFeedbackPanel: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text(option.feedback.renText.replacingOccurrences(of: ". ", with: ".\n"))
+                    Text(formatRenText(option.feedback.renText))
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)
                         .lineSpacing(6)

@@ -104,7 +104,7 @@ struct LessonView: View {
                         .shadow(color: nextButtonGlow ? .purple.opacity(0.6) : .clear, radius: 8)
                 }
                 .scaleEffect(nextButtonScale)
-                .padding(.top, 58)
+                .padding(.top, 6)
                 .padding(.trailing, 16)
                 .onAppear {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {

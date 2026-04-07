@@ -45,6 +45,12 @@ struct LessonView: View {
                 ScrollViewReader { proxy in
                     ScrollView {
                         VStack(spacing: 20) {
+                            Text(displayedLesson.title)
+                                .font(.caption)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.white.opacity(0.5))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
                             stepIndicator(currentLabel: step.label)
                             scenarioCard(step: step)
                             questionText(step: step)

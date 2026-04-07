@@ -17,7 +17,7 @@ struct LessonOptionCard: View {
 
     var body: some View {
         let borderColor: Color = {
-            guard isSelected, showingFeedback else { return .white.opacity(0.15) }
+            guard showingFeedback else { return .white.opacity(0.15) }
             return option.feedback.isCorrect ? .green : .red
         }()
 
@@ -28,7 +28,7 @@ struct LessonOptionCard: View {
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
 
-            if isSelected, showingFeedback {
+            if showingFeedback {
                 LessonFeedbackPanel(option: option)
             }
         }
@@ -39,7 +39,7 @@ struct LessonOptionCard: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 10)
-                .stroke(borderColor, lineWidth: isSelected && showingFeedback ? 2 : 1)
+                .stroke(borderColor, lineWidth: showingFeedback ? 2 : 1)
         )
         .id("option-\(index)")
         .contentShape(Rectangle())

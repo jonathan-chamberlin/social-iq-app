@@ -13,6 +13,7 @@ struct Social_IQApp: App {
     @State private var authViewModel = AuthViewModel()
     @State private var showOnboarding = false
     @State private var onboardingChecked = false
+    @State private var showSplash = true
 
     private let onboardingService = OnboardingService()
 
@@ -32,34 +33,42 @@ struct Social_IQApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                switch authViewModel.authState {
-                case .signedOut:
-                    SignInView(authViewModel: authViewModel)
-                case .loading:
-                    ProgressView("Loading...")
-                case .signedIn(let user):
-                    if !onboardingChecked {
+            if showSplash {
+                SplashView()
+                    .task {
+                        try? await Task.sleep(for: .seconds(1.5))
+                        withAnimation { showSplash = false }
+                    }
+            } else {
+                Group {
+                    switch authViewModel.authState {
+                    case .signedOut:
+                        SignInView(authViewModel: authViewModel)
+                    case .loading:
                         ProgressView("Loading...")
-                            .task { await checkOnboarding(userId: user.id.uuidString) }
-                    } else if showOnboarding {
-                        OnboardingView(userId: user.id.uuidString) {
-                            showOnboarding = false
+                    case .signedIn(let user):
+                        if !onboardingChecked {
+                            ProgressView("Loading...")
+                                .task { await checkOnboarding(userId: user.id.uuidString) }
+                        } else if showOnboarding {
+                            OnboardingView(userId: user.id.uuidString) {
+                                showOnboarding = false
+                            }
+                        } else {
+                            HomeView(authViewModel: authViewModel)
                         }
-                    } else {
-                        HomeView(authViewModel: authViewModel)
                     }
                 }
-            }
-            .overlay(alignment: .bottomTrailing) {
-                if signedInUserId != nil {
-                    FeedbackButton(userId: signedInUserId)
-                        .padding(.trailing, 20)
-                        .padding(.bottom, 24)
+                .overlay(alignment: .bottomTrailing) {
+                    if signedInUserId != nil {
+                        FeedbackButton(userId: signedInUserId)
+                            .padding(.trailing, 20)
+                            .padding(.bottom, 24)
+                    }
                 }
-            }
-            .task {
-                await authViewModel.checkSession()
+                .task {
+                    await authViewModel.checkSession()
+                }
             }
         }
     }

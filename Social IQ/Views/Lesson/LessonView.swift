@@ -12,6 +12,8 @@ struct LessonView: View {
     @State private var viewModel = LessonViewModel()
     @State private var activeLesson: Lesson?
     @State private var showOtherAnswers = false
+    @State private var nextButtonScale: CGFloat = 0
+    @State private var nextButtonGlow = false
     @Environment(\.dismiss) private var dismiss
 
     private static let stepLabels = ["READ", "THINK", "SPEAK"]
@@ -84,16 +86,32 @@ struct LessonView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
-        .toolbar {
+        .overlay(alignment: .topTrailing) {
             if showOtherAnswers {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showOtherAnswers = false
-                        viewModel.nextStep()
-                    } label: {
-                        Text("Next")
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.purple)
+                Button {
+                    showOtherAnswers = false
+                    nextButtonScale = 0
+                    nextButtonGlow = false
+                    viewModel.nextStep()
+                } label: {
+                    Text("Next")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 8)
+                        .background(Capsule().fill(Color.purple))
+                        .shadow(color: nextButtonGlow ? .purple.opacity(0.6) : .clear, radius: 8)
+                }
+                .scaleEffect(nextButtonScale)
+                .padding(.top, 58)
+                .padding(.trailing, 16)
+                .onAppear {
+                    withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
+                        nextButtonScale = 1.0
+                    }
+                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true).delay(0.4)) {
+                        nextButtonGlow = true
                     }
                 }
             }

@@ -11,6 +11,7 @@ struct LessonView: View {
     var onComplete: (() -> Void)?
     @State private var viewModel = LessonViewModel()
     @State private var activeLesson: Lesson?
+    @State private var showOtherAnswers = false
     @Environment(\.dismiss) private var dismiss
 
     private static let stepLabels = ["READ", "THINK", "SPEAK"]
@@ -178,14 +179,38 @@ struct LessonView: View {
     private func optionCards(step: LessonStep) -> some View {
         VStack(spacing: 12) {
             ForEach(Array(step.options.enumerated()), id: \.element.id) { index, option in
+                let shouldShowFeedback: Bool = {
+                    if viewModel.selectedOptionIndex == index && viewModel.showFeedback {
+                        return true
+                    }
+                    if !option.feedback.isCorrect && showOtherAnswers {
+                        return true
+                    }
+                    return false
+                }()
+
                 LessonOptionCard(
                     index: index,
                     option: option,
                     isSelected: viewModel.selectedOptionIndex == index,
-                    showingFeedback: viewModel.showFeedback,
+                    showingFeedback: shouldShowFeedback,
                     onTap: { viewModel.selectOption(index) },
-                    onNext: { viewModel.nextStep() }
+                    onNext: {
+                        showOtherAnswers = false
+                        viewModel.nextStep()
+                    }
                 )
+            }
+
+            if viewModel.isCorrectSelection && viewModel.showFeedback && !showOtherAnswers {
+                Button {
+                    withAnimation { showOtherAnswers = true }
+                } label: {
+                    Text("See why the other answers were wrong")
+                        .font(.caption)
+                        .foregroundStyle(.purple.opacity(0.8))
+                        .padding(.top, 4)
+                }
             }
         }
     }

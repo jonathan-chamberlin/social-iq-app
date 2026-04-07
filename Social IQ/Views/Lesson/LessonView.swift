@@ -86,32 +86,32 @@ struct LessonView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbarColorScheme(.dark, for: .navigationBar)
-        .overlay(alignment: .topTrailing) {
-            if showOtherAnswers {
-                Button {
-                    showOtherAnswers = false
-                    nextButtonScale = 0
-                    nextButtonGlow = false
-                    viewModel.nextStep()
-                } label: {
-                    Text("Next")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Capsule().fill(Color.purple))
-                        .shadow(color: nextButtonGlow ? .purple.opacity(0.6) : .clear, radius: 8)
-                }
-                .scaleEffect(nextButtonScale)
-                .padding(.top, 6)
-                .padding(.trailing, 16)
-                .onAppear {
-                    withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
-                        nextButtonScale = 1.0
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                if showOtherAnswers {
+                    Button {
+                        showOtherAnswers = false
+                        nextButtonScale = 0
+                        nextButtonGlow = false
+                        viewModel.nextStep()
+                    } label: {
+                        Text("Next")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 8)
+                            .background(Capsule().fill(Color.purple))
+                            .shadow(color: nextButtonGlow ? .purple.opacity(0.6) : .clear, radius: 8)
                     }
-                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true).delay(0.4)) {
-                        nextButtonGlow = true
+                    .scaleEffect(nextButtonScale)
+                    .onAppear {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.5)) {
+                            nextButtonScale = 1.0
+                        }
+                        withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true).delay(0.4)) {
+                            nextButtonGlow = true
+                        }
                     }
                 }
             }

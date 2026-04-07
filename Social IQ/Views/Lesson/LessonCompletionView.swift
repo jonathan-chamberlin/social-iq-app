@@ -19,7 +19,7 @@ struct LessonCompletionView: View {
     @State private var showPercentile = false
     @State private var percentileScale: CGFloat = 1.8
     @State private var percentileOpacity: Double = 0
-    @State private var countdownSeconds = 5
+    @State private var countdownProgress: CGFloat = 0
     @State private var countdownActive = false
 
     // MARK: - Computed
@@ -78,28 +78,38 @@ struct LessonCompletionView: View {
             VStack(spacing: 12) {
                 if let onNextLesson {
                     Button(action: onNextLesson) {
-                        HStack {
-                            Text(countdownActive
-                                ? "Next Lesson (\(countdownSeconds))"
-                                : "Next Lesson")
-                                .font(.headline)
-                        }
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(
-                            LinearGradient(
-                                colors: [Theme.gold, Theme.goldLight],
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        Text("Next Lesson")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background {
+                                GeometryReader { geo in
+                                    // Dim base
+                                    Theme.gold.opacity(0.3)
+
+                                    // Gold fill sweeping left to right
+                                    LinearGradient(
+                                        colors: [Theme.gold, Theme.goldLight],
+                                        startPoint: .leading,
+                                        endPoint: .trailing
+                                    )
+                                    .frame(width: geo.size.width * countdownProgress)
+                                    .animation(
+                                        countdownActive
+                                            ? .linear(duration: 5)
+                                            : .none,
+                                        value: countdownProgress
+                                    )
+                                }
+                            }
+                            .foregroundStyle(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
                 }
 
                 Button(action: {
                     countdownActive = false
+                    countdownProgress = 0
                     onDismiss()
                 }) {
                     Text("Back to Home")
@@ -111,14 +121,14 @@ struct LessonCompletionView: View {
             .padding(.bottom, 40)
         }
         .task(id: countdownActive) {
-            guard countdownActive, let onNextLesson else { return }
-            while countdownSeconds > 0 {
-                try? await Task.sleep(for: .seconds(1))
-                guard countdownActive else { return }
-                countdownSeconds -= 1
-            }
+            guard countdownActive, onNextLesson != nil else { return }
+            // Kick off the fill animation on the next frame
+            countdownProgress = 1.0
+            // Wait for the 5-second fill to complete
+            try? await Task.sleep(for: .seconds(5))
+            guard countdownActive else { return }
             countdownActive = false
-            onNextLesson()
+            onNextLesson?()
         }
         .onAppear {
             UINotificationFeedbackGenerator().notificationOccurred(.success)

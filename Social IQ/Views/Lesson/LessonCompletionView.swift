@@ -10,7 +10,7 @@ struct LessonCompletionView: View {
         static let glowFadeDuration: Double = 0.4
         static let percentileDelay: Double = 0.5
         static let countdownStartDelay: Double = 1.2
-        static let autoAdvanceDuration: Double = 5
+        static let autoAdvanceDuration: Double = 4
         static let percentileSpringResponse: Double = 0.4
         static let percentileSpringDamping: Double = 0.6
     }

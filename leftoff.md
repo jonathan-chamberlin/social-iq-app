@@ -5,14 +5,13 @@
 ## Unfinished
 - App Store Review v1.0 submitted, waiting for approval (up to 48 hours)
   - Review status: https://appstoreconnect.apple.com/apps/6761561557/distribution/reviewsubmissions/details/bc9b1a63-d94e-483d-94f7-4f80c114f7d8
-- /improve refactor complete but uncommitted - screenBackground fixes, GCD->async migration, service layer extraction, convention updates
+- /improve refactor committed (5a92dd3) - screenBackground fixes, GCD->async migration, service layer extraction, convention updates
 - `transaction_abandon` campaign has no placement, only holdout variant
 - AppConfig.swift was force-added to git (was gitignored for secrets) - verify it should stay tracked
 - Views over 100 lines (LessonView 286, HomeView 244, LessonCompletionView 178) not yet split into subcomponents
 - 0 test files exist - 10 testable types need test coverage
 
 ## Next Up
-- Commit refactor changes
 - Monitor App Store Review and respond to any rejection feedback
 - Once approved: create Bitly attribution links per channel
 - Enroll in Small Business Program

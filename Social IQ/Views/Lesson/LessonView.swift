@@ -8,6 +8,7 @@ import SwiftUI
 struct LessonView: View {
     var lesson: Lesson
     var userId: String?
+    var isReplay: Bool = false
     var onComplete: (() -> Void)?
     @State private var viewModel = LessonViewModel()
     @State private var activeLesson: Lesson?
@@ -15,6 +16,7 @@ struct LessonView: View {
     @State private var nextButtonScale: CGFloat = 0
     @State private var nextButtonGlow = false
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.scenePhase) private var scenePhase
 
     private enum Timing {
         static let nextButtonSpringResponse: Double = 0.4
@@ -63,7 +65,19 @@ struct LessonView: View {
         }
         .onAppear {
             viewModel.startLesson(lesson)
+            if isReplay {
+                AnalyticsService.track(event: .lessonReplayed, properties: ["lesson_id": lesson.id])
+            }
             AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .background, !viewModel.isComplete {
+                AnalyticsService.track(event: .lessonAbandoned, properties: [
+                    "lesson_id": displayedLesson.id,
+                    "question_number": viewModel.currentStepIndex + 1,
+                    "question_type": viewModel.currentStep?.label ?? "unknown",
+                ])
+            }
         }
         .onChange(of: viewModel.isComplete) { _, complete in
             if complete, let userId {

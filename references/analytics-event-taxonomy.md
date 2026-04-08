@@ -32,7 +32,9 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 | lesson_started | lesson_id | **LIVE** | What content is being consumed |
 | question_answered | lesson_id, question_number, question_type (READ/THINK/SPEAK), answer_index, is_correct, time_to_answer_seconds | **LIVE** | Per-question difficulty + engagement |
 | lesson_completed | lesson_id | **LIVE** | Completion tracking |
-| lesson_locked_tap | (defined, not wired) | NOT YET | Paywall trigger signal |
+| lesson_abandoned | lesson_id, question_number, question_type | **LIVE** | Where people leave mid-lesson (fires on background) |
+| lesson_replayed | lesson_id | **LIVE** | Which lessons have replay value |
+| lesson_locked_tap | lesson_id | **LIVE** | Paywall trigger signal |
 
 ---
 
@@ -40,7 +42,8 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 
 | Event | Properties | Purpose |
 |-------|-----------|---------|
-| paywall_presented | paywall_variant, trigger (onboarding, in_app, timer_discount, delete_attempt) | Which paywall and why |
+| paywall_presented | trigger (onboarding_complete, lessons_locked) | Which paywall and why |
+| paywall_dismissed | trigger | Drop-off from paywall without purchase |
 | paywall_plan_selected | plan (annual, weekly) | What users are choosing |
 | paywall_purchase_started | plan, price | Entered Apple payment flow |
 | paywall_purchase_completed | plan, price, is_trial | Revenue tracking |

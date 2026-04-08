@@ -32,6 +32,8 @@ final class SuperwallService {
         handler.onDismiss { _, result in
             if case .purchased = result {
                 AnalyticsService.track(event: .subscriptionStarted)
+            } else {
+                AnalyticsService.track(event: .paywallDismissed, properties: ["trigger": placement.rawValue])
             }
             onDismiss()
         }

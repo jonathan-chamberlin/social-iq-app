@@ -3,17 +3,16 @@
 **Last updated:** 2026-04-08
 
 ## Unfinished
-- `transaction_abandon` campaign has no placement, only holdout variant
-- Debug subscription toggle (`#if DEBUG`) is in the code - long-press greeting to activate. Compiled out of release builds, safe to keep.
-- `onboarding_abandoned` event: code is correct but hasn't been verified in a live test (fires on app background during onboarding)
 - `AppConfig.showResetDataButton` is set to true - flip to false before public release
-- Paywall now shows on TestFlight after publishing draft on Superwall dashboard - needs verification on next TestFlight build
+- `transaction_abandon` campaign has no placement, only holdout variant
+- `lesson_replayed` event verified in code but untestable with dev sign-in (no Supabase progress data) - will fire for real users
 
 ## Next Up
-- Verify paywall appears on TestFlight (deploy new build, go through onboarding, tap "Start My Training")
-- Implement remaining quick wins: daily streak counter (#5), scenario context illustrations (#8)
+- Enrich `app_opened` with `days_since_last_open` property for retention curves
+- Add `explanation_expanded` event to measure answer explanation engagement
+- Implement remaining quick wins: daily streak counter, scenario context illustrations
 - Enroll in Small Business Program
-- Once App Store link is live: create Bitly attribution links per channel (one per channel, not per post)
+- Once App Store link is live: create Bitly attribution links per channel
 
 ## Blockers
 - None

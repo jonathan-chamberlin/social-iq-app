@@ -104,6 +104,7 @@ struct HomeView: View {
                 LessonView(
                     lesson: lesson,
                     userId: userId,
+                    isReplay: completedLessonIds.contains(lesson.id),
                     onComplete: { Task { await loadCompletedLessons() } }
                 )
             }

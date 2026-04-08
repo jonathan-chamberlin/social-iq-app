@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'FILE=\"${TOOL_INPUT_FILE_PATH:-${TOOL_INPUT_file_path:-}}\"; if [[ -n \"$FILE\" && \"$FILE\" == *.swift ]]; then if grep -qE \"foregroundColor\\(|NavigationView|ObservableObject|@Published|cornerRadius\\(|DispatchQueue\\.main|Timer\\.publish\" \"$FILE\" 2>/dev/null; then echo \"DEPRECATED API DETECTED in $FILE. Check banned APIs in CLAUDE.md.\"; fi; fi'"
+            "command": "bash -c 'FILE=\"${TOOL_INPUT_FILE_PATH:-${TOOL_INPUT_file_path:-}}\"; if [[ -n \"$FILE\" && \"$FILE\" == *.swift ]]; then ISSUES=\"\"; if grep -qE \"foregroundColor\\(|NavigationView|ObservableObject|@Published|cornerRadius\\(|DispatchQueue\\.main|Timer\\.publish\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}BANNED API detected. \"; fi; if grep -qE \"RoundedRectangle.*fill.*Color\\.white\\.opacity\\(0\\.08\\)\" \"$FILE\" 2>/dev/null && ! grep -q \"func cardBackground\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}INLINE STYLE: use .cardBackground() instead of inline RoundedRectangle.fill(Color.white.opacity(0.08)). \"; fi; if grep -qE \"LinearGradient.*Theme\\.gold.*Theme\\.goldLight|LinearGradient.*goldLight.*gold\" \"$FILE\" 2>/dev/null && ! grep -q \"goldGradient\" \"$FILE\" 2>/dev/null; then ISSUES=\"${ISSUES}INLINE STYLE: use Theme.goldGradient instead of inline LinearGradient. \"; fi; if grep -qE \"UIImpactFeedbackGenerator|UINotificationFeedbackGenerator\" \"$FILE\" 2>/dev/null && ! echo \"$FILE\" | grep -q \"Utilities/\" 2>/dev/null; then ISSUES=\"${ISSUES}INLINE HAPTIC: use HapticService instead of raw UIKit feedback generators. \"; fi; if [[ -n \"$ISSUES\" ]]; then echo \"$ISSUES Check CLAUDE.md shared UI patterns.\"; fi; fi'"
           }
         ]
       }

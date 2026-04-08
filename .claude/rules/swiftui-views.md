@@ -17,8 +17,13 @@ globs: ["**/Views/**/*.swift", "**/*View.swift"]
 - `onChange(of:perform:)` → `onChange(of:) { oldValue, newValue in }`
 - `onAppear` + async work → `.task { }`
 
-## Shared UI Patterns
-- Card backgrounds: `.cardBackground()` (Theme.swift)
-- Gold gradient: `Theme.goldGradient`
-- Screen background: `.screenBackground()`
-- Haptics: `HapticService.light()/.medium()/.heavy()/.success()`
+## Shared UI Patterns (enforced by PostToolUse hook)
+
+Use the helper — never the raw pattern. The hook flags violations on every Write/Edit.
+
+| Helper | Use instead of (anti-pattern) |
+|--------|------------------------------|
+| `.cardBackground()` | `RoundedRectangle(cornerRadius: 12).fill(Color.white.opacity(0.08))` |
+| `Theme.goldGradient` | `LinearGradient(colors: [Theme.gold, Theme.goldLight], ...)` |
+| `.screenBackground()` | `Color.black.ignoresSafeArea()` |
+| `HapticService.light()` etc. | `UIImpactFeedbackGenerator` / `UINotificationFeedbackGenerator` (outside Utilities/) |

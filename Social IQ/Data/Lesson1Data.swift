@@ -35,7 +35,7 @@ extension LessonData {
                         label: "She's trying to demonstrate authority in front of the group",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "You saw it. Managers who just want to correct you pull you aside. She did it on the call for a reason.",
+                            renText: "You saw it. Goffman's research on impression management explains why: public correction is a performance. Managers who just want to correct you pull you aside. She did it on the call for a reason.",
                             text: "There's a performance element. She's showing the team she holds people to standards. Once you see that, the right response becomes obvious."
                         )
                     ),
@@ -93,7 +93,7 @@ extension LessonData {
                         label: "Agree to validate and disarm her, then follow up during your one on one",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "THAT. You take the hit clean in public, then have the real conversation where it actually counts.",
+                            renText: "THAT. Goffman calls this face-saving. You let her maintain authority in front of the audience, then have the real conversation where it actually counts.",
                             text: "Everyone's watching how you handle pressure. Agree, move on, look like you can take a hit without drama. Sandra feels her authority is intact (even if you disagree). Then you have the real conversation in your 1-on-1 where you can actually push back."
                         )
                     ),
@@ -151,7 +151,7 @@ extension LessonData {
                         label: "\"You're right. I'll fix it and send an updated version by end of day.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Clean read. Agreed, committed, gave a deadline. Meeting moves. That's exactly how you take a hit without losing ground.",
+                            renText: "Clean read. Agreed, committed, gave a deadline. Meeting moves. De-escalation research shows brief, action-oriented responses end public conflicts fastest. That's exactly how you take a hit without losing ground.",
                             text: "You look composed, Sandra feels respected (even if you don't actually agree). Handle the details later in private."
                         )
                     )

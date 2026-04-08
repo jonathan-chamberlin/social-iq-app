@@ -35,7 +35,7 @@ extension LessonData {
                         label: "She's scared about your financial security and expressing it as criticism",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "You caught the fear under the words. That's the whole game.",
+                            renText: "You caught the fear under the words. Ekman's research shows body language often contradicts spoken words. Her tight voice and nervous hands told you the real story.",
                             text: "The word \"stable\" is the giveaway. She's not saying freelance is bad. She's saying the lack of security terrifies her. That tight voice and the pasta stirring? That's anxiety. She's scared for you and this is the only way she knows how to say it."
                         )
                     ),
@@ -83,7 +83,7 @@ extension LessonData {
                         label: "Label her fear, tell her you appreciate her concern, and that everything will be okay",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Name it first, then reassure. That order is everything.",
+                            renText: "Name it first, then reassure. Lieberman's UCLA research on affect labeling shows naming an emotion out loud reduces its intensity. That order is everything.",
                             text: "Name what she's feeling: \"it sounds like you're worried I won't be able to support myself.\" Once she feels heard, her guard drops. Then you can reassure her things will be okay."
                         )
                     ),
@@ -131,7 +131,7 @@ extension LessonData {
                         label: "\"I know it's scary. It sounds like you're worried I won't be able to take care of myself.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "THAT. You named the fear out loud and gave her room to confirm it. That's the whole unlock.",
+                            renText: "THAT. Lieberman's research at UCLA proved this: naming someone's fear out loud literally calms the amygdala. You gave her room to confirm it. That's the whole unlock.",
                             text: "Now she feels like you're actually listening, not just waiting to defend yourself."
                         )
                     ),

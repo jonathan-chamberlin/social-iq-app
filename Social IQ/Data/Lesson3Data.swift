@@ -35,7 +35,7 @@ extension LessonData {
                         label: "They're mid-story, and the group has a clear center of mass",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Yes. Center of mass. You saw where the gravity was.",
+                            renText: "Yes. Center of mass. Social dynamics research shows every group has a speaker hierarchy. You saw where the gravity was.",
                             text: "Cool shirt guy is clearly running the show right now. The group has a rhythm. Walk up mid-punchline and you kill the moment. Wait for the natural pause after the laugh."
                         )
                     ),
@@ -83,7 +83,7 @@ extension LessonData {
                         label: "Walk up to the edge of the group, listen and make eye contact with whoever is talking for 10-15 seconds, then build on something someone just said",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Edge, listen, build. That's the whole move. Most people skip straight to talking.",
+                            renText: "Edge, listen, build. Carl Rogers' active listening research shows people accept you faster when they feel heard first. Most people skip straight to talking.",
                             text: "Listen for 10-15 seconds, then build on what they're already talking about. Now you look like someone who was paying attention, not someone barging in. People love feeling like others are interested in them. Most people miss this."
                         )
                     ),
@@ -151,7 +151,7 @@ extension LessonData {
                         label: "\"You must've been pissed, what airline was it?\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "That's it. You showed you heard them, then handed it back. Clean entry.",
+                            renText: "That's it. Voss calls this labeling. You named what they felt, then handed it back with a question. Clean entry.",
                             text: "\"You must've been pissed\" shows you were listening. People love that. One short question that extends their story, not yours. You're in the conversation naturally. Share your own story after they've accepted your presence."
                         )
                     )

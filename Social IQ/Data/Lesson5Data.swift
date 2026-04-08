@@ -45,7 +45,7 @@ extension LessonData {
                         label: "Danny has learned you're a safe ask and conflates the relationship with financial access",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "THAT. This isn't a crisis, it's a system. You saw it.",
+                            renText: "THAT. This isn't a crisis, it's a system. Gottman's research on relationship bids shows people unconsciously learn who will turn toward them. You saw it.",
                             text: "He's found his path of least resistance and it runs through you. The three weeks of silence after you said no last time? That was him recalibrating, not punishing you. The relationship is real. The money pattern is also real. You have to handle them separately."
                         )
                     ),
@@ -83,7 +83,7 @@ extension LessonData {
                         label: "Separate the relationship from the request: love him, decline the loan, keep them distinct",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Clean read. You can't guilt-trip someone who already named the love out loud.",
+                            renText: "Clean read. Gottman's research on turning toward vs. turning away shows you can honor a relationship while declining a request. You can't guilt-trip someone who already named the love out loud.",
                             text: "Separate the love from the money. That's the move. He can't guilt you with \"I guess you don't care about family\" if you've already named the relationship as its own thing. No audit, no repayment plan he won't follow, no \"last time\" ultimatum you can't enforce."
                         )
                     ),
@@ -141,7 +141,7 @@ extension LessonData {
                         label: "\"I'm not going to lend you money right now and I love you. You got this.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "You caught that. No AND love in the same breath. That's exactly how you close the guilt door.",
+                            renText: "You caught that. Gottman's research shows you can turn toward the person while turning away from the request. No AND love in the same breath. That's exactly how you close the guilt door.",
                             text: "He can't pull the \"you don't care about family\" card because you already named the relationship separately."
                         )
                     ),

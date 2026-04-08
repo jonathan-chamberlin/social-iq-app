@@ -35,7 +35,7 @@ extension LessonData {
                         label: "You're both in a natural rhythm and silence is normal",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "You read the smile correctly. That's comfort, not boredom. Most guys miss that.",
+                            renText: "You read the smile correctly. Ekman's research on micro-expressions shows a calm smile with relaxed eyes is comfort, not boredom. Most guys miss that.",
                             text: "Most guys panic and rush to fill every silence, and she can feel that energy shift. The pause is fine. She's enjoying being with you."
                         )
                     ),
@@ -93,7 +93,7 @@ extension LessonData {
                         label: "Let there be silence, then make a joke",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Yes. Let it sit, then flip it light. That's the move.",
+                            renText: "Yes. Let it sit, then flip it light. Rogers' active listening research shows that not rushing to fill silence gives the other person space to feel comfortable. That's the move.",
                             text: "Women love to laugh. A joke right now keeps the vibe playful, which is exactly where you want a first date to be."
                         )
                     ),
@@ -141,7 +141,7 @@ extension LessonData {
                         label: "\"I hope you don't cry yourself to sleep with how bad I'm beating you.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
-                            renText: "Absurd, situational, zero pressure. That's exactly the register you want on a first date.",
+                            renText: "Absurd, situational, zero pressure. Social psychology research on humor and attraction shows playful teasing builds rapport faster than deep questions. That's the register you want on a first date.",
                             text: "Playful tease. She's obviously not going to cry about losing at pool. That's what makes it funny. The absurd exaggeration keeps things light and flirty."
                         )
                     ),

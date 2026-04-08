@@ -308,6 +308,7 @@ struct OnboardingView: View {
     private func completeOnboardingAndDismiss() {
         guard !isCompleting else { return }
         isCompleting = true
+        trackStepCompleted()
         Task {
             do {
                 let onboardingData = OnboardingData(

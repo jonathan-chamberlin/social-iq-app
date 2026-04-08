@@ -7,8 +7,10 @@
 - Debug subscription toggle (`#if DEBUG`) is in the code - long-press greeting to activate. Compiled out of release builds, safe to keep.
 - `onboarding_abandoned` event: code is correct but hasn't been verified in a live test (fires on app background during onboarding)
 - `AppConfig.showResetDataButton` is set to true - flip to false before public release
+- Paywall now shows on TestFlight after publishing draft on Superwall dashboard - needs verification on next TestFlight build
 
 ## Next Up
+- Verify paywall appears on TestFlight (deploy new build, go through onboarding, tap "Start My Training")
 - Implement remaining quick wins: daily streak counter (#5), scenario context illustrations (#8)
 - Enroll in Small Business Program
 - Once App Store link is live: create Bitly attribution links per channel (one per channel, not per post)

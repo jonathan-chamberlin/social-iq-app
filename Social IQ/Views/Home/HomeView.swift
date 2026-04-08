@@ -12,6 +12,7 @@ struct HomeView: View {
     @State private var selectedLesson: Lesson?
     @State private var subscriptionRevision = 0
     @State private var proBadgeGlow = false
+    @State private var showResetConfirmation = false
     #if DEBUG
     @State private var debugForceSubscribed = false
     #endif
@@ -128,6 +129,23 @@ struct HomeView: View {
                         }
                     }
                 }
+                if AppConfig.showResetDataButton {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Reset Data") {
+                            showResetConfirmation = true
+                        }
+                        .font(.caption2)
+                        .foregroundStyle(.red.opacity(0.7))
+                    }
+                }
+            }
+            .alert("Reset All Data?", isPresented: $showResetConfirmation) {
+                Button("Reset", role: .destructive) {
+                    Task { await resetUserData() }
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("This will clear your profile, onboarding, and lesson progress. You will be signed out.")
             }
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
@@ -174,6 +192,71 @@ struct HomeView: View {
         } catch {
             // Silently fail — lessons still usable without progress data
         }
+    }
+
+    // MARK: - Reset
+
+    private func resetUserData() async {
+        guard let userId else { return }
+        let client = SupabaseService.shared.client
+
+        struct ProfileReset: Encodable {
+            let onboardingCompleted: Bool
+            let firstName: String?
+            let age: Int?
+            let gender: String?
+            let socialContext: String?
+            let quiz1Answer: String?
+            let quiz2Answer: String?
+            let quiz3Answer: String?
+            let selectedGoals: [String]?
+            let referralCode: String?
+            let discoverySource: String?
+            let currentStreak: Int
+            let longestStreak: Int
+            let totalXp: Int
+
+            enum CodingKeys: String, CodingKey {
+                case onboardingCompleted = "onboarding_completed"
+                case firstName = "first_name"
+                case age, gender
+                case socialContext = "social_context"
+                case quiz1Answer = "quiz1_answer"
+                case quiz2Answer = "quiz2_answer"
+                case quiz3Answer = "quiz3_answer"
+                case selectedGoals = "selected_goals"
+                case referralCode = "referral_code"
+                case discoverySource = "discovery_source"
+                case currentStreak = "current_streak"
+                case longestStreak = "longest_streak"
+                case totalXp = "total_xp"
+            }
+        }
+
+        let reset = ProfileReset(
+            onboardingCompleted: false,
+            firstName: nil, age: nil, gender: nil, socialContext: nil,
+            quiz1Answer: nil, quiz2Answer: nil, quiz3Answer: nil,
+            selectedGoals: nil, referralCode: nil, discoverySource: nil,
+            currentStreak: 0, longestStreak: 0, totalXp: 0
+        )
+
+        do {
+            try await client
+                .from(DatabaseSchema.UserProfiles.table)
+                .update(reset)
+                .eq(DatabaseSchema.UserProfiles.id, value: userId)
+                .execute()
+
+            try await client
+                .from(DatabaseSchema.LessonProgress.table)
+                .delete()
+                .eq(DatabaseSchema.LessonProgress.userId, value: userId)
+                .execute()
+        } catch {
+            // Best-effort reset
+        }
+        await authViewModel.signOut()
     }
 
     // MARK: - Lesson Card

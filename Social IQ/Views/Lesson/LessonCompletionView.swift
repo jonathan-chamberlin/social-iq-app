@@ -25,7 +25,6 @@ struct LessonCompletionView: View {
 
     @State private var displayedScore = 0
     @State private var showScoreGlow = false
-    @State private var showPercentile = false
     @State private var percentileScale: CGFloat = 1.8
     @State private var percentileOpacity: Double = 0
     @State private var countdownProgress: CGFloat = 0
@@ -50,86 +49,32 @@ struct LessonCompletionView: View {
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
 
-            // MARK: - Animated Score
-
-            Text("\(displayedScore) / \(totalSteps)")
-                .font(.system(size: 48, weight: .bold, design: .rounded))
-                .foregroundStyle(Theme.gold)
-                .shadow(
-                    color: showScoreGlow ? Theme.gold.opacity(0.6) : .clear,
-                    radius: showScoreGlow ? 16 : 0
-                )
-
-            Text("correct on first try")
-                .font(.subheadline)
-                .foregroundStyle(.gray)
-
-            // MARK: - Percentile Flash
-
-            VStack(spacing: 6) {
-                Text("\(completionCount.formatted()) people completed this lesson")
-                    .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
-
-                Text("You finished faster than \(percentile)% of them")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Theme.goldLight)
-                    .scaleEffect(percentileScale)
-                    .opacity(percentileOpacity)
-            }
-            .padding(.top, 4)
+            LessonCompletionScoreCard(
+                displayedScore: displayedScore,
+                totalSteps: totalSteps,
+                showScoreGlow: showScoreGlow,
+                completionCount: completionCount,
+                percentile: percentile,
+                percentileScale: percentileScale,
+                percentileOpacity: percentileOpacity
+            )
 
             Spacer()
 
-            // MARK: - Actions
-
-            VStack(spacing: 12) {
-                if let onNextLesson {
-                    Button(action: onNextLesson) {
-                        Text("Next Lesson")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background {
-                                GeometryReader { geo in
-                                    // Dim base
-                                    Theme.gold.opacity(0.3)
-
-                                    // Gold fill sweeping left to right
-                                    Theme.goldGradient
-                                    .frame(width: geo.size.width * countdownProgress)
-                                    .animation(
-                                        countdownActive
-                                            ? .linear(duration: Timing.autoAdvanceDuration)
-                                            : .none,
-                                        value: countdownProgress
-                                    )
-                                }
-                            }
-                            .foregroundStyle(.white)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
-                    }
-                }
-
-                Button(action: {
+            LessonCompletionActions(
+                onNextLesson: onNextLesson,
+                onDismiss: {
                     countdownActive = false
                     countdownProgress = 0
                     onDismiss()
-                }) {
-                    Text("Back to Home")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
-                }
-            }
-            .padding(.horizontal, 32)
-            .padding(.bottom, 40)
+                },
+                countdownProgress: countdownProgress,
+                countdownActive: countdownActive
+            )
         }
         .task(id: countdownActive) {
             guard countdownActive, onNextLesson != nil else { return }
-            // Kick off the fill animation on the next frame
             countdownProgress = 1.0
-            // Wait for the fill to complete
             try? await Task.sleep(for: .seconds(Timing.autoAdvanceDuration))
             guard countdownActive else { return }
             countdownActive = false
@@ -146,21 +91,18 @@ struct LessonCompletionView: View {
 
     private func startAnimations() {
         Task {
-            // 1. Count up the score
             for i in 1...max(score, 1) {
                 try? await Task.sleep(for: .seconds(Timing.scoreTickInterval))
                 displayedScore = min(i, score)
                 HapticService.light()
             }
 
-            // 2. Gold glow after count-up finishes
             try? await Task.sleep(for: .seconds(0.1))
             withAnimation(.easeOut(duration: Timing.glowFadeDuration)) {
                 showScoreGlow = true
             }
             HapticService.medium()
 
-            // 3. Percentile flash - scale down + fade in
             try? await Task.sleep(for: .seconds(Timing.percentileDelay))
             withAnimation(.spring(response: Timing.percentileSpringResponse, dampingFraction: Timing.percentileSpringDamping)) {
                 percentileScale = 1.0
@@ -168,7 +110,6 @@ struct LessonCompletionView: View {
             }
             HapticService.heavy()
 
-            // 4. Start auto-advance countdown (only if next lesson exists)
             if onNextLesson != nil {
                 try? await Task.sleep(for: .seconds(Timing.countdownStartDelay - Timing.percentileDelay))
                 countdownActive = true

@@ -1,0 +1,26 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/jonathanchamberlin/.claude/scripts/generate-repo-map.sh /Users/jonathanchamberlin/repos/social-iq",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"${TOOL_INPUT_FILE_PATH:-${TOOL_INPUT_file_path:-}}\"; if [[ -n \"$FILE\" && \"$FILE\" == *.swift ]]; then if grep -qE \"foregroundColor\\(|NavigationView|ObservableObject|@Published|cornerRadius\\(|DispatchQueue\\.main|Timer\\.publish\" \"$FILE\" 2>/dev/null; then echo \"DEPRECATED API DETECTED in $FILE. Check banned APIs in CLAUDE.md.\"; fi; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}

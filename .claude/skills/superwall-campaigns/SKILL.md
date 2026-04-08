@@ -35,6 +35,8 @@ The Superwall MCP (`mcp__superwall__*`) manages campaigns, placements, products,
 
 **MCP cannot edit paywall visual content** (text, layout, design). Paywall copy is edited in the Superwall dashboard visual editor only.
 
+**MCP cannot publish paywalls.** After editing a paywall in the dashboard, it stays in draft until manually published. There is no `publish_paywall` MCP tool. If a paywall isn't showing in production/TestFlight, this is the first thing to check - see "Troubleshooting: Paywall Not Showing" below.
+
 **If MCP auth fails** (expired OAuth token error like `"exp" claim timestamp check failed`):
 1. Don't waste time removing/re-adding the MCP — the token is cached in the session
 2. Fall back to the **Superwall dashboard** directly for the task
@@ -94,6 +96,34 @@ Paywall copy decisions should be informed by user research. Read `user-research/
 - The #1 complaint ("feels like a test" — 50%) — avoid quiz/test language on paywalls
 - ICP-B paywall demand signal (Pattern 14) — Lauren, Sana, Phoebe were disappointed by locked lessons
 - Gender-neutral copy requirement (Pattern 12) — "people" not "guys"
+
+## Troubleshooting: Paywall Not Showing
+
+When a paywall doesn't appear after tapping a button that calls `Superwall.shared.register(placement:)`, check these in order:
+
+### 1. Paywall has unpublished changes (MOST COMMON)
+Superwall's visual editor creates drafts. If the paywall was edited but never published, TestFlight/production builds won't see the update. The simulator may still show it because sandbox can serve drafts.
+- **MCP can't publish paywalls** - there is no `publish_paywall` tool
+- **Fix:** Open Superwall dashboard -> Paywalls -> click the paywall -> click the teal "Publish" button in the editor
+- **Tell the user** this requires the dashboard (or generate a Chrome agent prompt)
+
+### 2. Campaign is not active
+Check via MCP: `mcp__superwall__get_campaign` with the campaign ID. Look for status/active fields.
+- If paused or draft, the placement event fires but no paywall is served
+
+### 3. Placement event name mismatch
+The placement string in code must exactly match the campaign's placement on the dashboard. Check for typos, camelCase vs snake_case differences.
+
+### 4. Simulator vs TestFlight environment
+Superwall treats builds differently:
+- **Simulator** = sandbox environment (may show draft/test paywalls)
+- **TestFlight** = production environment (only shows published, live paywalls)
+- **App Store** = production environment
+
+If it works in simulator but not TestFlight, the issue is almost always #1 (unpublished draft) or a campaign scoped to test/sandbox only.
+
+### 5. Audience filters or entitlements blocking
+Check the campaign's audience rules - filters like "show once," device type, or entitlement status can silently suppress the paywall.
 
 ## Key placements
 

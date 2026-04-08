@@ -24,16 +24,24 @@ final class SuperwallService {
         Superwall.shared.register(placement: placement.rawValue)
     }
 
-    /// Present a paywall and execute `onDismiss` after the user finishes interacting.
-    /// The feature block fires when:
-    /// - The user purchases and the paywall closes
-    /// - The user dismisses without purchasing
-    /// - No paywall is configured for this placement
+    /// Present a paywall and execute `onDismiss` after the user finishes interacting,
+    /// regardless of whether they purchased or dismissed.
     static func presentPaywall(placement: SuperwallPlacement, onDismiss: @escaping @Sendable () -> Void) {
         AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
-        Superwall.shared.register(placement: placement.rawValue) {
+        let handler = PaywallPresentationHandler()
+        handler.onDismiss { _, result in
+            if case .purchased = result {
+                AnalyticsService.track(event: .subscriptionStarted)
+            }
             onDismiss()
         }
+        handler.onSkip { _ in
+            onDismiss()
+        }
+        handler.onError { _ in
+            onDismiss()
+        }
+        Superwall.shared.register(placement: placement.rawValue, handler: handler)
     }
 
     /// Present a paywall and execute `onComplete` when the user should proceed.

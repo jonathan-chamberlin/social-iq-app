@@ -45,3 +45,4 @@ Social IQ/Config/AppConfig.swift
 .env
 .env.mixpanel
 .mcp.json
+.claude/repo-map.txt

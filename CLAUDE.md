@@ -44,6 +44,13 @@ Social IQ/
   Utilities/        — HapticService, SoundPlayer, String+Formatting
   Assets.xcassets/
 
+## Architecture
+- Pattern: MVVM with @Observable ViewModels (one per feature)
+- Views: Max 100 lines. Extract subviews aggressively.
+- Services: Protocol-based. Inject via init, never hardcode.
+- Navigation: Type-safe Route enums, not string-based.
+- Supabase: All database calls go through the service layer, never directly from ViewModels.
+
 ## Coding Conventions
 
 ### File organization
@@ -92,6 +99,28 @@ Social IQ/
 - Each step's UI lives in its own file and receives only the bindings/callbacks it needs.
 - Reusable patterns: `OnboardingOptionListStep` for any single-select auto-advance list.
 - Scare bullet content lives as static data on `OnboardingScareStep`, not in the coordinator.
+
+## Banned APIs (AI agents hallucinate these — use the modern replacement)
+- `foregroundColor()` → `foregroundStyle()`
+- `cornerRadius()` → `clipShape(.rect(cornerRadius:))`
+- `GeometryReader` (for simple sizing) → `containerRelativeFrame()`
+- `onChange(of:perform:)` → `onChange(of:) { oldValue, newValue in }`
+- `onAppear` with async work → `.task { }`
+- `Timer.publish` / Combine → `AsyncStream` or `.task` with `sleep`
+
+## Skill Routing
+- SwiftUI views/components → swiftui-patterns, swiftui-components
+- Product decisions → app-mafia-mobile
+- Supabase schema/RLS → supabase-schema-rls
+- TestFlight deploy → testflight-deploy
+- Analytics/Mixpanel → mixpanel-taxonomy
+- Paywalls/Superwall → superwall-campaigns
+- App Store Connect → app-store-connect
+
+## TestFlight Awareness
+- Local changes are NOT on TestFlight until archived and uploaded — say this explicitly
+- After code changes, proactively offer to archive and upload if goal is device testing
+- Track temporary debug changes and revert before committing
 
 ## Rules
 - After changes: build → verify compilation → run tests → screenshot

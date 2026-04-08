@@ -175,7 +175,8 @@ struct OnboardingView: View {
                 case .bridgeToPaywall:
                     OnboardingBridgeToPaywallStep(
                         onStartTraining: {
-                            SuperwallService.presentPaywallWithHandler(placement: .onboardingComplete) {
+                            UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
+                            SuperwallService.presentPaywall(placement: .onboardingComplete) {
                                 completeOnboardingAndDismiss()
                             }
                         },

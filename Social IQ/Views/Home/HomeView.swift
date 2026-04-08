@@ -10,6 +10,8 @@ struct HomeView: View {
     var authViewModel: AuthViewModel
     @State private var completedLessonIds: Set<String> = []
     @State private var selectedLesson: Lesson?
+    @State private var subscriptionRevision = 0
+    @State private var proBadgeGlow = false
     #if DEBUG
     @State private var debugForceSubscribed = false
     #endif
@@ -34,6 +36,14 @@ struct HomeView: View {
 
     private var greeting: String {
         userName.isEmpty ? "Welcome" : "Welcome back, \(userName)"
+    }
+
+    private var isProUser: Bool {
+        _ = subscriptionRevision
+        #if DEBUG
+        if debugForceSubscribed { return true }
+        #endif
+        return SuperwallService.isSubscribed
     }
 
     var body: some View {
@@ -72,8 +82,10 @@ struct HomeView: View {
                             .buttonStyle(.plain)
                         }
 
-                        upgradeButton
-                            .padding(.top, 8)
+                        if !isProUser {
+                            upgradeButton
+                                .padding(.top, 8)
+                        }
 
                         Button("Sign Out", role: .destructive) {
                             Task {
@@ -93,7 +105,30 @@ struct HomeView: View {
                     onComplete: { Task { await loadCompletedLessons() } }
                 )
             }
-            .navigationTitle("Social IQ")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    HStack(spacing: 8) {
+                        Text("Social IQ")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                        if isProUser {
+                            Text("PRO")
+                                .font(.caption2)
+                                .fontWeight(.heavy)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 3)
+                                .background(Capsule().fill(Theme.goldGradient))
+                                .shadow(color: proBadgeGlow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
+                                .onAppear {
+                                    withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                                        proBadgeGlow = true
+                                    }
+                                }
+                        }
+                    }
+                }
+            }
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
             .onAppear {
@@ -106,6 +141,7 @@ struct HomeView: View {
     }
 
     private func isLocked(_ lesson: Lesson) -> Bool {
+        _ = subscriptionRevision
         #if DEBUG
         if debugForceSubscribed { return false }
         #endif
@@ -115,7 +151,16 @@ struct HomeView: View {
     private func handleLessonTap(_ lesson: Lesson) {
         if isLocked(lesson) {
             AnalyticsService.track(event: .lessonLockedTap, properties: ["lesson_id": lesson.id])
-            SuperwallService.presentPaywall(placement: .lessonLocked)
+            let tappedLesson = lesson
+            SuperwallService.presentPaywall(placement: .lessonLocked) {
+                Task { @MainActor in
+                    subscriptionRevision += 1
+                    if SuperwallService.isSubscribed {
+                        AnalyticsService.track(event: .subscriptionStarted)
+                        selectedLesson = tappedLesson
+                    }
+                }
+            }
         } else {
             selectedLesson = lesson
         }
@@ -188,7 +233,14 @@ struct HomeView: View {
 
     private var upgradeButton: some View {
         Button {
-            SuperwallService.presentPaywall()
+            SuperwallService.presentPaywall(placement: .lessonLocked) {
+                Task { @MainActor in
+                    subscriptionRevision += 1
+                    if SuperwallService.isSubscribed {
+                        AnalyticsService.track(event: .subscriptionStarted)
+                    }
+                }
+            }
         } label: {
             Label("Upgrade", systemImage: "star.fill")
                 .font(.headline)

@@ -8,9 +8,8 @@ description: Configure Superwall paywalls, placements, and A/B tests for Social 
 ## Current Live Setup
 
 **Paywall:** Social IQ Pro (ID 203822) — used by both campaigns below
-- Annual: $29.99/year (42% savings)
-- 6 Months: $4.99/6mo (22% savings)
-- Product ID: `com.jonathanchamberlin.socialiq.annual`
+- Annual: $29.99/year — primary product (`com.jonathanchamberlin.socialiq.annual`)
+- Weekly: $4.99/week — secondary product (`com.jonathanchamberlin.socialiq.weekly`)
 
 **Active Campaigns:**
 | Campaign | ID | Placement | Paywall |
@@ -20,15 +19,73 @@ description: Configure Superwall paywalls, placements, and A/B tests for Social 
 | Transaction Abandoned | 78289 | (no placement yet) | (no paywall yet) |
 | Example Campaign | 75153 | `campaign_trigger` | 195191 (100%) |
 
-## MCP API Limitations
+## Superwall MCP
 
-The Superwall MCP can manage campaigns, placements, products, and entitlements — but **cannot edit paywall visual content** (text, layout, design). Paywall copy is edited in the Superwall dashboard visual editor only.
+The Superwall MCP (`mcp__superwall__*`) manages campaigns, placements, products, and entitlements programmatically. Use it as the first approach before falling back to the dashboard.
+
+**Key MCP tools:**
+- `mcp__superwall__whoami` — verify auth is working
+- `mcp__superwall__list_projects` — list projects (use to get project ID)
+- `mcp__superwall__list_paywalls` — list paywalls
+- `mcp__superwall__get_paywall` — get paywall details
+- `mcp__superwall__list_campaigns` — list campaigns
+- `mcp__superwall__get_campaign` — get campaign details
+- `mcp__superwall__list_products` — list products
+- `mcp__superwall__list_entitlements` — list entitlements
+
+**MCP cannot edit paywall visual content** (text, layout, design). Paywall copy is edited in the Superwall dashboard visual editor only.
+
+**If MCP auth fails** (expired OAuth token error like `"exp" claim timestamp check failed`):
+1. Don't waste time removing/re-adding the MCP — the token is cached in the session
+2. Fall back to the **Superwall dashboard** directly for the task
+3. If the user has Claude Chrome available, generate step-by-step browser instructions
 
 **Known MCP bugs (as of 2026-04-04):**
-- `get_paywall` and `list_paywalls` fail with a schema error on the `products` field (expects string, gets object)
+- `get_paywall` and `list_paywalls` may fail with a schema error on the `products` field (expects string, gets object)
 - `create_paywall` has the same products type mismatch
 
-**Workaround for visual edits:** Generate a step-by-step prompt for Claude Chrome (browser) to click and replace text elements in the Superwall dashboard editor.
+## Paywall Template Variables
+
+Superwall paywall templates use `{{ products.<slot>.<variable> }}` syntax. Products are referenced by slot: `primary` (annual) and `secondary` (weekly).
+
+### Period variables (critical for non-monthly products)
+
+| Variable | Weekly result | Annual result | Use for |
+|----------|--------------|---------------|---------|
+| `period` | `"week"` | `"year"` | Display period name - USE THIS ONE |
+| `periodWeeks` | `1` | `52` | Numeric weeks |
+| `periodMonths` | `0` | `12` | Numeric months - BROKEN for weekly |
+| `localizedPeriod` | `"1 wk"` | `"1 yr"` | Compact localized string |
+
+**NEVER use `periodMonths` for weekly products** — it rounds 0.25 months to 0, producing "0 Months".
+
+### Correct template patterns
+
+```
+# Weekly product (secondary)
+Header:  {{ products.secondary.period }}          → "week" (use "Words" case for "Week")
+Price:   {{ products.secondary.price }} / {{ products.secondary.period }}  → "$4.99 / week"
+
+# Annual product (primary)
+Header:  {{ products.secondary.period }}          → "year"
+Price:   {{ products.primary.price }} / {{ products.primary.period }}      → "$29.99 / year"
+```
+
+### Case settings in the editor
+- "Words" case → capitalizes: "Week", "Year"
+- "UPPER" case → all caps: "WEEK", "YEAR"
+- Default → lowercase: "week", "year"
+
+### Fix checklist for broken period display
+1. Open Superwall dashboard → Paywalls → click the paywall
+2. In the visual editor, click each text element showing "0 Months" or wrong period
+3. In the element settings panel, find the template text
+4. Replace `{{ products.secondary.periodMonths }} Months` with `{{ products.secondary.period }}`
+5. Replace `/ {{ products.secondary.periodMonths }} months` with `/ {{ products.secondary.period }}`
+6. Set text case to "Words" if you want "Week" capitalized
+7. Preview in editor to confirm
+8. Publish the paywall
+9. Repeat for every paywall using the same template
 
 ## Paywall Copy Source
 

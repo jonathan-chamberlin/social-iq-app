@@ -11,7 +11,7 @@ description: Archive, upload, and deploy a new build to TestFlight for Social IQ
 - **Bundle ID:** com.jonathanchamberlin.Social-IQ
 - **Team ID:** 35373542G8
 - **App Store Connect URL:** https://appstoreconnect.apple.com/teams/8833fdf3-8efa-47a0-8777-442f8cc35999/apps/6761561557/testflight/ios
-- **Internal testing group:** Dev Testing (auto-receives builds after compliance is resolved)
+- **Internal testing group:** Dev Testing (auto-receives builds immediately - compliance resolves automatically)
 
 ## App Store Connect API Key
 
@@ -82,17 +82,7 @@ xcodebuild -exportArchive \
 
 Look for `** EXPORT SUCCEEDED **` and `Upload succeeded` in the output.
 
-### Step 4 — Resolve compliance
-
-Apple takes 5-15 minutes to process the build. Then in App Store Connect:
-
-1. TestFlight → iOS builds → find the new build
-2. Missing Compliance → **"None of the algorithms mentioned above"** → Save
-3. Auto-adds to Dev Testing group
-
-This step can also be done via the App Store Connect API — see the `app-store-connect` skill.
-
-### Step 5 — Install on device
+### Step 4 — Install on device
 
 On the test iPhone, open the **TestFlight** app. The new build appears as an update. Tap **"Update"**.
 
@@ -106,7 +96,7 @@ When adding temporary debug code (e.g., skipping auth, forcing onboarding) to te
 
 ## Notes
 
-- The app uses only HTTPS (exempt encryption) — always select "None of the algorithms mentioned above" for compliance
+- Export compliance is handled automatically — `ITSAppUsesNonExemptEncryption = NO` is set in the Xcode project, so no manual compliance resolution is needed in App Store Connect
 - Build numbers must be strictly increasing — Apple rejects duplicates
 - Superwall paywall config is server-side — paywall changes don't require a new build
 - Archive timeout: allow ~3-5 minutes for the archive step

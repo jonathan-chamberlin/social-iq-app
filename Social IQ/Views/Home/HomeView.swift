@@ -4,6 +4,7 @@
 //
 
 import Supabase
+import SuperwallKit
 import SwiftUI
 
 struct HomeView: View {
@@ -145,7 +146,7 @@ struct HomeView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This will clear your profile, onboarding, and lesson progress. You will be signed out.")
+                Text("Clears profile, onboarding, and lesson progress. To also reset Pro, cancel sandbox subscription in Settings > App Store > Sandbox Account first.")
             }
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
@@ -256,6 +257,7 @@ struct HomeView: View {
         } catch {
             // Best-effort reset
         }
+        Superwall.shared.reset()
         await authViewModel.signOut()
     }
 

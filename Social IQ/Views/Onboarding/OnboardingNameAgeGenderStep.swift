@@ -32,10 +32,7 @@ struct OnboardingNameAgeGenderStep: View {
                 .font(.title3)
                 .foregroundStyle(.white)
                 .padding(16)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.white.opacity(0.08))
-                )
+                .cardBackground()
                 .autocorrectionDisabled()
                 .textInputAutocapitalization(.words)
             }

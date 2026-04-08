@@ -30,10 +30,7 @@ struct OnboardingQuizStep: View {
                             Spacer()
                         }
                         .padding(16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.white.opacity(0.08))
-                        )
+                        .cardBackground()
                     }
                 }
             }

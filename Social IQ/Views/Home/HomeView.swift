@@ -79,7 +79,11 @@ struct HomeView: View {
                             Button {
                                 handleLessonTap(lesson)
                             } label: {
-                                lessonCard(lesson)
+                                HomeLessonCard(
+                                    lesson: lesson,
+                                    isLocked: isLocked(lesson),
+                                    isCompleted: completedLessonIds.contains(lesson.id)
+                                )
                             }
                             .buttonStyle(.plain)
                         }
@@ -202,39 +206,6 @@ struct HomeView: View {
         guard let userId else { return }
         let client = SupabaseService.shared.client
 
-        struct ProfileReset: Encodable {
-            let onboardingCompleted: Bool
-            let firstName: String?
-            let age: Int?
-            let gender: String?
-            let socialContext: String?
-            let quiz1Answer: String?
-            let quiz2Answer: String?
-            let quiz3Answer: String?
-            let selectedGoals: [String]?
-            let referralCode: String?
-            let discoverySource: String?
-            let currentStreak: Int
-            let longestStreak: Int
-            let totalXp: Int
-
-            enum CodingKeys: String, CodingKey {
-                case onboardingCompleted = "onboarding_completed"
-                case firstName = "first_name"
-                case age, gender
-                case socialContext = "social_context"
-                case quiz1Answer = "quiz1_answer"
-                case quiz2Answer = "quiz2_answer"
-                case quiz3Answer = "quiz3_answer"
-                case selectedGoals = "selected_goals"
-                case referralCode = "referral_code"
-                case discoverySource = "discovery_source"
-                case currentStreak = "current_streak"
-                case longestStreak = "longest_streak"
-                case totalXp = "total_xp"
-            }
-        }
-
         let reset = ProfileReset(
             onboardingCompleted: false,
             firstName: nil, age: nil, gender: nil, socialContext: nil,
@@ -260,59 +231,6 @@ struct HomeView: View {
         }
         Superwall.shared.reset()
         await authViewModel.signOut()
-    }
-
-    // MARK: - Lesson Card
-
-    private func lessonCard(_ lesson: Lesson) -> some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Text(lesson.title)
-                    .font(.headline)
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.leading)
-
-                HStack(spacing: 8) {
-                    tag(lesson.category.rawValue, color: Theme.gold)
-                    tag(lesson.difficulty.rawValue, color: .blue)
-                }
-            }
-
-            Spacer()
-
-            if isLocked(lesson) {
-                Text("PRO")
-                    .font(.caption2)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(
-                        Capsule().fill(Theme.goldGradient)
-                    )
-            } else if completedLessonIds.contains(lesson.id) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                    .font(.title2)
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
-        .cardBackground()
-        .overlay(
-            RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.white.opacity(0.1), lineWidth: 1)
-        )
-    }
-
-    private func tag(_ text: String, color: Color) -> some View {
-        Text(text.capitalized)
-            .font(.caption2)
-            .fontWeight(.semibold)
-            .foregroundStyle(.white)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(Capsule().fill(color.opacity(0.4)))
     }
 
     // MARK: - Upgrade Button

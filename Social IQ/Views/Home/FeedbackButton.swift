@@ -26,13 +26,7 @@ struct FeedbackButton: View {
                 .foregroundStyle(.white)
                 .frame(width: 48, height: 48)
                 .background(
-                    Circle().fill(
-                        LinearGradient(
-                            colors: [Theme.gold, Theme.goldLight],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing
-                        )
-                    )
+                    Circle().fill(Theme.goldGradient)
                 )
                 .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
         }

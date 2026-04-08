@@ -6,7 +6,13 @@
 import Foundation
 
 enum AppConfig {
-    static let supabaseURL = URL(string: "https://mobxxxxbsuuygwddjfom.supabase.co")!
+    // swiftlint:disable:next force_unwrapping
+    static let supabaseURL: URL = {
+        guard let url = URL(string: "https://mobxxxxbsuuygwddjfom.supabase.co") else {
+            fatalError("Invalid Supabase URL - check AppConfig")
+        }
+        return url
+    }()
     static let supabaseAnonKey = "sb_publishable_tOhcW5WAn7K5jvqDCPKJiQ_rZbdhNGP"
     static let superwallAPIKey = "pk_FleX2nb2iqfrCDpPwGpmI"
     static let mixpanelToken = "c1389400976ecbdf82fd43ac29fb6212"

@@ -97,11 +97,7 @@ struct LessonCompletionView: View {
                                     Theme.gold.opacity(0.3)
 
                                     // Gold fill sweeping left to right
-                                    LinearGradient(
-                                        colors: [Theme.gold, Theme.goldLight],
-                                        startPoint: .leading,
-                                        endPoint: .trailing
-                                    )
+                                    Theme.goldGradient
                                     .frame(width: geo.size.width * countdownProgress)
                                     .animation(
                                         countdownActive

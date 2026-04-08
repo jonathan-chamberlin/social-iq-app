@@ -4,7 +4,6 @@
 //
 
 import Supabase
-import SuperwallKit
 import SwiftUI
 
 struct HomeView: View {
@@ -204,32 +203,15 @@ struct HomeView: View {
 
     private func resetUserData() async {
         guard let userId else { return }
-        let client = SupabaseService.shared.client
-
-        let reset = ProfileReset(
-            onboardingCompleted: false,
-            firstName: nil, age: nil, gender: nil, socialContext: nil,
-            quiz1Answer: nil, quiz2Answer: nil, quiz3Answer: nil,
-            selectedGoals: nil, referralCode: nil, discoverySource: nil,
-            currentStreak: 0, longestStreak: 0, totalXp: 0
-        )
+        let onboardingService = OnboardingService()
 
         do {
-            try await client
-                .from(DatabaseSchema.UserProfiles.table)
-                .update(reset)
-                .eq(DatabaseSchema.UserProfiles.id, value: userId)
-                .execute()
-
-            try await client
-                .from(DatabaseSchema.LessonProgress.table)
-                .delete()
-                .eq(DatabaseSchema.LessonProgress.userId, value: userId)
-                .execute()
+            try await onboardingService.resetProfile(userId: userId)
+            try await progressService.deleteAllProgress(userId: userId)
         } catch {
             // Best-effort reset
         }
-        Superwall.shared.reset()
+        SuperwallService.reset()
         await authViewModel.signOut()
     }
 

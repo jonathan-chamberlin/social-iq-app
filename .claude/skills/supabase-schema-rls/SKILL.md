@@ -194,27 +194,32 @@ supabase db reset
 ```
 
 ## Swift patterns (async/await + supabase-swift)
+
+**Important:** These patterns go INSIDE service layer files (e.g., OnboardingService, LessonProgressService), never in Views or ViewModels. Access via `SupabaseService.shared.client`.
+
 ```swift
-// Fetch user profile
-let profile: Profile = try await supabase
-  .from("profiles")
+// Inside a service struct - fetch user profile
+private var client: SupabaseClient { SupabaseService.shared.client }
+
+let profile: Profile = try await client
+  .from(DatabaseSchema.UserProfiles.table)
   .select()
-  .eq("id", value: userId)
+  .eq(DatabaseSchema.UserProfiles.id, value: userId)
   .single()
   .execute()
   .value
 
 // Insert progress
-try await supabase
-  .from("user_progress")
+try await client
+  .from(DatabaseSchema.LessonProgress.table)
   .insert(UserProgress(userId: userId, lessonId: lessonId))
   .execute()
 
 // Update with returning
-let updated: Profile = try await supabase
-  .from("profiles")
+let updated: Profile = try await client
+  .from(DatabaseSchema.UserProfiles.table)
   .update(["streak_count": newStreak])
-  .eq("id", value: userId)
+  .eq(DatabaseSchema.UserProfiles.id, value: userId)
   .select()
   .single()
   .execute()

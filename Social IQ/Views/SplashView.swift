@@ -8,8 +8,6 @@ import SwiftUI
 struct SplashView: View {
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
-
             VStack(spacing: 24) {
                 Image("LaunchLogo")
                     .resizable()
@@ -22,5 +20,6 @@ struct SplashView: View {
                     .foregroundStyle(Theme.gold)
             }
         }
+        .screenBackground()
     }
 }

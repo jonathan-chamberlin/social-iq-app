@@ -39,6 +39,13 @@ struct LessonProgressService {
             .execute()
     }
 
+    func deleteAllProgress(userId: String) async throws {
+        try await client.from(DatabaseSchema.LessonProgress.table)
+            .delete()
+            .eq(DatabaseSchema.LessonProgress.userId, value: userId)
+            .execute()
+    }
+
     func fetchCompletedLessons(userId: String) async throws -> [LessonProgress] {
         try await client.from(DatabaseSchema.LessonProgress.table)
             .select()

@@ -145,36 +145,32 @@ struct LessonCompletionView: View {
     // MARK: - Animation Sequence
 
     private func startAnimations() {
-        // 1. Count up the score
-        for i in 1...max(score, 1) {
-            let delay = Double(i) * Timing.scoreTickInterval
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+        Task {
+            // 1. Count up the score
+            for i in 1...max(score, 1) {
+                try? await Task.sleep(for: .seconds(Timing.scoreTickInterval))
                 displayedScore = min(i, score)
                 HapticService.light()
             }
-        }
 
-        // 2. Gold glow after count-up finishes
-        let countUpDuration = Double(max(score, 1)) * Timing.scoreTickInterval + 0.1
-        DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration) {
+            // 2. Gold glow after count-up finishes
+            try? await Task.sleep(for: .seconds(0.1))
             withAnimation(.easeOut(duration: Timing.glowFadeDuration)) {
                 showScoreGlow = true
             }
             HapticService.medium()
-        }
 
-        // 3. Percentile flash - scale down + fade in
-        DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + Timing.percentileDelay) {
+            // 3. Percentile flash - scale down + fade in
+            try? await Task.sleep(for: .seconds(Timing.percentileDelay))
             withAnimation(.spring(response: Timing.percentileSpringResponse, dampingFraction: Timing.percentileSpringDamping)) {
                 percentileScale = 1.0
                 percentileOpacity = 1.0
             }
             HapticService.heavy()
-        }
 
-        // 4. Start auto-advance countdown (only if next lesson exists)
-        if onNextLesson != nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + countUpDuration + Timing.countdownStartDelay) {
+            // 4. Start auto-advance countdown (only if next lesson exists)
+            if onNextLesson != nil {
+                try? await Task.sleep(for: .seconds(Timing.countdownStartDelay - Timing.percentileDelay))
                 countdownActive = true
             }
         }

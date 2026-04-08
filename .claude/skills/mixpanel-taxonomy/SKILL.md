@@ -42,9 +42,18 @@ description: Mixpanel event naming, super properties, and dashboard setup for So
 - `notification_opened` — user tapped notification
 
 ## Super properties (set at app launch)
+
+**Important:** All Mixpanel calls go through `AnalyticsService` - never call `Mixpanel.mainInstance()` directly outside AnalyticsService.
+
 ```swift
-Mixpanel.mainInstance().registerSuperProperties([
-  "subscription_status": subscriptionStatus, // "free", "trial", "premium"
+// In AnalyticsService (the only place raw Mixpanel calls belong)
+static func registerSuperProperties(_ properties: [String: MixpanelType]) {
+    Mixpanel.mainInstance().registerSuperProperties(properties)
+}
+
+// Usage from anywhere else:
+AnalyticsService.registerSuperProperties([
+  "subscription_status": subscriptionStatus,
   "days_since_install": daysSinceInstall,
   "total_lessons_completed": totalLessons,
   "onboarding_completed": onboardingDone
@@ -53,7 +62,8 @@ Mixpanel.mainInstance().registerSuperProperties([
 
 ## User properties (set on identify)
 ```swift
-Mixpanel.mainInstance().people.set(properties: [
+// Via AnalyticsService wrapper:
+AnalyticsService.setUserProperties([
   "$name": displayName,
   "subscription_status": status,
   "streak_count": streak,

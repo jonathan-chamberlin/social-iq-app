@@ -11,8 +11,6 @@ struct SignInView: View {
 
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
-
             VStack(spacing: 32) {
                 Spacer()
 
@@ -70,6 +68,7 @@ struct SignInView: View {
                     .frame(height: 60)
             }
         }
+        .screenBackground()
     }
 }
 

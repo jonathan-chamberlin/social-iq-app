@@ -107,6 +107,7 @@ Social IQ/
 - `onChange(of:perform:)` → `onChange(of:) { oldValue, newValue in }`
 - `onAppear` with async work → `.task { }`
 - `Timer.publish` / Combine → `AsyncStream` or `.task` with `sleep`
+- `DispatchQueue.main.asyncAfter` → `Task { try? await Task.sleep(for:) }` (no GCD in this project)
 
 ## Skill Routing
 - SwiftUI views/components → swiftui-patterns, swiftui-components
@@ -144,3 +145,5 @@ Project-specific docs live in `references/` at the repo root:
 - Do NOT use Combine (Timer.publish, etc.) — the project uses async/await exclusively
 - Force unwraps on URL construction will be rejected — use optional binding or guard/let
 - `import UIKit` should only appear in Utilities (HapticService, SoundPlayer) — views use the service wrappers
+- Do NOT use `DispatchQueue.main.asyncAfter` — use `Task { try? await Task.sleep(for:) }` instead
+- Do NOT import framework SDKs (SuperwallKit, Supabase) directly in Views — use service wrappers (SuperwallService, SupabaseService)

@@ -130,38 +130,41 @@ Check the campaign's audience rules - filters like "show once," device type, or 
 ### lessons_locked (live — primary conversion point)
 Fires when a free user taps a locked lesson. This is where ICP-B showed visible demand.
 ```swift
-Superwall.shared.register(placement: "lessons_locked")
+// Always use SuperwallService wrappers — never Superwall.shared directly in Views
+SuperwallService.presentPaywall(placement: .lessonLocked)
 ```
 
 ### onboarding_complete (live — first paywall exposure)
 Fires at the end of onboarding. Keep it soft — user hasn't seen value yet.
 ```swift
-Superwall.shared.register(placement: "onboarding_complete")
+SuperwallService.presentPaywall(placement: .onboardingComplete)
 ```
 
 ### transaction_abandoned (not yet configured)
 Fires when a user starts checkout but doesn't complete. Shows a discounted offer or urgency message. Highest impact placement (17-25% revenue lift) — configure once payment pipeline is live.
 ```swift
-Superwall.shared.register(placement: "transaction_abandoned")
+// Add to SuperwallPlacement enum + SuperwallService when ready
+SuperwallService.presentPaywall(placement: .transactionAbandoned)
 ```
 
 ### paywall_close (future)
 Fires when user dismisses a paywall without subscribing. Shows a "last chance" or alternative offer.
 ```swift
-Superwall.shared.register(placement: "paywall_close")
+SuperwallService.presentPaywall(placement: .paywallClose)
 ```
 
 ### session_milestone (future)
 Fires after a user completes N lessons (e.g., 3rd or 5th). They've seen value, now convert.
 ```swift
-Superwall.shared.register(placement: "session_milestone", params: ["lesson_count": count])
+SuperwallService.presentPaywall(placement: .sessionMilestone)
 ```
 
 ## Age-segmented routing (App Mafia insight)
 - 23-28 is the highest conversion bracket for self-improvement apps
 - Route different paywall designs by age segment via Superwall's user attributes
 ```swift
-Superwall.shared.setUserAttributes([
+// Add to SuperwallService as a static method when implementing
+SuperwallService.setUserAttributes([
   "age_bracket": ageBracket, // "18-22", "23-28", "29-35", "36+"
   "subscription_status": status
 ])

@@ -57,6 +57,22 @@ struct OnboardingService {
         return rows.first?.onboardingCompleted ?? false
     }
 
+    func resetProfile(userId: String) async throws {
+        let reset = ProfileReset(
+            onboardingCompleted: false,
+            firstName: nil, age: nil, gender: nil, socialContext: nil,
+            quiz1Answer: nil, quiz2Answer: nil, quiz3Answer: nil,
+            selectedGoals: nil, referralCode: nil, discoverySource: nil,
+            currentStreak: 0, longestStreak: 0, totalXp: 0
+        )
+
+        try await client
+            .from(DatabaseSchema.UserProfiles.table)
+            .update(reset)
+            .eq(DatabaseSchema.UserProfiles.id, value: userId)
+            .execute()
+    }
+
     func completeOnboarding(userId: String, data: OnboardingData) async throws {
         struct ProfileUpdate: Encodable {
             let onboardingCompleted: Bool

@@ -72,6 +72,10 @@ final class SuperwallService {
         return false
     }
 
+    static func reset() {
+        Superwall.shared.reset()
+    }
+
     // NOTE: transaction_abandon is a built-in Superwall event.
     // No code-side registration needed — configure it entirely in the Superwall dashboard
     // by creating a campaign triggered by the "transaction_abandon" event.

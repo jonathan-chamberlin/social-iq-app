@@ -21,3 +21,6 @@
 
 ## Blockers
 - None
+
+## Reference
+- TestFlight public link: https://testflight.apple.com/join/x9BESNVN

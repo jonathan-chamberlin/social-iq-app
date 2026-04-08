@@ -99,10 +99,17 @@
   },
   {
     "demographics": {"name": "Theo", "session_number": "15", "session_type": "remote", "age": null, "background": "Super into self-improvement, high ticket sales, wants to influence people and be best version of self"},
-    "icp_classification": {"icp_fit": "ICP", "icp_score": 4, "icp_reasoning": "Most self-improvement-oriented tester yet, actively wants to influence people, changes behavior quickly — but high ticket sales implies existing social skill"},
-    "core_metrics": {"completed_L1": false, "started_L2_unprompted": false, "total_lessons_done": 0, "would_use_again": "not_stated"},
-    "pattern_signals": {"felt_like_test": true, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
-    "verbatim_quotes": ["Instead of allowing me to describe my situation specifically, it's kind of assuming that I fit into one of those categories", "Less quiz and more like a personalized experience would be interesting", "Andre told me that was his feedback for you as well"]
+    "icp_classification": {"icp_fit": "ICP", "icp_score": 5, "icp_reasoning": "Most self-improvement-oriented tester, retained user, actively doing exercises and enjoying them, unprompted positive feedback + feature request — upgraded from 4 to 5 after follow-up confirmed retention"},
+    "core_metrics": {"completed_L1": true, "started_L2_unprompted": false, "total_lessons_done": null, "would_use_again": "yes"},
+    "pattern_signals": {"felt_like_test": true, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": true, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": true, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": true, "engaged_with_explanations": true, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Instead of allowing me to describe my situation specifically, it's kind of assuming that I fit into one of those categories", "Less quiz and more like a personalized experience would be interesting", "I'm really enjoying this happy that you made it. It's really helpful", "Instead of making it multiple choice maybe make a short answer so then people can type their answer", "They feel good because I got some positive feedback but then they also understand like they might be tripping a little bit too"]
+  },
+  {
+    "demographics": {"name": "Tamok", "session_number": "17", "session_type": "in-person", "age": null, "background": "Into self-improvement, brief in-person feedback session"},
+    "icp_classification": {"icp_fit": "Edge", "icp_score": 3, "icp_reasoning": "Into self-improvement, called app 'cool as fuck,' but limited data on lesson completion and return intent"},
+    "core_metrics": {"completed_L1": null, "started_L2_unprompted": null, "total_lessons_done": null, "would_use_again": "not_stated"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": false, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": true, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["Cool as fuck", "How do you know that these are the best things to say?"]
   },
   {
     "demographics": {"name": "Lauren", "session_number": "16", "session_type": "in-person-group", "age": null, "background": "Sorority member (DEEF), socially capable but overthinks interactions, struggles initiating conversation"},

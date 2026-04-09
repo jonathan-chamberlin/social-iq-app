@@ -19,5 +19,8 @@ enum AppConfig {
     /// Show "Reset Data" button on HomeView for testing. Set to false before release.
     static let showResetDataButton = false
 
+    /// Show "Reset Subscription" button in Settings for testing paywalls. Set to false before release.
+    static let showResetSubscriptionButton = false
+
     // Non-secret constants (UserDefaults keys, product IDs) live in Constants/AppConstants.swift
 }

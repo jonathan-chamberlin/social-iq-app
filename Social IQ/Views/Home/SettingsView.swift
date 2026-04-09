@@ -13,6 +13,7 @@ struct SettingsView: View {
     @State private var showDeleteConfirmation = false
     @State private var isRestoringPurchases = false
     @State private var restoreMessage: String?
+    @State private var subscriptionResetMessage: String?
 
     private let progressService = LessonProgressService()
     private let onboardingService = OnboardingService()
@@ -73,6 +74,25 @@ struct SettingsView: View {
                     Label("Delete Account", systemImage: "trash")
                 }
             }
+
+            if AppConfig.showResetSubscriptionButton {
+                // MARK: - Debug
+                Section {
+                    Button {
+                        resetSuperwallSubscription()
+                    } label: {
+                        Label("Reset Subscription", systemImage: "arrow.counterclockwise")
+                            .foregroundStyle(.orange)
+                    }
+                } header: {
+                    Text("Debug")
+                } footer: {
+                    if let subscriptionResetMessage {
+                        Text(subscriptionResetMessage)
+                            .foregroundStyle(.white.opacity(Theme.Opacity.muted))
+                    }
+                }
+            }
         }
         .scrollContentBackground(.hidden)
         .screenBackground()
@@ -104,6 +124,14 @@ struct SettingsView: View {
             restoreMessage = "Could not restore purchases. Please try again."
         }
         isRestoringPurchases = false
+    }
+
+    private func resetSuperwallSubscription() {
+        SuperwallService.reset()
+        subscriptionResetMessage = "Superwall reset. Status: \(SuperwallService.isSubscribed ? "still active" : "inactive")"
+        #if DEBUG
+        print("[Debug] Superwall subscription status after reset: \(SuperwallService.isSubscribed)")
+        #endif
     }
 
     private func deleteAccount() async {

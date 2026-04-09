@@ -47,7 +47,7 @@ struct OnboardingChartStep: View {
                     path.move(to: CGPoint(x: 0, y: chartH * 0.75))
                     path.addLine(to: CGPoint(x: w, y: chartH * 0.7))
                 }
-                .stroke(Color.gray.opacity(0.5), lineWidth: 2)
+                .stroke(Color.gray.opacity(Theme.Opacity.secondary), lineWidth: 2)
 
                 Path { path in
                     path.move(to: CGPoint(x: 0, y: chartH * 0.75))
@@ -68,7 +68,7 @@ struct OnboardingChartStep: View {
                 }
                 .padding(.horizontal, 16)
                 .font(.caption2)
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                 .offset(y: labelHeight / 2)
                 .frame(width: w, height: labelHeight, alignment: .bottom)
                 .offset(y: labelHeight)
@@ -83,7 +83,7 @@ struct OnboardingChartStep: View {
                 .frame(width: 8, height: 8)
             Text(label)
                 .font(.caption)
-                .foregroundStyle(.white.opacity(0.7))
+                .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
         }
     }
 }

@@ -23,7 +23,7 @@ struct LessonAnswerSection: View {
                     Text(lessonTitle)
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundStyle(.white.opacity(0.5))
+                        .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     LessonStepIndicator(currentLabel: step.label)

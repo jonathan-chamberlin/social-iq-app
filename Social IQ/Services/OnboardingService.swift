@@ -60,7 +60,7 @@ struct OnboardingService {
     func resetProfile(userId: String) async throws {
         let reset = ProfileReset(
             onboardingCompleted: false,
-            firstName: nil, age: nil, gender: nil, socialContext: nil,
+            age: nil, gender: nil, socialContext: nil,
             quiz1Answer: nil, quiz2Answer: nil, quiz3Answer: nil,
             selectedGoals: nil, referralCode: nil, discoverySource: nil,
             currentStreak: 0, longestStreak: 0, totalXp: 0

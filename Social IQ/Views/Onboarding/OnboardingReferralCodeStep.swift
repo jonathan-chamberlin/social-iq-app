@@ -19,7 +19,7 @@ struct OnboardingReferralCodeStep: View {
 
             TextField(
                 "", text: $referralCode,
-                prompt: Text("Enter code").foregroundStyle(.white.opacity(0.3))
+                prompt: Text("Enter code").foregroundStyle(.white.opacity(Theme.Opacity.disabled))
             )
             .textFieldStyle(.plain)
             .font(.title3)
@@ -35,7 +35,7 @@ struct OnboardingReferralCodeStep: View {
             Button(action: onSkip) {
                 Text("Skip")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                     .frame(maxWidth: .infinity)
             }
         }

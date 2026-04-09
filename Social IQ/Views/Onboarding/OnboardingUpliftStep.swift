@@ -27,12 +27,12 @@ struct OnboardingUpliftStep: View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.green.opacity(0.3), lineWidth: 1)
+                    .stroke(Color.green.opacity(Theme.Opacity.disabled), lineWidth: 1)
             )
 
             Image(systemName: "arrow.up.right")
                 .font(.system(size: 60))
-                .foregroundStyle(.green.opacity(0.3))
+                .foregroundStyle(.green.opacity(Theme.Opacity.disabled))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .padding(.top, 20)
         }

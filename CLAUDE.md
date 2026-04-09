@@ -34,7 +34,7 @@ Social IQ/
   Constants/        — DatabaseSchema, AnalyticsEvent
   Models/           — Codable structs (Lesson, LessonProgress)
   Data/             — Lesson content data (Lesson1-5)
-  ViewModels/       — AuthViewModel, LessonViewModel
+  ViewModels/       — AuthViewModel, LessonViewModel, OnboardingViewModel
   Views/
     Home/           — HomeView
     Auth/           — SignInView
@@ -90,6 +90,7 @@ Social IQ/
 ### Shared UI patterns
 - Card backgrounds: use `.cardBackground()` (defined in Theme.swift), never inline `RoundedRectangle.fill(Color.white.opacity(0.08))`.
 - Gold gradient: use `Theme.goldGradient`, never inline `LinearGradient(colors: [Theme.gold, Theme.goldLight], ...)`.
+- Semantic opacity: use `Theme.Opacity.disabled/.secondary/.muted/.subtle`, never inline magic opacity values (0.3, 0.5, 0.6, 0.7).
 - Screen background: use `.screenBackground()`, never inline `Color.black.ignoresSafeArea()`.
 - Haptics: use `HapticService.light()/.medium()/.heavy()/.success()`, never inline `UIImpactFeedbackGenerator`.
 - Sentence-splitting: use `.sentenceFormatted` (String extension), never inline `.replacingOccurrences(of: ". ", with: ".\n")`.
@@ -147,3 +148,4 @@ Project-specific docs live in `references/` at the repo root:
 - `import UIKit` should only appear in Utilities (HapticService, SoundPlayer) — views use the service wrappers
 - Do NOT use `DispatchQueue.main.asyncAfter` — use `Task { try? await Task.sleep(for:) }` instead
 - Do NOT import framework SDKs (SuperwallKit, Supabase) directly in Views — use service wrappers (SuperwallService, SupabaseService)
+- All `print()` statements MUST be wrapped in `#if DEBUG` / `#endif` — no debug logging in release builds

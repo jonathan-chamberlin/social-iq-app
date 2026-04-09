@@ -44,7 +44,7 @@ struct SettingsView: View {
             } footer: {
                 if let restoreMessage {
                     Text(restoreMessage)
-                        .foregroundStyle(.white.opacity(0.6))
+                        .foregroundStyle(.white.opacity(Theme.Opacity.muted))
                 }
             }
 
@@ -108,13 +108,25 @@ struct SettingsView: View {
 
     private func deleteAccount() async {
         guard let userId else { return }
+        #if DEBUG
+        print("[Delete] Starting account deletion for \(userId)")
+        #endif
+
         do {
             try await onboardingService.resetProfile(userId: userId)
             try await progressService.deleteAllProgress(userId: userId)
+            #if DEBUG
+            print("[Delete] Profile and progress reset")
+            #endif
         } catch {
-            // Best-effort data cleanup
+            #if DEBUG
+            print("[Delete] Reset error (best-effort): \(error)")
+            #endif
         }
         SuperwallService.reset()
+        #if DEBUG
+        print("[Delete] Signing out")
+        #endif
         await authViewModel.signOut()
     }
 }

@@ -46,7 +46,27 @@ final class AuthViewModel {
                 throw AuthError.missingIdentityToken
             }
             appleFirstName = credential.fullName?.givenName
+            #if DEBUG
+            print("[Auth] Apple credential givenName: \(appleFirstName ?? "nil")")
+            #endif
+
             let user = try await AuthService.shared.signInWithApple(credential: credential)
+
+            // Apple only sends fullName on the very first authorization.
+            // On re-auth, fall back to the name stored in user_profiles.
+            if appleFirstName == nil || appleFirstName?.isEmpty == true {
+                let storedName = await AuthService.shared.fetchFirstName(userId: user.id.uuidString)
+                #if DEBUG
+                print("[Auth] user_profiles first_name: \(storedName ?? "nil")")
+                #endif
+                if let storedName, !storedName.isEmpty {
+                    appleFirstName = storedName
+                }
+            }
+
+            #if DEBUG
+            print("[Auth] Final appleFirstName: \(appleFirstName ?? "nil")")
+            #endif
             authState = .signedIn(user)
         } catch {
             errorMessage = error.localizedDescription

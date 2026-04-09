@@ -28,7 +28,7 @@ struct FeedbackButton: View {
                 .background(
                     Circle().fill(Theme.goldGradient)
                 )
-                .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+                .shadow(color: .black.opacity(Theme.Opacity.disabled), radius: 4, x: 0, y: 2)
         }
     }
 }

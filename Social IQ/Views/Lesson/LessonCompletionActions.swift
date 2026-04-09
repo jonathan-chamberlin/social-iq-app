@@ -24,7 +24,7 @@ struct LessonCompletionActions: View {
                         .padding()
                         .background {
                             GeometryReader { geo in
-                                Theme.gold.opacity(0.3)
+                                Theme.gold.opacity(Theme.Opacity.disabled)
 
                                 Theme.goldGradient
                                     .frame(width: geo.size.width * countdownProgress)

@@ -6,7 +6,6 @@
 import Foundation
 
 enum AppConfig {
-    // swiftlint:disable:next force_unwrapping
     static let supabaseURL: URL = {
         guard let url = URL(string: "https://mobxxxxbsuuygwddjfom.supabase.co") else {
             fatalError("Invalid Supabase URL - check AppConfig")

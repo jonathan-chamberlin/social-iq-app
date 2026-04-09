@@ -35,10 +35,10 @@ struct CalculatingView: View {
                     if i < messages.count {
                         HStack(spacing: 8) {
                             Image(systemName: i < phase ? "checkmark.circle.fill" : "circle.dotted")
-                                .foregroundStyle(i < phase ? .green : .white.opacity(0.5))
+                                .foregroundStyle(i < phase ? .green : .white.opacity(Theme.Opacity.secondary))
                             Text(messages[i])
                                 .font(.subheadline)
-                                .foregroundStyle(.white.opacity(0.7))
+                                .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                         }
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                     }

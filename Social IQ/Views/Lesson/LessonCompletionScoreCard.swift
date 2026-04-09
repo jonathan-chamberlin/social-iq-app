@@ -18,14 +18,14 @@ struct LessonCompletionScoreCard: View {
             .font(.system(size: 48, weight: .bold, design: .rounded))
             .foregroundStyle(Theme.gold)
             .shadow(
-                color: showScoreGlow ? Theme.gold.opacity(0.6) : .clear,
+                color: showScoreGlow ? Theme.gold.opacity(Theme.Opacity.muted) : .clear,
                 radius: showScoreGlow ? 16 : 0
             )
 
         VStack(spacing: 6) {
             Text("\(completionCount.formatted()) people completed this lesson")
                 .font(.caption)
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
 
             Text("You finished faster than \(percentile)% of them")
                 .font(.headline)

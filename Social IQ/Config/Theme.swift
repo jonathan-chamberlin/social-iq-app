@@ -15,6 +15,13 @@ enum Theme {
         startPoint: .leading,
         endPoint: .trailing
     )
+
+    enum Opacity {
+        static let disabled: Double = 0.3
+        static let secondary: Double = 0.5
+        static let muted: Double = 0.6
+        static let subtle: Double = 0.7
+    }
 }
 
 extension View {

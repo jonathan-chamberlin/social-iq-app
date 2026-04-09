@@ -2,82 +2,23 @@
 //  OnboardingView.swift
 //  Social IQ
 //
-//  Coordinator: owns state, navigation, and analytics.
-//  Each step's UI lives in its own file (OnboardingQuizStep, OnboardingScareStep, etc.).
+//  View coordinator: renders the step UI and wires events to OnboardingViewModel.
+//  All state, navigation, and analytics live in OnboardingViewModel.
 //
 
-import Mixpanel
 import SwiftUI
 
 struct OnboardingView: View {
-    let userId: String
-    let appleFirstName: String?
-    let onComplete: () -> Void
+    @State private var viewModel: OnboardingViewModel
     @Environment(\.scenePhase) private var scenePhase
 
-    private let service = OnboardingService()
-
-    // MARK: - State
-
-    @State private var currentStep: OnboardingStep = .quiz
-    @State private var quizSubStep: QuizSubStep = .challenge
-    @State private var quizAnswers: [Int] = []
-
-    @State private var userName: String = ""
-    @State private var userAge: Int = 22
-    @State private var selectedGender: String = ""
-    @State private var selectedSocialContext: String = ""
-    @State private var selectedGoals: Set<String> = []
-    @State private var referralCode: String = ""
-    @State private var selectedDiscoverySource: String = ""
-
-    @State private var isCompleting = false
-    @State private var stepEnteredAt: Date = .now
-
-    // MARK: - Option Data
-
-    private static let socialContextOptions = [
-        "College campus",
-        "Greek life (sorority / fraternity)",
-        "Work / professional networking",
-        "Social events / parties / bars",
-        "Online / dating apps",
-        "Small friend groups",
-    ]
-
-    private static let discoverySourceOptions = [
-        "Reddit",
-        "Instagram",
-        "TikTok",
-        "Friend / word of mouth",
-        "App Store search",
-        "Greek life / sorority / fraternity",
-        "Other",
-    ]
-
-    // MARK: - Analytics Helpers
-
-    private var currentAnalyticsName: String {
-        if currentStep == .quiz {
-            return quizSubStep.analyticsName
-        }
-        return currentStep.analyticsName
+    init(userId: String, appleFirstName: String?, onComplete: @escaping () -> Void) {
+        _viewModel = State(initialValue: OnboardingViewModel(
+            userId: userId,
+            appleFirstName: appleFirstName,
+            onComplete: onComplete
+        ))
     }
-
-    private func trackStepCompleted(extraProperties: [String: MixpanelType] = [:]) {
-        let duration = Int(Date().timeIntervalSince(stepEnteredAt))
-        var properties: [String: MixpanelType] = [
-            "step": currentStep.stepNumber,
-            "step_name": currentAnalyticsName,
-            "duration_seconds": duration,
-        ]
-        for (key, value) in extraProperties {
-            properties[key] = value
-        }
-        AnalyticsService.track(event: .onboardingStepCompleted, properties: properties)
-    }
-
-    // MARK: - Body
 
     var body: some View {
         VStack(spacing: 0) {
@@ -87,7 +28,7 @@ struct OnboardingView: View {
 
             stepContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .id("\(currentStep)-\(quizSubStep)")
+                .id("\(viewModel.currentStep)-\(viewModel.quizSubStep)")
                 .transition(.asymmetric(
                     insertion: .move(edge: .trailing),
                     removal: .move(edge: .leading)
@@ -98,23 +39,15 @@ struct OnboardingView: View {
         }
         .padding(.horizontal, 24)
         .screenBackground()
-        .animation(.easeInOut(duration: 0.3), value: currentStep)
-        .animation(.easeInOut(duration: 0.3), value: quizSubStep)
+        .animation(.easeInOut(duration: 0.3), value: viewModel.currentStep)
+        .animation(.easeInOut(duration: 0.3), value: viewModel.quizSubStep)
         .preferredColorScheme(.dark)
         .onAppear {
-            if let appleFirstName, !appleFirstName.isEmpty, userName.isEmpty {
-                userName = appleFirstName
-            }
             AnalyticsService.track(event: .onboardingStarted)
         }
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .background, currentStep != .bridgeToPaywall {
-                let duration = Int(Date().timeIntervalSince(stepEnteredAt))
-                AnalyticsService.track(event: .onboardingAbandoned, properties: [
-                    "last_step": currentStep.stepNumber,
-                    "last_step_name": currentAnalyticsName,
-                    "duration_seconds": duration,
-                ])
+            if newPhase == .background, viewModel.currentStep != .bridgeToPaywall {
+                viewModel.trackAbandoned()
             }
         }
     }
@@ -125,7 +58,9 @@ struct OnboardingView: View {
         HStack(spacing: 6) {
             ForEach(OnboardingStep.allCases, id: \.self) { step in
                 Circle()
-                    .fill(step.stepNumber <= currentStep.stepNumber ? Color.white : Color.white.opacity(0.3))
+                    .fill(step.stepNumber <= viewModel.currentStep.stepNumber
+                          ? Color.white
+                          : Color.white.opacity(Theme.Opacity.disabled))
                     .frame(width: 8, height: 8)
             }
         }
@@ -137,25 +72,30 @@ struct OnboardingView: View {
     private var stepContent: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
-                switch currentStep {
+                switch viewModel.currentStep {
                 case .quiz:
-                    OnboardingQuizStep(subStep: quizSubStep, onSelectOption: selectQuizOption)
+                    OnboardingQuizStep(
+                        subStep: viewModel.quizSubStep,
+                        onSelectOption: viewModel.selectQuizOption
+                    )
                 case .nameAgeGender:
                     OnboardingNameAgeGenderStep(
-                        userName: $userName, userAge: $userAge, selectedGender: $selectedGender
+                        userName: $viewModel.userName,
+                        userAge: $viewModel.userAge,
+                        selectedGender: $viewModel.selectedGender
                     )
                 case .socialContext:
                     OnboardingOptionListStep(
                         title: "Where do you spend most of your social time?",
-                        options: Self.socialContextOptions
+                        options: OnboardingViewModel.socialContextOptions
                     ) { option in
-                        selectedSocialContext = option
-                        advance()
+                        viewModel.selectedSocialContext = option
+                        viewModel.advance()
                     }
                 case .calculating:
-                    CalculatingView { advance() }
+                    CalculatingView { viewModel.advance() }
                 case .scare:
-                    OnboardingScareStep(quiz1Answer: quizAnswers.first ?? 0)
+                    OnboardingScareStep(quiz1Answer: viewModel.quizAnswers.first ?? 0)
                 case .uplift:
                     OnboardingUpliftStep()
                 case .socialProof:
@@ -163,16 +103,19 @@ struct OnboardingView: View {
                 case .chart:
                     OnboardingChartStep()
                 case .goalSelection:
-                    OnboardingGoalSelectionStep(selectedGoals: $selectedGoals)
+                    OnboardingGoalSelectionStep(selectedGoals: $viewModel.selectedGoals)
                 case .referralCode:
-                    OnboardingReferralCodeStep(referralCode: $referralCode, onSkip: advance)
+                    OnboardingReferralCodeStep(
+                        referralCode: $viewModel.referralCode,
+                        onSkip: viewModel.advance
+                    )
                 case .discoverySource:
                     OnboardingOptionListStep(
                         title: "How did you hear about us?",
-                        options: Self.discoverySourceOptions
+                        options: OnboardingViewModel.discoverySourceOptions
                     ) { option in
-                        selectedDiscoverySource = option
-                        advance()
+                        viewModel.selectedDiscoverySource = option
+                        viewModel.advance()
                     }
                 case .ratingPrompt:
                     OnboardingRatingPromptStep()
@@ -181,12 +124,12 @@ struct OnboardingView: View {
                         onStartTraining: {
                             UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
                             SuperwallService.presentPaywallWithHandler(placement: .onboardingComplete) {
-                                completeOnboardingAndDismiss()
+                                viewModel.completeOnboardingAndDismiss()
                             }
                         },
                         onFreeLesson: {
                             UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
-                            completeOnboardingAndDismiss()
+                            viewModel.completeOnboardingAndDismiss()
                         }
                     )
                 }
@@ -198,23 +141,23 @@ struct OnboardingView: View {
 
     @ViewBuilder
     private var bottomBar: some View {
-        if currentStep.autoAdvances {
+        if viewModel.currentStep.autoAdvances {
             EmptyView()
         } else {
             HStack {
-                if currentStep.showsBackButton {
+                if viewModel.currentStep.showsBackButton {
                     Button {
-                        goBack()
+                        viewModel.goBack()
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.title3)
-                            .foregroundStyle(.white.opacity(0.6))
+                            .foregroundStyle(.white.opacity(Theme.Opacity.muted))
                             .frame(width: 44, height: 50)
                     }
                 }
 
                 Button {
-                    advance()
+                    viewModel.advance()
                 } label: {
                     Text("Continue")
                         .font(.headline)
@@ -223,124 +166,19 @@ struct OnboardingView: View {
                         .padding()
                         .background(
                             Capsule()
-                                .fill(canContinue ? Color.white.opacity(0.15) : Color.white.opacity(0.05))
+                                .fill(viewModel.canContinue
+                                      ? Color.white.opacity(0.15)
+                                      : Color.white.opacity(0.05))
                         )
                 }
-                .disabled(!canContinue)
+                .disabled(!viewModel.canContinue)
             }
-        }
-    }
-
-    // MARK: - Navigation Logic
-
-    private var canContinue: Bool {
-        switch currentStep {
-        case .nameAgeGender:
-            !userName.trimmingCharacters(in: .whitespaces).isEmpty && !selectedGender.isEmpty
-        case .goalSelection:
-            !selectedGoals.isEmpty
-        default:
-            true
-        }
-    }
-
-    private func advance() {
-        guard let nextStep = currentStep.next else { return }
-        trackStepCompleted(extraProperties: quizAnswerProperty())
-        currentStep = nextStep
-        stepEnteredAt = .now
-    }
-
-    private func goBack() {
-        if currentStep == .quiz, let prevSub = quizSubStep.previous {
-            quizSubStep = prevSub
-            quizAnswers.removeLast()
-        } else if let prevStep = currentStep.previous {
-            currentStep = prevStep
-        }
-        stepEnteredAt = .now
-    }
-
-    private func quizAnswerProperty() -> [String: MixpanelType] {
-        guard currentStep == .quiz, let lastAnswer = quizAnswers.last else { return [:] }
-        let options = quizSubStep.options
-        guard lastAnswer < options.count else { return [:] }
-        return ["answer": options[lastAnswer]]
-    }
-
-    private func selectQuizOption(_ index: Int) {
-        quizAnswers.append(index)
-        if let nextSub = quizSubStep.next {
-            let options = quizSubStep.options
-            var extra: [String: MixpanelType] = [:]
-            if index < options.count {
-                extra["answer"] = options[index]
-            }
-            trackStepCompleted(extraProperties: extra)
-            quizSubStep = nextSub
-            stepEnteredAt = .now
-        } else {
-            advance()
-        }
-    }
-
-    // MARK: - Completion Flow
-
-    private func buildUserProperties() -> [String: MixpanelType] {
-        var userProps: [String: MixpanelType] = [
-            "first_name": userName,
-            "age": userAge,
-        ]
-        if !selectedGender.isEmpty { userProps["gender"] = selectedGender }
-        if !selectedSocialContext.isEmpty { userProps["social_context"] = selectedSocialContext }
-        if !selectedGoals.isEmpty { userProps["goals"] = Array(selectedGoals).joined(separator: ", ") }
-        if !selectedDiscoverySource.isEmpty { userProps["discovery_source"] = selectedDiscoverySource }
-        if quizAnswers.indices.contains(0) {
-            let q1 = QuizSubStep.challenge.options
-            if quizAnswers[0] < q1.count { userProps["quiz_challenge"] = q1[quizAnswers[0]] }
-        }
-        if quizAnswers.indices.contains(1) {
-            let q2 = QuizSubStep.meetNew.options
-            if quizAnswers[1] < q2.count { userProps["quiz_meet_new"] = q2[quizAnswers[1]] }
-        }
-        if quizAnswers.indices.contains(2) {
-            let q3 = QuizSubStep.underperform.options
-            if quizAnswers[2] < q3.count { userProps["quiz_underperform"] = q3[quizAnswers[2]] }
-        }
-        return userProps
-    }
-
-    private func completeOnboardingAndDismiss() {
-        guard !isCompleting else { return }
-        isCompleting = true
-        trackStepCompleted()
-        Task {
-            do {
-                let onboardingData = OnboardingData(
-                    firstName: userName,
-                    age: userAge,
-                    gender: selectedGender.isEmpty ? nil : selectedGender,
-                    socialContext: selectedSocialContext.isEmpty ? nil : selectedSocialContext,
-                    quiz1Answer: quizAnswers.indices.contains(0) ? String(quizAnswers[0]) : nil,
-                    quiz2Answer: quizAnswers.indices.contains(1) ? String(quizAnswers[1]) : nil,
-                    quiz3Answer: quizAnswers.indices.contains(2) ? String(quizAnswers[2]) : nil,
-                    selectedGoals: Array(selectedGoals),
-                    referralCode: referralCode.isEmpty ? nil : referralCode,
-                    discoverySource: selectedDiscoverySource.isEmpty ? nil : selectedDiscoverySource
-                )
-                try await service.completeOnboarding(userId: userId, data: onboardingData)
-            } catch {
-                // Best-effort save — don't block the user
-            }
-            AnalyticsService.setUserProperties(buildUserProperties())
-            AnalyticsService.track(event: .onboardingCompleted)
-            onComplete()
         }
     }
 }
 
 #Preview {
     OnboardingView(userId: UUID().uuidString, appleFirstName: "Jane") {
-        print("Onboarding complete")
+        // Preview completion
     }
 }

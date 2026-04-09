@@ -23,10 +23,10 @@ struct OnboardingNameAgeGenderStep: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("First name")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                 TextField(
                     "", text: $userName,
-                    prompt: Text("Your first name").foregroundStyle(.white.opacity(0.3))
+                    prompt: Text("Your first name").foregroundStyle(.white.opacity(Theme.Opacity.disabled))
                 )
                 .textFieldStyle(.plain)
                 .font(.title3)
@@ -40,7 +40,7 @@ struct OnboardingNameAgeGenderStep: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Gender")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                 HStack(spacing: 10) {
                     ForEach(genderOptions, id: \.self) { option in
                         let isSelected = selectedGender == option
@@ -64,7 +64,7 @@ struct OnboardingNameAgeGenderStep: View {
             VStack(alignment: .leading, spacing: 8) {
                 Text("Age: \(userAge)")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.7))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                 Picker("Age", selection: $userAge) {
                     ForEach(13...99, id: \.self) { age in
                         Text("\(age)").tag(age)

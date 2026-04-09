@@ -92,13 +92,13 @@ struct HomeView: View {
                             SettingsView(authViewModel: authViewModel)
                         } label: {
                             Image(systemName: "gearshape")
-                                .foregroundStyle(.white.opacity(0.7))
+                                .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                         }
                         #if DEBUG
                         if AppConfig.showResetDataButton {
                             Button("Reset Data") { showResetConfirmation = true }
                                 .font(.caption2)
-                                .foregroundStyle(.red.opacity(0.7))
+                                .foregroundStyle(.red.opacity(Theme.Opacity.subtle))
                         }
                         #endif
                     }

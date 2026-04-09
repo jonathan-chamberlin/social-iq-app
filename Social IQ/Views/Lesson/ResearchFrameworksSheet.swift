@@ -47,13 +47,13 @@ struct ResearchFrameworksSheet: View {
                 VStack(alignment: .leading, spacing: 20) {
                     Text("Our answers are grounded in peer-reviewed social psychology research and proven negotiation frameworks.")
                         .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                         .padding(.bottom, 4)
 
                     ForEach(frameworks, id: \.name) { framework in
                         HStack(spacing: 0) {
                             RoundedRectangle(cornerRadius: 2)
-                                .fill(Color.blue.opacity(0.6))
+                                .fill(Color.blue.opacity(Theme.Opacity.muted))
                                 .frame(width: 3)
 
                             VStack(alignment: .leading, spacing: 8) {

@@ -17,6 +17,8 @@ enum DatabaseSchema {
     enum UserProfiles {
         static let table = "user_profiles"
         static let id = "id"
+        static let firstName = "first_name"
+        static let email = "email"
         static let onboardingCompleted = "onboarding_completed"
     }
 

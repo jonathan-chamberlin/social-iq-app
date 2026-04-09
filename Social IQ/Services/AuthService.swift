@@ -27,8 +27,9 @@ final class AuthService {
     }
 
     /// Exchange an Apple credential for a Supabase session.
-    /// If Apple provided a name, persist it in user metadata immediately
-    /// (Apple only sends fullName on the very first sign-in).
+    /// Apple only sends fullName/email on the very first sign-in for a given
+    /// app+Apple ID pair. We persist whatever Apple provides to `user_profiles`
+    /// immediately so it survives re-auth and account deletion.
     func signInWithApple(credential: ASAuthorizationAppleIDCredential) async throws -> User {
         guard let nonce = currentNonce else {
             throw AuthError.missingNonce
@@ -46,15 +47,49 @@ final class AuthService {
             )
         )
 
-        // Persist Apple-provided name in user metadata (only available on first sign-in)
-        if let givenName = credential.fullName?.givenName, !givenName.isEmpty {
-            _ = try? await SupabaseService.shared.client.auth.update(
-                user: UserAttributes(data: ["full_name": .string(givenName)])
+        // Persist Apple-provided name and email to user_profiles.
+        // Apple only sends these on the very first authorization, so this is
+        // our one chance to capture them in a table we control.
+        let givenName = credential.fullName?.givenName
+        let email = credential.email
+        if (givenName != nil && !givenName!.isEmpty) || (email != nil && !email!.isEmpty) {
+            #if DEBUG
+            print("[Auth] Saving Apple info to user_profiles - name: \(givenName ?? "nil"), email: \(email ?? "nil")")
+            #endif
+            try? await saveAppleInfoToProfile(
+                userId: session.user.id.uuidString,
+                firstName: givenName,
+                email: email
             )
         }
 
         currentNonce = nil
         return session.user
+    }
+
+    /// Fetch the stored first name from user_profiles.
+    /// Used as fallback when Apple doesn't provide the name on re-auth.
+    func fetchFirstName(userId: String) async -> String? {
+        struct Row: Decodable {
+            let firstName: String?
+            enum CodingKeys: String, CodingKey {
+                case firstName = "first_name"
+            }
+        }
+        do {
+            let rows: [Row] = try await SupabaseService.shared.client
+                .from(DatabaseSchema.UserProfiles.table)
+                .select(DatabaseSchema.UserProfiles.firstName)
+                .eq(DatabaseSchema.UserProfiles.id, value: userId)
+                .execute()
+                .value
+            return rows.first?.firstName
+        } catch {
+            #if DEBUG
+            print("[Auth] Failed to fetch first name: \(error)")
+            #endif
+            return nil
+        }
     }
 
     func signOut() async throws {
@@ -64,6 +99,29 @@ final class AuthService {
     func restoreSession() async throws -> User? {
         let session = try await SupabaseService.shared.client.auth.session
         return session.user
+    }
+
+    // MARK: - Profile persistence
+
+    /// Save Apple-provided name/email to user_profiles.
+    /// Only updates non-nil fields so we never overwrite existing data with nil.
+    private func saveAppleInfoToProfile(userId: String, firstName: String?, email: String?) async throws {
+        struct AppleInfoUpdate: Encodable {
+            let firstName: String?
+            let email: String?
+
+            enum CodingKeys: String, CodingKey {
+                case firstName = "first_name"
+                case email
+            }
+        }
+
+        let update = AppleInfoUpdate(firstName: firstName, email: email)
+        try await SupabaseService.shared.client
+            .from(DatabaseSchema.UserProfiles.table)
+            .update(update)
+            .eq(DatabaseSchema.UserProfiles.id, value: userId)
+            .execute()
     }
 
     // MARK: - Nonce helpers

@@ -41,7 +41,7 @@ struct OnboardingScareStep: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.red.opacity(0.3), lineWidth: 1)
+                .stroke(Color.red.opacity(Theme.Opacity.disabled), lineWidth: 1)
         )
     }
 

@@ -24,7 +24,7 @@ struct OnboardingBridgeToPaywallStep: View {
 
             Text("You've taken the first step. Your custom training plan is ready.")
                 .font(.body)
-                .foregroundStyle(.white.opacity(0.7))
+                .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 8)
 
@@ -43,7 +43,7 @@ struct OnboardingBridgeToPaywallStep: View {
             Button(action: onFreeLesson) {
                 Text("Start with free lesson")
                     .font(.subheadline)
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
             }
         }
         .frame(maxWidth: .infinity)

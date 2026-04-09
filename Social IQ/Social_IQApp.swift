@@ -99,6 +99,17 @@ struct Social_IQApp: App {
         do {
             let completed = try await onboardingService.fetchOnboardingCompleted(userId: userId)
             showOnboarding = !completed
+            // If onboarding is needed and we don't have the name yet (session restore,
+            // not fresh sign-in), fetch it from user_profiles.
+            if showOnboarding, authViewModel.appleFirstName == nil {
+                let storedName = await AuthService.shared.fetchFirstName(userId: userId)
+                if let storedName, !storedName.isEmpty {
+                    authViewModel.appleFirstName = storedName
+                    #if DEBUG
+                    print("[App] Restored first name from user_profiles: \(storedName)")
+                    #endif
+                }
+            }
         } catch {
             // If we can't check, show onboarding (safer than skipping)
             showOnboarding = true

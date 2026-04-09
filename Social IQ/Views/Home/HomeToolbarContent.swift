@@ -15,7 +15,7 @@ struct HomeProBadge: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 3)
             .background(Capsule().fill(Theme.goldGradient))
-            .shadow(color: glow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
+            .shadow(color: glow ? Theme.gold.opacity(Theme.Opacity.muted) : .clear, radius: 8)
             .onAppear {
                 withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
                     glow = true

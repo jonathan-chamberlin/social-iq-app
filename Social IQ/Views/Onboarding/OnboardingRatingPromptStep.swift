@@ -23,7 +23,7 @@ struct OnboardingRatingPromptStep: View {
 
             Text("A quick rating helps other people discover Social IQ")
                 .font(.body)
-                .foregroundStyle(.white.opacity(0.7))
+                .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)

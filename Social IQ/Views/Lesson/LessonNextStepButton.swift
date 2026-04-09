@@ -32,7 +32,7 @@ struct LessonNextStepButton: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 8)
                     .background(Capsule().fill(Theme.gold))
-                    .shadow(color: glow ? Theme.gold.opacity(0.6) : .clear, radius: 8)
+                    .shadow(color: glow ? Theme.gold.opacity(Theme.Opacity.muted) : .clear, radius: 8)
             }
             .scaleEffect(scale)
             .onAppear {

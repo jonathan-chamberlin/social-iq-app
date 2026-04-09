@@ -53,10 +53,10 @@ struct OnboardingSocialProofStep: View {
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                 Text("·")
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                 Text(duration)
                     .font(.caption)
-                    .foregroundStyle(.white.opacity(0.5))
+                    .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
             }
         }
         .padding(16)

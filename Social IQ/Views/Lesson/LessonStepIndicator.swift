@@ -31,13 +31,13 @@ struct LessonStepIndicator: View {
                     Text(label)
                         .font(.caption2)
                         .fontWeight(isCurrent ? .semibold : .regular)
-                        .foregroundStyle(isCurrent ? .white : .gray.opacity(0.6))
+                        .foregroundStyle(isCurrent ? .white : .gray.opacity(Theme.Opacity.muted))
                 }
                 .frame(maxWidth: .infinity)
 
                 if index < Self.stepLabels.count - 1 {
                     Rectangle()
-                        .fill(isCompleted ? Theme.gold : Color.gray.opacity(0.3))
+                        .fill(isCompleted ? Theme.gold : Color.gray.opacity(Theme.Opacity.disabled))
                         .frame(height: 2)
                         .offset(y: -8)
                 }

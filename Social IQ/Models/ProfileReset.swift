@@ -4,9 +4,10 @@
 
 import Foundation
 
+/// Resets onboarding and progress data but preserves Apple-provided identity
+/// fields (first_name, email) that cannot be re-fetched after first sign-in.
 struct ProfileReset: Encodable {
     let onboardingCompleted: Bool
-    let firstName: String?
     let age: Int?
     let gender: String?
     let socialContext: String?
@@ -22,7 +23,6 @@ struct ProfileReset: Encodable {
 
     enum CodingKeys: String, CodingKey {
         case onboardingCompleted = "onboarding_completed"
-        case firstName = "first_name"
         case age, gender
         case socialContext = "social_context"
         case quiz1Answer = "quiz1_answer"

@@ -36,7 +36,7 @@ struct LessonFeedbackPanel: View {
                         Button { showFullExplanation = true } label: {
                             Text("See more")
                                 .font(.system(size: 13))
-                                .foregroundStyle(.white.opacity(0.5))
+                                .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                         }
                     }
                 }
@@ -46,7 +46,7 @@ struct LessonFeedbackPanel: View {
                 Button { showFrameworks = true } label: {
                     Image(systemName: "questionmark.circle")
                         .font(.system(size: 18))
-                        .foregroundStyle(.white.opacity(0.5))
+                        .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
                 }
             }
 

@@ -34,7 +34,7 @@ struct OnboardingGoalSelectionStep: View {
 
             Text("Pick up to \(Self.maxGoals)")
                 .font(.subheadline)
-                .foregroundStyle(.white.opacity(0.5))
+                .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
 
             WrappingHStack(items: goalOptions, spacing: 10, lineSpacing: 10) { goal in
                 let isSelected = selectedGoals.contains(goal)

@@ -47,9 +47,22 @@ final class SuperwallService {
 
     /// Present a paywall and execute `onComplete` when the user should proceed.
     /// The feature block fires when the user has access (purchased, already subscribed, or no paywall configured).
-    static func presentPaywallWithHandler(placement: SuperwallPlacement, onComplete: @escaping () -> Void) {
+    /// The dismiss handler ensures the user also proceeds if they close the paywall without purchasing.
+    static func presentPaywallWithHandler(placement: SuperwallPlacement, onComplete: @escaping @Sendable () -> Void) {
         AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
-        Superwall.shared.register(placement: placement.rawValue) {
+        let handler = PaywallPresentationHandler()
+        handler.onDismiss { _, result in
+            if case .purchased = result {
+                AnalyticsService.track(event: .subscriptionStarted)
+            } else {
+                AnalyticsService.track(event: .paywallDismissed, properties: ["trigger": placement.rawValue])
+            }
+            onComplete()
+        }
+        handler.onError { _ in
+            onComplete()
+        }
+        Superwall.shared.register(placement: placement.rawValue, handler: handler) {
             if isSubscribed {
                 AnalyticsService.track(event: .subscriptionStarted)
             }

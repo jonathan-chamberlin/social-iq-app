@@ -74,6 +74,13 @@ struct Social_IQApp: App {
                     .task {
                         await authViewModel.checkSession()
                     }
+                    .onChange(of: signedInUserId) { oldId, newId in
+                        if oldId != nil, newId == nil {
+                            // User signed out — reset so next sign-in re-checks onboarding
+                            onboardingChecked = false
+                            showOnboarding = false
+                        }
+                    }
                 }
             }
             .preferredColorScheme(.dark)

@@ -180,7 +180,7 @@ struct OnboardingView: View {
                     OnboardingBridgeToPaywallStep(
                         onStartTraining: {
                             UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
-                            SuperwallService.presentPaywall(placement: .onboardingComplete) {
+                            SuperwallService.presentPaywallWithHandler(placement: .onboardingComplete) {
                                 completeOnboardingAndDismiss()
                             }
                         },

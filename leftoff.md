@@ -13,6 +13,8 @@
 
 ## Next Up
 - Monitor App Store Review and respond to any rejection feedback
+- **Reddit Seeding Launch** — full details in Notion task page content (task ID: `33dafe0d-cf03-8108-9c31-d3cdfea75a23`)
+- **AI UGC Tool Test** — full details in Notion task page content (task ID: `33dafe0d-cf03-8162-826b-ddced947353e`)
 - Once approved: create Bitly attribution links per channel
 - Split LessonView into coordinator + extracted subcomponents
 - Add unit tests for ViewModels (AuthViewModel, LessonViewModel) and Services

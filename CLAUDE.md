@@ -151,3 +151,7 @@ Project-specific docs live in `references/` at the repo root:
 - All `print()` statements MUST be wrapped in `#if DEBUG` / `#endif` — no debug logging in release builds
 - Supabase `.auth.session` reads from local Keychain cache WITHOUT server validation — use `refreshSession()` for session restore to catch deleted/invalidated users
 - Apple Sign In only sends `fullName`/`email` on the VERY FIRST authorization per app+Apple ID pair — persist these to `user_profiles` immediately, never rely on `auth.users` metadata (gets overwritten on re-auth)
+- NEVER use `Superwall.shared.getPresentationResult()` as a pre-check before `register()` — it consumes campaign evaluations (counts as "matched") without assigning variants, making paywalls silently fail
+- Simulator vs TestFlight differ in 3 critical ways: (1) StoreKit has no real transactions on sim, (2) iOS Keychain survives app deletion on device, (3) `#if DEBUG` code is stripped from TestFlight builds — always diagnose with MCP/dashboard BEFORE deploying code changes
+- When debugging "paywall not showing", check Superwall subscription status and dashboard config FIRST, before modifying code — 4 sessions were wasted changing code when the root cause was stale StoreKit state
+- `SuperwallService.identify(userId:)` MUST be called after sign-in — without it, Superwall uses device identity and new accounts inherit stale subscription state from previous users

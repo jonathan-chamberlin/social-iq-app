@@ -97,33 +97,63 @@ Paywall copy decisions should be informed by user research. Read `user-research/
 - ICP-B paywall demand signal (Pattern 14) — Lauren, Sana, Phoebe were disappointed by locked lessons
 - Gender-neutral copy requirement (Pattern 12) — "people" not "guys"
 
+## Identity Management
+
+**CRITICAL: Always call `SuperwallService.identify(userId:)` after sign-in.** Without it, Superwall uses device-level identity. A new account on the same device inherits the previous user's subscription state, causing paywalls to silently skip.
+
+```swift
+// In Social_IQApp.swift checkOnboarding():
+AnalyticsService.identify(userId: userId)
+SuperwallService.identify(userId: userId)  // Must pair with analytics identify
+```
+
+On sign-out/account deletion, call `SuperwallService.reset()` to clear cached state.
+
 ## Troubleshooting: Paywall Not Showing
 
 When a paywall doesn't appear after tapping a button that calls `Superwall.shared.register(placement:)`, check these in order:
 
-### 1. Paywall has unpublished changes (MOST COMMON)
+### 1. Stale StoreKit subscription on device (MOST COMMON for developer testing)
+If the developer's Apple ID ever completed a sandbox purchase, Superwall sees them as subscribed and silently skips ALL paywalls. This is the #1 cause of "works on simulator, fails on TestFlight."
+- **Diagnosis:** Check `SuperwallService.isSubscribed` - if true, this is the issue
+- **Fix:** Use the "Reset Subscription" button in Settings (toggle `AppConfig.showResetSubscriptionButton = true`), then delete account and create fresh
+- **Why simulator works:** Simulator has no real StoreKit transactions; device has Apple ID transaction history
+- **NEVER use `getPresentationResult()` as a pre-check before `register()`** - it consumes campaign evaluations (counts as "matched") without assigning variants, making the problem worse
+
+### 2. Paywall has unpublished changes
 Superwall's visual editor creates drafts. If the paywall was edited but never published, TestFlight/production builds won't see the update. The simulator may still show it because sandbox can serve drafts.
 - **MCP can't publish paywalls** - there is no `publish_paywall` tool
 - **Fix:** Open Superwall dashboard -> Paywalls -> click the paywall -> click the teal "Publish" button in the editor
 - **Tell the user** this requires the dashboard (or generate a Chrome agent prompt)
 
-### 2. Campaign is not active
+### 3. Campaign is not active
 Check via MCP: `mcp__superwall__get_campaign` with the campaign ID. Look for status/active fields.
 - If paused or draft, the placement event fires but no paywall is served
 
-### 3. Placement event name mismatch
+### 4. Placement event name mismatch
 The placement string in code must exactly match the campaign's placement on the dashboard. Check for typos, camelCase vs snake_case differences.
 
-### 4. Simulator vs TestFlight environment
+### 5. Simulator vs TestFlight environment
 Superwall treats builds differently:
-- **Simulator** = sandbox environment (may show draft/test paywalls)
-- **TestFlight** = production environment (only shows published, live paywalls)
+- **Simulator** = sandbox environment (no real StoreKit, may show draft/test paywalls)
+- **TestFlight** = production environment (real StoreKit with Apple ID history, only published paywalls)
 - **App Store** = production environment
 
-If it works in simulator but not TestFlight, the issue is almost always #1 (unpublished draft) or a campaign scoped to test/sandbox only.
+Key differences that cause "works on sim, fails on device":
+- StoreKit transactions tied to Apple ID persist across app deletion
+- iOS Keychain survives app deletion (Supabase session restores unexpectedly)
+- `Superwall.shared.reset()` clears Superwall state but NOT StoreKit transactions
+- `#if DEBUG` logging is invisible on TestFlight - use configurable UI diagnostics instead
 
-### 5. Audience filters or entitlements blocking
+### 6. Audience filters or entitlements blocking
 Check the campaign's audience rules - filters like "show once," device type, or entitlement status can silently suppress the paywall.
+
+### Debugging checklist (do these BEFORE changing code)
+1. Check `SuperwallService.isSubscribed` - is the user seen as subscribed?
+2. Check Superwall dashboard via MCP: `list_campaigns` -> verify placement name, paywall attached, campaign active
+3. Check `integrated` field on `list_projects` - if `false`, SDK may not be connecting
+4. Check if `identify(userId:)` is being called after sign-in
+5. Only AFTER ruling out config/state issues should you modify code
 
 ## Key placements
 

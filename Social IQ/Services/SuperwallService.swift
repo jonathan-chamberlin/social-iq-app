@@ -18,6 +18,12 @@ final class SuperwallService {
         Superwall.configure(apiKey: AppConfig.superwallAPIKey)
     }
 
+    /// Associate Superwall with a specific user so subscription state is per-user, not per-device.
+    /// Must be called after sign-in so a new account on the same device starts fresh.
+    static func identify(userId: String) {
+        Superwall.shared.identify(userId: userId)
+    }
+
     /// Present a paywall for a specific placement.
     static func presentPaywall(placement: SuperwallPlacement = .lessonLocked) {
         AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])

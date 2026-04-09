@@ -93,8 +93,8 @@ struct Social_IQApp: App {
             let completed = try await onboardingService.fetchOnboardingCompleted(userId: userId)
             showOnboarding = !completed
         } catch {
-            // If we can't check, skip onboarding (don't block the user)
-            showOnboarding = false
+            // If we can't check, show onboarding (safer than skipping)
+            showOnboarding = true
         }
         onboardingChecked = true
     }

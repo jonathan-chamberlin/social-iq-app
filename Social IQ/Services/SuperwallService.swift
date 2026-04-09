@@ -37,9 +37,8 @@ final class SuperwallService {
             }
             onDismiss()
         }
-        handler.onSkip { _ in
-            onDismiss()
-        }
+        // Don't call onDismiss on skip — if no paywall is configured,
+        // the user should stay on the current screen, not silently advance.
         handler.onError { _ in
             onDismiss()
         }

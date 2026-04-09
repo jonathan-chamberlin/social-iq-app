@@ -32,11 +32,7 @@ struct LessonView: View {
                     score: viewModel.score,
                     totalSteps: displayedLesson.steps.count,
                     onNextLesson: nextLesson.map { next in
-                        {
-                            activeLesson = next
-                            viewModel.startLesson(next)
-                            AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": next.id])
-                        }
+                        { advanceToLesson(next) }
                     },
                     onDismiss: { dismiss() }
                 )
@@ -103,6 +99,24 @@ struct LessonView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Next Lesson
+
+    private func advanceToLesson(_ next: Lesson) {
+        if AppConstants.freeLessonIds.contains(next.id) || SuperwallService.isSubscribed {
+            startNextLesson(next)
+        } else {
+            SuperwallService.presentPaywallWithHandler(placement: .lessonLocked) {
+                startNextLesson(next)
+            }
+        }
+    }
+
+    private func startNextLesson(_ next: Lesson) {
+        activeLesson = next
+        viewModel.startLesson(next)
+        AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": next.id])
     }
 }
 

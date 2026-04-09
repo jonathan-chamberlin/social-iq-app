@@ -22,10 +22,6 @@ struct LessonCompletionScoreCard: View {
                 radius: showScoreGlow ? 16 : 0
             )
 
-        Text("correct on first try")
-            .font(.subheadline)
-            .foregroundStyle(.gray)
-
         VStack(spacing: 6) {
             Text("\(completionCount.formatted()) people completed this lesson")
                 .font(.caption)

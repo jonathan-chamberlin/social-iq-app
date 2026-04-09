@@ -15,6 +15,13 @@ struct LessonFeedbackPanel: View {
         VStack(alignment: .leading, spacing: 10) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 6) {
+                    if let researcher = option.feedback.researcher {
+                        Text(researcher)
+                            .font(.caption2)
+                            .fontWeight(.semibold)
+                            .foregroundStyle(Theme.gold)
+                    }
+
                     Text(option.feedback.renText.sentenceFormatted)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(.white)

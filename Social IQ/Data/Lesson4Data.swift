@@ -25,6 +25,7 @@ extension LessonData {
                         label: "She thinks you're making a bad decision and wants you to reconsider",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Her words sound like criticism, sure. But her body is doing something else entirely.",
                             text: "Easy to take her words at face value, but look at her body language: tight voice, stirring pasta nervously. She's not critiquing your plan. She's scared. If you respond with logic, you'll miss what she actually needs."
                         )
@@ -35,6 +36,7 @@ extension LessonData {
                         label: "She's scared about your financial security and expressing it as criticism",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Ekman - UCSF",
                             renText: "You caught the fear under the words. Ekman's research shows body language often contradicts spoken words. Her tight voice and nervous hands told you the real story.",
                             text: "The word \"stable\" is the giveaway. She's not saying freelance is bad. She's saying the lack of security terrifies her. That tight voice and the pasta stirring? That's anxiety. She's scared for you and this is the only way she knows how to say it."
                         )
@@ -45,6 +47,7 @@ extension LessonData {
                         label: "She's worried what other family members will think",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Makes sense if you know families that run on appearances. But she never mentioned anyone else.",
                             text: "Nothing she's doing points to caring about what other people think. She's not mentioning relatives or friends. The tight voice and \"stability\" tell you this is her own fear, not a reputation thing."
                         )
@@ -55,6 +58,7 @@ extension LessonData {
                         label: "She doesn't trust your judgment based on past decisions",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "If she'd said \"you always do this\" you'd be right. she didn't. she's looking forward, not back.",
                             text: "If you hear this as a trust issue, you'll get defensive about your track record instead of addressing what's actually going on."
                         )
@@ -73,6 +77,7 @@ extension LessonData {
                         label: "Walk her through your financial plan with specific numbers to ease her concern",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "The plan is real and it matters. But she can't hear it yet. Feelings have to move first.",
                             text: "Spreadsheets don't work on someone who's scared. She won't absorb any numbers until she feels like you've actually heard her. Lead with the emotion first, then the plan has a shot."
                         )
@@ -83,6 +88,7 @@ extension LessonData {
                         label: "Label her fear, tell her you appreciate her concern, and that everything will be okay",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Lieberman - UCLA",
                             renText: "Name it first, then reassure. Lieberman's UCLA research on affect labeling shows naming an emotion out loud reduces its intensity. That order is everything.",
                             text: "Name what she's feeling: \"it sounds like you're worried I won't be able to support myself.\" Once she feels heard, her guard drops. Then you can reassure her things will be okay."
                         )
@@ -93,6 +99,7 @@ extension LessonData {
                         label: "Label the fear underneath the criticism before explaining that it's your life",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Solid start, but \"it's my life\" undoes it. you opened the door and then closed it in her face.",
                             text: "\"It's my life\" sounds respectful but it's actually a wall. She hears \"stop talking about this.\" She'll feel dismissed and bring it up again next dinner because nothing got resolved."
                         )
@@ -103,6 +110,7 @@ extension LessonData {
                         label: "Change the subject and revisit this when she's had time to process",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Avoidance feels peaceful in the moment. It just moves the tension to next time.",
                             text: "Every time you dodge this conversation, she has more time to worry and the next one gets harder."
                         )
@@ -121,6 +129,7 @@ extension LessonData {
                         label: "\"Mom, I've run the numbers. I have three months runway and two clients already lined up.\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "The numbers are real. But she asked about feelings and you handed her a spreadsheet.",
                             text: "She'll say \"okay\" and feel the exact same dread. You answered the question she asked, not the one she meant."
                         )
@@ -131,6 +140,7 @@ extension LessonData {
                         label: "\"I know it's scary. It sounds like you're worried I won't be able to take care of myself.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Lieberman - UCLA",
                             renText: "THAT. Lieberman's research at UCLA proved this: naming someone's fear out loud literally calms the amygdala. You gave her room to confirm it. That's the whole unlock.",
                             text: "Now she feels like you're actually listening, not just waiting to defend yourself."
                         )
@@ -141,6 +151,7 @@ extension LessonData {
                         label: "\"I hear you but this is what I want to do. I need you to support me.\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Totally get it, you want her in your corner. But flipping to your needs before hers lands as dismissal.",
                             text: "You just asked her to shut down her fear so you can feel supported. That's a bad trade. She needs something from you right now, not the other way around."
                         )
@@ -151,6 +162,7 @@ extension LessonData {
                         label: "\"Can we talk about this later? I just want to have a nice dinner.\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "You want peace at the table. She'll bring it back up before dessert.",
                             text: "Next dinner, same conversation, more buildup. Dodging it doesn't make it go away."
                         )

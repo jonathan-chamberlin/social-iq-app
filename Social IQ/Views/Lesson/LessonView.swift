@@ -31,6 +31,7 @@ struct LessonView: View {
                     lessonId: displayedLesson.id,
                     score: viewModel.score,
                     totalSteps: displayedLesson.steps.count,
+                    researchers: uniqueResearchers(for: displayedLesson),
                     onNextLesson: nextLesson.map { next in
                         { advanceToLesson(next) }
                     },
@@ -99,6 +100,16 @@ struct LessonView: View {
                 }
             }
         }
+    }
+
+    // MARK: - Helpers
+
+    private func uniqueResearchers(for lesson: Lesson) -> [String] {
+        var seen = Set<String>()
+        return lesson.steps
+            .flatMap { $0.options }
+            .compactMap { $0.feedback.researcher }
+            .filter { seen.insert($0).inserted }
     }
 
     // MARK: - Next Lesson

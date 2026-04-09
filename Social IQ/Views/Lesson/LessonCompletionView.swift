@@ -18,6 +18,7 @@ struct LessonCompletionView: View {
     let lessonId: String
     let score: Int
     let totalSteps: Int
+    let researchers: [String]
     let onNextLesson: (() -> Void)?
     let onDismiss: () -> Void
 
@@ -58,6 +59,15 @@ struct LessonCompletionView: View {
                 percentileScale: percentileScale,
                 percentileOpacity: percentileOpacity
             )
+
+            if !researchers.isEmpty {
+                Text("Grounded in research by \(researchers.joined(separator: " · "))")
+                    .font(.caption2)
+                    .foregroundStyle(.white.opacity(0.45))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 32)
+                    .padding(.top, 8)
+            }
 
             Spacer()
 

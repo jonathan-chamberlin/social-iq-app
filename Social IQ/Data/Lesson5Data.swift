@@ -25,6 +25,7 @@ extension LessonData {
                         label: "Danny is taking advantage of you and doesn't care about the relationship",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Makes sense to go there, four times feels like scheming. But there's a difference between easy and malicious.",
                             text: "If you read this as him using you, you'll come in angry when what you actually need is boundaries."
                         )
@@ -35,6 +36,7 @@ extension LessonData {
                         label: "Danny genuinely needs help and doesn't have other options",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "That's the story he tells himself. Four times says he has options, they're just harder than you.",
                             text: "That's probably what Danny would tell you. But if you buy this framing, you become the permanent solution to a problem you can't fix."
                         )
@@ -45,6 +47,7 @@ extension LessonData {
                         label: "Danny has learned you're a safe ask and conflates the relationship with financial access",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Gottman - UW",
                             renText: "THAT. This isn't a crisis, it's a system. Gottman's research on relationship bids shows people unconsciously learn who will turn toward them. You saw it.",
                             text: "He's found his path of least resistance and it runs through you. The three weeks of silence after you said no last time? That was him recalibrating, not punishing you. The relationship is real. The money pattern is also real. You have to handle them separately."
                         )
@@ -55,6 +58,7 @@ extension LessonData {
                         label: "Danny is testing whether you'll show up for family when it counts",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Totally get it, family framing hits hard. But that guilt is exactly the lever keeping you in the cycle.",
                             text: "This isn't a loyalty test. Danny needs rent money. If you frame it that way, you'll feel guilty saying no."
                         )
@@ -73,6 +77,7 @@ extension LessonData {
                         label: "Ask what happened to the money from last time before deciding",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Solid instinct, but now you're the auditor. A good enough excuse and you're back on the hook.",
                             text: "He gives a reason, you evaluate it, he gets defensive, and suddenly you're arguing about the past."
                         )
@@ -83,6 +88,7 @@ extension LessonData {
                         label: "Separate the relationship from the request: love him, decline the loan, keep them distinct",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Gottman - UW",
                             renText: "Clean read. Gottman's research on turning toward vs. turning away shows you can honor a relationship while declining a request. You can't guilt-trip someone who already named the love out loud.",
                             text: "Separate the love from the money. That's the move. He can't guilt you with \"I guess you don't care about family\" if you've already named the relationship as its own thing. No audit, no repayment plan he won't follow, no \"last time\" ultimatum you can't enforce."
                         )
@@ -93,6 +99,7 @@ extension LessonData {
                         label: "Offer a smaller amount with a written repayment plan",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Looks like structure, but you're still in. And when he misses the deadline, now you've got debt and resentment.",
                             text: "Sounds like a reasonable compromise, but now you're a lender with terms Danny won't meet. When he doesn't pay, you've added financial resentment on top of the existing pattern. Half-measures make this worse."
                         )
@@ -103,6 +110,7 @@ extension LessonData {
                         label: "Tell him you'll help this time but this is the last time",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "You've said some version of this before. Danny knows it. Ultimatums you won't enforce just teach people to wait you out.",
                             text: "Empty ultimatums teach people your limits aren't real. Next time he calls, he already knows you'll fold."
                         )
@@ -121,6 +129,7 @@ extension LessonData {
                         label: "\"Danny, what happened to the $200 I gave you two months ago?\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Asking for receipts feels fair, but now he just needs a good enough story and you're back in it.",
                             text: "He gives you a reason, you evaluate it, and now you're negotiating instead of holding a boundary."
                         )
@@ -131,6 +140,7 @@ extension LessonData {
                         label: "\"Okay, but this is the last time. I need you to figure out a better system.\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "You said yes, then softened it with rules he won't follow. That's not a boundary, that's a delay.",
                             text: "You gave him money and a lecture. He heard the money part."
                         )
@@ -141,6 +151,7 @@ extension LessonData {
                         label: "\"I'm not going to lend you money right now and I love you. You got this.\"",
                         feedback: OptionFeedback(
                             isCorrect: true,
+                            researcher: "Gottman - UW",
                             renText: "You caught that. Gottman's research shows you can turn toward the person while turning away from the request. No AND love in the same breath. That's exactly how you close the guilt door.",
                             text: "He can't pull the \"you don't care about family\" card because you already named the relationship separately."
                         )
@@ -151,6 +162,7 @@ extension LessonData {
                         label: "\"I can do $150 if you pay me back by the 15th.\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
+                            researcher: nil,
                             renText: "Half a no is still a yes. The 15th comes and goes, and now you're the one who feels weird about it.",
                             text: "Half a boundary, half a yes. You've lent money with a deadline he won't hit, and now you get to feel bad chasing it."
                         )

@@ -65,11 +65,6 @@ struct HomeView: View {
                         HomeUpgradeButton { presentUpgradePaywall() }
                             .padding(.top, 8)
                     }
-
-                    Button("Sign Out", role: .destructive) {
-                        Task { await authViewModel.signOut() }
-                    }
-                    .padding(.bottom, 32)
                 }
                 .padding(.horizontal, 20)
             }
@@ -91,11 +86,21 @@ struct HomeView: View {
                         if isProUser { HomeProBadge() }
                     }
                 }
-                if AppConfig.showResetDataButton {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button("Reset Data") { showResetConfirmation = true }
-                            .font(.caption2)
-                            .foregroundStyle(.red.opacity(0.7))
+                ToolbarItem(placement: .topBarTrailing) {
+                    HStack(spacing: 12) {
+                        NavigationLink {
+                            SettingsView(authViewModel: authViewModel)
+                        } label: {
+                            Image(systemName: "gearshape")
+                                .foregroundStyle(.white.opacity(0.7))
+                        }
+                        #if DEBUG
+                        if AppConfig.showResetDataButton {
+                            Button("Reset Data") { showResetConfirmation = true }
+                                .font(.caption2)
+                                .foregroundStyle(.red.opacity(0.7))
+                        }
+                        #endif
                     }
                 }
             }

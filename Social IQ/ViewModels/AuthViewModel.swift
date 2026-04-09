@@ -17,6 +17,8 @@ final class AuthViewModel {
 
     var authState: AuthState = .signedOut
     var errorMessage: String?
+    /// First name from Apple credential (only available on first sign-in).
+    var appleFirstName: String?
 
     func checkSession() async {
         authState = .loading
@@ -43,6 +45,7 @@ final class AuthViewModel {
                 }
                 throw AuthError.missingIdentityToken
             }
+            appleFirstName = credential.fullName?.givenName
             let user = try await AuthService.shared.signInWithApple(credential: credential)
             authState = .signedIn(user)
         } catch {

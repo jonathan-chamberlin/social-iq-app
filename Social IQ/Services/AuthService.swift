@@ -27,6 +27,8 @@ final class AuthService {
     }
 
     /// Exchange an Apple credential for a Supabase session.
+    /// If Apple provided a name, persist it in user metadata immediately
+    /// (Apple only sends fullName on the very first sign-in).
     func signInWithApple(credential: ASAuthorizationAppleIDCredential) async throws -> User {
         guard let nonce = currentNonce else {
             throw AuthError.missingNonce
@@ -43,6 +45,13 @@ final class AuthService {
                 nonce: nonce
             )
         )
+
+        // Persist Apple-provided name in user metadata (only available on first sign-in)
+        if let givenName = credential.fullName?.givenName, !givenName.isEmpty {
+            _ = try? await SupabaseService.shared.client.auth.update(
+                user: UserAttributes(data: ["full_name": .string(givenName)])
+            )
+        }
 
         currentNonce = nil
         return session.user

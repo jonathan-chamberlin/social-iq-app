@@ -16,6 +16,10 @@ enum AppConstants {
     static let annualProductId = "com.jonathanchamberlin.socialiq.annual"
     static let weeklyProductId = "com.jonathanchamberlin.socialiq.weekly"
 
+    // MARK: - External Links
+    static let privacyPolicyURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/privacy-policy")!
+    static let supportURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/support")!
+
     // MARK: - Lesson Social Proof
     static let lessonCompletionCounts: [String: Int] = [
         "lesson-1": 4220,

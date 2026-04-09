@@ -11,6 +11,7 @@ import SwiftUI
 
 struct OnboardingView: View {
     let userId: String
+    let appleFirstName: String?
     let onComplete: () -> Void
     @Environment(\.scenePhase) private var scenePhase
 
@@ -101,6 +102,9 @@ struct OnboardingView: View {
         .animation(.easeInOut(duration: 0.3), value: quizSubStep)
         .preferredColorScheme(.dark)
         .onAppear {
+            if let appleFirstName, !appleFirstName.isEmpty, userName.isEmpty {
+                userName = appleFirstName
+            }
             AnalyticsService.track(event: .onboardingStarted)
         }
         .onChange(of: scenePhase) { _, newPhase in
@@ -336,7 +340,7 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView(userId: UUID().uuidString) {
+    OnboardingView(userId: UUID().uuidString, appleFirstName: "Jane") {
         print("Onboarding complete")
     }
 }

@@ -53,9 +53,12 @@ struct Social_IQApp: App {
                                 ProgressView("Loading...")
                                     .task { await checkOnboarding(userId: user.id.uuidString) }
                             } else if showOnboarding {
-                                OnboardingView(userId: user.id.uuidString) {
-                                    showOnboarding = false
-                                }
+                                OnboardingView(
+                                userId: user.id.uuidString,
+                                appleFirstName: authViewModel.appleFirstName
+                            ) {
+                                showOnboarding = false
+                            }
                             } else {
                                 HomeView(authViewModel: authViewModel)
                             }

@@ -72,6 +72,12 @@ final class SuperwallService {
         return false
     }
 
+    static func restorePurchases() async throws {
+        let restorationResult = try await Superwall.shared.restorePurchases()
+        // restorationResult indicates whether restoration found active entitlements
+        // The subscription status updates automatically via Superwall's observer
+    }
+
     static func reset() {
         Superwall.shared.reset()
     }

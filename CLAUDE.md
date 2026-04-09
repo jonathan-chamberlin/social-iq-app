@@ -149,3 +149,5 @@ Project-specific docs live in `references/` at the repo root:
 - Do NOT use `DispatchQueue.main.asyncAfter` — use `Task { try? await Task.sleep(for:) }` instead
 - Do NOT import framework SDKs (SuperwallKit, Supabase) directly in Views — use service wrappers (SuperwallService, SupabaseService)
 - All `print()` statements MUST be wrapped in `#if DEBUG` / `#endif` — no debug logging in release builds
+- Supabase `.auth.session` reads from local Keychain cache WITHOUT server validation — use `refreshSession()` for session restore to catch deleted/invalidated users
+- Apple Sign In only sends `fullName`/`email` on the VERY FIRST authorization per app+Apple ID pair — persist these to `user_profiles` immediately, never rely on `auth.users` metadata (gets overwritten on re-auth)

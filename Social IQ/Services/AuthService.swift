@@ -97,7 +97,9 @@ final class AuthService {
     }
 
     func restoreSession() async throws -> User? {
-        let session = try await SupabaseService.shared.client.auth.session
+        // Force a server-side refresh to verify the user still exists.
+        // The local Keychain may hold a valid-looking JWT for a deleted user.
+        let session = try await SupabaseService.shared.client.auth.refreshSession()
         return session.user
     }
 

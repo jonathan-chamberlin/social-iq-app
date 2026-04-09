@@ -101,3 +101,19 @@ When adding temporary debug code (e.g., skipping auth, forcing onboarding) to te
 - Superwall paywall config is server-side — paywall changes don't require a new build
 - Archive timeout: allow ~3-5 minutes for the archive step
 - Upload timeout: allow ~1-2 minutes for the export/upload step
+
+## Fresh test on iPhone (reset Sign in with Apple)
+
+After a successful deploy, always tell the user these steps if they want a fresh test of the build:
+
+To get a completely fresh test of the TestFlight build (e.g., re-trigger onboarding, paywall, first-launch flows):
+
+1. Open **Settings** on the iPhone
+2. Use the **search bar** at the top, search for "Sign in with Apple"
+3. Tap **Sign in with Apple**
+4. Scroll to the bottom
+5. Find **XC com jonathanchamberlin Social IQ**
+6. Tap **Delete**
+7. Tap **Stop Using**
+
+This removes the Apple ID association so the next launch behaves like a first-time user.

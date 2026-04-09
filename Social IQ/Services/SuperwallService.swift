@@ -45,8 +45,8 @@ final class SuperwallService {
         Superwall.shared.register(placement: placement.rawValue, handler: handler)
     }
 
-    /// Uses getPresentationResult first to diagnose what Superwall will do, then
-    /// only calls register if a paywall will actually present.
+    /// Present a paywall with handler callbacks and a feature block fallback.
+    /// The feature block fires when no paywall is shown (user subscribed, holdout, etc.).
     static func presentPaywallWithHandler(placement: SuperwallPlacement, onComplete: @escaping @Sendable () -> Void) {
         #if DEBUG
         print("[Superwall] presentPaywallWithHandler called for placement: \(placement.rawValue)")
@@ -54,49 +54,6 @@ final class SuperwallService {
         #endif
         AnalyticsService.track(event: .paywallPresented, properties: ["trigger": placement.rawValue])
 
-        Task {
-            let result = await Superwall.shared.getPresentationResult(forPlacement: placement.rawValue)
-            #if DEBUG
-            print("[Superwall] getPresentationResult: \(result)")
-            #endif
-
-            switch result {
-            case .paywall:
-                // A paywall will show - use register with handler to track lifecycle
-                await MainActor.run {
-                    presentPaywallViaRegister(placement: placement, onComplete: onComplete)
-                }
-            case .placementNotFound:
-                #if DEBUG
-                print("[Superwall] SKIP: placement '\(placement.rawValue)' not found in any campaign")
-                #endif
-                await MainActor.run { onComplete() }
-            case .noAudienceMatch:
-                #if DEBUG
-                print("[Superwall] SKIP: no audience matched for this user")
-                #endif
-                await MainActor.run { onComplete() }
-            case .holdout(let experiment):
-                #if DEBUG
-                print("[Superwall] SKIP: user in holdout group for experiment \(experiment.id)")
-                #endif
-                await MainActor.run { onComplete() }
-            case .paywallNotAvailable:
-                #if DEBUG
-                print("[Superwall] SKIP: paywall not available (no window, network error, etc.)")
-                #endif
-                await MainActor.run { onComplete() }
-            @unknown default:
-                #if DEBUG
-                print("[Superwall] SKIP: unknown presentation result")
-                #endif
-                await MainActor.run { onComplete() }
-            }
-        }
-    }
-
-    /// Internal: present via register when we know a paywall will show.
-    private static func presentPaywallViaRegister(placement: SuperwallPlacement, onComplete: @escaping @Sendable () -> Void) {
         let handler = PaywallPresentationHandler()
         handler.onDismiss { _, result in
             #if DEBUG

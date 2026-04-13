@@ -18,6 +18,7 @@ enum AppConstants {
 
     // MARK: - External Links
     static let privacyPolicyURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/privacy-policy")!
+    static let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
     static let supportURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/support")!
 
     // MARK: - Lesson Social Proof

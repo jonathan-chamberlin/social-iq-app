@@ -51,6 +51,10 @@ struct SettingsView: View {
 
             // MARK: - Legal
             Section {
+                Link(destination: AppConstants.termsOfUseURL) {
+                    Label("Terms of Use (EULA)", systemImage: "doc.text")
+                }
+
                 Link(destination: AppConstants.privacyPolicyURL) {
                     Label("Privacy Policy", systemImage: "hand.raised")
                 }

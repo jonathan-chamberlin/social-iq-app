@@ -8,6 +8,9 @@ import Foundation
 enum AppConstants {
     // MARK: - UserDefaults Keys
     static let shouldAutoOpenLesson1Key = "shouldAutoOpenLesson1"
+    /// Cached onboarding-completed flag keyed by user id. Used as an offline
+    /// fallback when the Supabase profile fetch can't reach the server.
+    static let onboardingCompletedCachePrefix = "onboardingCompleted."
 
     // MARK: - Free Lessons
     static let freeLessonIds: Set<String> = ["lesson-3", "lesson-2", "lesson-4"]

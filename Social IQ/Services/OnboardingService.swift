@@ -54,7 +54,24 @@ struct OnboardingService {
             .execute()
             .value
 
-        return rows.first?.onboardingCompleted ?? false
+        let completed = rows.first?.onboardingCompleted ?? false
+        Self.cacheOnboardingCompleted(completed, userId: userId)
+        return completed
+    }
+
+    // MARK: - Offline cache
+
+    /// Last known onboarding-completed flag for this user, read from UserDefaults.
+    /// Returns `nil` if we've never successfully fetched the profile for this user.
+    static func cachedOnboardingCompleted(userId: String) -> Bool? {
+        let key = AppConstants.onboardingCompletedCachePrefix + userId
+        guard UserDefaults.standard.object(forKey: key) != nil else { return nil }
+        return UserDefaults.standard.bool(forKey: key)
+    }
+
+    static func cacheOnboardingCompleted(_ completed: Bool, userId: String) {
+        let key = AppConstants.onboardingCompletedCachePrefix + userId
+        UserDefaults.standard.set(completed, forKey: key)
     }
 
     func resetProfile(userId: String) async throws {
@@ -121,5 +138,7 @@ struct OnboardingService {
             .update(update)
             .eq(DatabaseSchema.UserProfiles.id, value: userId)
             .execute()
+
+        Self.cacheOnboardingCompleted(true, userId: userId)
     }
 }

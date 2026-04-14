@@ -98,7 +98,9 @@ struct Social_IQApp: App {
         }
         #endif
         do {
-            let completed = try await onboardingService.fetchOnboardingCompleted(userId: userId)
+            let completed = try await withTimeout(seconds: 5) {
+                try await onboardingService.fetchOnboardingCompleted(userId: userId)
+            }
             showOnboarding = !completed
             // If onboarding is needed and we don't have the name yet (session restore,
             // not fresh sign-in), fetch it from user_profiles.
@@ -112,8 +114,18 @@ struct Social_IQApp: App {
                 }
             }
         } catch {
-            // If we can't check, show onboarding (safer than skipping)
-            showOnboarding = true
+            // Network unreachable or timed out. Fall back to the last cached
+            // value for this user. If we've never cached one, default to "home"
+            // — a signed-in user hitting offline should land on cached content,
+            // not be forced back through onboarding.
+            if let cached = OnboardingService.cachedOnboardingCompleted(userId: userId) {
+                showOnboarding = !cached
+            } else {
+                showOnboarding = false
+            }
+            #if DEBUG
+            print("[App] Onboarding check failed (\(error)) — using cached value, showOnboarding=\(showOnboarding)")
+            #endif
         }
         onboardingChecked = true
     }

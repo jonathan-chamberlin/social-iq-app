@@ -97,10 +97,24 @@ final class AuthService {
     }
 
     func restoreSession() async throws -> User? {
-        // Force a server-side refresh to verify the user still exists.
-        // The local Keychain may hold a valid-looking JWT for a deleted user.
-        let session = try await SupabaseService.shared.client.auth.refreshSession()
-        return session.user
+        // Prefer a server-side refresh to verify the user still exists — the local
+        // Keychain may hold a valid-looking JWT for a deleted user. But if the
+        // network is unreachable (e.g. frat basement with no Wi-Fi), fall back
+        // to the locally cached session so the user can still open the app.
+        do {
+            let session = try await withTimeout(seconds: 5) {
+                try await SupabaseService.shared.client.auth.refreshSession()
+            }
+            return session.user
+        } catch {
+            if let cached = SupabaseService.shared.client.auth.currentSession {
+                #if DEBUG
+                print("[Auth] refreshSession failed (\(error)) — falling back to cached session")
+                #endif
+                return cached.user
+            }
+            throw error
+        }
     }
 
     // MARK: - Profile persistence
@@ -141,6 +155,32 @@ final class AuthService {
         let hash = SHA256.hash(data: data)
         return hash.compactMap { String(format: "%02x", $0) }.joined()
     }
+}
+
+// MARK: - Timeout helper
+
+/// Runs `operation` and throws `TimeoutError` if it doesn't finish within `seconds`.
+/// Used to keep network calls from blocking the UI indefinitely when offline.
+func withTimeout<T: Sendable>(
+    seconds: Double,
+    operation: @escaping @Sendable () async throws -> T
+) async throws -> T {
+    try await withThrowingTaskGroup(of: T.self) { group in
+        group.addTask { try await operation() }
+        group.addTask {
+            try await Task.sleep(for: .seconds(seconds))
+            throw TimeoutError()
+        }
+        guard let result = try await group.next() else {
+            throw TimeoutError()
+        }
+        group.cancelAll()
+        return result
+    }
+}
+
+struct TimeoutError: LocalizedError {
+    var errorDescription: String? { "The operation timed out." }
 }
 
 // MARK: - Auth Error

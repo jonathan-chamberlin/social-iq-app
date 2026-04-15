@@ -47,7 +47,6 @@ struct LessonView: View {
                     isCorrectSelection: viewModel.isCorrectSelection,
                     showOtherAnswers: showOtherAnswers,
                     onSelectOption: { viewModel.selectOption($0) },
-                    onShowOtherAnswers: { showOtherAnswers = true },
                     onTrackAnswer: { selected in
                         if let step = viewModel.currentStep {
                             let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
@@ -69,9 +68,15 @@ struct LessonView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                LessonNextStepButton(isVisible: showOtherAnswers) {
-                    showOtherAnswers = false
-                    viewModel.nextStep()
+                if showOtherAnswers {
+                    LessonNextStepButton(isVisible: true) {
+                        showOtherAnswers = false
+                        viewModel.nextStep()
+                    }
+                } else if viewModel.isCorrectSelection && viewModel.showFeedback {
+                    LessonExplainButton {
+                        withAnimation { showOtherAnswers = true }
+                    }
                 }
             }
         }
@@ -134,5 +139,44 @@ struct LessonView: View {
 #Preview {
     NavigationStack {
         LessonView(lesson: LessonData.lesson1)
+    }
+}
+
+// MARK: - Explain Button
+
+private struct LessonExplainButton: View {
+    let onTap: () -> Void
+
+    @State private var scale: CGFloat = 0
+    @State private var pulse = false
+
+    private enum Timing {
+        static let springResponse: Double = 0.4
+        static let springDamping: Double = 0.5
+        static let pulseDuration: Double = 0.9
+        static let pulseDelay: Double = 0.3
+    }
+
+    var body: some View {
+        Button(action: onTap) {
+            Text("Explain")
+                .font(.subheadline)
+                .fontWeight(.bold)
+                .foregroundStyle(.black)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 8)
+                .background(Capsule().fill(.white))
+                .shadow(color: .white.opacity(pulse ? 0.9 : 0.0), radius: pulse ? 12 : 0)
+        }
+        .accessibilityLabel("See why the other answers were wrong")
+        .scaleEffect(scale * (pulse ? 1.08 : 1.0))
+        .onAppear {
+            withAnimation(.spring(response: Timing.springResponse, dampingFraction: Timing.springDamping)) {
+                scale = 1.0
+            }
+            withAnimation(.easeInOut(duration: Timing.pulseDuration).repeatForever(autoreverses: true).delay(Timing.pulseDelay)) {
+                pulse = true
+            }
+        }
     }
 }

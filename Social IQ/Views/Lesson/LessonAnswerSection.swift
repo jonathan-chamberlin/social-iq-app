@@ -13,7 +13,6 @@ struct LessonAnswerSection: View {
     let isCorrectSelection: Bool
     let showOtherAnswers: Bool
     let onSelectOption: (Int) -> Void
-    let onShowOtherAnswers: () -> Void
     let onTrackAnswer: (Int) -> Void
 
     var body: some View {
@@ -79,21 +78,6 @@ struct LessonAnswerSection: View {
                     onTap: { onSelectOption(index) },
                     onNext: {}
                 )
-            }
-
-            if isCorrectSelection && showFeedback && !showOtherAnswers {
-                Button {
-                    withAnimation { onShowOtherAnswers() }
-                } label: {
-                    Text("See why the other answers were wrong")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Theme.goldGradient)
-                        .foregroundStyle(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
-                }
-                .padding(.top, 8)
             }
         }
     }

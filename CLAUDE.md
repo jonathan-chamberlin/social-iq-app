@@ -126,6 +126,7 @@ Social IQ/
 
 ## Rules
 - After changes: build → verify compilation → run tests → screenshot
+- **UI changes MUST be visually verified via XcodeBuildMCP before reporting SUCCESS / Done.** Build-passing is not sufficient proof for any change that affects pixels. Workflow: `session_show_defaults` → `boot_sim` → install the freshly built `.app` → `launch_app_sim` → navigate to the affected screen (use `snapshot_ui` if `tap` by label fails) → `screenshot` → `Read` the screenshot → confirm the change is visible → only then report SUCCESS. If you report `PARTIAL` because you skipped this, you skipped it wrong — do it before reporting. Never wait for the user to ask "did you screenshot?".
 - NEVER modify .pbxproj directly
 - Team signing ID: 35373542G8
 

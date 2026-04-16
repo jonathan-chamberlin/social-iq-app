@@ -65,6 +65,7 @@ struct CoachmarkOverlay: View {
                     if newPhase == .background { controller.dismiss() }
                 }
             }
+            .ignoresSafeArea()
             .transition(.opacity)
         }
     }
@@ -84,7 +85,6 @@ struct CoachmarkOverlay: View {
                     }
                     .compositingGroup()
             }
-            .ignoresSafeArea()
             .allowsHitTesting(false)
     }
 

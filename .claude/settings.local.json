@@ -12,7 +12,14 @@
       "mcp__superwall__list_paywalls",
       "mcp__superwall__list_products",
       "mcp__superwall-docs__docs_search",
-      "mcp__claude_ai_Mixpanel__Get-Projects"
+      "mcp__claude_ai_Mixpanel__Get-Projects",
+      "Bash(mkdir -p .claude/improve-artifacts)",
+      "Bash(rm -f .claude/improve-artifacts/*.md)",
+      "Bash(mkdir -p ~/.claude/references)",
+      "Bash(mv ~/.claude/rules/notion-areas.md ~/.claude/references/notion-areas.md)",
+      "Bash(mv ~/.claude/rules/notion-mcp.md ~/.claude/references/notion-mcp.md)",
+      "mcp__claude_ai_Gmail__gmail_search_messages",
+      "mcp__claude_ai_Gmail__gmail_read_message"
     ]
   },
   "enableAllProjectMcpServers": true,

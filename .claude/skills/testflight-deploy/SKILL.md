@@ -1,6 +1,7 @@
 ---
 name: testflight-deploy
 description: Archive, upload, and deploy a new build to TestFlight for Social IQ. Trigger on: "testflight", "deploy", "upload build", "new build", "archive".
+model: sonnet
 ---
 
 # TestFlight Deploy for Social IQ

@@ -1,6 +1,7 @@
 ---
 name: mixpanel-taxonomy
 description: Mixpanel event naming, super properties, and dashboard setup for Social IQ. Trigger on: "analytics", "mixpanel", "event tracking", "dashboard", "funnel".
+model: sonnet
 ---
 
 # Mixpanel Taxonomy for Social IQ

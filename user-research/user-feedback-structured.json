@@ -112,6 +112,13 @@
     "verbatim_quotes": ["Cool as fuck", "How do you know that these are the best things to say?"]
   },
   {
+    "demographics": {"name": "Nick", "session_number": "18", "session_type": "in-person", "age": null, "background": "Met at E-club demo day, awkward, into healthy living, e-commerce sustainability business plan, open to social skills coaching"},
+    "icp_classification": {"icp_fit": "Edge", "icp_score": 3, "icp_reasoning": "Awkward, open to social skills tips, said app has 'serious potential' and he'd 'definitely use it,' liked UI - but limited data on lesson completion (did one challenge only)"},
+    "core_metrics": {"completed_L1": null, "started_L2_unprompted": false, "total_lessons_done": null, "would_use_again": "yes"},
+    "pattern_signals": {"felt_like_test": false, "too_much_text": false, "wanted_more_visuals": true, "wanted_free_text_ai": false, "wanted_mascot_soul": false, "no_clear_direction": false, "onboarding_options_didnt_fit": false, "scenario_context_ambiguous": false, "wanted_deferred_feedback": false, "wanted_branching_scenarios": false, "wanted_progress_bar": false, "wanted_lesson_tracking": false, "had_aha_moment": false, "engaged_with_explanations": false, "skipped_explanations": false, "mentioned_willingness_to_pay": false},
+    "verbatim_quotes": ["It has serious potential", "He would definitely use it", "Pictures would be nice"]
+  },
+  {
     "demographics": {"name": "Lauren", "session_number": "16", "session_type": "in-person-group", "age": null, "background": "Sorority member (DEEF), socially capable but overthinks interactions, struggles initiating conversation"},
     "icp_classification": {"icp_fit": "Strong", "icp_score": 4, "icp_reasoning": "Genuinely engaged, asked for more lessons, personally related to scenarios, identified real pain points — overthinks social interactions despite surface-level confidence"},
     "core_metrics": {"completed_L1": true, "started_L2_unprompted": true, "total_lessons_done": 3, "would_use_again": "implied_yes"},

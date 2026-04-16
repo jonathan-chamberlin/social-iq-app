@@ -1,7 +1,7 @@
-# User Research Synthesis - 19 Sessions
+# User Research Synthesis - 20 Sessions
 
-**Generated:** 2026-04-08
-**Source:** 19 user research sessions (Sessions 01-16 original; Session 16 was a group session with 3 participants; Session 17 added 2026-04-06; Theo follow-up 2026-04-08)
+**Generated:** 2026-04-08 (updated 2026-04-15)
+**Source:** 20 user research sessions (Sessions 01-16 original; Session 16 was a group session with 3 participants; Session 17 added 2026-04-06; Theo follow-up 2026-04-08; Session 18 added 2026-04-15)
 **Method:** Full transcript analysis with ICP classification, pattern extraction, and frequency counting. Loose counting: includes plausible inferences, not just explicit mentions.
 
 ---
@@ -59,20 +59,21 @@ Note on Kofi update: Follow-up revealed he DID start L2 (dating lesson) unprompt
 | 08 | Kyle | Former ICP | Was first person to teach Jonathan about reading people. No longer consuming self-improvement content. Tested revised tone - still felt like a test. Graduated out of ICP. |
 | 14 | Elijah | Edge | Looksmaxxing influencer, deep self-improvement identity but physical not social. Did 2 lessons, said "really cool," projected into scenarios. Questioned whether you can truly know someone's internal motives. |
 | 17 | Tamok | Likely ICP | Into self-improvement, called the app "cool as fuck." Brief session - limited data on lesson completion. Raised the credibility/authority question ("how do you know these are the best things to say?") despite explanations being present. Also flagged step indicators (READ/THINK/SPEAK) looking tappable but not being interactive. |
+| 18 | Nick | Edge | Met at E-club demo day. Self-described awkward, open to social skills coaching. Did one challenge, said "serious potential," liked UI, said he'd "definitely use it." Feature request: pictures. Limited data on lesson completion. |
 
 ---
 
 ## Retention Signal Summary
 
-| Metric | Count | % of Total (n=19) | ICP-A % (n=6) | ICP-B % (n=3) | Non-ICP % (n=5) |
+| Metric | Count | % of Total (n=20) | ICP-A % (n=6) | ICP-B % (n=3) | Non-ICP % (n=5) |
 |--------|-------|--------------------|---------------|---------------|-----------------|
-| Completed L1 | 16 | 84% | 6/6 (100%) | 3/3 (100%) | 4/5 (80%) |
-| Started L2 unprompted | 13 | 68% | 4/6 (67%) | 3/3 (100%) | 3/5 (60%) |
-| Did 3+ lessons | 7 | 37% | 1/6 (Wyatt) | 3/3 (100%) | 0/5 |
-| Said "would return" | 8 | 42% | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) |
-| Said "would NOT return" | 2 | 11% | 0/6 (0%) | 0/3 (0%) | 2/5 (40%) |
+| Completed L1 | 16 | 80% | 6/6 (100%) | 3/3 (100%) | 4/5 (80%) |
+| Started L2 unprompted | 13 | 65% | 4/6 (67%) | 3/3 (100%) | 3/5 (60%) |
+| Did 3+ lessons | 7 | 35% | 1/6 (Wyatt) | 3/3 (100%) | 0/5 |
+| Said "would return" | 9 | 45% | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) |
+| Said "would NOT return" | 2 | 10% | 0/6 (0%) | 0/3 (0%) | 2/5 (40%) |
 
-Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP), Elijah (2 lessons), Tamok (limited data). Not counted in either ICP or Non-ICP columns.
+Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP), Elijah (2 lessons), Tamok (limited data), Nick (1 challenge, said "definitely use it"). Not counted in either ICP or Non-ICP columns.
 
 **Key finding:** Combined ICP (Segments A+B) has 78% stated return intent (7/9) vs. 0% for non-ICP. ICP-A return rate improved from 50% to 67% with Theo's follow-up confirming he's actively using and enjoying the app. Dylan remains the only ICP-A user with unknown return intent.
 
@@ -86,12 +87,12 @@ Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP
 
 Session 16 was in-person. Including it changes the in-person/remote split. Session 17 (Tamok) was in-person but limited data.
 
-| Metric | In-Person (n=11) | Remote (n=8) |
+| Metric | In-Person (n=12) | Remote (n=8) |
 |--------|-----------------|-------------|
-| Started L2 unprompted | 9/11 (82%) | 4/8 (50%) |
-| Did 3+ lessons | 6/11 (55%) | 0/8 (0%) |
-| Said "would return" | 6/11 (55%) | 2/8 (25%) |
-| Said "would NOT return" | 1/11 (9%) | 1/8 (13%) |
+| Started L2 unprompted | 9/12 (75%) | 4/8 (50%) |
+| Did 3+ lessons | 6/12 (50%) | 0/8 (0%) |
+| Said "would return" | 7/12 (58%) | 2/8 (25%) |
+| Said "would NOT return" | 1/12 (8%) | 1/8 (13%) |
 
 **Crossed with ICP:**
 
@@ -116,7 +117,7 @@ Two explanations still apply:
 
 ## Pattern Analysis - Ranked by Frequency
 
-### 1. "Feels like a test, not a conversation" - 53% (10/19)
+### 1. "Feels like a test, not a conversation" - 50% (10/20)
 
 | Who Said It | ICP? | Signal Type | Specific Quote/Note |
 |-------------|------|------------|-------------------|
@@ -135,7 +136,7 @@ Two explanations still apply:
 
 **Important nuance from Theo's follow-up:** Despite raising the test-feel complaint initially, Theo got past it and is now actively enjoying the exercises. This suggests the test feel is a friction point that slows adoption but doesn't necessarily kill retention for strong ICP users. The question is how many weaker ICP users it filters out entirely.
 
-### 2. "Too much text, needs more visuals" - 47% (9/19)
+### 2. "Too much text, needs more visuals" - 50% (10/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -147,10 +148,11 @@ Two explanations still apply:
 | Brandon | Edge | Wanted more context/immersion (visual would help) |
 | Wyatt | Near | Forgot the pool setting mid-lesson - needs persistent visual context |
 | Lauren, Sana, Phoebe | ICP-B | None of them read the explanations at all - skipped past text to get to the next question |
+| Nick | Edge | "Pictures would be nice" - explicit request for visuals after trying one challenge |
 
-**ICP signal:** 4/6 ICP-A (67%) explicit; ICP-B behavior confirms it - all three skipped explanations entirely. Universal across all groups. The "skipped explanations" finding now spans 4 distinct users/groups (Nishanth, Lauren, Sana, Phoebe) - see Pattern 13 below.
+**ICP signal:** 4/6 ICP-A (67%) explicit; ICP-B behavior confirms it - all three skipped explanations entirely. Nick (Edge) independently requested pictures. Universal across all groups. The "skipped explanations" finding now spans 4 distinct users/groups (Nishanth, Lauren, Sana, Phoebe) - see Pattern 13 below.
 
-### 3. "How do you know these are the right answers?" - Credibility/Authority - 42% (8/19)
+### 3. "How do you know these are the right answers?" - Credibility/Authority - 40% (8/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -163,7 +165,7 @@ Two explanations still apply:
 | Avi | No | "The discrete nature of the multiple choice questions is perhaps a bit reductive" |
 | Brandon | Edge | "You can't teach nuance without showing the right answer" |
 
-**This pattern has grown significantly.** Previously tracked as a scattered concern, it now spans 8/19 users across ALL segments. The pattern has two variants:
+**This pattern has grown significantly.** Previously tracked as a scattered concern, it now spans 8/20 users across ALL segments. The pattern has two variants:
 1. **Methodology challenge** (Lauren, Phoebe, Tamok, Kofi, Nishanth): "How do you decide what's right?" - wants to see the reasoning or research
 2. **Epistemological challenge** (Elijah, Avi): "Can you even know what's right in social situations?" - questions the premise itself
 
@@ -171,7 +173,7 @@ The methodology variant is actionable - surface research citations, psychology b
 
 The epistemological variant is harder to address and may indicate non-ICP or edge-case users who don't buy the core premise.
 
-### 4. "Onboarding options don't fit me" - 47% (9/19)
+### 4. "Onboarding options don't fit me" - 45% (9/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -187,7 +189,7 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 
 **ICP signal:** 3/9 ICP users (Aryaman, Theo, Lauren) - 33% of combined ICP. Lauren's complaint aligns with the non-ICP pattern ("none of these fit"), but her context is different: the options were probably calibrated for the male self-improvement audience, so they structurally excluded her segment. This is an ICP-B onboarding failure, not a filtering success. Theo's complaint is a personalization request - he wants to describe his specific situation. Combined signal: onboarding options are too narrow for both segments.
 
-### 5. "Scenarios need richer context / clearer setting" - 32% (6/19)
+### 5. "Scenarios need richer context / clearer setting" - 30% (6/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -207,7 +209,7 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 - Taking compliments gracefully - not deflecting or dismissing
 - Breaking out of cliques - meeting people outside your existing social group
 
-### 6. "Defer wrong-answer feedback to end of lesson" - 21% (4/19)
+### 6. "Defer wrong-answer feedback to end of lesson" - 20% (4/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -218,7 +220,7 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 
 **ICP signal:** 1/9 combined ICP (11%). **Critical tension:** Hudson and Aryaman (both ICP-A) explicitly praised the mid-flow wrong-answer explanations. Hudson: "It's not just correct, incorrect... you just need more education." Aryaman: "Whenever you choose a bad option it gives hints... this is a good idea." ICP-B skipped explanations entirely - making deferred vs. mid-flow feedback less relevant for that segment. The deferred model might fix the test feel but break the aha moments. Must test both models before committing.
 
-### 7. "Needs mascot / character / soul" - 16% (3/19)
+### 7. "Needs mascot / character / soul" - 15% (3/20)
 
 | Who Said It | ICP? |
 |-------------|------|
@@ -228,7 +230,7 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 
 **ICP signal:** 3/6 ICP-A (50%). Dylan's quote is the sharpest: "Lacking direction and a soul... Duolingo has a mascot, sound effects, personalities." Important but implement after core feel is fixed - mascot on top of a quiz that feels like an exam is lipstick on a pig.
 
-### 8. "Home page / lesson list is confusing" - 21% (4/19)
+### 8. "Home page / lesson list is confusing" - 20% (4/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -239,7 +241,7 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 
 **ICP signal:** 1/9 combined ICP (11%). Kofi's comment confirms the lesson list is a retention leak even for users who made it past L1. Post-onboarding transition needs to guide users directly into the next lesson, not present a menu. Note: ICP-B auto-started next lessons without friction - see Pattern 15.
 
-### 9. "Wants free-text / AI-rated open responses" - 16% (3/19)
+### 9. "Wants free-text / AI-rated open responses" - 15% (3/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -251,14 +253,14 @@ The epistemological variant is harder to address and may indicate non-ICP or edg
 
 Three independent users arriving at this request (Andre, Jack, Theo) - two of them ICP - is a real signal. The feature is complex (AI evaluation layer, cost per response, latency) but the user pull is genuine. Consider a hybrid: keep MC for early lessons (low friction), introduce short answer as an advanced mode in later lessons. Could validate cheaply by adding one short-answer question per lesson and measuring completion rates vs. MC questions.
 
-### 10. "Needs end-of-lesson summary" - 11% (2/19)
+### 10. "Needs end-of-lesson summary" - 10% (2/20)
 
 | Who Said It | ICP? |
 |-------------|------|
 | Aryaman | ICP-A |
 | Wyatt | Near |
 
-### 11. "Explain why OTHER answers were wrong, not just why right is right" - 11% (2/19)
+### 11. "Explain why OTHER answers were wrong, not just why right is right" - 10% (2/20)
 
 | Who Said It | ICP? |
 |-------------|------|
@@ -267,7 +269,7 @@ Three independent users arriving at this request (Andre, Jack, Theo) - two of th
 
 Wyatt suggested gating this behind premium - natural monetization lever.
 
-### 12. "MCQ format is reductive for social situations" - 5% (1/19)
+### 12. "MCQ format is reductive for social situations" - 5% (1/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -275,7 +277,7 @@ Wyatt suggested gating this behind premium - natural monetization lever.
 
 **ICP signal:** 0/9 combined ICP (0%). Only Avi said this explicitly, but it connects to both the "feels like a test" pattern and the growing "wants free-text AI" pattern. Theo's free-text request is essentially the constructive version of Avi's critique - same underlying problem, but Theo proposed a solution.
 
-### 13. "Positioning reads as 'for lonely guys'" - 5% (1/19)
+### 13. "Positioning reads as 'for lonely guys'" - 5% (1/20)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -303,7 +305,7 @@ Do not remove the explanations to satisfy ICP-B until you verify whether ICP-A r
 
 **Complication for "questioning answer authority":** Lauren, Phoebe, and Tamok questioned how the right answer was determined - without engaging with the explanations that justify it. This is not the same as the Non-ICP answer-authority challenge (which is skepticism about the premise). These users wanted to understand the reasoning; they just didn't find it in text form. The signal is: the justification needs to be surfaced differently, not removed.
 
-### 15. "Paywall created visible demand" - 16% (3/19)
+### 15. "Paywall created visible demand" - 16% (3/20)
 
 | Who | ICP? | Note |
 |-----|------|------|
@@ -315,7 +317,7 @@ Do not remove the explanations to satisfy ICP-B until you verify whether ICP-A r
 
 **Update to "What's NOT validated":** "Users will pay" is now partially validated for ICP-B. Still needs a real paywall test where users are asked to pay without a manual unlock.
 
-### 16. "Auto-started next lesson unprompted" - 16% (3/19)
+### 16. "Auto-started next lesson unprompted" - 16% (3/20)
 
 | Who | ICP? | Note |
 |-----|------|------|
@@ -325,7 +327,7 @@ Do not remove the explanations to satisfy ICP-B until you verify whether ICP-A r
 
 **Strong retention signal.** Auto-starting the next lesson without being asked is the clearest behavioral indicator of loop engagement. At n=19, this has only happened with ICP-B in-person - it needs remote replication to confirm it's product pull, not observer effect. Still, three users independently doing this in the same session is not noise.
 
-### 17. "Step indicators look tappable but aren't" - 5% (1/19)
+### 17. "Step indicators look tappable but aren't" - 5% (1/20)
 
 | Who | ICP? | Note |
 |-----|------|------|
@@ -345,6 +347,7 @@ These are things ICP users explicitly praised or demonstrated through behavior. 
 | Core concept works | Andre (ICP-A) | "I actually personally really liked it"; "perfect alley for you" |
 | Core concept works | Sana (ICP-B) | "A lot of people need this" |
 | Core concept works | Tamok (Edge) | "Cool as fuck" |
+| Core concept works + UI praised | Nick (Edge) | "It has serious potential"; liked the UI; said he'd "definitely use it" |
 | Core concept works + retention | Theo (ICP-A) | "I'm really enjoying this happy that you made it. It's really helpful" - unsolicited follow-up from a remote user |
 | Wrong-answer explanations educate without shaming | Hudson (ICP-A) | "It's not just correct, incorrect... you just need more education" |
 | Wrong-answer explanations educate without shaming | Aryaman (ICP-A) | "Whenever you choose a bad option it gives hints... this is a good idea" |
@@ -367,14 +370,14 @@ These are things ICP users explicitly praised or demonstrated through behavior. 
 
 ## ICP vs Non-ICP Behavior Comparison
 
-| Dimension | ICP-A (n=6) | ICP-B (n=3) | Non-ICP (n=5) | Edge (n=5) |
+| Dimension | ICP-A (n=6) | ICP-B (n=3) | Non-ICP (n=5) | Edge (n=6) |
 |-----------|-------------|-------------|---------------|------------|
-| Avg lessons completed | ~2.0 | 3+ | ~0.8 | ~2.2 |
-| Projected into scenarios | 5/6 (83%) | 3/3 (100%) | 0/5 (0%) | 4/5 (80%) |
-| Read explanations carefully | 4/6 (67%) | 0/3 (0%) | 0/5 (0%) | 3/5 (60%) |
-| Gave constructive feature ideas | 6/6 (100%) | 3/3 (100%) | 3/5 (60%) | 5/5 (100%) |
-| Would return | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) | 1/5 (20%) |
-| Questioned answer authority | 1/6 (17%) | 2/3 (67%) | 3/5 (60%) | 3/5 (60%) |
+| Avg lessons completed | ~2.0 | 3+ | ~0.8 | ~2.0 |
+| Projected into scenarios | 5/6 (83%) | 3/3 (100%) | 0/5 (0%) | 4/6 (67%) |
+| Read explanations carefully | 4/6 (67%) | 0/3 (0%) | 0/5 (0%) | 3/6 (50%) |
+| Gave constructive feature ideas | 6/6 (100%) | 3/3 (100%) | 3/5 (60%) | 6/6 (100%) |
+| Would return | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) | 2/6 (33%) |
+| Questioned answer authority | 1/6 (17%) | 2/3 (67%) | 3/5 (60%) | 3/6 (50%) |
 
 **Theo's follow-up changes the ICP-A picture.** Average lessons completed ticks up (from ~1.7 to ~2.0), "would return" jumps from 50% to 67%, and "projected into scenarios" from 67% to 83% (Theo is actively doing exercises and finding them helpful). ICP-A is no longer a segment with ambiguous retention - 4/6 are positive, 1 unknown (Dylan), 0 negative.
 
@@ -415,7 +418,7 @@ Lauren holds the VP of Fraternity and Sorority Life position at Northeastern. Th
 - **Remote retention for ICP-B.** All three ICP-B users were in-person. Their 100% retention on every metric may reflect observer effect. Send them the app link and measure L2 rate without Jonathan present - this is the single most important data point to collect next.
 - **The revised tone is sufficient.** Kyle (the person who literally inspired the app) tested the revised tone and it still felt like a test. No ICP-B user raised the test-feel complaint, but they also skipped all explanatory text - so the tone may be irrelevant to that segment.
 - **Users will pay.** ICP-B showed paywall demand signal (disappointed by locked lessons), but no one has actually paid. Still needs a real paywall test without a manual unlock.
-- **Answer credibility at scale.** 8/19 users questioned answer authority - this crosses all segments and is growing. Needs a structural solution (research citations, credibility badges, methodology transparency) before scaling.
+- **Answer credibility at scale.** 8/20 users questioned answer authority - this crosses all segments and is growing. Needs a structural solution (research citations, credibility badges, methodology transparency) before scaling.
 
 ### The binding constraint
 **It's not content quality - it's credibility and product feel.** The learning mechanism works when someone sits through it. But "feels like a test" + "too much text" + "no soul" + "no direction" + "how do you know this is right?" = friction that compounds for remote users. Theo's retention proves that strong ICP users CAN push through the friction - but the question is how many weaker ICP users it filters out.
@@ -471,7 +474,7 @@ Fix the top 2-3 packaging issues. Rebuild one lesson with the new format. Retest
 
 8. **Short answer + AI evaluation design:** Three users have requested this. Key design questions: What does the AI evaluation prompt look like? How do you balance positive and constructive feedback? What's the cost per response? Can you use a cheaper model (Haiku) for evaluation? Does completion rate drop when users have to type vs. tap?
 
-9. **Credibility framing:** 8/19 users questioned answer authority. What's the right credibility signal - research citations in explanations, a methodology page, psychology-backed badges, or social proof (X% of users improved)? Test different approaches with both segments.
+9. **Credibility framing:** 8/20 users questioned answer authority. What's the right credibility signal - research citations in explanations, a methodology page, psychology-backed badges, or social proof (X% of users improved)? Test different approaches with both segments.
 
 ---
 
@@ -487,7 +490,7 @@ Corrections applied from founder review (sessions 01-15):
 - Kyle reclassified from ICP to Former ICP (Edge)
 - Brandon classified as Edge/Debatable, not Non-ICP
 
-Session 13 (Avi) added 2026-04-02: Non-ICP, remote. Introduced two new patterns: "MCQ format is reductive" and "positioning reads as for lonely guys." Both are low-frequency (1/19) but worth monitoring.
+Session 13 (Avi) added 2026-04-02: Non-ICP, remote. Introduced two new patterns: "MCQ format is reductive" and "positioning reads as for lonely guys." Both are low-frequency (1/20) but worth monitoring.
 
 Sessions 14-15 added 2026-04-03: Kofi follow-up revealed he started L2 unprompted (dating lesson) but bounced due to lesson menu overwhelm and described app as "quiz module." Elijah (Edge, remote) did 2 lessons, said "really cool," questioned scenario credibility. Theo (ICP-A, remote) - most self-improvement-oriented tester yet - initially raised onboarding friction but completed it.
 
@@ -498,6 +501,8 @@ Session 16 added 2026-04-03: In-person group session with Lauren, Sana, and Phoe
 Session 17 (Tamok) added 2026-04-06: In-person, brief session. Into self-improvement, called app "cool as fuck." Raised the credibility/authority question ("how do you know these are the best things to say?") and flagged step indicators as looking tappable. Classified as Edge/Likely ICP - limited data on lesson completion.
 
 Theo follow-up #2 added 2026-04-08: Unsolicited voice note confirming active retention. "I'm really enjoying this... it's really helpful... I'm enjoying doing exercise." Requested short answer + AI evaluation with positive and constructive feedback. ICP score upgraded from 4 to 5. This is the first confirmed remote retention signal for ICP-A without observer effect. Free-text AI request count updated from 2 to 3.
+
+Session 18 (Nick) added 2026-04-15: In-person, met at E-club demo day. Self-described awkward, open to social skills coaching. Did one challenge, said "serious potential," liked UI, said he'd "definitely use it." Feature request: pictures. Into healthy living, has e-commerce sustainability business plan. Classified as Edge (score 3) - positive signals but limited data on lesson completion. "Would return" count updated from 8 to 9.
 
 To keep this document useful over time:
 - **Don't append** - if new sessions are added, re-synthesize from all transcripts

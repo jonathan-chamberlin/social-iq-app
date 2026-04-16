@@ -1,0 +1,154 @@
+4/9/26, 11:41 AM                                                                      App Store Connect
+
+                                                                                                                                          J Chambe
+               Apps                       Trends                       Reports                        Business                         Users
+                                                                                                                                Jonathan     and Access
+                                                                                                                                         Chamberlin
+
+
+                                                                                                                            Distribution
+
+                                                                                                                            Analytics
+             Social IQ - Charisma Training
+                                                                                                                            TestFlight
+
+                                                                                                                            Xcode Cloud
+
+        App Review
+
+
+    iOS Submission                                                                                                        Resubmit to App Review
+
+        Unresolved Issues
+
+
+
+             Your app version was rejected and no other items submitted can be accepted or approved. You
+             can make edits to your app version below.
+
+
+    Items Submitted (1)
+    You can review and make edits to your items below, or communicate with Apple. Accepted items won't
+    be available for release until all items with issues are resubmitted and accepted. You can also remove
+    those items and resubmit them later.
+
+    ITEM                                        TYPE                                     REVIEW STATUS                             ACTION
+
+
+                                                                                             Rejected
+
+                         iOS App 1.0                                                     4.0.0 Design: Preamble
+                                                App Version                                                                        Edit
+                         1.0 (17)                                                           Screenshot-0409-
+                                                                                         141127.png Download
+
+
+
+    Messages (1)
+
+            Apple Today 9:22 AM
+
+        Hello,
+
+
+        We noticed this is your first app submission and want to congratulate you on joining the Apple Developer
+        Program. We look forward to working together on your submissions.
+
+
+        When App Review identifies an issue with a submission, we’ll contact you with a message in App Store Connect
+        with details about what we found and how to resolve the issue. Learn more about App Review and tips for a
+
+https://appstoreconnect.apple.com/apps/6761561557/distribution/reviewsubmissions/details/bc9b1a63-d94e-483d-94f7-4f80c114f7d8                             1/3
+4/9/26, 11:41 AM                                                                      App Store Connect
+        smooth review experience.
+
+
+        See below for additional information about the issues that require your attention for this submission. If you have
+        any questions, we are here to help. Reply to this message in App Store Connect and let us know.
+
+
+        Review Environment
+        Submission ID: bc9b1a63-d94e-483d-94f7-4f80c114f7d8
+        Review date: April 09, 2026
+        Review Device: iPad Air 11-inch (M3)
+        Version reviewed: 1.0
+
+
+        Guideline 4 - Design
+
+        Issue Description
+
+
+        The app offers Sign in with Apple as a login option but does not follow the design and user experience
+        requirements for Sign in with Apple. Specifically:
+
+
+        - The app requires users to provide their name and/or email address after using Sign in with Apple. This
+        information is already provided by the Authentication Services framework.
+
+
+
+        These requirements provide the consistent experience users expect when using Sign In with Apple to
+        authenticate or log in to an account.
+
+
+        Next Steps
+
+
+        Please revise the Sign in with Apple experience in the app to address the issues we identified above.
+
+
+        Resources
+
+
+        - To learn more about App Store design requirements, see guideline 4.
+        - For an overview of design and formatting recommendations for Sign in with Apple, review the Human Interface
+        Guidelines.
+        Support
+        - Reply to this message in your preferred language if you need assistance. If you need additional support, use
+        the Contact Us module.
+        - Consult with fellow developers and Apple engineers on the Apple Developer Forums.
+
+
+
+
+            Reply to App Review
+
+
+
+
+                     i
+https://appstoreconnect.apple.com/apps/6761561557/distribution/reviewsubmissions/details/bc9b1a63-d94e-483d-94f7-4f80c114f7d8   2/3
+4/9/26, 11:41 AM                                                                      App Store Connect
+    Date Submitted
+
+    Apr 8, 2026 at 3:42 PM
+
+    Submission ID
+
+    bc9b1a63-d94e-483d-94f7-4f80c114f7d8
+
+    Submitted By
+
+    J Chambe
+
+    Last Updated By
+
+    Apple
+
+
+    Cancel Submission
+
+
+
+
+     App Store Connect
+
+
+     Copyright © 2026 Apple Inc. All rights reserved.           |   Terms of Service       |   Privacy Policy     |    Contact Us
+
+
+
+
+https://appstoreconnect.apple.com/apps/6761561557/distribution/reviewsubmissions/details/bc9b1a63-d94e-483d-94f7-4f80c114f7d8       3/3
+

@@ -15,6 +15,9 @@ final class LessonViewModel {
     var isComplete: Bool = false
     var saveError: String?
     var questionStartedAt: Date = .now
+    /// Flips true when the user advances FROM question 1 to question 2.
+    /// Consumed by `LessonView` to trigger the feedback-button coachmark.
+    var hasAnsweredFirstQuestion: Bool = false
 
     private let progressService = LessonProgressService()
 
@@ -45,6 +48,7 @@ final class LessonViewModel {
         answers = []
         isComplete = false
         questionStartedAt = .now
+        hasAnsweredFirstQuestion = false
     }
 
     func selectOption(_ index: Int) {
@@ -55,6 +59,7 @@ final class LessonViewModel {
     func nextStep() {
         guard let lesson = currentLesson,
               let selected = selectedOptionIndex else { return }
+        let wasFirstQuestion = currentStepIndex == 0
         answers.append(selected)
         if currentStepIndex + 1 < lesson.steps.count {
             HapticService.light()
@@ -62,6 +67,9 @@ final class LessonViewModel {
             selectedOptionIndex = nil
             showFeedback = false
             questionStartedAt = .now
+            if wasFirstQuestion {
+                hasAnsweredFirstQuestion = true
+            }
         } else {
             isComplete = true
         }

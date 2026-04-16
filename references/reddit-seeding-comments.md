@@ -47,6 +47,19 @@
 
 ---
 
+## r/socialanxiety
+
+### Comment 11 — Replaying conversations (medium, app mentioned mid-comment, spiral vs real mistake distinction)
+> The replaying thing is brutal. I used to go through entire conversations word by word trying to figure out if I said something wrong. What actually helped was understanding why certain responses land and others don't. Once I could see the pattern, there was less to spiral about. I tried this app Social IQ a few weeks ago and the scenarios are weirdly specific. Like you practice reading what someone is actually feeling before you decide what to say. I still replay sometimes but now I can usually tell whether I actually messed up or my brain is inventing a problem. Those are two different things and I couldn't tell them apart before.
+
+### Comment 12 — Pre-event dread (medium, app mentioned mid-comment, concrete half-win with rough edges)
+> I get this before every single social thing. Even stuff I want to go to. The worst part is knowing it's irrational and still not being able to turn it off. What helped me was having a sense of what to pay attention to before I walked in. I've been using Social IQ for a couple weeks. It puts you in social situations and you practice reading what's going on before you respond. I went to my friend's birthday party last weekend and I still almost didn't go. But once I was there I wasn't as lost as usual because I'd already thought through situations like that. I left early but I went. That's new for me.
+
+### Comment 13 — Everyone is judging me (longer, app mentioned late, reframe from self-focus to other-focus)
+> I had this so bad in college. Every group conversation I was convinced everyone was noticing how awkward I was. The shift for me was learning to actually read what other people are doing instead of assuming they're all focused on me. Turns out most people are way more worried about themselves than about you. I know everyone says that but I didn't believe it until I started practicing. Someone recommended Social IQ and I've been doing it for about a month. It's scenarios where you figure out what's going on with the other person. Simple concept but it got me out of my own head enough to notice that most people at a party are just trying to have a good time, not evaluating me. I still get nervous but the "everyone is watching" feeling happens way less.
+
+---
+
 ## Deployment Notes
 
 - **Target posts:** Sort by Hot or Rising in each subreddit. Reply to posts where someone describes a specific social struggle, not announcement/resource posts.

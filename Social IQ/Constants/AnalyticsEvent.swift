@@ -20,6 +20,8 @@ enum AnalyticsEvent: String {
     case paywallPresented = "paywall_presented"
     case paywallDismissed = "paywall_dismissed"
     case subscriptionStarted = "subscription_started"
+    case coachmarkShown = "coachmark_shown"
+    case coachmarkDismissed = "coachmark_dismissed"
 }
 
 enum SuperwallPlacement: String {

@@ -30,5 +30,6 @@ struct FeedbackButton: View {
                 )
                 .shadow(color: .black.opacity(Theme.Opacity.disabled), radius: 4, x: 0, y: 2)
         }
+        .coachmarkAnchor(.feedbackButton)
     }
 }

@@ -71,6 +71,14 @@ struct Social_IQApp: App {
                                 .padding(.bottom, 24)
                         }
                     }
+                    .overlay {
+                        if signedInUserId != nil {
+                            CoachmarkOverlay()
+                        }
+                    }
+                    .onPreferenceChange(CoachmarkAnchorPreferenceKey.self) { frames in
+                        CoachmarkController.shared.mergeAnchors(frames)
+                    }
                     .task {
                         await authViewModel.checkSession()
                     }

@@ -105,6 +105,11 @@ struct LessonView: View {
                 }
             }
         }
+        .onChange(of: viewModel.hasAnsweredFirstQuestion) { _, didAnswer in
+            if didAnswer, !isReplay {
+                CoachmarkController.shared.show(.feedbackButton)
+            }
+        }
     }
 
     // MARK: - Helpers

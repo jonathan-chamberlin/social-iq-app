@@ -1,0 +1,207 @@
+4/9/26, 11:44 AM                                                            Tips from App Review | Apple Developer Forums
+ Apple Developer
+ Apple Developer
+
+ Forums
+ Search for a topic, subtopic, or tag
+ Search for a topic, subto Clear search query
+ Local Nav Open Menu Local Nav Close Menu
+ Search
+                                                                                      Post
+
+
+ Tips from App Review
+   App Store Distribution & Marketing   App Review   App Review   App Store Connect     In-App Purchase   TestFlight
+
+
+
+
+           This thread has been locked by a moderator; it no longer accepts new replies.
+
+
+
+
+          
+
+          Sta
+          vie
+          Ap
+          ff,
+          w
+          R
+          p le
+            e
+                  App Review                                                    Created       Replies     Boosts       Views   Participants
+                  Apple                                                         Dec ’25         0           0           6.1k         1
+                  Here are some tips from App Review for a smooth review experience. We’ve split them into
+                  two categories: Before You Submit and After You Submit. We’ve also made an easy-to-follow
+                  Submission Guide you can save and reference at any point on your App Store journey.
+
+
+
+
+                  Before You Submit Tips
+                  Enable a complete review.
+
+                  Make sure you’ve provided demo accounts or implemented an account demonstration mode
+                  before you submit. We’ll need to review the entire app experience, both with and without an
+                  account.
+                  Provide up-to-date demo account login credentials in the App Review Information section on
+                  the app version page in App Store Connect.
+
+                          If your app has multiple account types (such as admin and general users), use the Notes
+                          field to provide additional demo account credentials for each account type.
+                          If your app requires an authentication code in addition to the login credentials, provide
+                          the code in advance in the Notes field. Otherwise, a call may be required to complete the
+                          review.
+
+https://developer.apple.com/forums/thread/810791                                                                                              1/4
+4/9/26, 11:44 AM                                            Tips from App Review | Apple Developer Forums
+               Apps that handle sensitive user information, or operate in highly regulated industries, can
+               implement demonstration modes that exhibit full features and functionality while using
+               demonstration data.
+               Use the Notes field in App Store Connect to provide information to App Review.
+               The App Review Information section of App Store Connect includes a Notes field. Provide any
+               information that could be relevant to your submission’s review:
+
+                     Submitting a new app? Tell us about your app's concept, business model, and if your
+                     app is designed to only operate in certain locations.
+                     Submitting an update? Tell us about what’s changed and where to locate significant
+                     new content or features.
+                     Connecting to hardware? Attach a video, not a screen recording, that shows both the
+                     hardware and the app running on a physical Apple device as they pair and interact.
+
+                   Tips Second Asset.gif
+
+
+
+
+               Test your app on physical devices before submitting for review. Use TestFlight to distribute
+               your app for beta testing.
+               App Review evaluates apps the way your users will use them: installed on real devices and
+               connected to networks with real-world conditions. Make sure your pre-submission testing
+               includes running the app on each device platform where it could be used. Users expect the
+               app to function on all the devices where it’s available.
+               TestFlight will help you do quality assurance and beta testing on real devices. Share your beta
+               app with internal testers on your Apple Developer Program account or to external users via an
+               email invite or public link.
+               Configure In-App Purchases for review in the sandbox environment.
+               App Review assesses In-App Purchases in the same sandbox environment Apple provides for
+               testing them. The sandbox lets us use real product data and server-to-server transactions,
+               without incurring any financial charges.
+               Take these steps to prepare your In-App Purchases for review:
+
+                     Accept the Paid Applications Agreement in App Store Connect.
+                     Submit the In-App Purchases in App Store Connect that you’d like reviewed.
+                     Follow the steps in TN3186: Troubleshooting In-App Purchases availability in the
+                     sandbox if your app fails to display your In-App Purchases.
+
+               Note: In-App Purchases don’t need prior approval from App Review to function in review.
+               Join a Meet with Apple event if you need assistance before you submit for review.
+               Request an App Review appointment through Meet with Apple to chat with an App Review
+               expert about how to prepare for review, ask questions about specific guidelines, and discuss
+https://developer.apple.com/forums/thread/810791                                                                 2/4
+4/9/26, 11:44 AM                                                  Tips from App Review | Apple Developer Forums
+               other topics related to the review process. Appointments are subject to availability during
+               your local business hours on Tuesdays and Thursdays.
+               After You Submit Tips
+               Contact App Review if you need assistance with an ongoing submission.
+               If your submission doesn’t pass review and you have questions, contact App Review directly
+               by clicking Reply to App Review in App Store Connect. You’ll receive a reply from a review
+               specialist who’s familiar with your app.
+               You can also use the Reply to App Review message window to request a call with an Apple
+               representative. Include your preferred time and language for the call and we’ll do our best to
+               accommodate your requests.
+
+
+
+
+               Use the Bug Fix Submissions process to quickly deliver bug fixes and resolve other issues on
+               the next submission.
+               If an update includes bug fixes and is rejected, you will be given the option to resolve the
+               issues on your next submission, as long as there are no legal or safety concerns. App Review
+               will let you know if your submission is eligible by including this note at the top of the rejection
+               message:
+                   Bug Fix Submissions
+
+                   The issues we've identified below are eligible to be resolved on your next update.
+
+
+               To accept this offer, simply reply to the rejection message in App Store Connect and let App
+               Review know you’ll resolve the issues on the next submission.
+               Share ideas with Apple about how to improve or clarify the App Review Guidelines by
+               submitting guideline feedback.
+               Just as the App Store is always changing and improving to keep up with the needs of
+               customers, the App Review Guidelines may be revised to provide new and updated guidance.
+               If you have ideas for improving or clarifying our requirements you can suggest guideline
+               changes.
+               If your submission was rejected but you believe it follows the App Review Guidelines, consider
+               submitting an appeal to the App Review Board.
+               If your submission didn’t pass review but you have reason to believe it follows the App Review
+               Guidelines, you can submit an appeal to the App Review Board. You can also file an appeal if
+               you think we misunderstood your app or the review was unfair. The App Review Board will
+               contact you as soon as they complete their investigation.
+
+                    Boost             Cop
+
+                                      y to
+https://developer.apple.com/forums/thread/810791                                                                     3/4
+4/9/26, 11:44 AM                                                                   Tips from App Review | Apple Developer Forums
+
+                                          clip
+
+                                           boacomments and opinions and is for informational purposes only. Apple disclaims any and all liability for the acts, omissions and conduct
+    This site contains user submitted content,
+    of any third parties in connection with or related to your use of the site. All postings and use of the content on this site are subject to the Apple Developer Forums Participation
+    Agreement and Apple provided code is subject to the Apple Sample Code License.
+                                               rd
+    Platforms                                       Topics & Technologies                      Resources                                   Programs
+
+    iOS                                             Accessibility                              Documentation                               Apple Developer Program
+
+    iPadOS                                          Accessories                                Tutorials                                   Apple Developer Enterprise Program
+
+    macOS                                           App Extensions                             Downloads                                   App Store Small Business Program
+
+    tvOS                                            App Store                                  Forums                                      MFi Program
+
+    watchOS                                         Audio & Video                              Videos                                      News Partner Program
+
+    visionOS                                        Augmented Reality                                                                      Video Partner Program
+                                                                                               Support
+                                                    Design                                                                                 Security Bounty Program
+    Tools                                                                                      Support Articles
+                                                    Distribution                                                                           Security Research Device Program
+    Swift                                                                                      Contact Us
+                                                    Education
+    SwiftUI                                                                                    Bug Reporting                               Events
+                                                    Fonts
+    SF Symbols                                                                                 System Status                               Meet with Apple
+                                                    Games
+    Swift Playground                                                                                                                       Apple Developer Centers
+                                                    Health & Fitness                           Account
+    TestFlight                                                                                                                             App Store Awards
+                                                    In-App Purchase                            Apple Developer
+    Xcode                                                                                                                                  Apple Design Awards
+                                                    Localization                               App Store Connect
+    Xcode Cloud                                                                                                                            Apple Developer Academies
+                                                    Maps & Location                            Certificates, IDs, & Profiles
+                                                                                                                                           WWDC
+                                                    Machine Learning                           Feedback Assistant
+                                                    Open Source
+
+                                                    Security
+
+                                                    Safari & Web
+
+
+
+    To view the latest developer news, visit                                                               News and Updates                                                            .
+
+    Copyright © 2026 Apple Inc. All rights reserved.           Terms of Use   Privacy Policy   License Agreements
+
+
+
+
+https://developer.apple.com/forums/thread/810791                                                                                                                                           4/4
+

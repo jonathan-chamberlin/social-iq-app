@@ -1,6 +1,6 @@
 # Left Off
 
-**Last updated:** 2026-04-14
+**Last updated:** 2026-04-17
 
 ## Unfinished
 - **App Store Review resubmitted (Build 28)** - waiting for Apple's response

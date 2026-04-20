@@ -19,7 +19,10 @@
       "Bash(mv ~/.claude/rules/notion-areas.md ~/.claude/references/notion-areas.md)",
       "Bash(mv ~/.claude/rules/notion-mcp.md ~/.claude/references/notion-mcp.md)",
       "mcp__claude_ai_Gmail__gmail_search_messages",
-      "mcp__claude_ai_Gmail__gmail_read_message"
+      "mcp__claude_ai_Gmail__gmail_read_message",
+      "mcp__claude_ai_Slack__slack_search_users",
+      "mcp__claude_ai_Slack__slack_search_public_and_private",
+      "mcp__claude_ai_Slack__slack_read_channel"
     ]
   },
   "enableAllProjectMcpServers": true,

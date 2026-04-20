@@ -80,7 +80,6 @@ struct OnboardingView: View {
                     )
                 case .nameAgeGender:
                     OnboardingNameAgeGenderStep(
-                        userName: $viewModel.userName,
                         userAge: $viewModel.userAge,
                         selectedGender: $viewModel.selectedGender
                     )

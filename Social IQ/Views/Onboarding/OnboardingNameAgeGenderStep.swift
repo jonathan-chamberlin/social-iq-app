@@ -6,7 +6,6 @@
 import SwiftUI
 
 struct OnboardingNameAgeGenderStep: View {
-    @Binding var userName: String
     @Binding var userAge: Int
     @Binding var selectedGender: String
 
@@ -19,23 +18,6 @@ struct OnboardingNameAgeGenderStep: View {
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
                 .padding(.top, 20)
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("First name")
-                    .font(.subheadline)
-                    .foregroundStyle(.white.opacity(Theme.Opacity.subtle))
-                TextField(
-                    "", text: $userName,
-                    prompt: Text("Your first name").foregroundStyle(.white.opacity(Theme.Opacity.disabled))
-                )
-                .textFieldStyle(.plain)
-                .font(.title3)
-                .foregroundStyle(.white)
-                .padding(16)
-                .cardBackground()
-                .autocorrectionDisabled()
-                .textInputAutocapitalization(.words)
-            }
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("Gender")

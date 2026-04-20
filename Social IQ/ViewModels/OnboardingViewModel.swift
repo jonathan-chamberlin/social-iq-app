@@ -100,7 +100,7 @@ final class OnboardingViewModel {
     var canContinue: Bool {
         switch currentStep {
         case .nameAgeGender:
-            !userName.trimmingCharacters(in: .whitespaces).isEmpty && !selectedGender.isEmpty
+            !selectedGender.isEmpty
         case .goalSelection:
             !selectedGoals.isEmpty
         default:

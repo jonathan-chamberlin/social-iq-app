@@ -8,6 +8,7 @@ import Foundation
 // MARK: - Onboarding Step Enum
 
 enum OnboardingStep: Int, CaseIterable {
+    case welcome
     case quiz
     case nameAgeGender
     case socialContext
@@ -24,6 +25,7 @@ enum OnboardingStep: Int, CaseIterable {
 
     var analyticsName: String {
         switch self {
+        case .welcome: "welcome"
         case .quiz: "quiz"
         case .nameAgeGender: "name_age_gender"
         case .socialContext: "social_context"
@@ -42,7 +44,7 @@ enum OnboardingStep: Int, CaseIterable {
 
     var autoAdvances: Bool {
         switch self {
-        case .quiz, .socialContext, .calculating, .discoverySource, .bridgeToPaywall:
+        case .welcome, .quiz, .socialContext, .calculating, .discoverySource, .bridgeToPaywall:
             true
         default:
             false
@@ -51,7 +53,7 @@ enum OnboardingStep: Int, CaseIterable {
 
     var showsBackButton: Bool {
         switch self {
-        case .quiz, .calculating:
+        case .welcome, .quiz, .calculating:
             false
         default:
             true
@@ -65,6 +67,8 @@ enum OnboardingStep: Int, CaseIterable {
     }
 
     var previous: OnboardingStep? {
+        // Welcome is a one-way commitment gate — quiz must not be able to back into it.
+        if self == .quiz { return nil }
         let all = Self.allCases
         guard let idx = all.firstIndex(of: self), idx > all.startIndex else { return nil }
         let prev = all[all.index(before: idx)]

@@ -22,9 +22,11 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            progressDots
-                .padding(.top, 12)
-                .padding(.bottom, 24)
+            if viewModel.currentStep != .welcome {
+                progressDots
+                    .padding(.top, 12)
+                    .padding(.bottom, 24)
+            }
 
             stepContent
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -73,6 +75,8 @@ struct OnboardingView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 0) {
                 switch viewModel.currentStep {
+                case .welcome:
+                    OnboardingWelcomeStep(onGetStarted: viewModel.advance)
                 case .quiz:
                     OnboardingQuizStep(
                         subStep: viewModel.quizSubStep,

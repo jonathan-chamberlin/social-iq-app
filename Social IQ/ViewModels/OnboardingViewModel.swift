@@ -17,7 +17,7 @@ final class OnboardingViewModel {
 
     // MARK: - Step State
 
-    var currentStep: OnboardingStep = .quiz
+    var currentStep: OnboardingStep = .welcome
     var quizSubStep: QuizSubStep = .challenge
     var quizAnswers: [Int] = []
 

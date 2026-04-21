@@ -20,6 +20,11 @@
   5. **Restructure lesson flow to story-first (Kahoot-style)** — present scenario in isolation first, build tension, then reveal MCQ. Current flow shows all 4 options simultaneously with the prompt. Separate initiative — biggest lift, affects every lesson + LessonView architecture. Park until 1–4 validate.
 
 ## Next Up
+- **Mixpanel internal-user filter — manual follow-up**:
+  - Add annotation on Reports → click 2026-04-20 → "App Store launch — 16:00 UTC" (MCP has no annotation tool)
+  - Wait for Lexicon to index `is_internal` / `build_type` super properties (~5–15 min), then create cohort "Real users" where `is_internal != true` and set as default filter on funnel dashboards
+  - Code change in `Services/AnalyticsService.swift` tags every future event with `build_type` (debug/testflight/app_store) + `is_internal` bool — ships with next build
+  - Script `scripts/mixpanel/retro_tag_internal_users.py` already committed 26 pre-launch profiles as `is_internal=true`. 94 anonymous event-only distinct_ids (126 total − 32 profiles) cannot be retro-tagged; filter those out via date-range only
 - Confirm build 29 finishes processing in App Store Connect
 - Reply to App Review in App Store Connect with the explanation above
 - App Store Connect attribution links created for all 6 channels (see `references/attribution-links.md`) — wire into future `reddit-seeding` skill so agents never reconstruct URLs

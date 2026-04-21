@@ -22,7 +22,10 @@
       "mcp__claude_ai_Gmail__gmail_read_message",
       "mcp__claude_ai_Slack__slack_search_users",
       "mcp__claude_ai_Slack__slack_search_public_and_private",
-      "mcp__claude_ai_Slack__slack_read_channel"
+      "mcp__claude_ai_Slack__slack_read_channel",
+      "Bash(cp /Users/jonathanchamberlin/.claude/skills/reel-scriptwriter/SKILL.md /tmp/reel-scriptwriter-SKILL.md.bak)",
+      "Bash(cp /tmp/reel-skill-extract/reel-scriptwriter/SKILL.md /Users/jonathanchamberlin/.claude/skills/reel-scriptwriter/SKILL.md)",
+      "Read(//tmp/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

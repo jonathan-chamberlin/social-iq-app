@@ -1,39 +1,51 @@
-# Leftoff Phase Artifact
+# Leftoff Update Report
 
-**Status:** PASS (no-op; file already reflects merged state)
+**Session:** 2026-04-21  
+**Type:** Diagnostic - Superwall Test Mode popup investigation
 
-## Carried forward (14)
-From existing `leftoff.md`:
+## Summary
 
-**Unfinished (7)**
-- App Store Review resubmitted (Build 28) — waiting for Apple's response
-- `SuperwallService.identify(userId:)` added but not yet tested on TestFlight
-- Small Business Program enrollment submitted, waiting for confirmation email
-- `transaction_abandon` campaign has no placement, only holdout variant
-- Views over 100 lines not yet split: SettingsView (171), HomeView (207), LessonView (138), LessonCompletionView (129)
-- 0 test files exist - 10 testable types need test coverage
-- Offline loading path — implemented timeouts + cached fallback; needs real-device TestFlight verification (enable airplane mode after a prior sign-in and relaunch)
+Session was read-only diagnostic work: traced Test Mode popup appearing on App Store build back to Superwall dashboard misconfiguration (85 trailing spaces on registered bundle_id). User fixed via dashboard UI. No code changes committed.
 
-**Next Up (6)**
-- Wait for Apple review response
-- Once approved: create Bitly attribution links per channel
-- Lesson UX: sticky "See why" button — pin to bottom of screen after correct answer
-- Reddit Seeding Launch — Notion task `33dafe0d-cf03-8108-9c31-d3cdfea75a23`
-- AI UGC Tool Test — Notion task `33dafe0d-cf03-8162-826b-ddced947353e`
-- Add unit tests for ViewModels and Services
+## Merge Results
 
-**Blockers (1)**
-- App Store approval pending Apple review
+### Items Carried Forward
+**Count: 28 items**
 
-## Newly appended (0)
-No new unfinished items detected this session. Today's commits:
-- `ff073fb` — offline loading fix (the unfinished real-device verification is already in the list from the prior session entry)
-- `9fc7a45` — Reddit seeding doc (Reddit launch already tracked)
+All existing Unfinished, Next Up, and Blockers items preserved without modification:
+- Build 29 TestFlight upload and App Review follow-up
+- SuperwallService testing
+- Small Business Program enrollment wait
+- transaction_abandon campaign placement
+- Views over 100 lines refactoring (SettingsView, HomeView, LessonView, LessonCompletionView)
+- Test coverage (0 test files, 10 testable types)
+- Offline loading path verification
+- CWOOP content-craft panel vividness test
+- Dylan 2026-04-20 feedback extraction and triage
+- Dylan prioritized action items (1-5)
+- Mixpanel internal-user filter setup
+- App Store attribution links wiring
+- Lesson UX and craft sprint items
+- App Store approval blocker
 
-Untracked dirs (`paywalls/`, `submission-reqs/`) contain reference assets (paywall PNGs, App Review PDFs), not follow-ups.
+### Items Newly Appended
+**Count: 2 items**
 
-## Removed as completed (0)
-No items had commit sha evidence of completion. Per "when in doubt keep it", removed nothing.
+**Unfinished:**
+- Superwall dashboard bundle_id trailing whitespace bug report (85 spaces padded to registered bundle_id on save, causing Test Mode popup on App Store build)
 
-## Diff
-No changes to `leftoff.md` required — file already reflects the merged state. Header date `2026-04-14` already current.
+**Next Up:**
+- Verify Test Mode popup cleared on real iPhone after kill + relaunch (user-reported success, confirm repeatable if needed)
+
+### Items Removed as Completed
+**Count: 0 items**
+
+No items removed. All prior work remains active. (Git log 2026-04-07 to 2026-04-21 shows Build 29 committed as 1d8772a but the TestFlight submission is still pending App Review, so the item stays on Unfinished.)
+
+## Status
+
+**git status:** 
+- Deleted files only: `.claude/improve-artifacts/` subdirs (daily-log.md, learn.md, leftoff.md, refactor.md, skills-audit.md) — These are leftoff artifacts that get regenerated; their deletion is expected.
+- Modified: `.claude/settings.local.json`
+
+**Remaining unfinished work** preserved. Project state unchanged code-wise. Next session resumes App Review follow-up and TestFlight verification.

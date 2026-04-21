@@ -155,6 +155,40 @@ Check the campaign's audience rules - filters like "show once," device type, or 
 4. Check if `identify(userId:)` is being called after sign-in
 5. Only AFTER ruling out config/state issues should you modify code
 
+## Troubleshooting: "Test Mode Active" Overlay in Production
+
+Symptom: App Store / TestFlight build shows the red "Test Mode Active" banner with text like `Bundle ID mismatch: expected com.jonathanchamberlin.Social-IQ, got com.jonathanchamberlin.Social-IQ` — both strings look visually identical.
+
+### Root cause: invisible trailing whitespace in the dashboard-registered bundle_id
+The Superwall dashboard's bundle_id field stores the raw string you typed/pasted (including trailing spaces), but **renders it visually trimmed** in both the dashboard UI and the "Test Mode Active" error overlay. Superwall's SDK does strict `==` string equality with no trim, so even 1 trailing space forces the app into Test Mode.
+
+This was observed in production with ~85 trailing spaces on the bundle_id, invisible everywhere except when inspected via the MCP API.
+
+### Diagnostic (do this FIRST, before changing any code or Info.plist)
+**Never compare the popup's rendered `expected` vs `got` visually — they are both trimmed.** Instead:
+
+1. Query the dashboard-registered value via MCP:
+   ```
+   mcp__superwall__list_projects
+   ```
+   Find the project and inspect `applications[].bundle_id`.
+2. Dump `repr()` and `len()` of that string. Compare length to `Bundle.main.bundleIdentifier` length. If they differ, you've found the bug — the extra chars are almost always trailing spaces/tabs.
+3. Confirm by byte-diffing: the project's actual bundle ID is 32 chars (`com.jonathanchamberlin.Social-IQ`); anything longer is whitespace pollution.
+
+### Fix
+In the Superwall dashboard:
+1. Open the project → Applications → click the bundle_id field.
+2. `Cmd+A` to select all → `Delete`.
+3. **Retype from scratch** (do not paste — the clipboard may still contain the polluted value).
+4. Save. Re-query via `mcp__superwall__list_projects` and confirm `len() == 32`.
+5. No app code change is needed. Next cold launch of the production build clears Test Mode.
+
+### Why this keeps happening
+- Dashboard paste events can include trailing whitespace from copied Xcode build-settings output.
+- The dashboard UI CSS trims visually so the operator cannot see the garbage.
+- The "Test Mode Active" overlay also renders trimmed, so the `expected` / `got` strings look byte-identical.
+- Only the MCP API (and raw HTTP responses) expose the true stored value.
+
 ## Key placements
 
 ### lessons_locked (live — primary conversion point)

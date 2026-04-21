@@ -87,4 +87,41 @@ final class LessonViewModel {
             saveError = error.localizedDescription
         }
     }
+
+    // MARK: - Analytics
+
+    func trackLessonStarted(isReplay: Bool) {
+        guard let lesson = currentLesson else { return }
+        if isReplay {
+            AnalyticsService.track(event: .lessonReplayed, properties: ["lesson_id": lesson.id])
+        }
+        AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
+    }
+
+    func trackQuestionAnswered(selectedIndex: Int) {
+        guard let step = currentStep, let lesson = currentLesson else { return }
+        let timeToAnswer = Int(Date().timeIntervalSince(questionStartedAt))
+        AnalyticsService.track(event: .questionAnswered, properties: [
+            "lesson_id": lesson.id,
+            "question_number": currentStepIndex + 1,
+            "question_type": step.label,
+            "answer_index": selectedIndex,
+            "is_correct": step.options[selectedIndex].feedback.isCorrect,
+            "time_to_answer_seconds": timeToAnswer,
+        ])
+    }
+
+    func trackLessonAbandoned() {
+        guard let lesson = currentLesson else { return }
+        AnalyticsService.track(event: .lessonAbandoned, properties: [
+            "lesson_id": lesson.id,
+            "question_number": currentStepIndex + 1,
+            "question_type": currentStep?.label ?? "unknown",
+        ])
+    }
+
+    func trackLessonCompleted() {
+        guard let lesson = currentLesson else { return }
+        AnalyticsService.track(event: .lessonCompleted, properties: ["lesson_id": lesson.id])
+    }
 }

@@ -48,17 +48,7 @@ struct LessonView: View {
                     showOtherAnswers: showOtherAnswers,
                     onSelectOption: { viewModel.selectOption($0) },
                     onTrackAnswer: { selected in
-                        if let step = viewModel.currentStep {
-                            let timeToAnswer = Int(Date().timeIntervalSince(viewModel.questionStartedAt))
-                            AnalyticsService.track(event: .questionAnswered, properties: [
-                                "lesson_id": displayedLesson.id,
-                                "question_number": viewModel.currentStepIndex + 1,
-                                "question_type": step.label,
-                                "answer_index": selected,
-                                "is_correct": step.options[selected].feedback.isCorrect,
-                                "time_to_answer_seconds": timeToAnswer,
-                            ])
-                        }
+                        viewModel.trackQuestionAnswered(selectedIndex: selected)
                     }
                 )
             }
@@ -82,23 +72,16 @@ struct LessonView: View {
         }
         .onAppear {
             viewModel.startLesson(lesson)
-            if isReplay {
-                AnalyticsService.track(event: .lessonReplayed, properties: ["lesson_id": lesson.id])
-            }
-            AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
+            viewModel.trackLessonStarted(isReplay: isReplay)
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .background, !viewModel.isComplete {
-                AnalyticsService.track(event: .lessonAbandoned, properties: [
-                    "lesson_id": displayedLesson.id,
-                    "question_number": viewModel.currentStepIndex + 1,
-                    "question_type": viewModel.currentStep?.label ?? "unknown",
-                ])
+                viewModel.trackLessonAbandoned()
             }
         }
         .onChange(of: viewModel.isComplete) { _, complete in
             if complete, let userId {
-                AnalyticsService.track(event: .lessonCompleted, properties: ["lesson_id": displayedLesson.id])
+                viewModel.trackLessonCompleted()
                 Task {
                     await viewModel.saveProgress(userId: userId)
                     onComplete?()
@@ -137,7 +120,7 @@ struct LessonView: View {
     private func startNextLesson(_ next: Lesson) {
         activeLesson = next
         viewModel.startLesson(next)
-        AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": next.id])
+        viewModel.trackLessonStarted(isReplay: false)
     }
 }
 

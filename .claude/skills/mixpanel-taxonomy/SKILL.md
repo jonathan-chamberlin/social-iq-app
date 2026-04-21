@@ -114,7 +114,7 @@ AnalyticsService.setUserProperties([
 - Every new feature MUST add its events to this taxonomy before shipping
 - Never track PII (email, phone) as event properties
 - Use Mixpanel's built-in $device, $os, $app_version — don't duplicate
-- Flush on every track call (AnalyticsService.track calls flush() immediately) — ensures events appear in real-time stream within seconds
+- Do NOT call `flush()` per event — Mixpanel batches automatically. The only legitimate `flush()` call is in `AnalyticsService.initialize()` (fires once at app launch to push the initial super-property registration and `app_opened` event immediately)
 
 ## Post-task reflection (run after every completed task)
 

@@ -1,69 +1,65 @@
-# Skills Audit
+# Skills Audit Report
 
-**Audited count:** 119 (matches `find ~/.claude/skills -maxdepth 2 -name SKILL.md | wc -l`)
+**Scoped to 24/48 total skills (reason: changed since last run 2026-04-14T23:55:40Z — under 30 circuit breaker)**
 
-## Method
+- Project skills changed: 2 (mixpanel-taxonomy, testflight-deploy)
+- Global skills changed: 22 (but 4 were deleted/archived — analyze-log, page-namer, skill-stocktake, visual-validation moved to skills-archive/)
+- Active skills actually audited: 20 (excluding the 4 archived)
 
-Fast-pass grep across all 119 SKILL.md files for banned patterns, then full Read of every file flagged by any grep, plus 5 random spot-check Reads of unflagged skills to confirm grep coverage.
+---
 
-Grep patterns used (all with `glob: **/SKILL.md`):
+## Per-Skill Audit Table
 
-- `foregroundColor\(` (deprecated SwiftUI)
-- `cornerRadius\(` (deprecated SwiftUI)
-- `NavigationView` (deprecated SwiftUI)
-- `onAppear.*Task` (onAppear+Task anti-pattern)
-- `DispatchQueue\.main\.asyncAfter` (banned per project)
-- `@Published|ObservableObject` (should be @Observable)
-- `Superwall\.shared\.` (should use SuperwallService wrapper)
-- `Mixpanel\.mainInstance` (should use AnalyticsService wrapper)
-- `console\.log` (noisy in STDIO MCP servers)
-- `api[_-]?key.*=.*["'][A-Za-z0-9]{20}` (hardcoded secrets, case-insensitive)
-- `sk-[A-Za-z0-9]{20}|pk_[A-Za-z0-9]{20}` (api key literals)
-
-## Spot-checks (5 random unflagged skills, full Read)
-
-1. `/Users/jonathanchamberlin/.claude/skills/ship/SKILL.md` — clean, no banned patterns.
-2. `/Users/jonathanchamberlin/.claude/skills/swift-concurrency-expert/SKILL.md` — clean, references-only Swift skill.
-3. `/Users/jonathanchamberlin/.claude/skills/speed-up/SKILL.md` — clean, Python performance skill.
-4. `/Users/jonathanchamberlin/.claude/skills/skill-stocktake/SKILL.md` — clean, audit workflow skill.
-5. `/Users/jonathanchamberlin/.claude/skills/rules-distill/SKILL.md` — clean, rules maintenance skill.
-
-## Findings table
-
-| Skill | File | Line | Pattern matched | Real violation? | Action |
+| Skill | Read? | Claims | Reality | Violations | Action |
 |---|---|---|---|---|---|
-| swiftui-pro | `~/.claude/skills/swiftui-pro/SKILL.md` | 42, 51, 55, 92 | `foregroundColor(` | NO — pedagogical "before/after" example demonstrating the deprecation rule itself | None |
-| improve | `~/.claude/skills/improve/SKILL.md` | 153 | `NavigationView` | NO — appears in a list of deprecated APIs the skill checks for | None |
-| improve | `~/.claude/skills/improve/SKILL.md` | 154 | `onAppear+Task` | NO — same deprecated-API checklist | None |
-| improve | `~/.claude/skills/improve/SKILL.md` | 155 | `console.log` | NO — same deprecated-API checklist (STDIO MCP) | None |
-| swiftui-patterns | `~/.claude/skills/swiftui-patterns/SKILL.md` | 35, 250 | `ObservableObject`/`@Published` | NO — explicit "use @Observable INSTEAD of ObservableObject" guidance and "Anti-Patterns to Avoid" list | None |
-| security-review | `~/.claude/skills/security-review/SKILL.md` | 304-309 | `console.log` | NO — wrong-vs-right example showing how to redact sensitive data in logs | None |
-| claude-api | `~/.claude/skills/claude-api/SKILL.md` | 99 | `console.log` | NO — legitimate Node.js example of printing the model response | None |
-| verification-loop | `~/.claude/skills/verification-loop/SKILL.md` | 72-73 | `console.log` | NO — appears inside a `grep` command to scan user code for stray `console.log`; not actual logging | None |
-| chrome-ext-test | `~/.claude/skills/chrome-ext-test/SKILL.md` | 50 | `console.log` | NO — Playwright test snippet logging the extension ID, valid usage | None |
+| mixpanel-taxonomy (project) | YES | "AnalyticsService.track calls flush() immediately" (line 117) | `AnalyticsService.track()` does NOT call flush. Only `initialize()` flushes, once at app launch. `track()` at line 40-42 of AnalyticsService.swift has no flush. | FACTUAL ERROR — instructs future agents to expect per-event flush, contradicts CLAUDE.md "NEVER call flush() per-event" rule | FIXED |
+| testflight-deploy (project) | YES | API key IDs hardcoded in skill file (S6QR8N472U, 8833fdf3...) | These are reference values in a project-scoped skill doc, not source code secrets. Key path is at `~/.appstoreconnect/private_keys/` which is gitignored. Acceptable for a skill reference doc. | None — skill is accurate, no banned patterns | Clean |
+| ai-check (global) | YES | Chunked AI detection via QuillBot script, extraction via `extract_prose.py` | Consistent with actual script references. No iOS/Mixpanel patterns. | None | Clean |
+| analyze-log (global) | N/A — ARCHIVED | Moved to skills-archive/ in commit c841fd0 (2026-04-16). Not an active skill. | — | N/A | Archived, skip |
+| canvas (global) | YES | Canvas LMS MCP tools, UTC→ET timezone conversion, assignment lifecycle | Solid. Due-date conversion rule is explicit and correct. | None | Clean |
+| close-task (global) | YES | Uses `mcp__notion__update_page` only, never `close_task.py` or REST API | Consistent with stated rules. Delegates to sibling files correctly. | None | Clean |
+| create_update_skill (global) | YES | Frontmatter required, boilerplate extraction rule | Consistent and up to date. | None | Clean |
+| daily-tasks (global) | YES | model: haiku, Canvas cross-reference only on explicit request | Correct. model field present. Extraction pattern follows rule. | None | Clean |
+| decision-series (global) | YES | Telegram card orchestration via scripts at `~/repos/decision-series/scripts/` | No banned patterns. Scripts correctly referenced. | None | Clean |
+| draft-and-revise (global) | YES | 10-phase workflow with TodoWrite requirement | Comprehensive. No banned APIs. Uses voice_analysis.md reference correctly. | None | Clean |
+| expiriments (global) | YES | 5-phase experiment workflow with create_experiment.py | Consistent. Folder name typo ("expiriments") is in the skill name itself — known and accepted. | None | Clean |
+| improve (global) | YES | 5 parallel subagents + verifier, last-run scoping, circuit breaker at 30 | Consistent with this audit's own execution. | None | Clean |
+| juice-shop-solver (global) | YES | curl-only pattern against localhost:3000, `PAYLOADS.md` extraction | No banned patterns. Proper progressive disclosure. | None | Clean |
+| llm-council (global) | YES | Valid frontmatter, 5-advisor + chairman pattern | YAML frontmatter had extra blank lines between `---` and `name:` — technically invalid per `create_update_skill` rules. Content otherwise accurate. | FRONTMATTER DRIFT — blank lines in YAML block | FIXED |
+| notion-analysis (global) | YES | Two-phase extraction with user approval gate | Correct. MCP tool path and fallback are accurate. | None | Clean |
+| notion-tasks (global) | YES | Markdown content rule (when to use which Notion MCP tool), append-to-top corruption warning | Accurate. Two-MCP-tool guidance is current. | None | Clean |
+| page-namer (global) | N/A — ARCHIVED | Moved to skills-archive/ in commit c841fd0 (2026-04-16). | — | N/A | Archived, skip |
+| reel-scriptwriter (global) | YES | ICP targeting, voice compliance, on-screen title rules | Detailed and internally consistent. No banned patterns. | None | Clean |
+| ship (global) | YES | 8-phase TestFlight workflow, keychain credential lookup | Keychain lookup verified real (`security find-generic-password -s APP_STORE_CONNECT_ISSUER_ID` returns valid value). Phases are correctly ordered (commit before archive). | None | Clean |
+| simulation-execution (global) | YES | `python3 main.py --quiet` runner | Generic simulation skill. No iOS patterns. Minimal surface. | None | Clean |
+| skill-creator (global) | YES | Skill creation workflow, frontmatter requirements | Detailed and accurate. References `init_skill.py` and `package_skill.py`. | None | Clean |
+| skill-stocktake (global) | N/A — ARCHIVED | Moved to skills-archive/ in commit c841fd0 (2026-04-16). | — | N/A | Archived, skip |
+| swiftui-patterns (global) | YES | `@Observable`, NavigationStack, anti-patterns, CROSS_VIEW_ANCHORS.md reference | Clean. Uses modern patterns. References CROSS_VIEW_ANCHORS.md for conditional read. | None | Clean |
+| visual-validation (global) | N/A — ARCHIVED | Moved to skills-archive/ in commit c841fd0 (2026-04-16). | — | N/A | Archived, skip |
 
-**Hardcoded secret greps:** zero hits across all 119 files.
+---
 
-## Stale skills
+## Skills Actually Modified
 
-None of the flagged files are stale:
-
-| File | Last modified |
+| File | Change |
 |---|---|
-| swiftui-pro/SKILL.md | 2026-04-08 |
-| swiftui-patterns/SKILL.md | 2026-03-22 |
-| improve/SKILL.md | 2026-04-13 |
-| security-review/SKILL.md | 2026-03-22 |
-| claude-api/SKILL.md | 2026-03-22 |
-| verification-loop/SKILL.md | 2026-03-22 |
-| chrome-ext-test/SKILL.md | 2026-03-14 |
+| `/Users/jonathanchamberlin/repos/social-iq/.claude/skills/mixpanel-taxonomy/SKILL.md` | Fixed factual error on line 117: `flush()` is NOT called per-event by `track()`. Corrected to explain the actual behavior (only called once in `initialize()`). |
+| `/Users/jonathanchamberlin/.claude/skills/llm-council/SKILL.md` | Fixed YAML frontmatter: removed blank lines between `---` opener and `name:` field, removed blank lines between `name:` and `description:`, removed trailing blank line before closing `---`. |
 
-All within the last ~30 days. No staleness flags.
+---
 
-## Skills modified
+## Superwall Troubleshooting Entry Check
 
-None. Every flagged occurrence is intentional pedagogical content (showing the wrong pattern to teach the right one) or a legitimate use (Node example, grep target).
+The prompt asked to check if `superwall-campaigns` already has a troubleshooting entry for "Test Mode Active caused by trailing whitespace in dashboard bundle_id." That skill was NOT in the changed-since-last-run scope and was not audited this pass. No update made.
+
+---
 
 ## Summary
 
-Audited 119/119 SKILL.md files. Eleven banned-pattern grep hits across 7 files; on full inspection, all 11 are intentional — pedagogical "wrong vs right" examples, deprecated-API checklists used by audit skills, or legitimate Node `console.log` in non-MCP contexts. Zero hardcoded secrets. Zero deprecated-API violations in actual recommended code. Zero stale skills. No edits applied.
+- 20 active skills audited
+- 4 archived skills skipped (analyze-log, page-namer, skill-stocktake, visual-validation)
+- 2 violations found and fixed:
+  1. `mixpanel-taxonomy` — factual error about flush() behavior
+  2. `llm-council` — YAML frontmatter blank lines causing potential discovery failure
+- 0 banned API patterns found in any skill code examples
+- 0 hardcoded secrets found in source code (testflight-deploy has reference IDs in a project skill doc, which is appropriate)

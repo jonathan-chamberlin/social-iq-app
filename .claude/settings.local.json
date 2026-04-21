@@ -25,7 +25,9 @@
       "mcp__claude_ai_Slack__slack_read_channel",
       "Bash(cp /Users/jonathanchamberlin/.claude/skills/reel-scriptwriter/SKILL.md /tmp/reel-scriptwriter-SKILL.md.bak)",
       "Bash(cp /tmp/reel-skill-extract/reel-scriptwriter/SKILL.md /Users/jonathanchamberlin/.claude/skills/reel-scriptwriter/SKILL.md)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(mkdir -p /Users/jonathanchamberlin/repos/social-iq/.claude/improve-artifacts)",
+      "Bash(rm -f /Users/jonathanchamberlin/repos/social-iq/.claude/improve-artifacts/*.md)"
     ]
   },
   "enableAllProjectMcpServers": true,

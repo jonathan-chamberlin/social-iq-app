@@ -1,6 +1,6 @@
 # Left Off
 
-**Last updated:** 2026-04-20
+**Last updated:** 2026-04-21
 
 ## Unfinished
 - **Build 29 uploaded to TestFlight** (Delivery UUID `310c2433-ee54-473c-8755-c974f3420bf6`) addressing App Review guideline 4.0 rejection (removed name TextField after Sign in with Apple). Waiting on processing (~5-15 min), then must attach to submission `bc9b1a63-d94e-483d-94f7-4f80c114f7d8` and reply to App Review explaining the silent `appleFirstName` → Supabase pipeline is preserved.
@@ -18,8 +18,11 @@
   3. **2s locked-continue timer on reactive onboarding screens** — scare, uplift, socialProof, chart, bridgeToPaywall. Forces the emotional beat to land before dismissal. Trivial — timer + disabled button state.
   4. **Per-answer reactive beats after quiz questions** — each quiz answer triggers a tailored micro-screen (graph "73% of users with this struggle improved in 14 days" OR matched testimonial "Marcus, 21, same answer"). Transforms questionnaire into conversation. Bigger lift: content writing + 3–6 new micro-screens + answer→beat mapping. Next week if items 1–3 move the needle on user tests.
   5. **Restructure lesson flow to story-first (Kahoot-style)** — present scenario in isolation first, build tension, then reveal MCQ. Current flow shows all 4 options simultaneously with the prompt. Separate initiative — biggest lift, affects every lesson + LessonView architecture. Park until 1–4 validate.
+- **Superwall dashboard bundle_id trailing whitespace bug** — 85 spaces padded to registered bundle_id on save, causing Test Mode popup on App Store build. User fixed via dashboard UI. File bug report with Superwall support.
 
 ## Next Up
+- **Review + commit /improve uncommitted changes** (intent: Stop Superwall from silently throwing production paywalls into Test Mode because the dashboard stored 85 trailing spaces on the bundle ID). Includes: 5 Swift refactors (magic opacity → Theme.Opacity.*, 6 AnalyticsService.track calls moved from LessonView to LessonViewModel), CLAUDE.md Gotcha + superwall-campaigns skill troubleshooting entry, mixpanel-taxonomy factual fix (`track()` does NOT call `flush()` per-event), new `daily-log.md`, `.claude/improve-lastrun` bump.
+- **Verify Test Mode popup cleared on real iPhone after kill + relaunch** (user reported it worked; confirm repeatable on App Store version if needed)
 - **Mixpanel internal-user filter — manual follow-up**:
   - Add annotation on Reports → click 2026-04-20 → "App Store launch — 16:00 UTC" (MCP has no annotation tool)
   - Wait for Lexicon to index `is_internal` / `build_type` super properties (~5–15 min), then create cohort "Real users" where `is_internal != true` and set as default filter on funnel dashboards

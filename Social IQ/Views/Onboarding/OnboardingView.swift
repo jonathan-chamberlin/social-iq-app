@@ -12,6 +12,13 @@ struct OnboardingView: View {
     @State private var viewModel: OnboardingViewModel
     @Environment(\.scenePhase) private var scenePhase
 
+    private enum ContinueButton {
+        // Active vs disabled fill opacity for the Continue capsule button.
+        // Not in Theme.Opacity because these are button-specific affordance values.
+        static let activeOpacity: Double = 0.15
+        static let disabledOpacity: Double = 0.05
+    }
+
     init(userId: String, appleFirstName: String?, onComplete: @escaping () -> Void) {
         _viewModel = State(initialValue: OnboardingViewModel(
             userId: userId,
@@ -170,8 +177,8 @@ struct OnboardingView: View {
                         .background(
                             Capsule()
                                 .fill(viewModel.canContinue
-                                      ? Color.white.opacity(0.15)
-                                      : Color.white.opacity(0.05))
+                                      ? Color.white.opacity(ContinueButton.activeOpacity)
+                                      : Color.white.opacity(ContinueButton.disabledOpacity))
                         )
                 }
                 .disabled(!viewModel.canContinue)

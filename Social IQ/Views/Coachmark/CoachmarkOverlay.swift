@@ -112,7 +112,7 @@ struct CoachmarkOverlay: View {
         }
         .padding(18)
         .background(RoundedRectangle(cornerRadius: 16).fill(Color.white))
-        .shadow(color: .black.opacity(0.5), radius: 16, x: 0, y: 8)
+        .shadow(color: .black.opacity(Theme.Opacity.secondary), radius: 16, x: 0, y: 8)
         .scaleEffect(bubbleAppeared ? 1 : 0.85)
         .opacity(bubbleAppeared ? 1 : 0)
     }
@@ -145,7 +145,7 @@ struct CoachmarkOverlay: View {
                     lineJoin: .round
                 )
             )
-            .shadow(color: .black.opacity(0.5), radius: 6, x: 0, y: 3)
+            .shadow(color: .black.opacity(Theme.Opacity.secondary), radius: 6, x: 0, y: 3)
             .allowsHitTesting(false)
     }
 

@@ -11,6 +11,9 @@ struct OnboardingNameAgeGenderStep: View {
 
     private let genderOptions = ["Male", "Female", "Other", "Prefer not to say"]
 
+    // Unselected capsule fill — matches the global card surface opacity.
+    private static let unselectedFillOpacity: Double = 0.08
+
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Tell us about yourself")
@@ -36,7 +39,7 @@ struct OnboardingNameAgeGenderStep: View {
                                 .padding(.vertical, 10)
                                 .background(
                                     Capsule()
-                                        .fill(isSelected ? Color.white : Color.white.opacity(0.08))
+                                        .fill(isSelected ? Color.white : Color.white.opacity(Self.unselectedFillOpacity))
                                 )
                         }
                     }

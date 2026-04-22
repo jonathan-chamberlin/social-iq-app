@@ -46,6 +46,10 @@ The Superwall MCP (`mcp__superwall__*`) manages campaigns, placements, products,
 - `get_paywall` and `list_paywalls` may fail with a schema error on the `products` field (expects string, gets object)
 - `create_paywall` has the same products type mismatch
 
+## Webhook `filter_types` — accepted values differ from Superwall docs
+
+When registering a webhook via `mcp__superwall__create_webhook` (or the dashboard), the docs-listed filter values `trial_start`, `trial_conversion`, `refund`, and `pause` are REJECTED with a validation error. Only these work as of 2026-04-21: `initial_purchase`, `renewal`, `uncancellation`, `cancellation`, `expiration`, `billing_issue`, `subscription_paused`. Semantics to remember when writing the receiver: trials arrive as `initial_purchase` with `periodType: "TRIAL"`, refunds arrive as negative `price` on other event types (not a standalone event), and the paused event is spelled `subscription_paused` (not `pause`). Wire the handler to branch on `periodType` and `price` sign, not on event names that don't exist.
+
 ## Paywall Template Variables
 
 Superwall paywall templates use `{{ products.<slot>.<variable> }}` syntax. Products are referenced by slot: `primary` (annual) and `secondary` (weekly).

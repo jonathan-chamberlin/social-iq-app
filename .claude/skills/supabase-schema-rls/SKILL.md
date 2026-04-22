@@ -230,6 +230,17 @@ let updated: Profile = try await client
 Every table with user data: `auth.uid() = user_id` for SELECT, INSERT (WITH CHECK), UPDATE, DELETE.
 Shared content tables (lessons, achievements): `TO authenticated USING (true)` for SELECT only.
 
+## Verifying Svix-signed Edge Function webhooks end-to-end (no real producer needed)
+
+When a webhook pipeline lands in an Edge Function (Superwall → `/superwall-webhook`, or any Svix-signed producer), you can verify the full signature-check + DB-write path by POSTing a synthetic Svix-signed payload in Python — no need to trigger a real event from the upstream system. Repeatable recipe:
+
+1. Get the webhook's secret from the Edge Function's env (`SUPERWALL_WEBHOOK_SECRET`, prefixed `whsec_<base64>`).
+2. Build signature as `v1,<sig>` where `sig = base64(HMAC_SHA256(key=base64_decode(secret[len("whsec_"):]), msg=f"{msg_id}.{timestamp}.{body}"))`. `msg_id` is any unique string (e.g. `msg_test_<uuid>`), `timestamp` is current unix seconds as a string, `body` is the raw JSON string you're POSTing (bytes used for HMAC and body must match exactly — do not re-serialize).
+3. POST to the Edge Function URL with headers `svix-id`, `svix-timestamp`, `svix-signature`, and `content-type: application/json`.
+4. Use a synthetic `app_user_id` (e.g. `test_webhook_<uuid>`) so cleanup is a single `DELETE FROM user_subscriptions WHERE app_user_id = '...'` via `execute_sql`.
+
+This works for any Svix-backed webhook (the signature format is Svix-standard, not Superwall-specific). Use it to test every event type + edge case (TRIAL period, negative-price refund, `subscription_paused`) in seconds instead of waiting for real store events.
+
 ## Post-task reflection (run after every completed task)
 
 Before marking the Notion task Done, answer these four questions:

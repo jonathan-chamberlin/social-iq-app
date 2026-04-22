@@ -26,13 +26,24 @@ All steps run from the CLI — no Xcode GUI needed.
 
 ### Step 1 — Bump build number
 
+Build numbers are a **global monotonic namespace per app on ASC** — the authoritative source of truth is App Store Connect, NOT the local `agvtool what-version`. `agvtool` only knows what this checkout shipped; it has no idea what's already been uploaded from other machines, branches, or prior archive-then-abort attempts. Always query ASC first and bump PAST the highest existing ASC build, not past the local one. (Bit us on this ship: local was 29, ASC already had 30, archiving 30 would have been rejected.)
+
 ```bash
 cd /Users/jonathanchamberlin/repos/social-iq
-CURRENT=$(agvtool what-version -terse)
-NEXT=$((CURRENT + 1))
+
+# 1. Query ASC for the highest existing build number (app_id = 6761561557)
+LATEST_ASC=$(curl -s -H "Authorization: Bearer $(app-store-connect-token)" \
+  "https://api.appstoreconnect.apple.com/v1/builds?filter\[app\]=6761561557&sort=-uploadedDate&limit=5" \
+  | python3 -c "import json,sys; print(max(int(b['attributes']['version']) for b in json.load(sys.stdin)['data']))")
+
+# 2. Bump past the higher of (local, ASC)
+LOCAL=$(agvtool what-version -terse)
+NEXT=$(( (LATEST_ASC > LOCAL ? LATEST_ASC : LOCAL) + 1 ))
 agvtool new-version -all $NEXT
-echo "Bumped build number from $CURRENT to $NEXT"
+echo "Bumped build number to $NEXT (local was $LOCAL, ASC latest was $LATEST_ASC)"
 ```
+
+If you don't have a token helper, use the `app-store-connect` skill's MCP tools or the JWT generation pattern from that skill. Never trust `agvtool` alone.
 
 The "Cannot find" warning about `YES` is harmless — ignore it.
 

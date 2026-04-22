@@ -96,8 +96,10 @@ struct Social_IQApp: App {
     }
 
     private func checkOnboarding(userId: String) async {
-        AnalyticsService.identify(userId: userId)
-        SuperwallService.identify(userId: userId)
+        // Identify is now handled at the sign-in state transition in
+        // AuthViewModel (fresh sign-in + session restore) so it fires before any
+        // paywall can be presented. See SuperwallService.configure() for the
+        // pre-sign-in device UUID identity.
         #if DEBUG
         if authViewModel.devSkipOnboarding {
             showOnboarding = false

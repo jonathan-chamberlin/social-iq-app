@@ -13,6 +13,10 @@ enum AnalyticsService {
         #if DEBUG
         Mixpanel.mainInstance().loggingEnabled = true
         #endif
+        // Claim the persistent device UUID as the Mixpanel distinct_id before any
+        // event fires. When identify() is later called with the Supabase user id,
+        // Mixpanel aliases the two ids natively so pre-sign-in events stay joined.
+        Mixpanel.mainInstance().identify(distinctId: AppConstants.deviceUUID())
         let buildType = currentBuildType
         let isInternal = buildType != "app_store"
         let buildProps: [String: MixpanelType] = [
@@ -43,6 +47,14 @@ enum AnalyticsService {
 
     static func identify(userId: String) {
         Mixpanel.mainInstance().identify(distinctId: userId)
+    }
+
+    /// Clear the current user identity and re-seed the distinct_id with the
+    /// persistent device UUID so a subsequent sign-in aliases cleanly instead
+    /// of inheriting the prior user's events.
+    static func reset() {
+        Mixpanel.mainInstance().reset()
+        Mixpanel.mainInstance().identify(distinctId: AppConstants.deviceUUID())
     }
 
     static func setUserProperties(_ properties: [String: MixpanelType]) {

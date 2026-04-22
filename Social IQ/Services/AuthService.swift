@@ -94,6 +94,11 @@ final class AuthService {
 
     func signOut() async throws {
         try await SupabaseService.shared.client.auth.signOut()
+        // Reset per-user SDK state so the next sign-in gets a clean alias chain
+        // instead of inheriting the prior user's Superwall entitlement cache or
+        // Mixpanel distinct_id.
+        SuperwallService.reset()
+        AnalyticsService.reset()
     }
 
     func restoreSession() async throws -> User? {

@@ -24,6 +24,7 @@ final class AuthViewModel {
         authState = .loading
         do {
             if let user = try await AuthService.shared.restoreSession() {
+                identifyUser(user)
                 authState = .signedIn(user)
             } else {
                 authState = .signedOut
@@ -31,6 +32,19 @@ final class AuthViewModel {
         } catch {
             authState = .signedOut
         }
+    }
+
+    /// Re-tag Superwall + Mixpanel with the Supabase user id on every path that
+    /// transitions authState to .signedIn. Missing either fresh sign-in or
+    /// session restore re-opens the "purchase under anonymous id" bug.
+    private func identifyUser(_ user: User) {
+        let supabaseId = user.id.uuidString
+        SuperwallService.identify(userId: supabaseId)
+        SuperwallService.setUserAttributes([
+            "supabase_user_id": supabaseId,
+            "device_user_id": AppConstants.deviceUUID()
+        ])
+        AnalyticsService.identify(userId: supabaseId)
     }
 
     /// Called from SignInWithAppleButton's onCompletion.
@@ -67,6 +81,7 @@ final class AuthViewModel {
             #if DEBUG
             print("[Auth] Final appleFirstName: \(appleFirstName ?? "nil")")
             #endif
+            identifyUser(user)
             authState = .signedIn(user)
         } catch {
             errorMessage = error.localizedDescription

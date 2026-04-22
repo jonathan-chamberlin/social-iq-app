@@ -16,12 +16,26 @@ import SuperwallKit
 final class SuperwallService {
     static func configure() {
         Superwall.configure(apiKey: AppConfig.superwallAPIKey)
+        // Claim a stable per-install UUID as the Superwall user id BEFORE any
+        // paywall can fire. Without this, transactions that happen before
+        // post-sign-in identify() get tagged under Superwall's anonymous
+        // `$SuperwallAlias:*` id and never surface under the real user.
+        Superwall.shared.identify(userId: AppConstants.deviceUUID())
     }
 
     /// Associate Superwall with a specific user so subscription state is per-user, not per-device.
     /// Must be called after sign-in so a new account on the same device starts fresh.
+    /// Superwall aliases the prior id to the new id for paywall assignments going forward;
+    /// historical events stay attached to the prior id.
     static func identify(userId: String) {
         Superwall.shared.identify(userId: userId)
+    }
+
+    /// Attach key/value attributes to the current Superwall user. These ride along
+    /// in every webhook payload, so the server-side subscription table can always
+    /// cross-reference supabase_user_id ↔ device_user_id.
+    static func setUserAttributes(_ attributes: [String: Any]) {
+        Superwall.shared.setUserAttributes(attributes)
     }
 
     /// Present a paywall for a specific placement.
@@ -114,6 +128,9 @@ final class SuperwallService {
 
     static func reset() {
         Superwall.shared.reset()
+        // Re-claim the persistent device UUID so post-sign-out events/paywalls
+        // still attribute to an id we control, not a fresh Superwall alias.
+        Superwall.shared.identify(userId: AppConstants.deviceUUID())
     }
 
     // NOTE: transaction_abandon is a built-in Superwall event.

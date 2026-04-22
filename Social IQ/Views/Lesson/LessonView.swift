@@ -13,6 +13,7 @@ struct LessonView: View {
     @State private var viewModel = LessonViewModel()
     @State private var activeLesson: Lesson?
     @State private var showOtherAnswers = false
+    @State private var hasFiredAbandon = false
     @Environment(\.dismiss) private var dismiss
     @Environment(\.scenePhase) private var scenePhase
 
@@ -58,25 +59,38 @@ struct LessonView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                if showOtherAnswers {
-                    LessonNextStepButton(isVisible: true) {
-                        showOtherAnswers = false
-                        viewModel.nextStep()
-                    }
-                } else if viewModel.isCorrectSelection && viewModel.showFeedback {
-                    LessonExplainButton {
-                        withAnimation { showOtherAnswers = true }
+                if !viewModel.isComplete {
+                    if showOtherAnswers {
+                        LessonNextStepButton(isVisible: true) {
+                            showOtherAnswers = false
+                            viewModel.nextStep()
+                        }
+                    } else if viewModel.isCorrectSelection && viewModel.showFeedback {
+                        LessonExplainButton {
+                            withAnimation { showOtherAnswers = true }
+                        }
                     }
                 }
             }
         }
         .onAppear {
+            hasFiredAbandon = false
             viewModel.startLesson(lesson)
-            viewModel.trackLessonStarted(isReplay: isReplay)
+            if let userId {
+                Task {
+                    await viewModel.recordVisit(userId: userId)
+                    viewModel.trackLessonStarted(isReplay: isReplay)
+                }
+            } else {
+                viewModel.trackLessonStarted(isReplay: isReplay)
+            }
+        }
+        .onDisappear {
+            fireAbandonIfNeeded()
         }
         .onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .background, !viewModel.isComplete {
-                viewModel.trackLessonAbandoned()
+            if newPhase == .background {
+                fireAbandonIfNeeded()
             }
         }
         .onChange(of: viewModel.isComplete) { _, complete in
@@ -119,8 +133,25 @@ struct LessonView: View {
 
     private func startNextLesson(_ next: Lesson) {
         activeLesson = next
+        hasFiredAbandon = false
         viewModel.startLesson(next)
-        viewModel.trackLessonStarted(isReplay: false)
+        if let userId {
+            Task {
+                await viewModel.recordVisit(userId: userId)
+                viewModel.trackLessonStarted(isReplay: false)
+            }
+        } else {
+            viewModel.trackLessonStarted(isReplay: false)
+        }
+    }
+
+    private func fireAbandonIfNeeded() {
+        guard !viewModel.isComplete, !hasFiredAbandon else { return }
+        hasFiredAbandon = true
+        viewModel.trackLessonAbandoned()
+        if let userId {
+            Task { await viewModel.recordAbandon(userId: userId) }
+        }
     }
 }
 

@@ -18,6 +18,9 @@ final class LessonViewModel {
     /// Flips true when the user advances FROM question 1 to question 2.
     /// Consumed by `LessonView` to trigger the feedback-button coachmark.
     var hasAnsweredFirstQuestion: Bool = false
+    /// 1 on first visit, 2+ on replay. Populated by `recordVisit` after the RPC returns.
+    /// 0 means the attempt hasn't been recorded yet (network failure or user not signed in).
+    var attemptNumber: Int = 0
 
     private let progressService = LessonProgressService()
 
@@ -49,6 +52,7 @@ final class LessonViewModel {
         isComplete = false
         questionStartedAt = .now
         hasAnsweredFirstQuestion = false
+        attemptNumber = 0
     }
 
     func selectOption(_ index: Int) {
@@ -88,14 +92,50 @@ final class LessonViewModel {
         }
     }
 
+    func recordVisit(userId: String) async {
+        guard let lesson = currentLesson else { return }
+        do {
+            attemptNumber = try await progressService.recordLessonStart(
+                userId: userId,
+                lessonId: lesson.id
+            )
+        } catch {
+            #if DEBUG
+            print("recordVisit failed: \(error.localizedDescription)")
+            #endif
+        }
+    }
+
+    func recordAbandon(userId: String) async {
+        guard let lesson = currentLesson else { return }
+        let reached = currentStepIndex + 1
+        do {
+            try await progressService.recordAbandon(
+                userId: userId,
+                lessonId: lesson.id,
+                lastReachedQuestion: reached
+            )
+        } catch {
+            #if DEBUG
+            print("recordAbandon failed: \(error.localizedDescription)")
+            #endif
+        }
+    }
+
     // MARK: - Analytics
 
     func trackLessonStarted(isReplay: Bool) {
         guard let lesson = currentLesson else { return }
         if isReplay {
-            AnalyticsService.track(event: .lessonReplayed, properties: ["lesson_id": lesson.id])
+            AnalyticsService.track(event: .lessonReplayed, properties: [
+                "lesson_id": lesson.id,
+                "attempt_number": attemptNumber,
+            ])
         }
-        AnalyticsService.track(event: .lessonStarted, properties: ["lesson_id": lesson.id])
+        AnalyticsService.track(event: .lessonStarted, properties: [
+            "lesson_id": lesson.id,
+            "attempt_number": attemptNumber,
+        ])
     }
 
     func trackQuestionAnswered(selectedIndex: Int) {
@@ -116,7 +156,9 @@ final class LessonViewModel {
         AnalyticsService.track(event: .lessonAbandoned, properties: [
             "lesson_id": lesson.id,
             "question_number": currentStepIndex + 1,
+            "total_questions": lesson.steps.count,
             "question_type": currentStep?.label ?? "unknown",
+            "attempt_number": attemptNumber,
         ])
     }
 

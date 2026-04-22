@@ -29,11 +29,11 @@ Use snake_case. Format: `{category}_{action}` (e.g., `onboarding_step_completed`
 
 | Event | Properties | Status | Purpose |
 |-------|-----------|--------|---------|
-| lesson_started | lesson_id | **LIVE** | What content is being consumed |
+| lesson_started | lesson_id, attempt_number | **LIVE** | What content is being consumed; attempt_number = 1 first open, 2+ on replay |
 | question_answered | lesson_id, question_number, question_type (READ/THINK/SPEAK), answer_index, is_correct, time_to_answer_seconds | **LIVE** | Per-question difficulty + engagement |
 | lesson_completed | lesson_id | **LIVE** | Completion tracking |
-| lesson_abandoned | lesson_id, question_number, question_type | **LIVE** | Where people leave mid-lesson (fires on background) |
-| lesson_replayed | lesson_id | **LIVE** | Which lessons have replay value |
+| lesson_abandoned | lesson_id, question_number, total_questions, question_type, attempt_number | **LIVE** | Where people leave mid-lesson (fires on back, swipe-down, or background) |
+| lesson_replayed | lesson_id, attempt_number | **LIVE** | Which lessons have replay value |
 | lesson_locked_tap | lesson_id | **LIVE** | Paywall trigger signal |
 
 ---

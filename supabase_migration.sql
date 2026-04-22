@@ -81,3 +81,28 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_user_profiles_updated_at
   BEFORE UPDATE ON public.user_profiles
   FOR EACH ROW EXECUTE FUNCTION public.update_updated_at();
+
+-- Attempt tracking: how far a user got before exiting, and how many times they returned.
+-- Applied via migration lesson_progress_attempt_tracking.
+ALTER TABLE public.lesson_progress
+  ADD COLUMN attempt_count INT NOT NULL DEFAULT 0,
+  ADD COLUMN last_reached_question INT,
+  ADD COLUMN last_visited_at TIMESTAMPTZ;
+
+-- Atomic increment on lesson open. SECURITY INVOKER so existing RLS policies apply.
+CREATE OR REPLACE FUNCTION public.record_lesson_start(
+  p_user_id UUID,
+  p_lesson_id TEXT
+) RETURNS INT
+LANGUAGE SQL
+SECURITY INVOKER
+AS $$
+  INSERT INTO public.lesson_progress (user_id, lesson_id, attempt_count, last_visited_at, started_at)
+  VALUES (p_user_id, p_lesson_id, 1, NOW(), NOW())
+  ON CONFLICT (user_id, lesson_id) DO UPDATE
+    SET attempt_count = lesson_progress.attempt_count + 1,
+        last_visited_at = NOW()
+  RETURNING attempt_count;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.record_lesson_start(UUID, TEXT) TO authenticated;

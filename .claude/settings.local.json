@@ -27,7 +27,8 @@
       "Bash(cp /tmp/reel-skill-extract/reel-scriptwriter/SKILL.md /Users/jonathanchamberlin/.claude/skills/reel-scriptwriter/SKILL.md)",
       "Read(//tmp/**)",
       "Bash(mkdir -p /Users/jonathanchamberlin/repos/social-iq/.claude/improve-artifacts)",
-      "Bash(rm -f /Users/jonathanchamberlin/repos/social-iq/.claude/improve-artifacts/*.md)"
+      "Bash(rm -f /Users/jonathanchamberlin/repos/social-iq/.claude/improve-artifacts/*.md)",
+      "Bash(git *)"
     ]
   },
   "enableAllProjectMcpServers": true,

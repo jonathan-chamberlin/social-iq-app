@@ -3,7 +3,9 @@
 **Last updated:** 2026-04-21
 
 ## Unfinished
-- **Real TestFlight sandbox verification of subscription-state pipeline** — build 31 uploaded to ASC at 23:22 UTC, processing. Once VALID: update TestFlight on iPhone → fresh test Apple ID in iOS Settings → purchase weekly sub → within ~30s query `SELECT * FROM user_subscription_events WHERE app_user_id = '<supabase-test-user-id>'` and `SELECT * FROM user_subscriptions WHERE app_user_id = '<supabase-test-user-id>'`. Synthetic Svix-signed payload already confirmed the pipeline (initial_purchase upsert + duplicate-event idempotency + current_subscription() helper); real Apple → Superwall → webhook hop is the only untested link.
+- **Passive monitoring for first real subscription-webhook delivery** — identify-timing half is CONFIRMED LIVE on build 31: launched app → dismissed a paywall → Superwall dashboard search for Supabase UUID `e38bd3f8-d645-4367-a0e9-c065beb986b2` resolved to a user record with the `paywall_close` event tagged to that id (not `$SuperwallAlias:*`). So the SDK is now correctly propagating the Supabase UUID as `originalAppUserId` on real events. Only untested link remaining is webhook payload shape on a real store transaction. When the next real user buys, query `SELECT app_user_id, event_type, received_at FROM user_subscription_events ORDER BY received_at DESC LIMIT 10;` — if `app_user_id` is a plain UUID, full fix is live; if `$SuperwallAlias:*`, regression.
+
+  Note for future reference: `Superwall.shared.identify(userId:)` is a local-only SDK call (no network request); Superwall's server only learns a user exists once a trackable event (paywall presentation, purchase, etc.) fires tagged with that id. To verify identify-timing changes in the dashboard without waiting for a purchase, trigger any paywall and dismiss it.
 - **Three uncommitted skill edits pending review** —
   - `.claude/skills/supabase-schema-rls/SKILL.md` (Svix-signed synthetic webhook verification recipe)
   - `.claude/skills/superwall-campaigns/SKILL.md` (accepted `filter_types` values: no `pause`/`refund`/`trial_start`/`trial_conversion`)

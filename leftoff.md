@@ -1,19 +1,13 @@
 # Left Off
 
-**Last updated:** 2026-04-21
+**Last updated:** 2026-04-23
 
 ## Unfinished
-- **Passive monitoring for first real subscription-webhook delivery** — identify-timing half is CONFIRMED LIVE on build 31: launched app → dismissed a paywall → Superwall dashboard search for Supabase UUID `e38bd3f8-d645-4367-a0e9-c065beb986b2` resolved to a user record with the `paywall_close` event tagged to that id (not `$SuperwallAlias:*`). So the SDK is now correctly propagating the Supabase UUID as `originalAppUserId` on real events. Only untested link remaining is webhook payload shape on a real store transaction. When the next real user buys, query `SELECT app_user_id, event_type, received_at FROM user_subscription_events ORDER BY received_at DESC LIMIT 10;` — if `app_user_id` is a plain UUID, full fix is live; if `$SuperwallAlias:*`, regression.
-
-  Note for future reference: `Superwall.shared.identify(userId:)` is a local-only SDK call (no network request); Superwall's server only learns a user exists once a trackable event (paywall presentation, purchase, etc.) fires tagged with that id. To verify identify-timing changes in the dashboard without waiting for a purchase, trigger any paywall and dismiss it.
-- **Three uncommitted skill edits pending review** —
-  - `.claude/skills/supabase-schema-rls/SKILL.md` (Svix-signed synthetic webhook verification recipe)
-  - `.claude/skills/superwall-campaigns/SKILL.md` (accepted `filter_types` values: no `pause`/`refund`/`trial_start`/`trial_conversion`)
-  - `.claude/skills/testflight-deploy/SKILL.md` (query-ASC-first logic before `agvtool` bump; build numbers are global-monotonic per app)
-  All three are operational knowledge worth keeping. Diff + commit when convenient.
+- **Lessons 6 & 7 added locally, not committed** — `Lesson6Data.swift` (pro, climbing-gym flirt, id `lesson-6`) + `Lesson7Data.swift` (free, raves disclosure, id `lesson-7`). Registered in `LessonData.swift` `allLessons` order `[lesson3, lesson2, lesson7, lesson4, lesson1, lesson5, lesson6]`. `freeLessonIds` + `lessonCompletionCounts` + `lessonPercentiles` updated in `AppConstants.swift`. Also removed `NEVER modify .pbxproj` rule from both `~/.claude/CLAUDE.md` and `social-iq/CLAUDE.md` (rule was a no-op because project uses Xcode 16 `PBXFileSystemSynchronizedRootGroup` — new files auto-sync to target). Build green, visual-verified on sim. **Decision needed before commit:** include in 1.0.1 ship-store in-flight, or hold for 1.0.2? Content change, zero logic risk. Also optional: normalize new scenarios' single quotes (`'EDC,'`) to double quotes to match existing 5 lessons' style.
+- **`/ship-store` mid-flight — Phase 3 device smoke gate** — build 32 (1.0.1) uploaded to ASC at 00:02 UTC, processed VALID in ~90s. `BUILD_ID=16030868-8caa-4887-a6ea-1157332d4a1b`. ASC 1.0.1 row still `PREPARE_FOR_SUBMISSION`, no build attached. Waiting on user device smoke-test of build 32 on Jonathan iPhone 16 Pro (onboarding → lesson 1 → paywall → Sign in with Apple). Next: user replies "go", then ship-store runs Phases 4–8 (find_version_context → swap_build + resolve_compliance → update metadata → set_release_type → submit_for_review). Notion task: `349afe0dcf038050a308ef447b3c6733`.
+- **Passive monitoring for first real subscription-webhook delivery** — identify-timing half CONFIRMED on build 31 (paywall_close event in Superwall tagged to Supabase UUID `e38bd3f8-d645-4367-a0e9-c065beb986b2`, not `$SuperwallAlias:*`). Only untested link is webhook payload shape on a real store transaction. When the next real user buys, query `SELECT app_user_id, event_type, received_at FROM user_subscription_events ORDER BY received_at DESC LIMIT 10;` — plain UUID = fix live; `$SuperwallAlias:*` = regression.
 - **Two pre-existing warnings in `SuperwallService.swift:124`** — unused `restorationResult` return value + spurious `try`. Drive-by cleanup, not urgent.
-- **`.claude/improve-artifacts/*` and `.claude/settings.local.json` modified** — leftover from pre-session /improve run. Untracked `daily-log.md` at repo root. `git diff` + decide to commit or discard.
-- **First real end-to-end run of `ship-store`** — build 31 on TestFlight but production 1.0.1 submission hasn't run through the skill. ASC 1.0.1 row exists in `Prepare for Submission`. Next step: say "ship store" to drive `/ship` → TestFlight processing poll → physical-device smoke gate → swap build 31 onto ASC 1.0.1 row → metadata → submit for review.
+- **`.claude/improve-artifacts/*` modified, untracked `content/reel-scripts/`** — leftover scratch. `git diff` + decide to commit or discard.
 
 ## Historical unfinished (pre-session)
 - `transaction_abandon` campaign has no placement, only holdout variant
@@ -27,19 +21,21 @@
   4. **Per-answer reactive beats after quiz questions** — bigger lift. Next week if 1–3 move the needle.
   5. **Restructure lesson flow to story-first (Kahoot-style)** — biggest lift. Park until 1–4 validate.
 - **Superwall dashboard bundle_id trailing whitespace bug** — fixed via dashboard UI. File bug report with Superwall support.
-- **Untracked `content/reel-scripts/2026-04-21-batch.md`** — 5 reel scripts (Griffin body language, Hudson anxiety, Quest rude worker, Nick's 12-page plan, gym compliments). Not tracked.
+- **Untracked `content/reel-scripts/2026-04-21-batch.md`** — 5 reel scripts. Not tracked.
 
 ## Next Up
-- **Once build 31 is VALID on TestFlight:** update on phone → fresh test Apple ID → sandbox purchase → verify rows in both subscription tables. This is the last piece of the serene-wandering-cook plan.
+- **Once build 32 is live on App Store:** update on phone → fresh test Apple ID → sandbox purchase → verify rows in both subscription tables. Last piece of the serene-wandering-cook plan.
 - **Mixpanel internal-user filter — manual follow-up:**
   - Add annotation on Reports → click 2026-04-20 → "App Store launch — 16:00 UTC" (MCP has no annotation tool)
-  - Wait for Lexicon to index `is_internal` / `build_type` super properties, then create cohort "Real users" where `is_internal != true` and set as default filter on funnel dashboards
+  - Wait for Lexicon to index `is_internal` / `build_type`, then create cohort "Real users" where `is_internal != true` as default filter on funnel dashboards
 - **Lesson UX: sticky "See why" button** — pin to bottom of screen after correct answer
 - **Reddit Seeding Launch** — Notion task `33dafe0d-cf03-8108-9c31-d3cdfea75a23`
 - **AI UGC Tool Test** — Notion task `33dafe0d-cf03-8162-826b-ddced947353e`
 - Add unit tests for ViewModels and Services
-- **Short-form craft sprint** — 5 scripts drafted at `content/reel-scripts/2026-04-21-batch.md`. Next: batch-shoot all 5 same-day with one outfit swap (between #2 and #3), fixed lighting, hand landmarks. Do NOT edit same-day — batch-edit separately. Craft-input capped at 2h total; retention data per reel.
+- **Short-form craft sprint** — 5 scripts drafted at `content/reel-scripts/2026-04-21-batch.md`. Next: batch-shoot all 5 same-day with one outfit swap (between #2 and #3), fixed lighting, hand landmarks. Batch-edit separately. Craft-input capped at 2h total; retention data per reel.
 - Triage Dylan's 2026-04-20 feedback into real tasks vs. parked
+- **Push notifications — GATED on >20 premium users.** Deferred 2026-04-23 because requirement failed binding-constraint test (manual text thread covers current premium count in <5 min). Audit + full phased plan archived on Notion task `34bafe0d-cf03-8025-953d-f766b78054e2`. Trigger to revisit: premium_users > 20 OR Jonathan has manually notified users 3+ times and is sick of it. Recommended architecture when revived: Supabase Edge Function → APNs HTTP/2 directly (option A), zero new vendors.
 
 ## Blockers
-- **Build 31 processing on ASC** — soft-blocks real sandbox verification only. App builds and runs fine locally regardless. Expected VALID within 5–15 min of 23:22 UTC upload.
+- **User device smoke-test of build 32** — blocks ship-store Phases 4–8. Soft block only; no further automation possible until user replies "go" in this session.
+- **Commit vs. hold decision for lessons 6 & 7** — blocks commit/push. Adding to in-flight 1.0.1 means a new build + re-upload; holding means 1.0.2 scope. User call, not automation.

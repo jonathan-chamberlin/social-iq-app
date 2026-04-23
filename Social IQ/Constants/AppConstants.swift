@@ -32,7 +32,7 @@ enum AppConstants {
     }
 
     // MARK: - Free Lessons
-    static let freeLessonIds: Set<String> = ["lesson-3", "lesson-2", "lesson-4"]
+    static let freeLessonIds: Set<String> = ["lesson-3", "lesson-2", "lesson-4", "lesson-7"]
 
     // MARK: - Subscription Product IDs
     static let annualProductId = "com.jonathanchamberlin.socialiq.annual"
@@ -50,6 +50,8 @@ enum AppConstants {
         "lesson-3": 3873,
         "lesson-4": 3693,
         "lesson-5": 3519,
+        "lesson-6": 2847,
+        "lesson-7": 3124,
     ]
 
     static let lessonPercentiles: [String: Int] = [
@@ -58,5 +60,7 @@ enum AppConstants {
         "lesson-3": 83,
         "lesson-4": 77,
         "lesson-5": 90,
+        "lesson-6": 88,
+        "lesson-7": 92,
     ]
 }

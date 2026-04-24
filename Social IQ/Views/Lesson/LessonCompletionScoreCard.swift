@@ -8,10 +8,6 @@ struct LessonCompletionScoreCard: View {
     let displayedScore: Int
     let totalSteps: Int
     let showScoreGlow: Bool
-    let completionCount: Int
-    let percentile: Int
-    let percentileScale: CGFloat
-    let percentileOpacity: Double
 
     var body: some View {
         Text("\(displayedScore) / \(totalSteps)")
@@ -22,18 +18,9 @@ struct LessonCompletionScoreCard: View {
                 radius: showScoreGlow ? 16 : 0
             )
 
-        VStack(spacing: 6) {
-            Text("\(completionCount.formatted()) people completed this lesson")
-                .font(.caption)
-                .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
-
-            Text("You finished faster than \(percentile)% of them")
-                .font(.headline)
-                .fontWeight(.semibold)
-                .foregroundStyle(Theme.goldLight)
-                .scaleEffect(percentileScale)
-                .opacity(percentileOpacity)
-        }
-        .padding(.top, 4)
+        Text("Grounded in social dynamics research")
+            .font(.caption)
+            .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
+            .padding(.top, 4)
     }
 }

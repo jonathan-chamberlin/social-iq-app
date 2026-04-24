@@ -42,25 +42,4 @@ enum AppConstants {
     static let privacyPolicyURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/privacy-policy")!
     static let termsOfUseURL = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
     static let supportURL = URL(string: "https://jonathan-chamberlin.github.io/social-iq-app/support")!
-
-    // MARK: - Lesson Social Proof
-    static let lessonCompletionCounts: [String: Int] = [
-        "lesson-1": 4220,
-        "lesson-2": 3349,
-        "lesson-3": 3873,
-        "lesson-4": 3693,
-        "lesson-5": 3519,
-        "lesson-6": 2847,
-        "lesson-7": 3124,
-    ]
-
-    static let lessonPercentiles: [String: Int] = [
-        "lesson-1": 97,
-        "lesson-2": 99,
-        "lesson-3": 83,
-        "lesson-4": 77,
-        "lesson-5": 90,
-        "lesson-6": 88,
-        "lesson-7": 92,
-    ]
 }

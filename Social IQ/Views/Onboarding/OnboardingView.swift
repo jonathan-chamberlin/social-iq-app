@@ -139,7 +139,9 @@ struct OnboardingView: View {
                         },
                         onFreeLesson: {
                             UserDefaults.standard.set(true, forKey: AppConstants.shouldAutoOpenLesson1Key)
-                            viewModel.completeOnboardingAndDismiss()
+                            SuperwallService.presentPaywallWithHandler(placement: .onboardingComplete) {
+                                viewModel.completeOnboardingAndDismiss()
+                            }
                         }
                     )
                 }

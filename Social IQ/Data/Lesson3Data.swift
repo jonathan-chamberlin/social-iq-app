@@ -126,7 +126,7 @@ extension LessonData {
                     LessonOption(
                         id: "lesson-3-speak-A",
                         prefix: "A",
-                        label: "\"Hey, I'm [name], what's everyone laughing about?\"",
+                        label: "\"Hey, I'm Alex, what's everyone laughing about?\"",
                         feedback: OptionFeedback(
                             isCorrect: false,
                             researcher: nil,

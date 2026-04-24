@@ -12,7 +12,7 @@ extension LessonData {
         title: "First Date Conversation Dies",
         category: .dating,
         difficulty: .intermediate,
-        scenarioText: "You're thirty minutes into a first date Mia at an arcade. The conversation has been solid. You've been playing pool and talking between shots. But it's been a full minute of silence. She looks at you and gives a calm smile. You can feel the urge to fire off the next question, but you've been talking a lot and you're running out of stuff to say.",
+        scenarioText: "You're thirty minutes into a first date with Mia at an arcade. The conversation has been solid. You've been playing pool and talking between shots. But it's been a full minute of silence. She looks at you and gives a calm smile. You can feel the urge to fire off the next question, but you've been talking a lot and you're running out of stuff to say.",
         steps: [
             LessonStep(
                 id: "lesson-2-read",

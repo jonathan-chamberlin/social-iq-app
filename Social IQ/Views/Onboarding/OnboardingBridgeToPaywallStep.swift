@@ -41,7 +41,7 @@ struct OnboardingBridgeToPaywallStep: View {
             }
 
             Button(action: onFreeLesson) {
-                Text("Start with free lesson")
+                Text("Maybe later")
                     .font(.subheadline)
                     .foregroundStyle(.white.opacity(Theme.Opacity.secondary))
             }

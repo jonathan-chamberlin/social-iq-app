@@ -8,11 +8,8 @@ struct LessonCompletionView: View {
     private enum Timing {
         static let scoreTickInterval: Double = 0.15
         static let glowFadeDuration: Double = 0.4
-        static let percentileDelay: Double = 0.5
         static let countdownStartDelay: Double = 1.2
         static let autoAdvanceDuration: Double = 4
-        static let percentileSpringResponse: Double = 0.4
-        static let percentileSpringDamping: Double = 0.6
     }
 
     let lessonId: String
@@ -26,20 +23,8 @@ struct LessonCompletionView: View {
 
     @State private var displayedScore = 0
     @State private var showScoreGlow = false
-    @State private var percentileScale: CGFloat = 1.8
-    @State private var percentileOpacity: Double = 0
     @State private var countdownProgress: CGFloat = 0
     @State private var countdownActive = false
-
-    // MARK: - Computed
-
-    private var completionCount: Int {
-        AppConstants.lessonCompletionCounts[lessonId] ?? 0
-    }
-
-    private var percentile: Int {
-        AppConstants.lessonPercentiles[lessonId] ?? 85
-    }
 
     var body: some View {
         VStack(spacing: 24) {
@@ -53,11 +38,7 @@ struct LessonCompletionView: View {
             LessonCompletionScoreCard(
                 displayedScore: displayedScore,
                 totalSteps: totalSteps,
-                showScoreGlow: showScoreGlow,
-                completionCount: completionCount,
-                percentile: percentile,
-                percentileScale: percentileScale,
-                percentileOpacity: percentileOpacity
+                showScoreGlow: showScoreGlow
             )
 
             if !researchers.isEmpty {
@@ -113,15 +94,8 @@ struct LessonCompletionView: View {
             }
             HapticService.medium()
 
-            try? await Task.sleep(for: .seconds(Timing.percentileDelay))
-            withAnimation(.spring(response: Timing.percentileSpringResponse, dampingFraction: Timing.percentileSpringDamping)) {
-                percentileScale = 1.0
-                percentileOpacity = 1.0
-            }
-            HapticService.heavy()
-
             if onNextLesson != nil {
-                try? await Task.sleep(for: .seconds(Timing.countdownStartDelay - Timing.percentileDelay))
+                try? await Task.sleep(for: .seconds(Timing.countdownStartDelay))
                 countdownActive = true
             }
         }

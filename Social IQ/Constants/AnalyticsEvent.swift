@@ -22,6 +22,7 @@ enum AnalyticsEvent: String {
     case subscriptionStarted = "subscription_started"
     case coachmarkShown = "coachmark_shown"
     case coachmarkDismissed = "coachmark_dismissed"
+    case lessonWriteSkipped = "lesson_write_skipped"
 }
 
 enum SuperwallPlacement: String {

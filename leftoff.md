@@ -1,6 +1,6 @@
 # Left Off
 
-**Last updated:** 2026-04-23
+**Last updated:** 2026-04-26 (later session)
 
 ## Binding constraint
 **Zero users. Content/videos is the proven distribution lever. Ship videos, not lessons.**
@@ -23,6 +23,8 @@ App launched 2026-04-20. Within 3 days, one data point from Chloe (romantic inte
 - Marketing version 1.0.2 is committed and pushed (`585ffc2`)
 - All lesson content committed (`985134c`) and pushed
 - Archives at `archives/SocialIQ-1.0.2-33.xcarchive` and `archives/export-33-1.0.2/`
+- **Creator positioning locked** — `references/creator-positioning.md` (one-pager: pillar, operating model, decision filter). Research split into `references/viral-hooks-research.md` (12 principles + 7 teardowns) and `references/social-iq-content-playbook.md` (platform handling, applied positioning, 6 ranked hook templates). Use the 4-question decision filter before posting reels.
+- **Mixpanel sim-filter hook** — `.claude/settings.json` now has a PreToolUse hook on `mcp__claude_ai_Mixpanel__.*` that reminds future sessions to filter `$model != "arm64"` on insights/funnels/retention queries. Real-device 30d snapshot taken this session: onboarding 65% complete (17/26), step 13→14 looks like a missing-instrumentation cliff (17 → 1), real funnel cliff is lesson 3 → lesson 4 (17 starts → 6), D1 retention 31% on app_opened.
 
 ## Passive monitoring
 - **First real subscription webhook** — when next real user buys, query `SELECT app_user_id, event_type, received_at FROM user_subscription_events ORDER BY received_at DESC LIMIT 10;` — plain UUID = fix live; `$SuperwallAlias:*` = regression.
@@ -58,6 +60,7 @@ App launched 2026-04-20. Within 3 days, one data point from Chloe (romantic inte
 - **Why parked**: Defensive guard mitigates user-facing impact. Full investigation is multi-day and not on the critical path to user acquisition.
 
 ## Next Up
+- read this page with notion mcp https://www.notion.so/jchamberlin/Post-content-fixes-funnel-retention-improvements-revisit-after-first-content-driven-install-wav-34cafe0dcf0380328120d5dff8c0b506?source=copy_link
 - **Write + shoot 5 reels** — `content/reel-scripts/2026-04-21-batch.md`. Scripting IS the positioning work. Batch-shoot same-day.
 - **Once build 33 is approved and released:** update on phone → verify new lessons render correctly for real users → monitor Mixpanel for lesson_started events on lesson-6 and lesson-7
 - **Mixpanel internal-user filter — manual follow-up:**

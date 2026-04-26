@@ -12,7 +12,7 @@ extension LessonData {
         title: "He Tells You He's Into Raves",
         category: .dating,
         difficulty: .intermediate,
-        scenarioText: "You're on a second date with Alex. It's been going well, he's funny, listens, asks real questions. Over a coffee date he mentions he's flying to Orlando in June for a week-long rave festival. You ask which one. 'EDC,' he says. 'I go every year with the same crew. Rave culture is kind of my thing.' He takes a sip of water and waits for your reaction.",
+        scenarioText: "You're on a second date with Alex. It's been going well, he's funny, listens, asks real questions. Over a coffee date he mentions he's flying to Orlando in June for a week-long rave festival. You ask which one. 'Electric Daisy Carnival,' he says. 'EDC.' 'I go every year with the same crew. Rave culture is kind of my thing.' He takes a sip of water and waits for your reaction.",
         steps: [
             LessonStep(
                 id: "lesson-7-read",

@@ -1,7 +1,7 @@
-# User Research Synthesis - 20 Sessions
+# User Research Synthesis - 22 Sessions
 
-**Generated:** 2026-04-08 (updated 2026-04-15)
-**Source:** 20 user research sessions (Sessions 01-16 original; Session 16 was a group session with 3 participants; Session 17 added 2026-04-06; Theo follow-up 2026-04-08; Session 18 added 2026-04-15)
+**Generated:** 2026-04-08 (updated 2026-04-23)
+**Source:** 22 user research sessions (Sessions 01-16 original; Session 16 was a group session with 3 participants; Session 17 added 2026-04-06; Theo follow-up 2026-04-08; Session 18 added 2026-04-15; Session 19 Chloe added 2026-04-21; Session 20 Holly added 2026-04-23)
 **Method:** Full transcript analysis with ICP classification, pattern extraction, and frequency counting. Loose counting: includes plausible inferences, not just explicit mentions.
 
 ---
@@ -24,16 +24,22 @@ Note on Dylan: his "No" in the transcript was answering "Was there a moment that
 
 Note on Theo: Most self-improvement-oriented tester. Initially raised onboarding friction ("less quiz, more personalized") but got past it and is now an actively retained user. Follow-up voice note (2026-04-08) confirmed: "I'm really enjoying this happy that you made it. It's really helpful like I actually am. I'm enjoying doing exercise." Unprompted positive feedback + thoughtful feature request = strong retention signal from a remote user with no observer effect. Upgraded from ICP score 4 to 5.
 
-### ICP Segment B: Social Anxiety / Overthinkers (n=3)
-Sorority sisters at Northeastern (DEEF). Overthink social interactions, replay them afterward, want to navigate social dynamics better. Different from Segment A in gender, social context, and use case - but equal ICP strength.
+### ICP Segment B: Social Anxiety / Overthinkers + ICP-Adjacent Female (n=5)
+Originally the sorority overthinker segment (Lauren/Sana/Phoebe). Expanded by Sessions 19-20 to include ICP-adjacent college-age female testers outside Greek life — same age/gender profile, different social context.
 
 | # | Name | Format | Lessons Done | Would Return? |
 |---|------|--------|-------------|---------------|
 | 16a | Lauren | In-person group | 3+ | Strong yes (unlocked paywall, kept going) |
 | 16b | Sana | In-person group | 3+ | Strong yes (unlocked paywall, kept going) |
 | 16c | Phoebe | In-person group | 3+ | Strong yes (unlocked paywall, kept going) |
+| 19 | Chloe | In-person (no onboarding) | 0 (2 questions, bounced) | Not stated |
+| 20 | Holly | In-person | 1 (rave lesson) | Not stated |
 
 Note on Session 16: Group session, in-person, tested on Jonathan's MacBook iOS Simulator with the enhanced onboarding (NOT the Base44 web prototype used in earlier sessions). All three completed 3+ lessons, auto-started the next lesson after finishing each one, and expressed visible disappointment when lessons were locked behind the Pro paywall. Jonathan unlocked them live - all three continued. Lauren is VP of FSL (Fraternity and Sorority Life) at Northeastern - a concrete distribution channel post-launch. Sana: "A lot of people need this" - described sorority circles as cliquey and hard to break into.
+
+Note on Chloe: 20, Northeastern 2nd-year, drug-discovery co-op, handmade fashion line, climber, raver. Designer/PM of Summet (consumer iOS app for climbers). Handed the phone mid-conversation with no onboarding, bounced after 2 questions. Raised two strong structural critiques: colors too dark for an ICP-female designer's taste, and lessons should be conversational not point-in-time ("you're saying there's a right answer but for some of these situations there isn't one right answer"). First ICP-female to challenge the single-correct-answer premise directly.
+
+Note on Holly: Suffolk University pre-vet student. Did the rave lesson (Lesson 7). Did not know what "EDC" was in the scenario (content clarity bug - now fixed to spell out "Electric Daisy Carnival"). Skipped all answer explanations. Audibly said "yay" when she got an answer correct - clean behavioral signal that the correct-answer verdict moment is rewarding even when the reasoning goes unread.
 
 **ICP targeting note:** Two distinct segments have now shown strong signals. Start with broad targeting; narrow based on which segment shows stronger retention once the app is live. Do not preemptively cut one segment before seeing organic data.
 
@@ -65,15 +71,17 @@ Note on Kofi update: Follow-up revealed he DID start L2 (dating lesson) unprompt
 
 ## Retention Signal Summary
 
-| Metric | Count | % of Total (n=20) | ICP-A % (n=6) | ICP-B % (n=3) | Non-ICP % (n=5) |
+| Metric | Count | % of Total (n=22) | ICP-A % (n=6) | ICP-B % (n=5) | Non-ICP % (n=5) |
 |--------|-------|--------------------|---------------|---------------|-----------------|
-| Completed L1 | 16 | 80% | 6/6 (100%) | 3/3 (100%) | 4/5 (80%) |
-| Started L2 unprompted | 13 | 65% | 4/6 (67%) | 3/3 (100%) | 3/5 (60%) |
-| Did 3+ lessons | 7 | 35% | 1/6 (Wyatt) | 3/3 (100%) | 0/5 |
-| Said "would return" | 9 | 45% | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) |
-| Said "would NOT return" | 2 | 10% | 0/6 (0%) | 0/3 (0%) | 2/5 (40%) |
+| Completed L1 | 17 | 77% | 6/6 (100%) | 4/5 (80%, Chloe bounced) | 4/5 (80%) |
+| Started L2 unprompted | 13 | 59% | 4/6 (67%) | 3/5 (60%) | 3/5 (60%) |
+| Did 3+ lessons | 7 | 32% | 1/6 (Wyatt) | 3/5 (60%) | 0/5 |
+| Said "would return" | 9 | 41% | 4/6 (67%) | 3/5 (60%) | 0/5 (0%) |
+| Said "would NOT return" | 2 | 9% | 0/6 (0%) | 0/5 (0%) | 2/5 (40%) |
 
 Edge cases: Brandon (3 lessons), Charlie (3 lessons), Kyle (1 lesson, former ICP), Elijah (2 lessons), Tamok (limited data), Nick (1 challenge, said "definitely use it"). Not counted in either ICP or Non-ICP columns.
+
+Note on ICP-B denominator change: Chloe and Holly added to ICP-B (n=3 → n=5). Chloe's 2-question bounce is an onboarding-skipped artifact, not a retention signal — she was handed the phone cold with no priming. Holly did one lesson with positive affect but return intent wasn't asked.
 
 **Key finding:** Combined ICP (Segments A+B) has 78% stated return intent (7/9) vs. 0% for non-ICP. ICP-A return rate improved from 50% to 67% with Theo's follow-up confirming he's actively using and enjoying the app. Dylan remains the only ICP-A user with unknown return intent.
 
@@ -152,7 +160,7 @@ Two explanations still apply:
 
 **ICP signal:** 4/6 ICP-A (67%) explicit; ICP-B behavior confirms it - all three skipped explanations entirely. Nick (Edge) independently requested pictures. Universal across all groups. The "skipped explanations" finding now spans 4 distinct users/groups (Nishanth, Lauren, Sana, Phoebe) - see Pattern 13 below.
 
-### 3. "How do you know these are the right answers?" - Credibility/Authority - 40% (8/20)
+### 3. "How do you know these are the right answers?" - Credibility/Authority - 41% (9/22)
 
 | Who Said It | ICP? | Specific Quote/Note |
 |-------------|------|-------------------|
@@ -164,14 +172,15 @@ Two explanations still apply:
 | Elijah | Edge | "How do we know what the person's true internal feelings/motives are" |
 | Avi | No | "The discrete nature of the multiple choice questions is perhaps a bit reductive" |
 | Brandon | Edge | "You can't teach nuance without showing the right answer" |
+| Chloe | ICP-B | "You're saying there's a right answer but for some of these situations there isn't one right answer" — epistemological variant from a strong ICP female designer |
 
-**This pattern has grown significantly.** Previously tracked as a scattered concern, it now spans 8/20 users across ALL segments. The pattern has two variants:
+**This pattern has grown significantly.** Previously tracked as a scattered concern, it now spans 9/22 users across ALL segments. The pattern has two variants:
 1. **Methodology challenge** (Lauren, Phoebe, Tamok, Kofi, Nishanth): "How do you decide what's right?" - wants to see the reasoning or research
 2. **Epistemological challenge** (Elijah, Avi): "Can you even know what's right in social situations?" - questions the premise itself
 
 The methodology variant is actionable - surface research citations, psychology backing, or credibility signals. CharmXP (competitor) claims "supported by Cornell and UC Berkeley research" on their paywall. Adding similar credibility framing could address this.
 
-The epistemological variant is harder to address and may indicate non-ICP or edge-case users who don't buy the core premise.
+The epistemological variant is harder to address. It now includes Chloe, a strong ICP-B designer/PM — so it's no longer safely dismissable as a non-ICP concern. Her framing ties the epistemological critique to the branching-scenario solution: if the scenario unfolds based on the choice, there doesn't need to be one "right answer" — only consequences.
 
 ### 4. "Onboarding options don't fit me" - 45% (9/20)
 
@@ -285,25 +294,9 @@ Wyatt suggested gating this behind premium - natural monetization lever.
 
 **ICP signal:** 0/9 combined ICP (0%). **Ongoing concern - brand/stigma.** Avi is a socially skilled VC guy; his first impression is that the app targets lonely people. With ICP-B now confirmed as a strong segment, this concern compounds: the current positioning (and likely copy) skews male and lonely, which would actively repel ICP-B users. Session 16 used the word "people" instead of "guys" as a UX note - copy needs to be gender-neutral throughout. No ICP user has raised the stigma framing directly, but it's a positioning risk to fix before any launch.
 
-### 14. "Skipped explanations entirely" - 26% (5/19)
+### 14. "Skipped explanations entirely" — 27% confirmed / 43% of observable sample
 
-| Who | ICP? | Note |
-|-----|------|------|
-| Nishanth | No | Disengaged, self-rates high - explanations irrelevant to him |
-| Lauren | ICP-B | Skipped explanations but still questioned how the right answer was determined |
-| Sana | ICP-B | Skipped explanations; did NOT question answer authority |
-| Phoebe | ICP-B | Skipped explanations but still questioned how the right answer was determined |
-| Tamok | Edge | Asked "how do you know" despite explanations being present on each card - either didn't read them or didn't find them sufficient |
-
-**This pattern has changed in significance.** At n=15, only Nishanth (a non-ICP user) skipped explanations - it read as disengagement from an unfit user. Now 4 of the 5 users who skipped or didn't engage with explanations are ICP or Edge. ICP-B users were engaged enough to auto-start the next lesson and push through the paywall, but they still skipped all explanatory text. Tamok's case is slightly different - the explanations were present but didn't register as credibility signals.
-
-**Two competing interpretations:**
-1. **The explanations are too long.** Users want the next question, not the lecture. This is a format problem - compress or restructure.
-2. **The explanations serve a different function.** Hudson and Aryaman (ICP-A) praised them for creating aha moments. ICP-B may not need the same depth - or may engage with it differently (audio, visual) rather than text.
-
-Do not remove the explanations to satisfy ICP-B until you verify whether ICP-A retention depends on them. Test a compressed visual format first.
-
-**Complication for "questioning answer authority":** Lauren, Phoebe, and Tamok questioned how the right answer was determined - without engaging with the explanations that justify it. This is not the same as the Non-ICP answer-authority challenge (which is skepticism about the premise). These users wanted to understand the reasoning; they just didn't find it in text form. The signal is: the justification needs to be surfaced differently, not removed.
+**See the dedicated Skipped Explanations section below for the full breakdown — this pattern has outgrown the ranked list.** Short version: 6 users explicitly skipped (Nishanth, Lauren, Sana, Phoebe, Tamok, Holly), 8 explicitly read them (Hudson, Aryaman, Brandon, Charlie, Andre, Wyatt, Theo, Elijah), 8 we have no clear behavioral data on. Of the observable sample (n=14), 43% skipped. Of female testers with behavioral data (n=4: Lauren, Sana, Phoebe, Holly), 100% skipped. Of engaged males (n=9), 89% read them.
 
 ### 15. "Paywall created visible demand" - 16% (3/20)
 
@@ -327,13 +320,86 @@ Do not remove the explanations to satisfy ICP-B until you verify whether ICP-A r
 
 **Strong retention signal.** Auto-starting the next lesson without being asked is the clearest behavioral indicator of loop engagement. At n=19, this has only happened with ICP-B in-person - it needs remote replication to confirm it's product pull, not observer effect. Still, three users independently doing this in the same session is not noise.
 
-### 17. "Step indicators look tappable but aren't" - 5% (1/20)
+### 17. "Step indicators look tappable but aren't" - 5% (1/22)
 
 | Who | ICP? | Note |
 |-----|------|------|
 | Tamok | Edge | Clicked on READ/THINK/SPEAK capsules expecting navigation; they're just labels |
 
 **New UX issue from Session 17.** The capsule styling of step indicators creates a false affordance - they look like tabs but don't do anything. Either restyle them to look non-interactive (remove capsule fill, use plain text) or make them actually tappable for step navigation.
+
+### 18. "Lessons should feel like a conversation, not a single point-in-time decision" — 27% (6/22)
+
+| Who | ICP? | Note |
+|-----|------|------|
+| Aryaman | ICP-A | Wanted branching / scenario unfolding based on answer |
+| Nishanth | No | "Let people just do what they want, then analyze" — deferred + conversational |
+| Brandon | Edge | Suggested branching answer paths |
+| Kyle | Former | "Reminded me of a test" — the critique is the format, not the copy |
+| Wyatt | Near | Wanted scenario to persist / unfold |
+| Chloe | ICP-B | **Most explicit articulation:** "it should be a conversation, not a point in time" — wants the scenario to continue based on her answer |
+
+**Chloe's framing unified threads that were scattered across prior synthesis rounds.** The branching-scenario request, the "feels like a test" critique, the "not one right answer" epistemological challenge, and the skipped-explanations behavior are all variants of the same underlying critique: the current format is a quiz, and users want an interaction. This is the single biggest structural bet the product can make.
+
+### 19. "Content clarity bugs — unknown references in scenarios" — 5% (1/22)
+
+| Who | ICP? | Note |
+|-----|------|------|
+| Holly | ICP-B | Did not know what "EDC" meant in the rave lesson. Scenario now reads "Electric Daisy Carnival" on first reference. |
+
+**Small pattern, cheap fix, but worth a standing check.** Any scenario that leans on subculture / scene-specific vocabulary (rave festivals, party drugs, brand names, regional slang) needs a first-reference expansion. Holly is the first to hit this; more will as the lesson library grows and testers diversify beyond the original ICP-A male cohort.
+
+---
+
+## Skipped Explanations — The Dominant Female Behavior
+
+This was Pattern 14 in earlier synthesis rounds. Holly (Session 20) made it the pattern that demands its own section: every female tester we have behavioral data on has skipped the wrong-answer / right-answer explanations, while most engaged male ICP users read them carefully. That gendered split was blurry at n=20 and is unmistakable at n=22.
+
+### Who did what
+
+| Behavior | Count | Users |
+|----------|-------|-------|
+| **Explicitly read explanations** | 8 | Hudson, Aryaman, Brandon, Charlie, Andre, Wyatt, Theo, Elijah |
+| **Explicitly skipped explanations** | 6 | Nishanth, Lauren, Sana, Phoebe, Tamok, Holly |
+| **No clear data** | 8 | Dylan, Kyle, Jack, Kofi, Sasha, Avi, Nick, Chloe |
+
+Denominator of behavioral observations: **14 users**. Of those, **6 skipped (43%), 8 read (57%)**. The 8 "no clear data" users are excluded from ratios — most did only 1-2 questions or didn't have behavior on explanations documented.
+
+### The gender cut (the signal that matters)
+
+| Group | Read | Skipped | Read rate |
+|-------|------|---------|-----------|
+| **Female testers with data** (Lauren, Sana, Phoebe, Holly) | 0 | 4 | **0%** |
+| **Engaged male ICP users** (Hudson, Aryaman, Andre, Wyatt, Theo, Brandon, Charlie, Elijah) | 8 | 0 | **100%** |
+| **Disengaged / Non-ICP males** (Nishanth, Tamok) | 0 | 2 | 0% |
+
+Four out of four female testers with observable behavior skipped the explanations. Every engaged male ICP user read them. This is not noise.
+
+### What the signal means
+
+1. **The explanation block is doing two different jobs for two different audiences.**
+   For ICP-A males, explanations are the product — they create the "aha moment" that Hudson and Aryaman explicitly praised. For ICP-B females, explanations are a wall of text between them and the next question. Same UI element, opposite reception.
+
+2. **"Yay" on correct vs skipped explanation = the reward is in the verdict, not the reasoning.**
+   Holly said "yay" audibly when she got an answer right, then moved on without reading why. The correct-answer moment is emotionally rewarding on its own. The explanation is perceived as optional homework after the reward has already been delivered.
+
+3. **"How do you know this is right?" while skipping the thing that answers that question.**
+   Lauren, Phoebe, and Tamok all questioned answer authority while never reading the explanations that justify the answer. This is not skepticism about the premise (that would be the Avi/Elijah epistemological challenge). It's a format failure: they wanted to understand the reasoning, but they wanted it delivered differently.
+
+4. **This compounds with Chloe's branching-scenario critique.**
+   Chloe said lessons should be conversational, not a single point-in-time decision. If the scenario played out based on her choice, the "explanation" would be embedded in the consequence — she'd see the fallout of a bad answer rather than read a paragraph about why it was bad. The explanation-skipping pattern and the "make it a conversation" pattern are the same complaint from two angles.
+
+### What NOT to conclude
+
+- **Do not delete the explanations.** ICP-A retention (Hudson, Aryaman, Theo, Wyatt) appears to depend on them. Theo's unprompted follow-up explicitly praised the pedagogy. Deleting to satisfy ICP-B would kill the ICP-A aha loop.
+- **Do not assume skipping means disengagement.** Lauren, Sana, and Phoebe auto-started the next lesson and pushed past the paywall with visible demand. They are the most retained segment in the entire dataset, and they skipped every explanation. Engagement and explanation-reading are decoupled for this audience.
+
+### What TO do (ranked)
+
+1. **Test a compressed visual format for the explanation.** Hypothesis: reduce each explanation to a 1-line takeaway + optional "why" expand. If ICP-A retention holds and ICP-B starts reading, ship it.
+2. **Embed the reasoning in the scenario outcome, not after it.** Chloe's branching-conversation format is the structural fix. Expensive to build, but it solves skipped-explanations, credibility-authority, and "feels like a test" simultaneously.
+3. **Move credibility signals out of the explanation block.** If users aren't reading the block, research citations buried inside it don't count. Put credibility markers on the paywall, in onboarding, and near the answer verdict itself — not only in the text they skip.
+4. **Protect whatever is producing the "yay" moment.** Whatever combination of visual confirmation + haptic + verdict pacing Holly reacted to, do not touch it during the explanation redesign. The verdict is the reward; keep it.
 
 ---
 
@@ -365,19 +431,40 @@ These are things ICP users explicitly praised or demonstrated through behavior. 
 | Resonated with overthinking framing | Lauren, Phoebe (ICP-B) | Resonated with "overthink every interaction and replay it for hours" |
 | Content addresses real sorority dynamics | Sana (ICP-B) | Described cliquey sorority circles where it's hard to meet people outside the group |
 | Lesson layout and specificity praised | Theo (ICP-A) | "I really like how the lessons are laid out and specific" - remote user, no observer effect |
+| Correct-answer verdict is emotionally rewarding | Holly (ICP-B) | Audible "yay" on each correct answer — clean positive-affect signal even though she skipped every explanation. The verdict moment is working independently of the reasoning block. |
+| Already uses AI to interpret real social situations | Holly (ICP-B) | Volunteered unprompted that she uses AI for social-situation advice. Described a concrete recent case: best friend of 15 years flaked on pre-planned hometown visit the morning-of, reframing "concrete plans" as "not concrete." Went to AI to figure out what the behavior meant. This is the exact "people you already know" problem Social IQ targets — not first meetings, not dating openers, but long-relationship ambiguity. Demand is proven; we're competing with ChatGPT, not creating a category. |
+
+---
+
+## Core Thesis Validation: "Known Relationships, Not First Meetings"
+
+Social IQ's positioning has always been that the hard social moments aren't introductions — they're navigating ambiguous behavior from people you already know. Holly (Session 20) is the first tester to explicitly confirm this is why she reaches for an AI tool today.
+
+**Her case, concrete:**
+- 15-year friendship (best friend since third grade).
+- Concrete hometown-visit plan, made over text, was the whole reason for the trip.
+- Morning-of: friend rewrites history — "oh sorry the plans weren't concrete."
+- Holly's real question isn't "what do I text back" — it's "what does this behavior mean about my friend and this relationship, and what do I do about a person who does this."
+
+**What this reframes:**
+1. **Content gap.** Our current library leans dating / early-stage / stranger-adjacent. Long-relationship ambiguity (friend flaking, soft rewrites of shared history, last-minute back-outs from people you've known for years, family members who gaslight low-stakes specifics) is a real and validated content lane we're under-serving.
+2. **"Diagnosis" is a product surface, not just "response."** Current lessons emphasize picking the right thing to say. Holly's use case emphasizes picking the right interpretation of what just happened. These are different reasoning layers; we mostly ship the second one today.
+3. **Competitive frame.** Users with this problem already open ChatGPT. The bar isn't "does the feature exist" — it's "are we a better, more specific, more trustworthy place to bring this than a general-purpose chatbot." Our edge is scenario specificity + a curated interpretation of behavior patterns; a chatbot will hedge.
+
+**Research action:** Future sessions should include a soft prompt about whether the participant has ever asked AI for advice on a social situation with someone they know well. Holly volunteered it; others may have the same behavior but won't mention it without a nudge.
 
 ---
 
 ## ICP vs Non-ICP Behavior Comparison
 
-| Dimension | ICP-A (n=6) | ICP-B (n=3) | Non-ICP (n=5) | Edge (n=6) |
+| Dimension | ICP-A (n=6) | ICP-B (n=5) | Non-ICP (n=5) | Edge (n=6) |
 |-----------|-------------|-------------|---------------|------------|
-| Avg lessons completed | ~2.0 | 3+ | ~0.8 | ~2.0 |
-| Projected into scenarios | 5/6 (83%) | 3/3 (100%) | 0/5 (0%) | 4/6 (67%) |
-| Read explanations carefully | 4/6 (67%) | 0/3 (0%) | 0/5 (0%) | 3/6 (50%) |
-| Gave constructive feature ideas | 6/6 (100%) | 3/3 (100%) | 3/5 (60%) | 6/6 (100%) |
-| Would return | 4/6 (67%) | 3/3 (100%) | 0/5 (0%) | 2/6 (33%) |
-| Questioned answer authority | 1/6 (17%) | 2/3 (67%) | 3/5 (60%) | 3/6 (50%) |
+| Avg lessons completed | ~2.0 | ~2.2 (3+ for sorority trio, 0-1 for Chloe/Holly) | ~0.8 | ~2.0 |
+| Projected into scenarios | 5/6 (83%) | 4/5 (80%) | 0/5 (0%) | 4/6 (67%) |
+| Read explanations carefully | 4/6 (67%) | 0/4 observable (0%) | 0/5 (0%) | 3/6 (50%) |
+| Gave constructive feature ideas | 6/6 (100%) | 5/5 (100%) | 3/5 (60%) | 6/6 (100%) |
+| Would return | 4/6 (67%) | 3/5 (60%, Chloe/Holly not asked) | 0/5 (0%) | 2/6 (33%) |
+| Questioned answer authority | 1/6 (17%) | 3/5 (60%) | 3/5 (60%) | 3/6 (50%) |
 
 **Theo's follow-up changes the ICP-A picture.** Average lessons completed ticks up (from ~1.7 to ~2.0), "would return" jumps from 50% to 67%, and "projected into scenarios" from 67% to 83% (Theo is actively doing exercises and finding them helpful). ICP-A is no longer a segment with ambiguous retention - 4/6 are positive, 1 unknown (Dylan), 0 negative.
 
@@ -476,6 +563,8 @@ Fix the top 2-3 packaging issues. Rebuild one lesson with the new format. Retest
 
 9. **Credibility framing:** 8/20 users questioned answer authority. What's the right credibility signal - research citations in explanations, a methodology page, psychology-backed badges, or social proof (X% of users improved)? Test different approaches with both segments.
 
+10. **Known-relationship content lane:** Holly's volunteered AI use case (best friend of 15 years flaking + rewriting concrete plans) is directly on-thesis but poorly covered by current lessons. Open questions: how many users reach for AI with "what does this behavior mean" problems from long-standing relationships? What's the right lesson shape for friend/family ambiguity vs. the current dating-weighted scenarios? Does a "diagnosis-first, response-second" lesson structure land differently than today's response-centric flow? Add the soft prompt — "have you ever asked AI for advice on a social situation with someone you know well?" — to subsequent sessions to quantify.
+
 ---
 
 ## Methodology Note: Preventing Context Rot
@@ -503,6 +592,10 @@ Session 17 (Tamok) added 2026-04-06: In-person, brief session. Into self-improve
 Theo follow-up #2 added 2026-04-08: Unsolicited voice note confirming active retention. "I'm really enjoying this... it's really helpful... I'm enjoying doing exercise." Requested short answer + AI evaluation with positive and constructive feedback. ICP score upgraded from 4 to 5. This is the first confirmed remote retention signal for ICP-A without observer effect. Free-text AI request count updated from 2 to 3.
 
 Session 18 (Nick) added 2026-04-15: In-person, met at E-club demo day. Self-described awkward, open to social skills coaching. Did one challenge, said "serious potential," liked UI, said he'd "definitely use it." Feature request: pictures. Into healthy living, has e-commerce sustainability business plan. Classified as Edge (score 3) - positive signals but limited data on lesson completion. "Would return" count updated from 8 to 9.
+
+Session 19 (Chloe) added 2026-04-21: In-person, met at E-club demo day then post-climbing. Perfect ICP female — 20, Northeastern, designer/PM of a consumer iOS climbing app (Summet). Skipped onboarding (handed phone cold), bounced after 2 questions. First ICP-female to explicitly challenge the single-correct-answer premise and the strongest articulator yet of the branching-conversation format request. Added to ICP-B segment (expanded from sorority-only to ICP-adjacent females). Introduced new Pattern 18 ("conversation, not point in time") by consolidating scattered prior signals into a single explicit framing. Color palette critique logged — first ICP-female designer to flag it.
+
+Session 20 (Holly) added 2026-04-23: In-person, Suffolk University pre-vet student. Did the rave lesson (Lesson 7). Surfaced content-clarity bug (didn't know "EDC" — fixed to spell out "Electric Daisy Carnival"). Skipped all answer explanations. Audibly said "yay" on each correct answer — clean positive-affect signal that the verdict moment is rewarding independent of the reasoning block. Holly's behavior pushed the skipped-explanations pattern from a sub-pattern inside Pattern 14 to a dedicated section: 4/4 female testers with observable data skipped, 8/9 engaged male ICP users read. Added new Pattern 19 (content-clarity bugs) for subculture-vocabulary expansions.
 
 To keep this document useful over time:
 - **Don't append** - if new sessions are added, re-synthesize from all transcripts

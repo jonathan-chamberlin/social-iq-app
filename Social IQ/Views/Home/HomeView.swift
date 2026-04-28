@@ -114,6 +114,10 @@ struct HomeView: View {
             }
             .toolbarColorScheme(.dark, for: .navigationBar)
             .task { await loadCompletedLessons() }
+            .task {
+                try? await Task.sleep(for: .seconds(2))
+                if SuperwallService.isSubscribed { subscriptionRevision += 1 }
+            }
             .onAppear {
                 if UserDefaults.standard.bool(forKey: AppConstants.shouldAutoOpenLesson1Key) {
                     UserDefaults.standard.removeObject(forKey: AppConstants.shouldAutoOpenLesson1Key)

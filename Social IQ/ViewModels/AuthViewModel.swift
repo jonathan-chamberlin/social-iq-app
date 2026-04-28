@@ -45,6 +45,7 @@ final class AuthViewModel {
             "device_user_id": AppConstants.deviceUUID()
         ])
         AnalyticsService.identify(userId: supabaseId)
+        Task { try? await SuperwallService.restorePurchases() }
     }
 
     /// Called from SignInWithAppleButton's onCompletion.

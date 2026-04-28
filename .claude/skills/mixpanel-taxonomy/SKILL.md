@@ -6,6 +6,28 @@ model: sonnet
 
 # Mixpanel Taxonomy for Social IQ
 
+## MCP Run-Query filter shape (use exactly this)
+
+The `mcp__claude_ai_Mixpanel__Run-Query` filter spec is NOT `{property, operator, values}` — that returns "Field required" validation errors. The correct shape is:
+
+```jsonc
+// String filter
+{"type": "string", "propertyName": "$model", "operator": "does not equal", "value": "arm64"}
+{"type": "string", "propertyName": "distinct_id", "operator": "equals", "value": "<uuid>"}
+// Multi-value: pass the filter once per value, OR use one filter with operator "contains" if substring-matching
+```
+
+```jsonc
+// Number filter
+{"type": "number", "propertyName": "score", "operator": "is at least", "value": 3}
+```
+
+Breakdowns require `metric: { type: "property", propertyName: "..." }` (NOT `{property: "..."}`).
+
+The simulator-data filter (`$model does not equal arm64`) is required by hook reminder and should be on every insights/funnels/retention query unless explicitly debugging simulator events. Add it as one of the global `filters` entries.
+
+If unsure of the full schema, call `mcp__claude_ai_Mixpanel__Get-Query-Schema` once per session and remember the shape — don't trial-and-error the validation.
+
 ## Event naming convention
 `object_action` in snake_case. Examples: `lesson_started`, `paywall_viewed`.
 

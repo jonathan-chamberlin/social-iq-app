@@ -113,6 +113,21 @@ SuperwallService.identify(userId: userId)  // Must pair with analytics identify
 
 On sign-out/account deletion, call `SuperwallService.reset()` to clear cached state.
 
+### CRITICAL: ALWAYS pair `identify()` with `restorePurchases()` (DO NOT remove)
+
+Already wired in `AuthViewModel.identifyUser()`:
+
+```swift
+SuperwallService.identify(userId: supabaseId)
+SuperwallService.setUserAttributes([...])
+AnalyticsService.identify(userId: supabaseId)
+Task { try? await SuperwallService.restorePurchases() }  // <-- DO NOT REMOVE
+```
+
+**Why this is non-negotiable:** SuperwallKit in production/observer mode resolves entitlement state from its own server records, NOT from the local StoreKit receipt. Users who purchased before their server-side record existed (e.g. during the bundleId-trim Test Mode window where StoreKit transactions completed but Superwall events were swallowed) silently lose pro on app update because the SDK queries server, finds nothing, and overwrites cached `.active` with `.inactive`. `restorePurchases()` re-validates the local receipt and pushes the entitlement to Superwall's server, fixing both that user and the regression class.
+
+Verified diagnosis 2026-04-27 (Terri + Matt Chamberlin). Anti-pattern entry: `~/.claude/skills/anti-patterns.md` → "superwall-subscription-inactive-after-update".
+
 ## Troubleshooting: Paywall Not Showing
 
 When a paywall doesn't appear after tapping a button that calls `Superwall.shared.register(placement:)`, check these in order:
